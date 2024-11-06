@@ -58,7 +58,7 @@
 	<!-- XSS 공격 방지 필터 -->
 	<filter>
 		<filter-name>xssFilter</filter-name>
-		<filter-class>com.codingbamboo.miniproject.common.filter.XSSFilter
+		<filter-class>com.codingbamboo.finalproject.common.filter.XSSFilter
 		</filter-class>
 	</filter>
 	<filter-mapping>
