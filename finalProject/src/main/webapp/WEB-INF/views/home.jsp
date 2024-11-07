@@ -128,6 +128,8 @@
 </head>
 <body class="bg-light" data-scroll-container>
 
+	<!-- 탑파트 -->
+	<%@ include file="/WEB-INF/inc/top.jsp"%>
     <div data-scroll-section>
         <!-- 메인이미지 파트 -->
         <div class="image-container" data-scroll>
@@ -216,6 +218,8 @@
         </div>
     </div>
 
+	<!-- footer 파트 -->
+	<%@ include file="/WEB-INF/inc/footer.jsp"%>
     <!-- Bootstrap JS 추가 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
