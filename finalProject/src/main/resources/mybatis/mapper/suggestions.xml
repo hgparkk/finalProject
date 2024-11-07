@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.codingbamboo.finalproject.suggestions.dao.ISuggestionsDAO">
+	
+	<select id="getSgList" resultType="com.codingbamboo.finalproject.suggestions.dto.adminSuggestionsDTO">
+		SELECT
+			  sg_no
+			, attach_no
+			, user_id
+			, sg_title
+			, sg_content
+			, TO_CHAR(sg_date, 'MM.dd') AS sg_date
+		FROM
+			  suggestion
+			  
+	</select>
+	
+</mapper>
