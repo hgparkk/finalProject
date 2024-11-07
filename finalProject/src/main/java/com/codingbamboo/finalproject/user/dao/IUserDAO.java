@@ -6,5 +6,8 @@ import com.codingbamboo.finalproject.user.dto.UserDTO;
 
 @Mapper
 public interface IUserDAO {
+	public UserDTO idDupCheck(UserDTO uesr);
+	public UserDTO emailDupCheck(UserDTO user);
 	public int insertUser(UserDTO user);
+	public UserDTO loginUser(UserDTO user);
 }

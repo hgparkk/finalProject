@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!-- Favicon-->
-<link rel="icon" type="image/x-icon" href="image/favicon.ico"/>
+<link rel="icon" type="image/png" sizes="16x16" href="image/favicon.ico"/>
 <!-- Font Awesome icons (free version)-->
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 
