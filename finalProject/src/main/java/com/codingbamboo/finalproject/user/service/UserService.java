@@ -27,4 +27,8 @@ public class UserService {
 	public UserDTO loginUser(UserDTO user) {
 		return dao.loginUser(user);
 	}
+	
+	public UserDTO idFind(UserDTO user) {
+		return dao.idFind(user);
+	}
 }

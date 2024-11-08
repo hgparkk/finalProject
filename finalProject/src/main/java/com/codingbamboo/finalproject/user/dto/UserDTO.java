@@ -1,9 +1,19 @@
 package com.codingbamboo.finalproject.user.dto;
 
+import javax.validation.constraints.Pattern;
+
 public class UserDTO {
+	
+	@Pattern(regexp = "^[a-z][a-zA-Z0-9]{5,}$", message = "¿Ã¹Ù¸£Áö ¾ÊÀº ¾ÆÀÌµğ ÀÔ´Ï´Ù.\\n¾ÆÀÌµğ´Â ¼ıÀÚ, ¿µ¹®À¸·Î¸¸ ÀÌ·ç¾îÁø 6±ÛÀÚ ÀÌ»óÀÌ¾î¾ß ÇÏ¸ç, ¿µ¹® ¼Ò¹®ÀÚ·Î ½ÃÀÛÇØ¾ß ÇÕ´Ï´Ù.")
 	private String userId;
+	
+    @Pattern(regexp = "^(?=.*[a-z])[a-zA-Z0-9!@#$%^&*]{8,}$", message = "¿Ã¹Ù¸£Áö ¾ÊÀº ºñ¹Ğ¹øÈ£ ÀÔ´Ï´Ù.\\n¼ıÀÚ, ¿µ¹®, Æ¯¼ö¹®ÀÚ·Î¸¸ ÀÌ·ç¾îÁø 8±ÛÀÚ ÀÌ»óÀÌ¾î¾ß ÇÏ¸ç, ¿µ¹® ¼Ò¹®ÀÚ°¡ ¹İµå½Ã Æ÷ÇÔµÇ¾î¾ß ÇÕ´Ï´Ù.")
 	private String userPw;
+    
+    @Pattern(regexp = "^[°¡-ÆRa-zA-Z]*$", message = "¿Ã¹Ù¸£Áö ¾ÊÀº ÀÌ¸§ÀÔ´Ï´Ù.\\nÀÌ¸§Àº ¼ıÀÚ³ª Æ¯¼ö¹®ÀÚ¸¦ Æ÷ÇÔÇÏÁö ¾Ê¾Æ¾ß ÇÕ´Ï´Ù.")
 	private String userName;
+    
+    @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "¿Ã¹Ù¸£Áö ¾ÊÀº ÀÌ¸ŞÀÏ Çü½ÄÀÔ´Ï´Ù.")
 	private String userEmail;
 	private int userIsmaster;
 	private int userIstemp;

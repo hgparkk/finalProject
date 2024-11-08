@@ -16,13 +16,13 @@ public class adiminSuggestionsController {
 	@Autowired
 	SuggestionsService suggestionsService;
 	
-	@RequestMapping("/adiminSuggestionsView")
+	@RequestMapping("/adminSuggestionsView")
 	public String adiminSuggestionsView(Model model) {
 		
 		List<adminSuggestionsDTO> SgList = suggestionsService.getSgList();
 		
 		model.addAttribute("SgList", SgList);
 		
-		return "admin/adiminSuggestionsView";
+		return "admin/adminSuggestionsView";
 	}
 }

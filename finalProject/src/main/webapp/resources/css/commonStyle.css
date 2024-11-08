@@ -1,0 +1,26 @@
+.space{
+	height:150px;
+}
+
+.local-text-btn {
+	text-decoration: none;
+}
+
+.local-text-btn:hover {
+	text-decoration: underline;
+}
+
+.min-width-set {
+	min-width: 476px;
+}
+
+.input-div {
+	width: 300px;
+}
+
+.btn-div-doc-div {
+	height: 58px;
+	display: flex;
+	align-items: center;
+	margin-left: 15px;
+}
