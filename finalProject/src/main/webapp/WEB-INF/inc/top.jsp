@@ -132,7 +132,7 @@
 
 			<div class="d-flex main-box">
 				<a class="nav-link co2 me-2" href="#">탄소중립 생활 실천 소개</a> <a
-					class="nav-link co2 me-2" href="#">탄소발자국 계산</a>
+					class="nav-link co2 me-2" href="${pageContext.request.contextPath }/carbonCalView">탄소발자국 계산</a>
 
 				<div class="dropdown-body me-2">
 					<a class="aTag">탄소중립 알려드려요 </a>
@@ -142,7 +142,7 @@
 				</div>
 
 				<div class="dropdown-body me-2">
-					<a class="aTag"> <!-- data-bs-toggle="dropdown" aria-expanded="false" -->소통공간
+					<a class="aTag">소통공간
 					</a>
 					<div class="dropdown-select">
 						<a class="detail" href="#">건의하기</a>
