@@ -12,79 +12,80 @@
 
 <body>
 	<%@ include file="/WEB-INF/inc/top.jsp"%>
-	<div class="space"></div>
 	<div class="pt-5">
 		<div class="row justify-content-center">
-			<div class="mt-5" style="width: 500px;">
-				<!-- 회원가입 폼 -->
-				<form id="registForm" action="<c:url value="/registDo" />" method="POST" class="needs-validation" novalidate>
+			<div class="mt-5 user-rounded-box rounded-5">
+				<div style="margin: 150px;">
+					<!-- 회원가입 폼 -->
+					<form id="registForm" action="<c:url value="/registDo" />" method="POST" class="needs-validation" novalidate>
 
-					<!-- 아이디 입력창 -->
-					<div class="d-flex">
+						<!-- 아이디 입력창 -->
+						<div class="d-flex">
+							<div class="form-floating mb-3 input-div">
+								<input class="form-control" id="inputId" type="text" name="userId" placeholder="아이디" required>
+								<label for="inputId">아이디</label>
+								<div id="idFeedback" class="invalid-feedback">아이디는 소문자로 시작하는 영문, 숫자로만 이루어진 6글자 이상이어야 합니다.</div>
+							</div>
+							<div class="d-flex align-items-center btn-div-doc-div mb-3">
+								<button type="button" id="idDupCheckBtn" class="btn btn-secondary" disabled>중복확인</button>
+							</div>
+						</div>
+
+						<!-- 아이디 중복체크 -->
+						<div id="idDupCheckDiv">
+							<span id="idDupCheck"></span>
+						</div>
+
+						<!-- 비밀번호 입력창 -->
 						<div class="form-floating mb-3 input-div">
-							<input class="form-control" id="inputId" type="text" name="userId" placeholder="아이디" required>
-							<label for="inputId">아이디</label>
-							<div id="idFeedback" class="invalid-feedback">아이디는 소문자로 시작하는 영문, 숫자로만 이루어진 6글자 이상이어야 합니다.</div>
+							<input class="form-control" id="inputPw" type="password" name="userPw" placeholder="비밀번호" required>
+							<label for="inputPw">비밀번호</label>
+							<div class="invalid-feedback">비밀번호는 영문 소문자가 포함된 숫자,영문,특수문자로만 이루어진 8글자 이상여야 합니다.</div>
 						</div>
-						<div class="d-flex align-items-center btn-div-doc-div mb-3">
-							<button type="button" id="idDupCheckBtn" class="btn btn-secondary" disabled>중복확인</button>
-						</div>
-					</div>
 
-					<!-- 아이디 중복체크 -->
-					<div id="idDupCheckDiv">
-						<span id="idDupCheck"></span>
-					</div>
-
-					<!-- 비밀번호 입력창 -->
-					<div class="form-floating mb-3 input-div">
-						<input class="form-control" id="inputPw" type="password" name="userPw" placeholder="비밀번호" required>
-						<label for="inputPw">비밀번호</label>
-						<div class="invalid-feedback">비밀번호는 영문 소문자가 포함된 숫자,영문,특수문자로만 이루어진 8글자 이상여야 합니다.</div>
-					</div>
-
-					<!-- 비밀번호 확인 입력창 -->
-					<div class="form-floating mb-3 input-div">
-						<input class="form-control" id="inputCheckPw" type="password" placeholder="비밀번호확인">
-						<label for="inputCheckPw">비밀번호확인</label>
-					</div>
-
-					<!-- 이름 입력창 -->
-					<div class="form-floating mb-3 input-div">
-						<input class="form-control" id="inputName" type="text" name="userName" placeholder="이름" required>
-						<label for="inputName">이름</label>
-						<div class="invalid-feedback">이름은 숫자, 특수문자를 포함하지 않습니다</div>
-					</div>
-
-					<!-- 이메일 입력창 -->
-					<div class="d-flex">
+						<!-- 비밀번호 확인 입력창 -->
 						<div class="form-floating mb-3 input-div">
-							<input class="form-control" id="inputEmail" type="email" name="userEmail" placeholder="이메일" required>
-							<label for="inputEmail">이메일</label>
-							<div id="emailFeedback" class="invalid-feedback">올바르지 않은 이메일 형식입니다</div>
+							<input class="form-control" id="inputCheckPw" type="password" placeholder="비밀번호확인">
+							<label for="inputCheckPw">비밀번호확인</label>
 						</div>
-						<div class="d-flex align-items-center btn-div-doc-div mb-3">
-							<button type="button" id="sendAuthEmail" class="btn btn-secondary" disabled>인증메일 발송</button>
-						</div>
-					</div>
 
-					<!-- 이메일 인증코드 확인창 -->
-					<div id="emailAuthDiv" class="d-none">
-						<div class="mb-3">
-							<span class="ms-2 text-success">인증 메일이 발송되었습니다.</span>
-						</div>
+						<!-- 이름 입력창 -->
 						<div class="form-floating mb-3 input-div">
-							<input class="form-control" id="inputEmailAuth" type="text" placeholder="인증번호" required>
-							<label for="inputEmailAuth">인증번호</label>
-							<div class="invalid-feedback"></div>
+							<input class="form-control" id="inputName" type="text" name="userName" placeholder="이름" required>
+							<label for="inputName">이름</label>
+							<div class="invalid-feedback">이름은 숫자, 특수문자를 포함하지 않습니다</div>
 						</div>
-					</div>
 
-					<!-- 회원가입 버튼 -->
-					<div class="d-flex justify-content-center">
-						<button id="registBtn" class="btn btn-primary btn-lg" type="button" disabled>회원가입</button>
-					</div>
-				</form>
+						<!-- 이메일 입력창 -->
+						<div class="d-flex">
+							<div class="form-floating mb-3 input-div">
+								<input class="form-control" id="inputEmail" type="email" name="userEmail" placeholder="이메일" required>
+								<label for="inputEmail">이메일</label>
+								<div id="emailFeedback" class="invalid-feedback">올바르지 않은 이메일 형식입니다</div>
+							</div>
+							<div class="d-flex align-items-center btn-div-doc-div mb-3">
+								<button type="button" id="sendAuthEmail" class="btn btn-secondary" disabled>인증메일 발송</button>
+							</div>
+						</div>
+
+						<!-- 이메일 인증코드 확인창 -->
+						<div id="emailAuthDiv" class="d-none">
+							<div class="mb-3">
+								<span class="ms-2 text-success">인증 메일이 발송되었습니다.</span>
+							</div>
+							<div class="form-floating mb-3 input-div">
+								<input class="form-control" id="inputEmailAuth" type="text" placeholder="인증번호" required>
+								<label for="inputEmailAuth">인증번호</label>
+								<div class="invalid-feedback"></div>
+							</div>
+						</div>
+
+						<!-- 회원가입 버튼 -->
+						<div class="d-flex justify-content-center">
+							<button id="registBtn" class="btn btn-success btn-lg" type="button" disabled>회원가입</button>
+						</div>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>

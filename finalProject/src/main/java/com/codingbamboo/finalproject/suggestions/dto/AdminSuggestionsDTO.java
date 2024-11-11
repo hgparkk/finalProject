@@ -1,6 +1,6 @@
 package com.codingbamboo.finalproject.suggestions.dto;
 
-public class adminSuggestionsDTO {
+public class AdminSuggestionsDTO {
 	private int sgNo;
 	private int attachNo;
 	private String userId;
@@ -8,11 +8,11 @@ public class adminSuggestionsDTO {
 	private String sgContent;
 	private String sgDate;
 	
-	public adminSuggestionsDTO() {
+	public AdminSuggestionsDTO() {
 		
 	}
 
-	public adminSuggestionsDTO(int sgNo, int attachNo, String userId, String sgTitle, String sgContent, String sgDate) {
+	public AdminSuggestionsDTO(int sgNo, int attachNo, String userId, String sgTitle, String sgContent, String sgDate) {
 		super();
 		this.sgNo = sgNo;
 		this.attachNo = attachNo;

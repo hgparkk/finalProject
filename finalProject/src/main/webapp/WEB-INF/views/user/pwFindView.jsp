@@ -13,66 +13,75 @@
 <body>
 	<%@ include file="/WEB-INF/inc/top.jsp"%>
 	<div class="space"></div>
-	<div class="space"></div>
 	<div class="pt-5">
 		<div class="row justify-content-center">
-			<div class="mt-5" style="width: 500px;">
+			<div class="fs-1 text-center">비밀번호 찾기</div>
+			<div class="mt-5 user-rounded-box rounded-5">
+				<div style="margin-top: 150px; margin-left: 150px; margin-right: 150px;">
 
-				<!-- 비밀번호 찾기 폼 -->
-				<form id="pwFindFrom" action="<c:url value="/pwFindDo" />" method="POST" class="needs-validation" novalidate>
+					<!-- 비밀번호 찾기 폼 -->
+					<form id="pwFindForm" action="<c:url value="/pwFindDo" />" method="POST" class="needs-validation" novalidate>
 
-					<!-- 이름 입력창 -->
-					<div class="form-floating mb-3 input-div">
-						<input class="form-control" id="inputName" type="text" name="userName" placeholder="이름" />
-						<label for="inputName">이름</label>
-					</div>
-
-					<!-- 아이디 입력창 -->
-					<div class="form-floating mb-3 input-div">
-						<input class="form-control" id="inputId" type="text" name="userId" placeholder="이름" />
-						<label for="inputId">아이디</label>
-					</div>
-
-					<!-- 이메일 입력창 -->
-					<div class="d-flex">
+						<!-- 이름 입력창 -->
 						<div class="form-floating mb-3 input-div">
-							<input class="form-control" id="inputEmail" type="email" name="userEmail" placeholder="이메일" required>
-							<label for="inputEmail">이메일</label>
-							<div id="emailFeedback" class="invalid-feedback">올바르지 않은 이메일 형식입니다</div>
+							<input class="form-control" id="inputName" type="text" name="userName" placeholder="이름" />
+							<label for="inputName">이름</label>
 						</div>
-						<div class="d-flex align-items-center btn-div-doc-div mb-3">
-							<button type="button" id="sendAuthEmail" class="btn btn-secondary">인증메일 발송</button>
-						</div>
-					</div>
 
-					<!-- 이메일 인증코드 확인창 -->
-					<div id="emailAuthDiv" class="d-none">
-						<div class="mb-3">
-							<span class="ms-2 text-success">인증 메일이 발송되었습니다.</span>
-						</div>
+						<!-- 아이디 입력창 -->
 						<div class="form-floating mb-3 input-div">
-							<input class="form-control" id="inputEmailAuth" type="text" placeholder="인증번호" required>
-							<label for="inputEmailAuth">인증번호</label>
-							<div class="invalid-feedback"></div>
+							<input class="form-control" id="inputId" type="text" name="userId" placeholder="이름" />
+							<label for="inputId">아이디</label>
 						</div>
-					</div>
 
-					<!-- 비밀번호 찾기 버튼 -->
-					<div class="d-flex justify-content-center mb-3">
-						<button id="pwFindBtn" class="btn btn-success btn-lg" type="submit" disabled>비밀번호 찾기</button>
-					</div>
-				</form>
+						<!-- 이메일 입력창 -->
+						<div class="d-flex">
+							<div class="form-floating mb-3 input-div">
+								<input class="form-control" id="inputEmail" type="email" name="userEmail" placeholder="이메일" required>
+								<label for="inputEmail">이메일</label>
+								<div id="emailFeedback" class="invalid-feedback">올바르지 않은 이메일 형식입니다</div>
+							</div>
+							<div class="d-flex align-items-center btn-div-doc-div mb-3">
+								<button type="button" id="sendAuthEmail" class="btn btn-secondary">인증메일 발송</button>
+							</div>
+						</div>
+
+						<!-- 이메일 인증코드 확인창 -->
+						<div id="emailAuthDiv" class="d-none">
+							<div class="mb-3">
+								<span class="ms-2 text-success">인증 메일이 발송되었습니다.</span>
+							</div>
+							<div class="form-floating mb-3 input-div">
+								<input class="form-control" id="inputEmailAuth" type="text" placeholder="인증번호" required>
+								<label for="inputEmailAuth">인증번호</label>
+								<div class="invalid-feedback"></div>
+							</div>
+						</div>
+
+						<!-- 비밀번호 찾기 버튼 -->
+						<div class="d-flex justify-content-center mb-3">
+							<button id="pwFindBtn" class="btn btn-success btn-lg" type="button" disabled>비밀번호 찾기</button>
+						</div>
+						<div id="pwFindResultDiv" class="d-flex justify-content-center d-none">
+							<span id="pwFindResult" class="ms-2"></span>
+						</div>
+						<div class="d-flex justify-content-evenly" style="margin-top: 50px; margin-bottom: 50px;">
+							<a class="text-black local-text-btn" href="<c:url value="/loginView" />">로그인 하러가기</a>
+							<a class="text-black local-text-btn" href="<c:url value="/idFindView" />">아이디 찾기</a>
+							<a class="text-black local-text-btn" href="<c:url value="/registView" />">회원가입 하기</a>
+						</div>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>
 	<div class="space"></div>
-	<div class="space"></div>
 	<%@ include file="/WEB-INF/inc/footer.jsp"%>
 	<script>
-	// 비밀번호찾기 버튼
+	// 비밀번호 찾기 버튼
 	const v_pwFindBtn = document.getElementById("pwFindBtn")
 	
-	// 회원 가입 버튼 활성화
+	// 비밀번호 찾기 버튼 활성화
 	function pwFindBtnSet(){
 		if(userEmailInput.classList.contains("is-valid") && userEmailAuthInput.classList.contains("is-valid")){
 			v_pwFindBtn.disabled = false
@@ -81,10 +90,29 @@
 		}
 	}
 	
-	// 회원 가입
+	// 비밀번호 찾기
+	let pwFindForm = $("#pwFindForm")
+	let pwFindFormUrl = pwFindForm.attr("action")
+	
 	v_pwFindBtn.addEventListener("click",()=>{
 		if(userEmailInput.classList.contains("is-valid") && userEmailAuthInput.classList.contains("is-valid")){
-			document.getElementById("registForm").submit()
+			let pwFindFormData = pwFindForm.serialize()
+			$.ajax({
+			type:'POST',
+			url: pwFindFormUrl,
+			data: pwFindFormData,
+			success: function(result){
+				let v_result = ""
+				if(result == "success"){
+					v_result = "임시 비밀번호가 메일로 발송되었습니다"
+				}else{
+					v_result = "비밀번호를 초기화 하는데에 실패하였습니다.";
+				}
+				
+				document.getElementById("pwFindResultDiv").classList.remove("d-none");
+				document.getElementById("pwFindResult").innerHTML = v_result;
+			}
+		})
 		}else{
 			alert("유효하지 않은 항목이 포함되어있습니다.\n항목을 확인하고 다시한번 시도하여 주세요.")
 			return
