@@ -49,7 +49,8 @@
 
 .co2-box {
 	justify-content: space-between;
-	flex-wrap: wrap; max-width : 1300px;
+	flex-wrap: wrap;
+	max-width: 1300px;
 	min-width: 500px;
 	max-width: 1300px;
 }
@@ -247,10 +248,10 @@
 						</div>
 					</div>
 					<div class="explain-box d-flex align-items-end justify-content-end">
-					<div class="d-flex">
-						<span>교통 CO₂ 발생량 | 휘발유 : (이동거리 / 16.04 * 2.097)</span> <span>
-							경유 : (이동거리 / 15.35 * 2.582) LPG : (이동거리 / 11.06 * 1.868) </span>
-					</div>
+						<div class="d-flex">
+							<span>교통 CO₂ 발생량 | 휘발유 : (이동거리 / 16.04 * 2.097)</span> <span>
+								경유 : (이동거리 / 15.35 * 2.582) LPG : (이동거리 / 11.06 * 1.868) </span>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -283,7 +284,7 @@
 	<%@ include file="/WEB-INF/inc/footer.jsp"%>
 
 	<script type="text/javascript">
-		const v_inputUsage = document.querySelector(".inputUsage");
+		const v_inputUsage = document.querySelector(".inputUsage-box");
 		v_inputUsage.addEventListener('click',()=>{
 			v_inputUsage.classList.toggle('clicked');
 		});
