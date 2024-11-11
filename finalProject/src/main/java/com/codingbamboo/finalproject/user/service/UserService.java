@@ -31,4 +31,16 @@ public class UserService {
 	public UserDTO idFind(UserDTO user) {
 		return dao.idFind(user);
 	}
+	
+	public UserDTO pwFind(UserDTO user) {
+		return dao.pwFind(user);
+	}
+	
+	public int updateTemp(UserDTO user) {
+		return dao.updateTemp(user);
+	};
+	
+	public int updateUser(UserDTO user) {
+		return dao.updateUser(user);
+	}
 }

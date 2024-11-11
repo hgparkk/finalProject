@@ -11,4 +11,7 @@ public interface IUserDAO {
 	public int insertUser(UserDTO user);
 	public UserDTO loginUser(UserDTO user);
 	public UserDTO idFind(UserDTO user);
+	public UserDTO pwFind(UserDTO user);
+	public int updateTemp(UserDTO user);
+	public int updateUser(UserDTO user);
 }

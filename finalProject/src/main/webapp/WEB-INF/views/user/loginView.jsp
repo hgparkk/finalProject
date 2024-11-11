@@ -91,6 +91,7 @@
 	<div class="space"></div>
 	<div class="pt-5">
 		<div class="row justify-content-center">
+			<div class="fs-1 text-center">로그인</div>
 			<div class="mt-5" style="width: 500px;">
 
 				<!-- 로그인 폼 -->
@@ -131,7 +132,9 @@
 					<span>SNS 계정으로 로그인하기</span>
 				</div>
 				<div class="d-flex justify-content-evenly min-width-set">
-					<a class="social-login-btn btn-naver"></a> <a class="social-login-btn btn-kakao"></a> <a class="social-login-btn btn-google"></a>
+					<a class="social-login-btn btn-naver"></a>
+					<a class="social-login-btn btn-kakao"></a>
+					<a class="social-login-btn btn-google"></a>
 				</div>
 				<div class="d-flex justify-content-center mention min-width-set" style="margin-top: 100px;">아직 회원이 아니시라면?</div>
 

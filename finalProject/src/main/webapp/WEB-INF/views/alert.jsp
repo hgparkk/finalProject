@@ -15,7 +15,7 @@
 		let alertUrl = "<c:out value='${url}'/>"
 		
 		alert(alertMsg)
-		location.replace("${pageContext.request.contextPath}"+aleartUrl)
+		location.replace("${pageContext.request.contextPath}"+alertUrl)
 	</script>
 </body>
 

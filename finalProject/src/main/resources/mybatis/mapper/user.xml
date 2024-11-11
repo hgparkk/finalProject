@@ -49,13 +49,16 @@
 			user_name,
 			user_email,
 			user_ismaster,
-			user_istemp
+			user_istemp,
+			user_provider,
+			user_provider_id
 		FROM
 			user_info
 		WHERE 1=1
 			AND user_id = #{userId}
 	</select>
 	
+	<!-- 아이디 찾기 -->
 	<select id="idFind" parameterType="UserDTO" resultType="UserDTO">
 		SELECT
 			user_id
@@ -66,4 +69,38 @@
 			AND user_email = #{userEmail}
 			AND user_ismaster = 0
 	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="pwFind" parameterType="UserDTO" resultType="UserDTO">
+		SELECT
+			user_id
+		FROM
+			user_info
+		WHERE 1=1
+			AND user_id = #{userId}
+			AND user_email = #{userEmail}
+	</select>
+	
+	<!-- 비밀번호 찾기 update -->
+	<update id="updateTemp" parameterType="UserDTO">
+		UPDATE	
+			user_info
+		SET
+			user_istemp = 1
+		WHERE 1=1
+			AND user_id = #{userId}
+	</update>
+	
+	<!-- 회원정보 수정 -->
+	<update id="updateUser" parameterType="UserDTO">
+		UPDATE	
+			user_info
+		SET
+			user_pw = #{userPw}
+			<if test="userIstemp == 1">
+			, user_istemp = 0
+			</if>
+		WHERE 1=1
+			AND user_id = #{userId}
+	</update>
 </mapper>
