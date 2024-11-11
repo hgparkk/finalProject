@@ -7,11 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.codingbamboo.finalproject.suggestions.dto.adminSuggestionsDTO;
+import com.codingbamboo.finalproject.suggestions.dto.AdminSuggestionsDTO;
 import com.codingbamboo.finalproject.suggestions.service.SuggestionsService;
 
 @Controller
-public class adiminSuggestionsController {
+public class AdiminSuggestionsController {
 	
 	@Autowired
 	SuggestionsService suggestionsService;
@@ -19,7 +19,7 @@ public class adiminSuggestionsController {
 	@RequestMapping("/adminSuggestionsView")
 	public String adiminSuggestionsView(Model model) {
 		
-		List<adminSuggestionsDTO> SgList = suggestionsService.getSgList();
+		List<AdminSuggestionsDTO> SgList = suggestionsService.getSgList();
 		
 		model.addAttribute("SgList", SgList);
 		
