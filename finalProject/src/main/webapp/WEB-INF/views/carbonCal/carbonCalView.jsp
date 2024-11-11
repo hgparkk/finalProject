@@ -48,14 +48,19 @@
 }
 
 .co2-box {
-	display: inline;
+	justify-content: space-between;
+	flex-wrap: wrap; max-width : 1300px;
+	min-width: 500px;
+	max-width: 1300px;
 }
 
-.inputUsage {
+.inputUsage-box {
 	border: 1px solid #CCCCCC;
 	border-radius: 0.5vw;
-	width: 40vw;
+	width: 48%;
 	height: 25vw;
+	margin-bottom: 0.3vw;
+	display: inline-block;
 }
 
 .clicked {
@@ -66,6 +71,7 @@
 .input-box {
 	display: flex;
 	height: 3vw;
+	padding: 0.5vw;
 }
 
 .fuel-img {
@@ -75,12 +81,12 @@
 }
 
 .fuel-img>img {
-	width: 2vw;
-	height: 2vw;
+	width: 1.5vw;
+	height: 1.5vw;
 }
 
 .input-box>span {
-	font-size: 2vw;
+	font-size: 1.5vw;
 	font-weight: bold;
 	color: #6FADCF;
 }
@@ -88,11 +94,13 @@
 .output-box {
 	border-top: 1px solid #CCCCCC;
 	height: 22vw;
-	padding: 2vw;
+	padding: 1vw;
 }
 
-.in&out-box{
-	height: 15vw;
+.inAndOut-box {
+	height: 14vw;
+	display: flex;
+	flex-direction: column;
 }
 
 .span {
@@ -100,21 +108,56 @@
 }
 
 .input {
-	width: 20vw;
+	width: 20.5vw;
 	height: 2.5vw;
 	padding: 0.2vw;
 }
 
-.inputElectric>span {
-	font-size: 1.2vw;
+.input::placeholder {
+	font-size: 1vw;
+}
+
+.inputUsage>span {
+	font-size: 1vw;
 }
 
 .outputCo2>span {
-	font-size: 1.2vw;
+	font-size: 1vw;
 }
 
-.explain-box{
-	height: 7vw;
+.explain-box {
+	height: 5vw;
+}
+
+.explain-box>span {
+	font-size: 0.8vw;
+}
+
+@media screen and (max-width:1340px) {
+	.co2-box {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	.inputUsage-box {
+		width: 80%;
+		height: 40vw;
+		margin: 1vw auto;
+	}
+	.input-box {
+		height: 3vw;
+	}
+	.output-box {
+		height: 37vw;
+		padding: 2vw;
+	}
+	.inAndOut-box {
+		height: 26vw;
+	}
+	.explain-box {
+		height: 7vw;
+	}
 }
 </style>
 </head>
@@ -139,7 +182,7 @@
 		<div class="ww"></div>
 
 		<div class="co2-box">
-			<div class="inputUsage">
+			<div class="inputUsage-box">
 				<div class="input-box">
 					<div class="fuel-img">
 						<img src="image/electric.png">
@@ -147,18 +190,90 @@
 					<span>전기</span>
 				</div>
 				<div class="output-box">
-					<div class="in&out-box">
-						<div class="inputElectric">
+					<div class="inAndOut-box justify-content-between">
+						<div class="inputUsage">
 							<span class="span">전기 사용량</span> <input class="input"
 								placeholder="숫자 입력..." style="text-align: right;"> <span>kwh/월</span>
 						</div>
 						<div class="outputCo2">
-							<span class="span">CO2 발생량</span> <input class="input"
+							<span class="span">CO₂ 발생량</span> <input class="input"
 								disabled="disabled"> <span>kg/월</span>
 						</div>
 					</div>
 					<div class="explain-box d-flex align-items-end justify-content-end">
 						<span>전기 CO₂ 발생량 | (전기 사용량 * 0.4781)</span>
+					</div>
+				</div>
+			</div>
+			<div class="inputUsage-box">
+				<div class="input-box">
+					<div class="fuel-img">
+						<img src="image/gas.jpg">
+					</div>
+					<span>가스</span>
+				</div>
+				<div class="output-box">
+					<div class="inAndOut-box justify-content-between">
+						<div class="inputUsage">
+							<span class="span">가스 사용량</span> <input class="input"
+								placeholder="숫자 입력..." style="text-align: right;"> <span>m³/월</span>
+						</div>
+						<div class="outputCo2">
+							<span class="span">CO₂ 발생량</span> <input class="input"
+								disabled="disabled"> <span>kg/월</span>
+						</div>
+					</div>
+					<div class="explain-box d-flex align-items-end justify-content-end">
+						<span>가스 CO₂ 발생량 | (가스 사용량 * 2.176)</span>
+					</div>
+				</div>
+			</div>
+			<div class="inputUsage-box">
+				<div class="input-box">
+					<div class="fuel-img">
+						<img src="image/traffic.png">
+					</div>
+					<span>교통</span>
+				</div>
+				<div class="output-box">
+					<div class="inAndOut-box justify-content-between">
+						<div class="inputUsage">
+							<span class="span">이동 거리</span> <input class="input"
+								placeholder="숫자 입력..." style="text-align: right;"> <span>km/월</span>
+						</div>
+						<div class="outputCo2">
+							<span class="span">CO₂ 발생량</span> <input class="input"
+								disabled="disabled"> <span>kg/월</span>
+						</div>
+					</div>
+					<div class="explain-box d-flex align-items-end justify-content-end">
+					<div class="d-flex">
+						<span>교통 CO₂ 발생량 | 휘발유 : (이동거리 / 16.04 * 2.097)</span> <span>
+							경유 : (이동거리 / 15.35 * 2.582) LPG : (이동거리 / 11.06 * 1.868) </span>
+					</div>
+					</div>
+				</div>
+			</div>
+			<div class="inputUsage-box">
+				<div class="input-box">
+					<div class="fuel-img">
+						<img src="image/garbage.png">
+					</div>
+					<span>폐기물</span>
+				</div>
+				<div class="output-box">
+					<div class="inAndOut-box justify-content-between">
+						<div class="inputUsage">
+							<span class="span">폐기물 사용량</span> <input class="input"
+								placeholder="숫자 입력..." style="text-align: right;"> <span>kg/월</span>
+						</div>
+						<div class="outputCo2">
+							<span class="span">CO₂ 발생량</span> <input class="input"
+								disabled="disabled"> <span>kg/월</span>
+						</div>
+					</div>
+					<div class="explain-box d-flex align-items-end justify-content-end">
+						<span>생활 폐기물 CO₂ 발생량 | (폐기물 사용량 * 0.5573)</span>
 					</div>
 				</div>
 			</div>

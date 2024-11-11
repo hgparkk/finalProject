@@ -1,6 +1,6 @@
 package com.codingbamboo.finalproject.carbonCalculate.dto;
 
-public class carbonCalculateDTO {
+public class CarbonCalculateDTO {
 	public int resultNo;
 	public String userId;
 	public String resultDate;
@@ -10,10 +10,10 @@ public class carbonCalculateDTO {
 	public int trafficValue;
 	public int wasteWeight;
 	
-	public carbonCalculateDTO() {
+	public CarbonCalculateDTO() {
 	}
 	
-	public carbonCalculateDTO(int resultNo, String userId, String resultDate, int electricUsage, int gasUseage,
+	public CarbonCalculateDTO(int resultNo, String userId, String resultDate, int electricUsage, int gasUseage,
 			String trafficKind, int trafficValue, int wasteWeight) {
 		this.resultNo = resultNo;
 		this.userId = userId;

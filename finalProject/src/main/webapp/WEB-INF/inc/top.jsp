@@ -23,8 +23,12 @@
 	justify-content: space-between;
 }
 
+.empty{
+	width: 2%
+}
+
 .img-box {
-	width: 15%;
+	width: 16%;
 }
 
 .main-box {
@@ -90,7 +94,7 @@
 }
 
 .login-box {
-	width: 15%;
+	width: 12%;
 	align-items: center;
 	justify-content: center;
 }
@@ -122,6 +126,7 @@
 
 	<nav class="navbar p-0">
 		<div class="d-flex top-container">
+			<div class="empty"></div>
 			<div class="img-box d-flex align-items-center justify-content-center">
 				<a
 					class="nav-link main d-flex align-items-center justify-content-center"

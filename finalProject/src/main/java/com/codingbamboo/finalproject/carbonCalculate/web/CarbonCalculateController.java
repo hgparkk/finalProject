@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.codingbamboo.finalproject.carbonCalculate.dao.ICarbonCalculateDAO;
 
 @Controller
-public class carbonCalculateController {
+public class CarbonCalculateController {
 	
 	@Autowired
 	ICarbonCalculateDAO dao;
