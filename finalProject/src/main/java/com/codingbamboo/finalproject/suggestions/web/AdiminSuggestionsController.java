@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.codingbamboo.finalproject.suggestions.dto.AdminSuggestionsDTO;
 import com.codingbamboo.finalproject.suggestions.service.SuggestionsService;
 
+
 @Controller
 public class AdiminSuggestionsController {
 	

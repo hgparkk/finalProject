@@ -12,6 +12,7 @@ public class AdminSuggestionsDTO {
 		
 	}
 
+	
 	public AdminSuggestionsDTO(int sgNo, int attachNo, String userId, String sgTitle, String sgContent, String sgDate) {
 		super();
 		this.sgNo = sgNo;
