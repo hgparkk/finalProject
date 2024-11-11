@@ -45,27 +45,6 @@ public class UserController {
 		return "user/loginView";
 	}
 
-	// 로그인
-	@RequestMapping(value = "/loginDo", method = RequestMethod.POST)
-	public String loginDo(String fromUrl, UserDTO userInfo, HttpSession session, HttpServletResponse response,
-			HttpServletRequest request, Model model, RedirectAttributes attr) {
-
-		UserDTO login = userService.loginUser(userInfo);
-
-		if (login != null && passwordEncoder.matches(userInfo.getUserPw(), login.getUserPw())) {
-			session.setAttribute("login", login);
-			if (fromUrl == null || fromUrl.isEmpty()) {
-				return "redirect:/";
-			} else {
-				return "redirect:/" + fromUrl;
-			}
-		} else {
-			attr.addFlashAttribute("failMsg", "아이디 혹은 비밀번호가 올바르지 않습니다.");
-			attr.addAttribute("fromUrl", fromUrl);
-			return "redirect:/loginView";
-		}
-	}
-
 	// 회원가입 창
 	@RequestMapping(value = "/registView", method = RequestMethod.GET)
 	public String registView() {
@@ -179,10 +158,6 @@ public class UserController {
 		// 회원가입 성공 메시지 설정
 		request.setAttribute("msg", "회원가입이 완료되었습니다");
 		request.setAttribute("url", "/loginView");
-
-		// 세션에서 인증 코드 제거 (선택 사항)
-		session.removeAttribute("emailCheckCode");
-
 		return "alert";
 	}
 
@@ -194,15 +169,13 @@ public class UserController {
 
 	// 아이디 찾기
 	@RequestMapping(value = "/idFindDo", method = RequestMethod.POST)
+	@ResponseBody
 	public String idFindDo(UserDTO user, HttpServletRequest request, Model model) {
 		UserDTO idFind = userService.idFind(user);
 		if (idFind == null) {
-			request.setAttribute("msg", "일치하는 정보가 없습니다.");
-			request.setAttribute("url", "/idFindView");
-			return "alert";
+			return "null";
 		} else {
-			model.addAttribute("findId", idFind.getUserId());
-			return "user/idFindResultView";
+			return idFind.getUserId();
 		}
 	}
 
@@ -211,10 +184,147 @@ public class UserController {
 	public String pwFindView() {
 		return "user/pwFindView";
 	}
-	
+
 	// 비밀번호 찾기
 	@RequestMapping(value = "/pwFindDo", method = RequestMethod.POST)
-	public String pwFindDo() {
-		return "redirect:/loginView";
+	@ResponseBody
+	public String pwFindDo(UserDTO user) {
+		UserDTO getUser = userService.pwFind(user);
+
+		if (getUser == null) {
+			return "fail";
+		}
+
+		int length = 8;
+		String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+		StringBuilder code = new StringBuilder();
+		SecureRandom random = new SecureRandom();
+
+		for (int i = 0; i < length; i++) {
+			int randomIndex = random.nextInt(characters.length());
+			code.append(characters.charAt(randomIndex));
+		}
+
+		String changedPw = code.toString(); // 생성된 랜덤 비번
+
+		// 비밀번호 암호화
+		String encodedPw = passwordEncoder.encode(changedPw);
+		user.setUserPw(encodedPw);
+
+		// 비밀번호 업데이트
+		userService.updateUser(user);
+		userService.updateTemp(user);
+
+		String userEmail = user.getUserEmail().replace("&#64;", "@");
+
+		HtmlEmail email = new HtmlEmail();
+		email.setHostName("smtp.naver.com");
+		email.setSmtpPort(465);
+		email.setAuthenticator(new DefaultAuthenticator("phg2559@naver.com", "C21RC6DK6H7B"));
+		email.setSSL(true);
+		String msg = "<!DOCTYPE html>\r\n" + "<html lang=\"ko\">\r\n" + "<head>\r\n"
+				+ "    <meta charset=\"UTF-8\">\r\n"
+				+ "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n"
+				+ "    <title>임시 비밀번호</title>\r\n" + "</head>\r\n"
+				+ "<body style=\"font-family: Arial, sans-serif; background-color: #f4f4f4; color: #333;\">\r\n"
+				+ "    <div style=\"max-width: 600px; margin: 0 auto; padding: 20px; background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: center;\" class=\"container\">\r\n"
+				+ "        <div style=\"margin-bottom: 20px;\">\r\n"
+				+ "            <img style=\"width: 100px; margin: 0 auto; display: block;\" \r\n"
+				+ "                src=\"https://firebasestorage.googleapis.com/v0/b/study-6b60a.appspot.com/o/bamboo.png?alt=media&token=43c75a02-e6cb-43bd-8fe9-c743ecb224be\" alt=\"Logo\">\r\n"
+				+ "        </div>\r\n" + "        <h1 style=\"color: #4CAF50; margin-bottom: 10px;\">임시 비밀번호</h1>\r\n"
+				+ "        <p style=\"font-size: 16px; margin-bottom: 10px;\">안녕하세요! 아래의 임시 비밀번호로 로그인 하신 후</p>\r\n"
+				+ "        <p style=\"font-size: 16px; margin-bottom: 10px;\">회원수정을 통해 비밀번호를 변경하시길 바랍니다.</p>\r\n"
+				+ "        <div style=\"font-size: 24px; font-weight: bold; color: #4CAF50; padding: 10px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 5px; width: 200px; margin: 0 auto; margin-bottom: 20px;\">\r\n"
+				+ changedPw + "\r\n" + "        </div>\r\n"
+				+ "        <p style=\"font-size: 16px; margin-bottom: 10px;\">감사합니다!</p>\r\n"
+				+ "        <div style=\"padding-top: 20px; font-size: 12px; color: #aaa; margin-top: 10px;\" class=\"footer\">© 2024 CodingBamboo. All rights reserved.</div>\r\n"
+				+ "    </div>\r\n" + "</body>\r\n" + "</html>";
+
+		try {
+			email.setFrom("phg2559@naver.com", "CodingBamboo");
+			email.setSubject("비밀번호가 변경되었습니다");
+			email.setCharset("UTF-8");
+			email.setMsg(msg);
+			email.addTo(userEmail, "");
+			email.send();
+			return "success";
+		} catch (EmailException e) {
+			e.printStackTrace();
+		}
+		return "fail";
+	}
+
+	// 로그인
+	@RequestMapping(value = "/loginDo", method = RequestMethod.POST)
+	public String loginDo(String fromUrl, UserDTO userInfo, HttpSession session, HttpServletResponse response,
+			HttpServletRequest request, Model model, RedirectAttributes attr) {
+
+		UserDTO login = userService.loginUser(userInfo);
+
+		if (login != null && passwordEncoder.matches(userInfo.getUserPw(), login.getUserPw())) {
+			session.setAttribute("login", login);
+			if (login.getUserIstemp() == 1) {
+				return "redirect:/myPagePwChangeView";
+			}
+			if (fromUrl == null || fromUrl.isEmpty()) {
+				return "redirect:/";
+			} else {
+				return "redirect:" + fromUrl;
+			}
+		} else {
+			attr.addFlashAttribute("failMsg", "아이디 혹은 비밀번호가 올바르지 않습니다.");
+			attr.addAttribute("fromUrl", fromUrl);
+			return "redirect:/loginView";
+		}
+	}
+
+	// 로그아웃
+	@RequestMapping(value = "/logoutDo", method = RequestMethod.GET)
+	public String logoutDo(HttpServletRequest request, HttpSession session) {
+		String fromUrl = request.getHeader("Referer");
+		session.invalidate();
+		if (fromUrl == null || fromUrl.isEmpty()) {
+			return "redirect:/";
+		} else {
+			return "redirect:" + fromUrl;
+		}
+	}
+
+	// 마이페이지 회원 정보
+	@RequestMapping(value = "/myPageUserInfoView", method = RequestMethod.GET)
+	public String myPageUpdate(HttpSession session) {
+		if ((UserDTO) session.getAttribute("login") == null) {
+			return "redirect:/";
+		}
+		return "user/myPageUserInfoView";
+	}
+
+	// 마이페이지 비밀번호 변경
+	@RequestMapping(value = "/myPagePwChangeView", method = RequestMethod.GET)
+	public String pwChangeView(HttpSession session) {
+		if ((UserDTO) session.getAttribute("login") == null) {
+			return "redirect:/";
+		}
+		return "user/myPagePwChangeView";
+	}
+
+	@RequestMapping(value = "/pwChangeDo", method = RequestMethod.POST)
+	public String pwChangeDo(String nowPassword, String newPassword, HttpSession session, HttpServletRequest request) {
+		UserDTO login = (UserDTO) session.getAttribute("login");
+
+		if (login != null && passwordEncoder.matches(nowPassword, login.getUserPw())) {
+			login.setUserPw(passwordEncoder.encode(newPassword));
+
+			userService.updateUser(login);
+
+			// 회원가입 성공 메시지 설정
+			request.setAttribute("msg", "비밀번호가 변경되었습니다.");
+			request.setAttribute("url", "/myPageUserInfoView");
+			return "alert";
+		} else {
+			request.setAttribute("msg", "현재 비밀번호가 일치하지 않습니다.");
+			request.setAttribute("url", "/myPagePwChangeView");
+			return "alert";
+		}
 	}
 }
