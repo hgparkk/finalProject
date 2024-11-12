@@ -13,7 +13,12 @@ public class CarbonCalculateController {
 	ICarbonCalculateDAO dao;
 	
 	@RequestMapping("/carbonCalView")
-	public String calCarbon() {
+	public String carbonCalView() {
 		return "carbonCal/carbonCalView";
+	}
+	
+	@RequestMapping("/carbonCalResultView")
+	public String carbonCalResultView() {
+		return "carbonCal/carbonCalResultView";
 	}
 }

@@ -1,17 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.codingbamboo.finalproject.carbonCalculate.dao.ICarbonCalculateDAO">
+<mapper
+	namespace="com.codingbamboo.finalproject.carbonCalculate.dao.ICarbonCalculateDAO">
+	<insert id="addUsageList">
+		INSERT INTO carbon_result(
+		result_no
+		, user_id
+		, result_date
+		, electric_useage
+		, gas_useage
+		, traffic_kind
+		, traffic_value
+		, waste_weight
+		) VALUES(
+		re_seq.NEXTVAL
+		, #{userId}
+		, #{resultDate}
+		, #{electricUseage}
+		, #{gasUseage}
+		, #{trafficKind}
+		, #{trafficValue}
+		, #{wasteWeight}
+		)
+	</insert>
+	
 	<select id="getInsertList">
 		SELECT
-			result_no
-			, user_id
-			, result_date
-			, electric_useage
-			, gas_useage
-			, traffic_kind
-			, traffic_value
-			, waste_weight
+		result_no
+		, user_id
+		, result_date
+		, electric_useage
+		, gas_useage
+		, traffic_kind
+		, traffic_value
+		, waste_weight
 		FROM
-			carbon_result
+		carbon_result
 	</select>
 </mapper>
