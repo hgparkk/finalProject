@@ -14,4 +14,8 @@ public interface IUserDAO {
 	public UserDTO pwFind(UserDTO user);
 	public int updateTemp(UserDTO user);
 	public int updateUser(UserDTO user);
+	public int updateUserForSnsLink(UserDTO user);
+	public UserDTO selectUserForSnsLogin(UserDTO user);
+	public int updateUserForDeleteSnsLink(String userId);
+	public int deleteUser(String userId);
 }

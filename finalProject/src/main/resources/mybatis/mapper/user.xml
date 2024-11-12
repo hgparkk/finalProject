@@ -103,4 +103,51 @@
 		WHERE 1=1
 			AND user_id = #{userId}
 	</update>
+	
+	<!-- sns 아이디와 연동 -->
+	<update id="updateUserForSnsLink" parameterType="UserDTO">
+		UPDATE
+			user_info
+		SET
+			user_provider = #{userProvider},
+			user_provider_id = #{userProviderId}
+		WHERE
+			user_id = #{userId}
+	</update>
+	
+	<!-- sns 아이디로 로그인 연동 -->
+	<select id="selectUserForSnsLogin" parameterType="UserDTO" resultType="UserDTO">
+		SELECT
+			user_id,
+			user_pw,
+			user_name,
+			user_email,
+			user_ismaster,
+			user_istemp,
+			user_provider,
+			user_provider_id
+		FROM
+			user_info
+		WHERE 1=1
+			AND user_provider = #{userProvider}
+			AND user_provider_id = #{userProviderId}
+	</select>
+	
+	<!-- sns 아이디와 연동 해제 -->
+	<update id="updateUserForDeleteSnsLink" parameterType="String">
+		UPDATE
+			user_info
+		SET
+			user_provider = null,
+			user_provider_id = null
+		WHERE
+			user_id = #{userId}
+	</update>
+	
+	<delete id="deleteUser" parameterType="String">
+		DELETE
+			user_info
+		WHERE
+			user_id = #{userId}
+	</delete>
 </mapper>

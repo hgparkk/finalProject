@@ -35,26 +35,15 @@
 						<span class="fs-4 info-box text-body-tertiary">이메일</span>
 						<span class="fs-4">${sessionScope.login.userEmail}</span>
 					</div>
-					<div class="mt-5 mb-5">
-						<a id="pwChangeButton" href="<c:url value="/myPagePwChangeView" />" class="btn btn-success btn-lg" style="width: 100%;">비밀번호 변경</a>
-					</div>
+					<div class="mt-5 mb-5"></div>
 					<c:if test="${sessionScope.login.userProvider != null}">
-						<div class="mb-2 fs-2 text-center">SNS 연동 정보</div>
-						<div class="mb-2">
+						<div class="mb-5 fs-2 text-center">SNS 연동 정보</div>
+						<div class="mb-2 d-flex align-items-center">
 							<span class="fs-4 info-box text-body-tertiary">연동된 SNS</span>
-							<span></span>
-						</div>
-						<div class="mb-2">
-							<span class="fs-4 info-box text-body-tertiary">SNS 아이디</span>
-							<span></span>
-						</div>
-						<div class="mt-5 mb-5">
-							<button class="btn btn-success btn-lg" style="width: 100%;">SNS 연동 정보 변경</button>
-						</div>
-					</c:if>
-					<c:if test="${sessionScope.login.userProvider == null}">
-						<div class="mt-5 mb-5">
-							<button class="btn btn-success btn-lg" style="width: 100%;">SNS 연동하기</button>
+							<c:if test="${sessionScope.login.userProvider == 'Naver'}">
+								<img src="assets/naver_login_assets/btnG_아이콘사각.png" class="ms-3" style="width: 35px;">
+								<span class="ms-3" style="color: #2DB400">NAVER</span>
+							</c:if>
 						</div>
 					</c:if>
 				</div>

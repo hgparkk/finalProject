@@ -132,7 +132,7 @@
 					<span>SNS 계정으로 로그인하기</span>
 				</div>
 				<div class="d-flex justify-content-evenly min-width-set">
-					<a class="social-login-btn btn-naver"></a>
+					<a href="${naverUri}" class="social-login-btn btn-naver"></a>
 					<a class="social-login-btn btn-kakao"></a>
 					<a class="social-login-btn btn-google"></a>
 				</div>
