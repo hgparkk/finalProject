@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -13,9 +13,9 @@
 	<script>
 		let alertMsg = "<c:out value='${msg}'/>"
 		let alertUrl = "<c:out value='${url}'/>"
-		
+
 		alert(alertMsg)
-		location.replace("${pageContext.request.contextPath}"+alertUrl)
+		location.replace("${pageContext.request.contextPath}" + alertUrl)
 	</script>
 </body>
 

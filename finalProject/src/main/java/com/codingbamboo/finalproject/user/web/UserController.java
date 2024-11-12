@@ -1,7 +1,6 @@
 package com.codingbamboo.finalproject.user.web;
 
 import java.security.SecureRandom;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -22,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.codingbamboo.finalproject.oauth.service.NaverService;
 import com.codingbamboo.finalproject.user.dto.UserDTO;
 import com.codingbamboo.finalproject.user.service.UserService;
 
@@ -30,6 +30,13 @@ public class UserController {
 
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
+
+	private final NaverService naverService;
+
+	@Autowired
+	public UserController(NaverService naverService) {
+		this.naverService = naverService;
+	}
 
 	@Autowired
 	UserService userService;
@@ -41,6 +48,8 @@ public class UserController {
 		if (fromUrl == null || fromUrl.isEmpty()) {
 			fromUrl = request.getHeader("Referer");
 		}
+		String Uri = naverService.getNaverUri(request, false);
+		model.addAttribute("naverUri", Uri);
 		model.addAttribute("fromUrl", fromUrl);
 		return "user/loginView";
 	}
@@ -266,7 +275,7 @@ public class UserController {
 			if (login.getUserIstemp() == 1) {
 				return "redirect:/myPagePwChangeView";
 			}
-			if (fromUrl == null || fromUrl.isEmpty()) {
+			if (fromUrl == null || fromUrl.isEmpty() || fromUrl.contains("/login") || fromUrl.contains("/callback")) {
 				return "redirect:/";
 			} else {
 				return "redirect:" + fromUrl;
@@ -283,7 +292,7 @@ public class UserController {
 	public String logoutDo(HttpServletRequest request, HttpSession session) {
 		String fromUrl = request.getHeader("Referer");
 		session.invalidate();
-		if (fromUrl == null || fromUrl.isEmpty()) {
+		if (fromUrl == null || fromUrl.isEmpty() || fromUrl.contains("/login")) {
 			return "redirect:/";
 		} else {
 			return "redirect:" + fromUrl;
@@ -317,7 +326,9 @@ public class UserController {
 
 			userService.updateUser(login);
 
-			// 회원가입 성공 메시지 설정
+			session.setAttribute("login", login);
+
+			// 비밀번호 변경 성공 메시지 설정
 			request.setAttribute("msg", "비밀번호가 변경되었습니다.");
 			request.setAttribute("url", "/myPageUserInfoView");
 			return "alert";
@@ -326,5 +337,52 @@ public class UserController {
 			request.setAttribute("url", "/myPagePwChangeView");
 			return "alert";
 		}
+	}
+
+	@RequestMapping(value = "/myPageSnsLinkManageView", method = RequestMethod.GET)
+	public String snsLinkManageView(HttpSession session, HttpServletRequest request, Model model) {
+		if ((UserDTO) session.getAttribute("login") == null) {
+			return "redirect:/";
+		}
+
+		String Uri = naverService.getNaverUri(request, true);
+		model.addAttribute("naverUri", Uri);
+
+		return "user/myPageSnsLinkManageView";
+	}
+	
+	@RequestMapping(value = "/deleteSnsLinkDo", method = RequestMethod.POST)
+	public String deleteSnsLinkDo(HttpSession session, HttpServletRequest request) {
+		UserDTO login = (UserDTO)session.getAttribute("login");
+		userService.updateUserForDeleteSnsLink(login.getUserId());
+		login.setUserProvider(null);
+		login.setUserProviderId(null);
+		session.setAttribute("login", login);
+		
+		request.setAttribute("msg", "소셜 계정 연동 정보가 삭제되었습니다.");
+		request.setAttribute("url", "/myPageSnsLinkManageView");
+		return "alert";
+	}
+
+	@RequestMapping(value = "/myPageMySuggestionsView", method = RequestMethod.GET)
+	public String myPageMySuggestionsView(HttpSession session) {
+		if ((UserDTO) session.getAttribute("login") == null) {
+			return "redirect:/";
+		}
+
+		return "user/myPageMySuggestionsView";
+	}
+	
+	@RequestMapping(value = "/resignUserDo", method=RequestMethod.POST)
+	public String resignUserDo(HttpSession session, HttpServletRequest request) {
+		UserDTO login = (UserDTO)session.getAttribute("login");
+		
+		// 유저가 남긴 건의 사항과 탄소 발자국 계산 결과를 삭제한다.
+		
+		userService.deleteUser(login.getUserId());
+		session.invalidate();
+		request.setAttribute("msg", "회원탈퇴가 완료되었습니다");
+		request.setAttribute("url", "/");
+		return "alert";
 	}
 }

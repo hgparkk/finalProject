@@ -43,4 +43,20 @@ public class UserService {
 	public int updateUser(UserDTO user) {
 		return dao.updateUser(user);
 	}
+
+	public int updateUserForSnsLink(UserDTO user) {
+		return dao.updateUserForSnsLink(user);
+	}
+	
+	public UserDTO selectUserForSnsLogin(UserDTO user) {
+		return dao.selectUserForSnsLogin(user);
+	}
+	
+	public int updateUserForDeleteSnsLink(String userId) {
+		return dao.updateUserForDeleteSnsLink(userId);
+	}
+	
+	public int deleteUser(String userId) {
+		return dao.deleteUser(userId);
+	}
 }
