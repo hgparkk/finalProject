@@ -59,7 +59,7 @@
 						<!-- 이메일 입력창 -->
 						<div class="d-flex">
 							<div class="form-floating mb-3 input-div">
-								<input class="form-control" id="inputEmail" type="email" name="userEmail" placeholder="이메일" required>
+								<input class="form-control" id="inputEmail" type="text" name="userEmail" placeholder="이메일" required>
 								<label for="inputEmail">이메일</label>
 								<div id="emailFeedback" class="invalid-feedback">올바르지 않은 이메일 형식입니다</div>
 							</div>

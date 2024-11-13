@@ -92,7 +92,7 @@ request.setAttribute("selectedItem", selectedItem);
 		})
 	})
 	
-	document.getElementById("resignUserBtn").addEventLiWstener("click",()=>{
+	document.getElementById("resignUserBtn").addEventListener("click",()=>{
 		if(confirm("회원을 탈퇴하시겠습니까?")){
 			if(confirm("탈퇴된 회원 정보는 복구되지 않습니다")){
 				document.getElementById("resignUserForm").submit();

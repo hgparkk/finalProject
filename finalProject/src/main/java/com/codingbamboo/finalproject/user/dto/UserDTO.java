@@ -15,6 +15,7 @@ public class UserDTO {
     
     @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "올바르지 않은 이메일 형식입니다.")
 	private String userEmail;
+    
 	private int userIsmaster;
 	private int userIstemp;
 	private String userProvider;

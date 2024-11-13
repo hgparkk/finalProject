@@ -109,6 +109,14 @@
 								<img src="assets/naver_login_assets/btnG_아이콘사각.png" class="ms-3" style="width: 35px;">
 								<span class="ms-3" style="color: #2DB400">NAVER</span>
 							</c:if>
+							<c:if test="${sessionScope.login.userProvider == 'Kakao'}">
+								<img src="assets/kakao_login_assets/kakaotalk_sharing_btn_small.png" class="ms-3" style="width: 35px;">
+								<span class="ms-3" style="color: #3C1E1E">KAKAO</span>
+							</c:if>
+							<c:if test="${sessionScope.login.userProvider == 'Google'}">
+								<img src="assets/google_login_assets/Web (mobile + desktop)/png@2x/light/web_light_rd_na_border@2x.png" class="ms-3" style="width: 35px;">
+								<span class="ms-3" style="color: #f2f2f2">Google</span>
+							</c:if>
 						</div>
 						<div class="mt-5 mb-5">
 							<button id="deleteSnsLink" class="btn btn-success btn-lg" style="width: 100%;">SNS 연동 정보 삭제</button>
@@ -126,9 +134,9 @@
 							<span>아래의 SNS로 연동하기</span>
 						</div>
 						<div class="d-flex justify-content-evenly min-width-set">
-							<a href="${naverUri}" class="social-login-btn btn-naver"></a>
-							<a class="social-login-btn btn-kakao"></a>
-							<a class="social-login-btn btn-google"></a>
+							<a href="${naverLinkUri}" class="social-login-btn btn-naver"></a>
+							<a href="${kakaoLinkUri}"  class="social-login-btn btn-kakao"></a>
+							<a href="${googleLinkUri}"  class="social-login-btn btn-google"></a>
 						</div>
 					</c:if>
 					<form id="deleteSnsLinkForm" action="<c:url value="/deleteSnsLinkDo" />" method="POST"></form>

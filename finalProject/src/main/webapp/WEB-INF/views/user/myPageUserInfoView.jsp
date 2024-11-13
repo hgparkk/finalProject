@@ -44,6 +44,20 @@
 								<img src="assets/naver_login_assets/btnG_아이콘사각.png" class="ms-3" style="width: 35px;">
 								<span class="ms-3" style="color: #2DB400">NAVER</span>
 							</c:if>
+							<c:if test="${sessionScope.login.userProvider == 'Kakao'}">
+								<img src="assets/kakao_login_assets/kakaotalk_sharing_btn_small.png" class="ms-3" style="width: 35px;">
+								<span class="ms-3" style="color: #3C1E1E">KAKAO</span>
+							</c:if>
+							<c:if test="${sessionScope.login.userProvider == 'Google'}">
+								<img src="assets/google_login_assets/Web (mobile + desktop)/png@2x/light/web_light_rd_na_border@2x.png" class="ms-3" style="width: 35px;">
+								<span class="ms-3" style="color: #f2f2f2">Google</span>
+							</c:if>
+						</div>
+					</c:if>
+					<c:if test="${sessionScope.login.userProvider == null}">
+						<div class="mb-5 fs-2 text-center">SNS 연동 정보</div>
+						<div class="mb-5 d-flex justify-content-center">
+							<span class="fs-4 text-body-tertiary">연동된 SNS가 없습니다</span>
 						</div>
 					</c:if>
 				</div>

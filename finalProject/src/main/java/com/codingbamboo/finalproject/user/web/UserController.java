@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.codingbamboo.finalproject.oauth.service.NaverService;
+import com.codingbamboo.finalproject.oauth.service.OAuthService;
 import com.codingbamboo.finalproject.user.dto.UserDTO;
 import com.codingbamboo.finalproject.user.service.UserService;
 
@@ -31,11 +31,11 @@ public class UserController {
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
 
-	private final NaverService naverService;
+	private final OAuthService oauthService;
 
 	@Autowired
-	public UserController(NaverService naverService) {
-		this.naverService = naverService;
+	public UserController(OAuthService oauthService) {
+		this.oauthService = oauthService;
 	}
 
 	@Autowired
@@ -48,8 +48,12 @@ public class UserController {
 		if (fromUrl == null || fromUrl.isEmpty()) {
 			fromUrl = request.getHeader("Referer");
 		}
-		String Uri = naverService.getNaverUri(request, false);
-		model.addAttribute("naverUri", Uri);
+		String naverLoginUri = oauthService.getUri(request, false,"Naver");
+		String kakaoLoginUri = oauthService.getUri(request, false, "Kakao");
+		String googleLoginUri = oauthService.getUri(request,false,"Google");
+		model.addAttribute("naverLoginUri", naverLoginUri);
+		model.addAttribute("kakaoLoginUri",kakaoLoginUri);
+		model.addAttribute("googleLoginUri",googleLoginUri);
 		model.addAttribute("fromUrl", fromUrl);
 		return "user/loginView";
 	}
@@ -100,8 +104,6 @@ public class UserController {
 		}
 
 		String emailCheckCode = code.toString(); // 생성된 랜덤 코드
-
-		inputEmail = inputEmail.replace("&#64;", "@");
 
 		HtmlEmail email = new HtmlEmail();
 		email.setHostName("smtp.naver.com");
@@ -224,7 +226,7 @@ public class UserController {
 		userService.updateUser(user);
 		userService.updateTemp(user);
 
-		String userEmail = user.getUserEmail().replace("&#64;", "@");
+		String userEmail = user.getUserEmail();
 
 		HtmlEmail email = new HtmlEmail();
 		email.setHostName("smtp.naver.com");
@@ -308,7 +310,7 @@ public class UserController {
 		return "user/myPageUserInfoView";
 	}
 
-	// 마이페이지 비밀번호 변경
+	// 마이페이지 비밀번호 변경 창
 	@RequestMapping(value = "/myPagePwChangeView", method = RequestMethod.GET)
 	public String pwChangeView(HttpSession session) {
 		if ((UserDTO) session.getAttribute("login") == null) {
@@ -317,6 +319,7 @@ public class UserController {
 		return "user/myPagePwChangeView";
 	}
 
+	// 마이페이지 비밀번호 변경 창
 	@RequestMapping(value = "/pwChangeDo", method = RequestMethod.POST)
 	public String pwChangeDo(String nowPassword, String newPassword, HttpSession session, HttpServletRequest request) {
 		UserDTO login = (UserDTO) session.getAttribute("login");
@@ -339,18 +342,24 @@ public class UserController {
 		}
 	}
 
+	// 마이페이지 sns 연동 창
 	@RequestMapping(value = "/myPageSnsLinkManageView", method = RequestMethod.GET)
 	public String snsLinkManageView(HttpSession session, HttpServletRequest request, Model model) {
 		if ((UserDTO) session.getAttribute("login") == null) {
 			return "redirect:/";
 		}
 
-		String Uri = naverService.getNaverUri(request, true);
-		model.addAttribute("naverUri", Uri);
+		String naverLinkUri = oauthService.getUri(request, true,"Naver");
+		String kakaoLinkUri = oauthService.getUri(request, true,"Kakao");
+		String googleLinkUri = oauthService.getUri(request, true,"Google");
+		model.addAttribute("naverLinkUri", naverLinkUri);
+		model.addAttribute("kakaoLinkUri", kakaoLinkUri);
+		model.addAttribute("googleLinkUri", googleLinkUri);
 
 		return "user/myPageSnsLinkManageView";
 	}
 	
+	// 마이페이지 sns 연동 해제
 	@RequestMapping(value = "/deleteSnsLinkDo", method = RequestMethod.POST)
 	public String deleteSnsLinkDo(HttpSession session, HttpServletRequest request) {
 		UserDTO login = (UserDTO)session.getAttribute("login");
@@ -364,6 +373,7 @@ public class UserController {
 		return "alert";
 	}
 
+	// 마이페이지 나의 건의사항 뷰
 	@RequestMapping(value = "/myPageMySuggestionsView", method = RequestMethod.GET)
 	public String myPageMySuggestionsView(HttpSession session) {
 		if ((UserDTO) session.getAttribute("login") == null) {
@@ -373,6 +383,7 @@ public class UserController {
 		return "user/myPageMySuggestionsView";
 	}
 	
+	// 회원 탈퇴
 	@RequestMapping(value = "/resignUserDo", method=RequestMethod.POST)
 	public String resignUserDo(HttpSession session, HttpServletRequest request) {
 		UserDTO login = (UserDTO)session.getAttribute("login");
