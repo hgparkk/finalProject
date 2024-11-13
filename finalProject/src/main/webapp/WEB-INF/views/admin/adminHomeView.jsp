@@ -20,11 +20,15 @@
         }
         .welcome-box {
             font-size: 1.5rem;
+            margin-bottom: 40px;
+            margin-top: 100px;
         }
         .content-row {
             display: flex;
             justify-content: space-around;
             gap: 20px;
+            margin-top: 130px;
+            margin-bottom: 130px;
         }
         .content-box {
             width: 45%;

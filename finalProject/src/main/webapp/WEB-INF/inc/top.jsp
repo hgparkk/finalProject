@@ -20,11 +20,11 @@
 .top-container {
 	width: 100%;
 	height: 100%;
-	justify-content: space-between;
+	justify-content: space-around;
 }
 
-.empty{
-	width: 2%
+.empty {
+	width: 0.5%
 }
 
 .img-box {
@@ -49,6 +49,14 @@
 	position: relative;
 }
 
+.dropdown-body2 {
+	width: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+}
+
 .dropdown-select {
 	width: 95%;
 	opacity: 0;
@@ -59,6 +67,20 @@
 	padding-top: 1vh;
 	padding-bottom: 1vh;
 	border-radius: 1vw;
+	transition-duration: 0.3s;
+}
+
+.dropdown-select2 {
+	width: 95%;
+	opacity: 0;
+	position: absolute;
+	left: -25%;
+	top: calc(80%);
+	background-color: green;
+	padding-top: 1vh;
+	padding-bottom: 1vh;
+	border-radius: 1vw;
+	transition-duration: 0.3s;
 }
 
 .co2 {
@@ -93,8 +115,12 @@
 	opacity: 100%;
 }
 
+.dropdown-body2:hover>.dropdown-select2 {
+	opacity: 100%;
+}
+
 .login-box {
-	width: 12%;
+	width: 13.5%;
 	align-items: center;
 	justify-content: center;
 }
@@ -137,7 +163,9 @@
 
 			<div class="d-flex main-box">
 				<a class="nav-link co2 me-2" href="#">탄소중립 생활 실천 소개</a> <a
-					class="nav-link co2 me-2" href="${pageContext.request.contextPath }/carbonCalView">탄소발자국 계산</a>
+					class="nav-link co2 me-2"
+					href="${pageContext.request.contextPath }/carbonCalView">탄소발자국
+					계산</a>
 
 				<div class="dropdown-body me-2">
 					<a class="aTag">탄소중립 알려드려요 </a>
@@ -147,26 +175,42 @@
 				</div>
 
 				<div class="dropdown-body me-2">
-					<a class="aTag">소통공간
-					</a>
+					<a class="aTag">소통공간 </a>
 					<div class="dropdown-select">
-						<a class="detail" href="#">건의하기</a>
-						<%-- <c:if test="">
-						<li><a class="dropdown-item" href="#">건의사항 목록</a></li>
-					</c:if> --%>
+						<c:if test="${sessionScope.login.userIsmaster != 1}">
+							<a class="detail" href="#">건의하기</a>
+						</c:if>
+						<c:if test="${sessionScope.login.userIsmaster == 1}">
+							<a class="detail" href="#">건의사항 목록</a>
+						</c:if>
 						<a class="detail" href="#">공지사항</a>
 					</div>
 				</div>
 				<a class="nav-link co2" href="#">태양광 발전 예측 지도</a>
 			</div>
 			<div
-				class="login-box d-flex align-items-center justify-content-center">
+				class="login-box d-flex align-items-center justify-content-start">
 				<c:if test="${sessionScope.login == null }">
 					<a class="nav-link login"
 						href="${pageContext.request.contextPath }/loginView">로그인</a>
 				</c:if>
 				<c:if test="${sessionScope.login != null }">
-					<a class="nav-link rounded" href="#">로그아웃</a>
+					<div class="dropdown-body2">
+						<a class="aTag d-flex justify-content-start">${sessionScope.login.userId }</a>
+						<c:if test="${sessionScope.login.userIsmaster != 1 }">
+							<div class="dropdown-select2 mt-3">
+								<a class="detail"
+									href="${pageContext.request.contextPath }/myPageUserInfoView">마이페이지</a>
+								<a class="detail"
+									href="${pageContext.request.contextPath }/myPageMySuggestionsView">나의
+									건의사항</a> <a class="detail"
+									href="${pageContext.request.contextPath }/pwChangeView">회원
+									관리</a>
+							</div>
+						</c:if>
+					</div>
+					<a class="nav-link login" style="margin-right: 0.5vw;"
+						href="${pageContext.request.contextPath }/logoutDo">로그아웃</a>
 				</c:if>
 			</div>
 		</div>

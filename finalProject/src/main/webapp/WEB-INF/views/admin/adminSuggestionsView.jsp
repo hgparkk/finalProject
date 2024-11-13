@@ -10,19 +10,19 @@
 <%@ include file="/WEB-INF/inc/header.jsp"%>
 
 <style>
-	.container{
-	width: 80%;
-	margin: auto;
-	border: 1px solid black;
-	
+	.table-container{
+	margin-top: 100px;
 	}
+	
+	
 </style>
 </head>
 <body>
 	<%@ include file="/WEB-INF/inc/top.jsp"%>
-	<div class="container">
+	<div class="container table-container">
+		<h2>건의 사항 목록</h2>
 		<div>
-			<table>
+			<table class="table table-bordered">
 				<thead>
 					<th>글번호</th>
 					<th>제목</th>
