@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="ko">
@@ -14,8 +13,7 @@
 <%@ include file="/WEB-INF/inc/header.jsp"%>
 
 <!-- Locomotive Scroll CSS -->
-<link rel="stylesheet"
-	href="https://unpkg.com/locomotive-scroll/dist/locomotive-scroll.min.css">
+<link rel="stylesheet" href="https://unpkg.com/locomotive-scroll/dist/locomotive-scroll.min.css">
 
 <style>
     html, body {
@@ -51,44 +49,70 @@
         text-decoration-line: underline;
         font-weight: bold;
     }
-    .photo-section-wrapper {
-        background-color: #17a065;
-        width: 100vw;
-        margin-left: calc(-50vw + 50%);
-        padding: 40px 0;
-        position: relative;
-    }
-    .photo-item {
-        background-color: white;
-        border-radius: 10px;
-        overflow: hidden;
-        padding: 20px;
-        text-align: center;
-        margin: 15px; /* 각 상자 사이의 간격 추가 */
-    }
-    .photo-item img {
-        width: 100%;
-        height: 220px;
-        object-fit: cover;
-        border-radius: 10px;
-        transition: transform 0.3s ease;
-    }
-    .photo-item img:hover {
-        transform: scale(1.05);
-    }
-    .photo-title {
-        color: #333;
-        font-weight: bold;
-        margin-top: 15px;
-        font-size: 18px;
-    }
     .photoTitle {
         font-weight: bold;
         font-size: 28px;
         color: black;
+        margin-top: 20px;
     }
-    .subContents{
-    	font-size: 20px;
+    .subContents {
+        font-size: 20px;
+    }
+    /* Carousel styling */
+    .carousel-inner {
+        text-align: center;
+    }
+    .photo-section-wrapper {
+        background-color: #17a065;
+        padding: 40px 5vw;
+    }
+
+    /* 카드 크기 50% 확대 */
+    .photo-item {
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+        text-align: center;
+        width: 330px;
+        height: 450px;
+        padding: 15px;
+        margin: auto;
+    }
+
+    .photo-item img {
+        width: 100%;
+        height: 380px;
+        object-fit: cover;
+        border-radius: 10px;
+        transition: transform 0.3s ease;
+    }
+
+    .photo-item img:hover {
+        transform: scale(1.05);
+    }
+
+    .photo-title {
+        color: #333;
+        font-weight: bold;
+        margin-top: 10px;
+        font-size: 20px;
+    }
+
+    /* Carousel Controls 위치 조정 및 크기 확대 */
+    .carousel-control-prev, .carousel-control-next {
+        width: 7%; /* 버튼 크기 증가 */
+        height: 7%; /* 버튼 크기 증가 */
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .carousel-control-prev {
+        left: calc(50% - 280px); /* 카드 왼쪽에서 100px 간격 */
+    }
+
+    .carousel-control-next {
+        right: calc(50% - 280px); /* 카드 오른쪽에서 100px 간격 */
     }
 </style>
 </head>
@@ -116,41 +140,64 @@
             <p class="textStress">에너지, 소비, 수송, 자원순환, 흡수원 5대 분야별로 분류해</p>
             <p>구체적인 방안을 소개하고 있어요. 이제 일상 속에서 쉽게 탄소중립 생활을 실천해보세요!</p>
         </div>
-		
-		<div style="padding-top:10px"></div>
-		
-		<div class="photoTitle">
-		<span>탄소중립 생활 실천</span>
-		<span style="color: green;">5대 분야</span>
-		</div>
-
+        
+        <div style="padding-top:10px"></div>
+        
+        <div class="photoTitle">
+            <span>탄소중립 생활 실천</span>
+            <span style="color: green;">5대 분야</span>
+        </div>
     </div>
     
-    <!-- 5개 섹션 사진 -->
-    <div class="photo-section-wrapper" data-scroll>
-        <div class="container py-4">
-            <div class="row justify-content-center">
-                <div class="col-md-4 col-lg-2 photo-item d-flex flex-column align-items-center justify-content-center">
-                    <img src="${pageContext.request.contextPath}/resources/image/box1.jpg" class="img-fluid rounded">
-                    <p class="photo-title">에너지 절약</p>
+    <!-- Carousel for 5 Cards with Green Background -->
+    <div class="photo-section-wrapper">
+        <div id="photoCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+            <div class="carousel-inner">
+                <!-- 에너지 절약 -->
+                <div class="carousel-item active">
+                    <div class="photo-item">
+                        <img src="${pageContext.request.contextPath}/resources/image/box1.jpg" class="img-fluid rounded" alt="에너지 절약">
+                        <p class="photo-title">에너지 절약</p>
+                    </div>
                 </div>
-                <div class="col-md-4 col-lg-2 photo-item d-flex flex-column align-items-center justify-content-center">
-                    <img src="${pageContext.request.contextPath}/resources/image/box2.jpg" class="img-fluid rounded">
-                    <p class="photo-title">친환경 소비</p>
+                <!-- 친환경 소비 -->
+                <div class="carousel-item">
+                    <div class="photo-item">
+                        <img src="${pageContext.request.contextPath}/resources/image/box2.jpg" class="img-fluid rounded" alt="친환경 소비">
+                        <p class="photo-title">친환경 소비</p>
+                    </div>
                 </div>
-                <div class="col-md-4 col-lg-2 photo-item d-flex flex-column align-items-center justify-content-center">
-                    <img src="${pageContext.request.contextPath}/resources/image/box3.jpg" class="img-fluid rounded">
-                    <p class="photo-title">친환경 이동</p>
+                <!-- 친환경 이동 -->
+                <div class="carousel-item">
+                    <div class="photo-item">
+                        <img src="${pageContext.request.contextPath}/resources/image/box3.jpg" class="img-fluid rounded" alt="친환경 이동">
+                        <p class="photo-title">친환경 이동</p>
+                    </div>
                 </div>
-                <div class="col-md-4 col-lg-2 photo-item d-flex flex-column align-items-center justify-content-center">
-                    <img src="${pageContext.request.contextPath}/resources/image/box4.jpg" class="img-fluid rounded">
-                    <p class="photo-title">자원순환</p>
+                <!-- 자원순환 -->
+                <div class="carousel-item">
+                    <div class="photo-item">
+                        <img src="${pageContext.request.contextPath}/resources/image/box4.jpg" class="img-fluid rounded" alt="자원순환">
+                        <p class="photo-title">자원순환</p>
+                    </div>
                 </div>
-                <div class="col-md-4 col-lg-2 photo-item d-flex flex-column align-items-center justify-content-center">
-                    <img src="${pageContext.request.contextPath}/resources/image/box5.jpg" class="img-fluid rounded">
-                    <p class="photo-title">흡수원 보호</p>
+                <!-- 흡수원 보호 -->
+                <div class="carousel-item">
+                    <div class="photo-item">
+                        <img src="${pageContext.request.contextPath}/resources/image/box5.jpg" class="img-fluid rounded" alt="흡수원 보호">
+                        <p class="photo-title">흡수원 보호</p>
+                    </div>
                 </div>
             </div>
+            <!-- Carousel Controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#photoCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">이전</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#photoCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">다음</span>
+            </button>
         </div>
     </div>
 
