@@ -4,23 +4,23 @@
 	namespace="com.codingbamboo.finalproject.carbonCalculate.dao.ICarbonCalculateDAO">
 	<insert id="addUsageList">
 		INSERT INTO carbon_result(
-		result_no
-		, user_id
-		, result_date
-		, electric_useage
-		, gas_useage
-		, traffic_kind
-		, traffic_value
-		, waste_weight
+			result_no
+			, user_id
+			, result_date
+			, electric_useage
+			, gas_useage
+			, traffic_kind
+			, traffic_value
+			, waste_weight
 		) VALUES(
-		re_seq.NEXTVAL
-		, #{userId}
-		, #{resultDate}
-		, #{electricUseage}
-		, #{gasUseage}
-		, #{trafficKind}
-		, #{trafficValue}
-		, #{wasteWeight}
+			re_seq.NEXTVAL
+			, #{userId}
+			, #{resultDate}
+			, #{electricUseage}
+			, #{gasUseage}
+			, #{trafficKind}
+			, #{trafficValue}
+			, #{wasteWeight}
 		)
 	</insert>
 	

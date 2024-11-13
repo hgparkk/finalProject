@@ -54,9 +54,13 @@
 .co2-box {
 	justify-content: space-between;
 	flex-wrap: wrap;
-	max-width: 1300px;
+	max-width: 1340px;
 	min-width: 500px;
-	max-width: 1300px;
+}
+
+.usage-group{
+	display: flex;
+	justify-content: space-between;
 }
 
 .inputUsage-box {
@@ -64,7 +68,7 @@
 	border-radius: 0.5vw;
 	width: 48%;
 	height: 25vw;
-	margin-bottom: 0.3vw;
+	margin-bottom: 5vh;
 	display: inline-block;
 }
 
@@ -175,7 +179,6 @@
 		height: 7vw;
 	}
 	.usage-group {
-		display: flex;
 		flex-direction: column;
 		min-width: 500px;
 	}
@@ -220,17 +223,22 @@
 	margin-bottom: 0.5vh;
 }
 
-}
 .result-box {
 	background-color: #E5F5EB;
 	width: 100%;
-	height: 50%;
+	height: 45%;
 	display: flex;
 	padding: 0.5vw;
 }
 
-.submit {
-	height: 30%;
+.empty2{
+	height: 5%
+}
+
+#submitForm{
+	width: 100%;
+	text-align: right;
+	height: 3vw;
 }
 
 #submitBtn {
@@ -240,6 +248,7 @@
 	border-radius: 0.2vw;
 	border: 0px;
 	width: 8%;
+	height: 100%;
 }
 </style>
 </head>
@@ -334,30 +343,34 @@
 								<div class="fuel-select-box">
 									<div class="fuel-select d-flex">
 										<div class="fuel">
-											<input type="radio" name="fuelType"> <label>휘발유</label>
+											<input type="radio" name="fuelType" id="gasoline" value="0"
+												checked> <label for="gasoline">휘발유</label>
 										</div>
 										<div class="fuel">
-											<input type="radio" name="fuelType"> <label>경유</label>
+											<input type="radio" name="fuelType" id="diesel" value="1">
+											<label for="diesel">경유</label>
 										</div>
 										<div class="fuel">
-											<input type="radio" name="fuelType"> <label>LPG</label>
+											<input type="radio" name="fuelType" id="lpg" value="2">
+											<label for="lpg">LPG</label>
 										</div>
 										<div class="fuel">
-											<input type="radio" name="fuelType"> <label>승용차
-												없음</label>
+											<input type="radio" name="fuelType" id="noCar" value="3">
+											<label for="noCar">승용차 없음</label>
 										</div>
 
 									</div>
 								</div>
 							</div>
 							<div class="inputUsage">
-								<span class="span">이동 거리</span> <input class="input"
-									type="number" id="inputFuel" placeholder="숫자 입력..."
-									onchange="co2Emission()" style="text-align: right;"> <span>km/월</span>
+								<span class="span">이동 거리</span> <span id="selectedFuel"></span>
+								<input class="input" type="number" id="inputFuel"
+									placeholder="숫자 입력..." onchange="co2Emission()"
+									style="text-align: right;"> <span>km/월</span>
 							</div>
 							<div class="outputCo2">
 								<span class="span">CO₂ 발생량</span> <input class="input"
-									id="outputGas" disabled="disabled"> <span>kg/월</span>
+									id="outputFuel" disabled="disabled"> <span>kg/월</span>
 							</div>
 						</div>
 						<div
@@ -409,7 +422,8 @@
 				</div>
 			</div>
 			<!-- 계산한 결과를 세션에 저장 후 이동 -->
-			<div class="submit d-flex justify-content-end align-items-end">
+			<div class="empty2"></div>
+			<div>
 				<form id="submitForm"
 					action="${pageContext.request.contextPath }/carbonCalResultView">
 					<button id="submitBtn" type="button">제출하기</button>
@@ -421,6 +435,45 @@
 	<%@ include file="/WEB-INF/inc/footer.jsp"%>
 
 	<script type="text/javascript">
+	
+	/* 페이지가 로드되자마자 실행되는 함수 */
+	document.addEventListener("DOMContentLoaded", function() {
+        const inputFuelField = document.getElementById('inputFuel');
+        const radioButtons = document.querySelectorAll('input[name="fuelType"]');
+        
+        // 페이지가 로드될 때, '승용차 없음'이 선택된 경우 inputFuel을 비활성화
+        const selectedFuelType = document.querySelector('input[name="fuelType"]:checked');
+        
+        if (selectedFuelType && selectedFuelType.id === 'noCar') {
+            inputFuelField.disabled = true;
+            inputFuelField.value = '';  // '승용차 없음'일 때 값도 초기화
+        } else {
+            inputFuelField.disabled = false;
+        }
+
+        // 라디오 버튼 변경 시마다 inputFuel 활성화/비활성화 및 CO₂ 발생량 계산
+        radioButtons.forEach(radioButton => {
+            radioButton.addEventListener('change', function() {
+                const selectedFuelType = document.querySelector('input[name="fuelType"]:checked');
+                if (selectedFuelType && selectedFuelType.id === 'noCar') {
+                    // '승용차 없음' 선택 시 inputFuel 필드를 비활성화
+                    inputFuelField.disabled = true;
+                    inputFuelField.value = '';  // 값도 초기화
+                } else {
+                    // 다른 연료 선택 시 inputFuel 필드를 활성화
+                    inputFuelField.disabled = false;
+                }
+                co2Emission();  // CO₂ 발생량 계산
+            });
+        });
+
+        // 기본적으로 "휘발유" 라디오 버튼이 체크된 상태로 설정
+        const defaultFuelType = document.getElementById('gasoline');
+        if (defaultFuelType) {
+            defaultFuelType.checked = true;
+        }
+    });
+	
 		document.querySelectorAll('.inputUsage-box').forEach(box => {
 		    box.addEventListener('click', () => {
 		        // 이전에 클릭된 요소에서 'clicked' 클래스를 제거
@@ -450,8 +503,10 @@
 		    // 교통 CO₂ 발생량 계산 (승용차 종류 선택에 따라)
 		    const v_inputFuel = document.getElementById('inputFuel').value;
 		    const selectedFuelType = document.querySelector('input[name="fuelType"]:checked');
+		    console.log(selectedFuelType.nextElementSibling.textContent.trim())
 		    let resultFuelCo2 = 0;
-	
+		    
+		    /* 원하는 연료 선택 */
 		    if (selectedFuelType && v_inputFuel) {
 		        const fuelType = selectedFuelType.nextElementSibling.textContent.trim();
 		        if (fuelType === '휘발유') {
@@ -460,22 +515,27 @@
 		            resultFuelCo2 = (v_inputFuel / 15.35) * 2.582;
 		        } else if (fuelType === 'LPG') {
 		            resultFuelCo2 = (v_inputFuel / 11.06) * 1.868;
-		        }
-		        const roundedFuelCo2 = Math.round(resultFuelCo2 * 100000) / 100000;
-		        document.getElementById("outputFuel").value = roundedFuelCo2;
+		        } 
 		    }
+		    
+		    /* 승용차 없음 선택하면 outputFuel 비움 */
+		    if(selectedFuelType.nextElementSibling.textContent.trim() == '승용차없음'){
+		    	document.getElementById("outputFuel").value = 0;
+	        }
+		    
+	        const roundedFuelCo2 = Math.round(resultFuelCo2 * 100000) / 100000;
+	        document.getElementById("outputFuel").value = roundedFuelCo2;
 	
 		    // 폐기물 CO₂ 발생량 계산
 		    const v_inputGarbage = document.getElementById('inputGarbage').value;
 	        const resultGarbageCo2 = v_inputGarbage * 0.5573;
 	        const roundedGarbageCo2 = Math.round(resultGarbageCo2 * 100000) / 100000;
 	        document.getElementById("outputGarbage").value = roundedGarbageCo2;
-	
+	        
 		    // 전체 CO₂ 발생량 계산 (각 항목의 배출량 합산)
-		    
 			const totalCo2 = (parseFloat(document.getElementById("outputElectric").value) || 0) +
 		                 (parseFloat(document.getElementById("outputGas").value) || 0) +
-		                 /* (parseFloat(document.getElementById("outputFuel").value) || 0) + */
+		                 (parseFloat(document.getElementById("outputFuel").value) || 0) +
 		                 (parseFloat(document.getElementById("outputGarbage").value) || 0);
 		    
 		    // 전체 CO₂ 발생량 출력
@@ -488,8 +548,7 @@
 				alert("전기 사용량을 입력해주세요.");
 				return;
 			}
-			console.log(document.getElementById("outputElectric").value)
-			console.log(document.getElementById("outputElectric"))
+			
 			if(document.getElementById("outputGas").value == null || document.getElementById("outputGas").value == 0){
 				alert("가스 사용량을 입력해주세요.");
 				return;
@@ -502,17 +561,18 @@
 			
 			if(confirm("결과창으로 이동하시겠습니까?")){
 				/* 기존에 존재하던 아이템들 삭제 */
-				sessionStorage.removeItem("resultE");
+				sessionStorage.removeItem("resultElec");
 				sessionStorage.removeItem("resultGas");
 				sessionStorage.removeItem("resultGar");
+				sessionStorage.removeItem("resultTrf");
+				sessionStorage.removeItem("resultTrfType");
 				
 				/* 새롭게 사용자가 입력한 결과를 sessionStorage에 저장후 submit */
-				sessionStorage.setItem("resultE", document.getElementById("outputElectric").value);
-				sessionStorage.setItem("resultGas", document.getElementById("outputGas").value);
-				sessionStorage.setItem("resultGar", document.getElementById("outputGarbage").value);
-				console.log(document.getElementById("outputTraffic"))
-				/* sessionStorage.setItem("resultT", document.getElementById("outputTraffic").value); */
-				console.log(document.getElementById("submitForm"));
+				sessionStorage.setItem("resultElec", document.getElementById("inputElectric").value);
+				sessionStorage.setItem("resultGas", document.getElementById("inputGas").value);
+				sessionStorage.setItem("resultGar", document.getElementById("inputGarbage").value);
+				sessionStorage.setItem("resultTrf", document.getElementById("inputFuel").value);
+				sessionStorage.setItem("resultTrfType", document.querySelector('input[name="fuelType"]:checked').nextElementSibling.textContent.trim());
 				document.getElementById("submitForm").submit();
 			}
 		});
