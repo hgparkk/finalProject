@@ -13,8 +13,7 @@
 
 <!-- header -->
 <%@ include file="/WEB-INF/inc/header.jsp"%>
-<style type="text/css">
-</style>
+
 </head>
 <body>
 	<!-- top -->
@@ -23,7 +22,8 @@
 	<div class="container">
 		<div>
 			<div class="date">
-			 	<select>2024</select>
+				<select>2024
+				</select>
 			</div>
 		</div>
 		<div>
@@ -57,7 +57,9 @@
 			</div>
 		</div>
 		<div>
-			<form id="resRegistForm" action="${pageContext.request.contextPath }/carbonCalRegistDo" method="POST">
+			<form id="resRegistForm"
+				action="${pageContext.request.contextPath }/carbonCalRegistDo"
+				method="POST">
 				<div class="d-none">
 					<div>${sessionScope.login.userId }</div>
 					<div id="resElec"></div>
@@ -91,7 +93,7 @@
 		document.getElementById("resTrf").innerHTML += v_resultTrf
 		
 		document.getElementById("resRegistBtn").addEventListener('click', ()=>{
-			submit
+			document.getElementById("resRegistForm").submit();
 		});
 		
 		v_resultElec = Math.round(v_resultElec * 0.4781 * 100000) / 100000;

@@ -20,6 +20,11 @@ public class CarbonCalculateController {
 	
 	@Autowired
 	CarbonCalculateService carbonCalculateService;
+	
+	@RequestMapping("/testView")
+	public String testView() {
+		return "carbonCal/testView";
+	}
 
 	// 탄소발자국 계산기 페이지 이동
 	@RequestMapping("/carbonCalView")
