@@ -153,23 +153,7 @@ html, body {
     }
 }
 
-/* 전원 버튼과 텍스트 섹션 */
-.darkModePart {
-    width: 90%;
-    max-width: 1200px;
-    height: 80vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background-color: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    margin: 50px auto;
-    padding: 20px;
-    transition: background-color 0.3s, color 0.3s;
-}
+
 
 .power-button {
     position: relative;
@@ -200,15 +184,7 @@ html, body {
     text-align: center;
 }
 
-.speech-bubble::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: -10px;
-    transform: translateY(-50%);
-    border: 10px solid transparent;
-    border-right-color: #007bff;
-}
+
 
 .main-title {
     font-size: 2rem;
@@ -242,28 +218,7 @@ html, body {
     font-size: 14px;
 }
 
-/* 다크 모드 스타일 */
-.dark-mode {
-    background-color: #333 !important;
-    color: #ffffff !important;
-}
 
-.dark-mode .sub-title, .dark-mode .tag {
-    color: #ffffff !important;
-    background-color: #555 !important;
-}
-
-.dark-mode .speech-bubble {
-    background-color: #555 !important;
-}
-
-.dark-mode .speech-bubble::after {
-    border-right-color: #555 !important;
-}
-
-.dark-mode .power-button img {
-    filter: brightness(0) invert(1) !important;
-}
 
 /* threeBoxSelect 스타일 */
 .threeBoxSelect {
@@ -396,7 +351,97 @@ html, body {
     margin-right: 10px;
     vertical-align: middle;
 }
+.content-wrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
+.platePart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.plate-button {
+    position: relative;
+    text-align: center;
+}
+
+#plateImage {
+    width: 300px;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+#plateImage:hover {
+    transform: scale(1.05);
+}
+
+.speech-bubble {
+    position: absolute;
+    top: 20px;
+    left: -240px; /* 이미지 왼쪽에 말풍선 배치 */
+    background-color: #32cd32;
+    color: #fff;
+    padding: 15px 20px; /* 패딩을 조금 늘려 텍스트가 상자 안에 들어가도록 함 */
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
+    width: 200px; /* 상자의 너비를 살짝 늘림 */
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* 화살표가 생기지 않도록 의사 요소 제거 */
+.speech-bubble:before, .speech-bubble:after {
+    content: none !important;
+}
+
+.text-content {
+    flex: 1;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.main-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #333;
+    line-height: 1.4;
+    margin-bottom: 10px;
+}
+
+.tags {
+    margin: 10px 0;
+}
+
+.tag {
+    display: inline-block;
+    background-color: #e0f7e0;
+    color: #32cd32;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 14px;
+    margin-right: 8px;
+}
+
+.sub-title {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.6;
+    margin-top: 15px;
+}
 </style>
 
 </head>
@@ -406,23 +451,23 @@ html, body {
 
    <div class="title">
       <img
-         src="${pageContext.request.contextPath}/resources/image/energyReduceMain.jpg"
+         src="${pageContext.request.contextPath}/resources/image/ecoConsumptionMain.jpg"
          alt="에너지 절약 이미지">
       <div class="title-content">
          <span>탄소중립</span>
-         <h1 class="mb-5">에너지 절약편</h1>
+         <h1 class="mb-5">친환경 소비편</h1>
 
          <div class="paired-text">
-            <h2 class="text-blue">전원은</h2>
+            <h2 class="text-warning">신중한</h2>
             <span class="bracket bracket-left">[</span>
-            <h2 class="fade-in-text text-blue">끄고</h2>
+            <h2 class="fade-in-text text-warning">소비로</h2>
             <span class="bracket bracket-right">]</span>
          </div>
 
          <div class="paired-text">
-            <h2 class="text-light-green">실천은</h2>
+            <h2 class="text-light-green">건강한</h2>
             <span class="bracket bracket-left">[</span>
-            <h2 class="fade-in-text text-light-green">켜자</h2>
+            <h2 class="fade-in-text text-light-green">지구로</h2>
             <span class="bracket bracket-right">]</span>
          </div>
 
@@ -433,28 +478,42 @@ html, body {
    </div>
 
    <!-- 전원 버튼과 텍스트 부분 -->
-   <div class="darkModePart" id="darkModePart">
-      <div class="power-button" onclick="toggleDarkMode()">
-         <img
-            src="${pageContext.request.contextPath}/resources/image/on_off_button.png"
-            alt="전원 버튼" id="powerButtonImage">
-         <div class="speech-bubble">
-            전원버튼을 클릭하여<br>에너지 절약을 실천해 주세요!
-         </div>
-      </div>
+<div class="content-wrapper">
+    <div class="platePart">
+        <div class="plate-button">
+            <img
+                src="${pageContext.request.contextPath}/resources/image/plate1.png"
+                alt="식기 버튼" id="plateImage" onclick="togglePlate()">
+            <div class="speech-bubble">
+                이미지를 클릭하여<br>친환경 소비를 실천해 주세요!
+            </div>
+        </div>
+    </div>
 
-      <div class="main-title">조금 불편해도, 지구를 위해 에너지 절약을 실천했던 적이 있나요?</div>
+    <div class="text-content">
+        <div class="main-title">
+            조금 고민되도<br>
+            지구를 위해 친환경 소비를<br>
+            실천했던 적이 있나요?
+        </div>
 
-      <div class="tags">
-         <span class="tag">#생활 속</span> <span class="tag">#에너지 절약법</span>
-      </div>
+        <div class="tags">
+            <span class="tag">#생활 속</span>
+            <span class="tag">#친환경 소비</span>
+        </div>
 
-      <div class="sub-title">
-         생활 속에서 실천할 수 있는 에너지 절약법은 무엇이 있을까요?<br> 모니터 화면이나 스마트폰 화면에서 다크 모드를
-         적용하면 소비전력이 25~30% 줄어들어 탄소 배출 저감에 기여할 수 있습니다. 탄소중립 사회 전환은 우리의 작은 생활습관의
-         변화로부터 시작합니다.
-      </div>
-   </div>
+        <div class="sub-title">
+            생활 속에서 실천할 수 있는<br>
+            친환경 소비는 무엇이 있을까요?
+            <br><br>
+            음식물 쓰레기로 인한 온실가스 배출 문제는 고형 폐기물 처리과정에서 발생합니다. 
+            최소한의 식재료만 구입하거나 음식은 남기지 않기 등 음식물 쓰레기 줄이는 습관으로 
+            탄소배출 저감에 기여할 수 있습니다. 탄소중립의 사회 전환은 우리의 작은 생활습관의 
+            변화로부터 시작합니다.
+        </div>
+    </div>
+</div>
+
 
    <!-- 세 개의 박스 섹션 -->
    <div class="threeBoxSelect">
@@ -478,82 +537,73 @@ html, body {
 
    <!-- 집에서detail -->
 <div class="homeBoxDetail-container" id="homeDetail" style="display: none;">
-    <!-- 불필요한 조명기구 소등하기 -->
     <div class="homeBoxDetail-header" onclick="toggleDetail(this)">
-        <span>불필요한 조명기구 소등하기</span> <span class="toggle-icon">▲</span>
+        <span>녹색제품 구매하기</span> <span class="toggle-icon">▲</span>
     </div>
     <div class="homeBoxDetail-content">
         <div class="homeBoxDetail">
-            <img src="${pageContext.request.contextPath}/resources/image/practiceDetail/home_box_detail1.jpg" alt="조명기구">
-            <span>조명기구 한 개의 전기 사용량은 작지만 여러 개의 조명기구를 장시간 사용하기 때문에 전체 전기 사용량에서 조명이 차지하는 비중은 높은 편이다.</span>
+            <img src="${pageContext.request.contextPath}/resources/image/practiceDetail/home_box_detail4.jpg" alt="조명기구">
+            <span>녹색제품은 에너지 자원의 투입과 온실가스 및 오염물질의 발생을 최소화하는 제품이다.</span>
             <span class="effect">실천효과</span>
-            <span class="effect-value">1가구당 이산화탄소 감축량: 251kg</span>
+            <span class="effect-value">1인당 이산화탄소 감축량: 3kg</span>
             <span class="rules-title">실천수칙</span>
             <div class="rules">
                 <div class="rule-item">
                     <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>사용하지 않는 조명기구 소등하기</span>
+                    <span>녹색제품(환경표지 제품, 우수재활용 제품, 저탄소 제품) 구매하기</span>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="homeBoxDetail-header" onclick="toggleDetail(this)">
+        <span>우리나라, 우리 지역 제철 식제료 이용하기</span> <span class="toggle-icon">▲</span>
+    </div>
+    <div class="homeBoxDetail-content">
+        <div class="homeBoxDetail">
+            <img src="${pageContext.request.contextPath}/resources/image/practiceDetail/home_box_detail5.jpg" alt="세탁기">
+            <span>제철 지역 식재료는 생산지에서 우리 식탁으로 오르기까지 전과정에서 배출되는 온실가스를 줄이고, 이를 활용한 요리를 통해 신선하고 영양까지 풍부한 식생활을 즐길 수 있다.</span>
+            <span class="effect">실천효과</span>
+            <span class="effect-value">1인당 이산화탄소 감축량: 132kg</span>
+            <span class="rules-title">실천수칙</span>
+            <div class="rules">
+                <div class="rule-item">
+                    <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
+                    <span>국내산·제철 식재료 이용하기</span>
                 </div>
                 <div class="rule-item">
                     <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>소등행사(4월 22일 지구의 날 등) 참여하기</span>
+                    <span>지역 농산물(로컬푸드) 매장 이용하기</span>
+                </div>
+                <div class="rule-item">
+                    <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
+                    <span>텃밭 또는 화분과 같은 용기를 이용해 채소를 직접 키워 먹기</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 세탁기 사용 횟수 줄이기 -->
     <div class="homeBoxDetail-header" onclick="toggleDetail(this)">
-        <span>세탁기 사용 횟수 줄이기</span> <span class="toggle-icon">▲</span>
+        <span>다회용기에 내용물만 구매하기</span> <span class="toggle-icon">▲</span>
     </div>
     <div class="homeBoxDetail-content">
         <div class="homeBoxDetail">
-            <img src="${pageContext.request.contextPath}/resources/image/practiceDetail/home_box_detail2.jpg" alt="세탁기">
-            <span>세탁기의 전기 사용량을 줄이려면, 세탁물의 양보다는 사용 횟수를 줄이는 것이 효과적이다.</span>
+            <img src="${pageContext.request.contextPath}/resources/image/practiceDetail/home_box_detail6.jpg" alt="전기장판">
+            <span>빈 다회용기를 이용하여 화장품, 세제 등을 필요한 만큼 덜어서 구매하면, 생활용품 형태의 플라스틱 폐기물 발생량을 줄일 수 있다.</span>
             <span class="effect">실천효과</span>
-            <span class="effect-value">1가구당 이산화탄소 감축량: 9kg</span>
+            <span class="effect-value">1인당 이산화탄소 감축량: 0.9kg</span>
             <span class="rules-title">실천수칙</span>
             <div class="rules">
                 <div class="rule-item">
                     <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>빨래는 최대한 모아 세탁 횟수 줄이기</span>
+                    <span>빈 다회용기를 이용하여 화장품, 세제 등 구매하기</span>
                 </div>
                 <div class="rule-item">
                     <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>전기 사용량이 큰 온수 대신 냉수로 세탁하기</span>
+                    <span>리필스테이션 이용하고 탄소중립포인트 적립받기</span>
                 </div>
-                <div class="rule-item">
-                    <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>건조기는 ‘강하게 모드’로 설정해 사용 시간 줄이기</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 전기장판 사용 줄이기 -->
-    <div class="homeBoxDetail-header" onclick="toggleDetail(this)">
-        <span>전기장판 사용 줄이기</span> <span class="toggle-icon">▲</span>
-    </div>
-    <div class="homeBoxDetail-content">
-        <div class="homeBoxDetail">
-            <img src="${pageContext.request.contextPath}/resources/image/practiceDetail/home_box_detail4.png" alt="전기장판">
-            <span>전기장판 사용 시간을 줄이고 체온과 비슷한 온도로 설정해 사용하면, 전기 사용량과 함께 장시간 사용 시 발생할 수 있는 화상의 위험도 줄일 수 있다.</span>
-            <span class="effect">실천효과</span>
-            <span class="effect-value">1가구당 이산화탄소 감축량: 315kg</span>
-            <span class="rules-title">실천수칙</span>
-            <div class="rules">
-                <div class="rule-item">
-                    <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>전기장판 사용 시간 줄이고, 필요한 시간만큼 타이머 설정해 사용하기</span>
-                </div>
-                <div class="rule-item">
-                    <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>보온성 유지를 위해 전기장판 위에 얇은 이불 덮어두기</span>
-                </div>
-                <div class="rule-item">
-                    <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>전기장판을 사용하지 않을 때는 전원 차단하기</span>
-                </div>
+                
             </div>
         </div>
     </div>
@@ -564,57 +614,57 @@ html, body {
 
    <!-- 학교에서 detail -->
 <div class="homeBoxDetail-container" id="schoolDetail" style="display: none;">
-    <!-- 빈 교실의 조명은 소등한다 -->
+
     <div class="homeBoxDetail-header" onclick="toggleDetail(this)">
-        <span>빈 교실의 조명은 소등한다.</span> <span class="toggle-icon">▲</span>
+        <span>저탄소, 친환경 식단을 운영한다</span> <span class="toggle-icon">▲</span>
     </div>
     <div class="homeBoxDetail-content">
         <div class="homeBoxDetail">
-            <img src="${pageContext.request.contextPath}/resources/image/practiceDetail/school_box_detail1.jpg" alt="조명기구">
-            <span>조명기구 한 개의 전기 사용량은 작지만 여러 개의 조명기구를 장시간 사용하기 때문에 전체 전기 사용량에서 조명이 차지하는 비중은 높은 편이다.</span>
+            <img src="${pageContext.request.contextPath}/resources/image/practiceDetail/school_box_detail4.jpg" alt="조명기구">
+            <span>농축수산물을 생산·유통·보관하는 과정에서 온실가스가 배출되기 때문에 탄소 배출이 적은 제품을 선택하여 저탄소·친환경 급식 문화를 조성해야 한다.</span>
             <span class="effect">실천효과</span>
-            <span class="effect-value">우리 학교 이산화탄소 감축량: 0.7t</span>
+            
             <span class="rules-title">실천수칙</span>
             <div class="rules">
                 <div class="rule-item">
                     <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>빈 교실의 조명기구 소등하기</span>
+                    <span>저탄소 농축산물, 친환경 수산물 인증마크를 확인하고 구매하기</span>
                 </div>
                 <div class="rule-item">
                     <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>학급별로 에너지 지킴이 임명하기</span>
+                    <span>우리나라, 우리 지역, 제철 식재료로 식단 구성하기</span>
                 </div>
                 <div class="rule-item">
                     <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>학교 외벽 조명기구의 점등·소등 관리 철저히 하기</span>
+                    <span>조리 시 열 사용을 줄일 수 있는 생채나 무침 위주의 식단 구성하기</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 전자기기 대기전력을 차단한다 -->
+
     <div class="homeBoxDetail-header" onclick="toggleDetail(this)">
-        <span>전자기기 대기전력을 차단한다</span> <span class="toggle-icon">▲</span>
+        <span>교내에서 텃밭 채소를 길러 본다.</span> <span class="toggle-icon">▲</span>
     </div>
     <div class="homeBoxDetail-content">
         <div class="homeBoxDetail">
-            <img src="${pageContext.request.contextPath}/resources/image/practiceDetail/school_box_detail2.jpg" alt="전자기기">
-            <span>대기전력은 기기의 동작과 관계없이 전원을 끈 상태에서도 소비되는 전력으로 불필요하게 낭비되는 전기를 말한다.</span>
+            <img src="${pageContext.request.contextPath}/resources/image/practiceDetail/school_box_detail5.jpg" alt="전자기기">
+            <span>텃밭 활동을 통해 식재료의 온실가스 줄이기, 올바른 식습관 형성, 먹거리의 소중함 등을 배울 수 있다.</span>
             <span class="effect">실천효과</span>
             <span class="effect-value">우리 학교 이산화탄소 감축량: 1t</span>
             <span class="rules-title">실천수칙</span>
             <div class="rules">
                 <div class="rule-item">
                     <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>대기전력이 높거나, 일시적으로만 사용하는 전자기기 확인하기</span>
+                    <span>학교 내 유휴 부지인 화단이나 자투리 공간을 활용하여 텃밭 조성하기</span>
                 </div>
                 <div class="rule-item">
                     <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>전자기기(에어컨 등)를 사용하지 않을 때는 콘센트 뽑기</span>
+                    <span>텃밭 수업을 먹거리 및 식습관에 대한 교육과 연계하기</span>
                 </div>
                 <div class="rule-item">
                     <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>전자기기의 특성과 학사일정을 고려해 대기전력 차단장치 설치·관리하기</span>
+                    <span>텃밭에서 재배한 농산물을 급식 식재료로 사용하기</span>
                 </div>
             </div>
         </div>
@@ -622,24 +672,21 @@ html, body {
 
     <!-- 절수 설비와 기기를 설치한다 -->
     <div class="homeBoxDetail-header" onclick="toggleDetail(this)">
-        <span>절수 설비와 기기를 설치한다.</span> <span class="toggle-icon">▲</span>
+        <span>국산목재로 만든 제품을 구매한다.</span> <span class="toggle-icon">▲</span>
     </div>
     <div class="homeBoxDetail-content">
         <div class="homeBoxDetail">
-            <img src="${pageContext.request.contextPath}/resources/image/practiceDetail/school_box_detail3.jpg" alt="절수 설비">
-            <span>물을 적게 사용하도록 구조·규격 등의 기준에 맞게 제작된 절수 설비와 기존 설비에 부속품을 교체하거나 추가로 장착해 사용하는 절수 기기가 있다.</span>
+            <img src="${pageContext.request.contextPath}/resources/image/practiceDetail/school_box_detail5.png" alt="절수 설비">
+            <span>목재는 가공이 쉽고 생산 과정에서 에너지를 적게 소모하는 친환경 소재이며, 특히 국산목재는 수입목재와 비교하여 운송 과정에서 발생하는 탄소 배출량이 낮다.</span>
             <span class="effect">실천효과</span>
-            <span class="effect-value">우리 학교 이산화탄소 감축량: 5t</span>
+
             <span class="rules-title">실천수칙</span>
             <div class="rules">
                 <div class="rule-item">
                     <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>세면대, 변기 등의 교체 시 절수 설비(수도꼭지 등) 설치하기</span>
+                    <span>국산목재로 만들어진 제품(가구, 생활제품, 소품 등) 구매하기</span>
                 </div>
-                <div class="rule-item">
-                    <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>수도꼭지, 양변기에 절수 기기 장착하기</span>
-                </div>
+               
             </div>
         </div>
     </div>
@@ -765,17 +812,7 @@ html, body {
             document.getElementById(id).style.display = 'block';
         }
 
-        function toggleDarkMode() {
-            const darkModePart = document.getElementById("darkModePart");
-            const powerButtonImage = document.getElementById("powerButtonImage");
-            darkModePart.classList.toggle("dark-mode");
-
-            if (darkModePart.classList.contains("dark-mode")) {
-                powerButtonImage.style.filter = "brightness(0) invert(1)";
-            } else {
-                powerButtonImage.style.filter = "none";
-            }
-        }
+       
 
         function toggleDetail(element) {
             const content = element.nextElementSibling;
@@ -789,6 +826,17 @@ html, body {
                 content.style.maxHeight = content.scrollHeight + "px";
                 icon.textContent = "▼";
                 content.classList.add('open');
+            }
+        }
+        function togglePlate() {
+            const plateImage = document.getElementById("plateImage");
+            const plate1Path = "${pageContext.request.contextPath}/resources/image/plate1.png";
+            const plate2Path = "${pageContext.request.contextPath}/resources/image/plate2.png";
+
+            if (plateImage.src.includes("plate1.png")) {
+                plateImage.src = plate2Path;
+            } else {
+                plateImage.src = plate1Path;
             }
         }
     </script>

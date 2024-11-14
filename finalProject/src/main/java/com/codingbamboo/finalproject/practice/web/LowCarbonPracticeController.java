@@ -15,5 +15,8 @@ public class LowCarbonPracticeController {
 	public String energyReduceView() {
 		return "practice/energyReduceView";
 	}
-	
+	@RequestMapping("/ecoConsumptionView")
+	public String ecoConsumptionView() {
+		return "practice/ecoConsumptionView";
+	}
 }
