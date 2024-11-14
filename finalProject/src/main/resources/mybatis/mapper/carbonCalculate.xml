@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper
 	namespace="com.codingbamboo.finalproject.carbonCalculate.dao.ICarbonCalculateDAO">
-	<insert id="addUsageList">
+	<insert id="insertCal" parameterType="com.codingbamboo.finalproject.carbonCalculate.dto.CarbonCalculateDTO">
 		INSERT INTO carbon_result(
 			result_no
 			, user_id
@@ -24,17 +24,21 @@
 		)
 	</insert>
 	
-	<select id="getInsertList">
+	<select id="getCal" resultType="com.codingbamboo.finalproject.carbonCalculate.dto.CarbonCalculateDTO">
 		SELECT
-		result_no
-		, user_id
-		, result_date
-		, electric_useage
-		, gas_useage
-		, traffic_kind
-		, traffic_value
-		, waste_weight
+			a.result_no
+			, a.user_id
+			, b.user_name
+			, a.result_date
+			, a.electric_useage
+			, a.gas_useage
+			, a.traffic_kind
+			, a.traffic_value
+			, a.waste_weight
 		FROM
-		carbon_result
+			carbon_result a, user_info b
+		WHERE 1=1
+			AND a.user_id = b.user_id
+			AND a.result_no = #{no}
 	</select>
 </mapper>
