@@ -57,8 +57,16 @@
 			</div>
 		</div>
 		<div>
-			<form action="${pageContext.request.contextPath }/myPageUserInfoView">
-				<button type="button">저장하기</button>
+			<form id="resRegistForm" action="${pageContext.request.contextPath }/carbonCalRegistDo" method="POST">
+				<div class="d-none">
+					<div>${sessionScope.login.userId }</div>
+					<div id="resElec"></div>
+					<div id="resGas"></div>
+					<div id="resGar"></div>
+					<div id="resTrfType"></div>
+					<div id="resTrf"></div>
+				</div>
+				<button id="resRegistBtn" type="button">저장하기</button>
 			</form>
 		</div>
 	</div>
@@ -72,9 +80,23 @@
 		let v_resultTrf = sessionStorage.getItem('resultTrf');
 		let v_fuelCo2 = 0;
 		
-		v_resultElec = Math.round(sessionStorage.getItem('resultElec') * 0.4781 * 100000) / 100000;
-		v_resultGas = Math.round(sessionStorage.getItem('resultGas') * 2.176 * 100000) / 100000;
-		v_resultGar = Math.round(sessionStorage.getItem('resultGar') * 0.5573 * 100000) / 100000;
+		let v_resultElec = sessionStorage.getItem('resultElec')
+		let v_resultGas = sessionStorage.getItem('resultGas')
+		let v_resultGar = sessionStorage.getItem('resultGar')
+		
+		document.getElementById("resElec").innerHTML += v_resultElec
+		document.getElementById("resGas").innerHTML += v_resultGas
+		document.getElementById("resGar").innerHTML += v_resultGar
+		document.getElementById("resTrfType").innerHTML += v_resultTrfType
+		document.getElementById("resTrf").innerHTML += v_resultTrf
+		
+		document.getElementById("resRegistBtn").addEventListener('click', ()=>{
+			submit
+		});
+		
+		v_resultElec = Math.round(v_resultElec * 0.4781 * 100000) / 100000;
+		v_resultGas = Math.round(v_resultGas * 2.176 * 100000) / 100000;
+		v_resultGar = Math.round(v_resultGar * 0.5573 * 100000) / 100000;
 		
 		if(v_resultTrfType == '휘발유'){
 			v_fuelCo2 = Math.round((v_resultTrf / 16.04) * 2.097 * 100000) / 100000;
