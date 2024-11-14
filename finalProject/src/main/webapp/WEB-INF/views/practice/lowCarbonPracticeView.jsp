@@ -79,6 +79,16 @@
         margin: auto;
     }
 
+    .photo-item a {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+    }
+
+    .photo-item a:hover {
+        cursor: pointer;
+    }
+
     .photo-item img {
         width: 100%;
         height: 380px;
@@ -87,7 +97,7 @@
         transition: transform 0.3s ease;
     }
 
-    .photo-item img:hover {
+    .photo-item a img:hover {
         transform: scale(1.05);
     }
 
@@ -156,36 +166,46 @@
                 <!-- 에너지 절약 -->
                 <div class="carousel-item active">
                     <div class="photo-item">
-                        <img src="${pageContext.request.contextPath}/resources/image/box1.jpg" class="img-fluid rounded" alt="에너지 절약">
-                        <p class="photo-title">에너지 절약</p>
+                        <a href="${pageContext.request.contextPath}/energyReduceView">
+                            <img src="${pageContext.request.contextPath}/resources/image/box1.jpg" class="img-fluid rounded" alt="에너지 절약">
+                            <p class="photo-title">에너지 절약</p>
+                        </a>
                     </div>
                 </div>
                 <!-- 친환경 소비 -->
                 <div class="carousel-item">
                     <div class="photo-item">
-                        <img src="${pageContext.request.contextPath}/resources/image/box2.jpg" class="img-fluid rounded" alt="친환경 소비">
-                        <p class="photo-title">친환경 소비</p>
+                        <a href="링크2을_여기에_넣으세요">
+                            <img src="${pageContext.request.contextPath}/resources/image/box2.jpg" class="img-fluid rounded" alt="친환경 소비">
+                            <p class="photo-title">친환경 소비</p>
+                        </a>
                     </div>
                 </div>
                 <!-- 친환경 이동 -->
                 <div class="carousel-item">
                     <div class="photo-item">
-                        <img src="${pageContext.request.contextPath}/resources/image/box3.jpg" class="img-fluid rounded" alt="친환경 이동">
-                        <p class="photo-title">친환경 이동</p>
+                        <a href="링크3을_여기에_넣으세요">
+                            <img src="${pageContext.request.contextPath}/resources/image/box3.jpg" class="img-fluid rounded" alt="친환경 이동">
+                            <p class="photo-title">친환경 이동</p>
+                        </a>
                     </div>
                 </div>
                 <!-- 자원순환 -->
                 <div class="carousel-item">
                     <div class="photo-item">
-                        <img src="${pageContext.request.contextPath}/resources/image/box4.jpg" class="img-fluid rounded" alt="자원순환">
-                        <p class="photo-title">자원순환</p>
+                        <a href="링크4를_여기에_넣으세요">
+                            <img src="${pageContext.request.contextPath}/resources/image/box4.jpg" class="img-fluid rounded" alt="자원순환">
+                            <p class="photo-title">자원순환</p>
+                        </a>
                     </div>
                 </div>
                 <!-- 흡수원 보호 -->
                 <div class="carousel-item">
                     <div class="photo-item">
-                        <img src="${pageContext.request.contextPath}/resources/image/box5.jpg" class="img-fluid rounded" alt="흡수원 보호">
-                        <p class="photo-title">흡수원 보호</p>
+                        <a href="링크5를_여기에_넣으세요">
+                            <img src="${pageContext.request.contextPath}/resources/image/box5.jpg" class="img-fluid rounded" alt="흡수원 보호">
+                            <p class="photo-title">흡수원 보호</p>
+                        </a>
                     </div>
                 </div>
             </div>
