@@ -7,17 +7,17 @@
 			result_no
 			, user_id
 			, result_date
-			, electric_useage
-			, gas_useage
+			, electric_usage
+			, gas_usage
 			, traffic_kind
 			, traffic_value
 			, waste_weight
 		) VALUES(
 			re_seq.NEXTVAL
 			, #{userId}
-			, #{resultDate}
-			, #{electricUseage}
-			, #{gasUseage}
+			, #{resultDate, jdbcType=DATE}
+			, #{electricUsage}
+			, #{gasUsage}
 			, #{trafficKind}
 			, #{trafficValue}
 			, #{wasteWeight}

@@ -14,8 +14,8 @@ public class CarbonCalculateService {
 	ICarbonCalculateDAO dao;
 
 	// 탄소발자국 계산 결과 저장
-	public int insertCal(CarbonCalculateDTO carbonCalculateDTO) {
-		int result = dao.insertCal(carbonCalculateDTO);
+	public int insertCal(CarbonCalculateDTO carbonCalculate) {
+		int result = dao.insertCal(carbonCalculate);
 		return result;
 	}
 
