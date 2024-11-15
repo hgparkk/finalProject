@@ -350,6 +350,7 @@ html, body {
     height: 20px;
     margin-right: 10px;
     vertical-align: middle;
+    margin-top: 20px;
 }
 .content-wrapper {
     display: flex;
@@ -697,73 +698,72 @@ html, body {
 
    <!-- 기업에서 detail -->
 <div class="homeBoxDetail-container" id="enterpriseDetail" style="display: none;">
-    <!-- 승강기 격층 운행하고, 계단 이용하기 -->
     <div class="homeBoxDetail-header" onclick="toggleDetail(this)">
-        <span>승강기 격층 운행하고, 계단 이용하기</span> <span class="toggle-icon">▲</span>
+        <span>저탄소·친환경 식단 이용하기</span> <span class="toggle-icon">▲</span>
     </div>
     <div class="homeBoxDetail-content">
         <div class="homeBoxDetail">
-            <img src="${pageContext.request.contextPath}/resources/image/practiceDetail/enterprise_box_detail1.jpg" alt="승강기">
-            <span>건물 승강기의 평균 운행 횟수는 1대/일 1,200회 정도이며, 연간 약 41t의 탄소를 배출한다.</span>
+            <img src="${pageContext.request.contextPath}/resources/image/practiceDetail/enterprise_box_detail4.jpg" alt="승강기">
+            <span>농축수산물을 생산·유통·보관하는 과정에서 온실가스가 배출되기 때문에 탄소 배출이 적은 제품을 선택하여 저탄소·친환경 식단을 운영해야 한다.</span>
             <span class="effect">실천효과</span>
-            <span class="effect-value">우리 기업 이산화탄소 감축량: 1t</span>
             <span class="rules-title">실천수칙</span>
             <div class="rules">
                 <div class="rule-item">
                     <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>승강기 격층 운행하기</span>
+                    <span>저탄소 농축산물, 친환경 수산물 인증마크를 확인하고 구매하기</span>
                 </div>
                 <div class="rule-item">
                     <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>승강기 대신 계단 이용하기</span>
+                    <span>우리나라, 우리 지역, 제철 식재료로 식단 구성하기</span>
+                </div>
+                <div class="rule-item">
+                    <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
+                    <span>조리 시 열 사용을 줄일 수 있는 생채나 무침 위주의 식단 구성하기</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 전자기기 대기전력 차단하기 -->
     <div class="homeBoxDetail-header" onclick="toggleDetail(this)">
-        <span>전자기기 대기전력 차단하기</span> <span class="toggle-icon">▲</span>
+        <span>탄소 발자국을 고려한 소비 촉진하기</span> <span class="toggle-icon">▲</span>
     </div>
     <div class="homeBoxDetail-content">
         <div class="homeBoxDetail">
-            <img src="${pageContext.request.contextPath}/resources/image/practiceDetail/enterprise_box_detail2.jpg" alt="전자기기">
-            <span>대기전력은 기기의 동작과 관계없이 전원을 끈 상태에서도 소비되는 전력으로 불필요하게 낭비되는 전기를 말한다.</span>
+            <img src="${pageContext.request.contextPath}/resources/image/practiceDetail/enterprise_box_detail5.jpg">
+            <span>‘탄소발자국’이란 제품이나 서비스의 생산부터 폐기까지 전과정에 걸쳐 발생한 온실가스 배출량을 이산화탄소 배출량으로 환산하여 표시한 것이다.</span>
             <span class="effect">실천효과</span>
             <span class="effect-value">우리 기업 이산화탄소 감축량: 0.4t</span>
             <span class="rules-title">실천수칙</span>
             <div class="rules">
                 <div class="rule-item">
                     <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>대기전력이 높거나, 일시적으로만 사용하는 전자기기 확인하기</span>
+                    <span>소비자 및 임직원 대상으로 탄소발자국을 고려한 소비 교육·홍보하기</span>
                 </div>
                 <div class="rule-item">
                     <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>전자기기 특성과 사용 정도를 고려해 대기전력 차단장치 설치·관리하기</span>
+                    <span>품질이 보증되고 오래 사용 가능한 제품 구매하기</span>
                 </div>
                 <div class="rule-item">
                     <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>점심시간 및 퇴근 시 직원들이 대기전력 차단하는 사내 문화 조성하기</span>
+                    <span>재활용하기 쉬운 재질·구조로 된 제품 구매하기</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 고효율 전자기기 사용하기 -->
     <div class="homeBoxDetail-header" onclick="toggleDetail(this)">
-        <span>고효율 전자기기 사용하기</span> <span class="toggle-icon">▲</span>
+        <span>자원순환성을 고려한 제품 전략 수립하기</span> <span class="toggle-icon">▲</span>
     </div>
     <div class="homeBoxDetail-content">
         <div class="homeBoxDetail">
-            <img src="${pageContext.request.contextPath}/resources/image/practiceDetail/enterprise_box_detail3.jpg" alt="고효율 전자기기">
-            <span>에너지 효율등급이 1등급에 가까운 전자기기일수록 등급이 낮은 제품보다 구매 비용이 높지만, 장기적으로 전기요금을 절약하고 탄소 배출을 줄일 수 있다.</span>
+            <img src="${pageContext.request.contextPath}/resources/image/practiceDetail/enterprise_box_detail6.jpg" alt="고효율 전자기기">
+            <span>제품의 기획 단계에서부터 ‘환경’에 대한 책임을 고려해야 하며, 생산부터 폐기까지 제품 전체의 자원순환성을 강화하기 위해 노력해야 한다.</span>
             <span class="effect">실천효과</span>
-            <span class="effect-value">우리 기업 이산화탄소 감축량: 23t</span>
             <span class="rules-title">실천수칙</span>
             <div class="rules">
                 <div class="rule-item">
                     <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>에너지 관련 제도별 로고를 확인하고, 고효율 전자기기 구매하기 (자세한 내용은 한국에너지공단 효율관리제도 누리집에서 확인)</span>
+                    <span>환경성적표지, 저탄소 인증제품 개발하기</span>
                 </div>
             </div>
         </div>
@@ -774,22 +774,19 @@ html, body {
    <div class="homeBoxDetail-container" id="enterpriseDetail"
       style="display: none;">
       <div class="homeBoxDetail-header" onclick="toggleDetail(this)">
-         <span>고효율 전자기기 사용하기</span> <span class="toggle-icon">▲</span>
+         <span>국산목재로 만든 제품구입하기</span> <span class="toggle-icon">▲</span>
       </div>
       <div class="homeBoxDetail-content">
          <div class="homeBoxDetail">
             <img
                src="${pageContext.request.contextPath}/resources/image/practiceDetail/home_box_detail4.png"
-               alt="전기장판"> <span>에너지 효율등급이 1등급에 가까운 전자기기일수록 등급이 낮은
-               제품보다 구매 비용이 높지만, 장기적으로 전기요금을 절약하고 탄소 배출을 줄일 수 있다. </span> <span
-               class="effect">실천효과</span> <span class="effect-value">우리 기업
-               이산화탄소 감축량: 23t</span> <span class="rules-title">실천수칙</span>
+               > <span>목재는 가공이 쉽고 생산 과정에서 에너지를 적게 소모하는 친환경 소재이며, 특히 국산목재는 수입목재와 비교하여 운송 과정에서 발생하는 탄소 배출량이 낮다. </span> <span
+               class="effect">실천효과</span> <span class="rules-title">실천수칙</span>
             <div class="rules">
                <div class="rule-item">
                   <img
                      src="${pageContext.request.contextPath}/resources/image/check_box.png"
-                     alt="체크"> <span>에너지 관련 제도별 로고를 확인하고, 고효율 전자기기
-                     구매하기(자세한 내용은 한국에너지공단 효율관리제도 누리집(https://eep.energy.or.kr)에서 확인)</span>
+                     alt="체크"> <span>에국산목재로 만들어진 제품(가구, 생활제품, 소품 등) 구매하기</span>
                </div>
                
             </div>
