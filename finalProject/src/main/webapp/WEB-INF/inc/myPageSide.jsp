@@ -37,7 +37,12 @@ request.setAttribute("selectedItem", selectedItem);
 
 <div class="d-flex flex-column bg-success ps-5">
 	<span class="mt-5"></span>
-	<span class="not-selected-span link-underline link-underline-opacity-0 menu-box">나의 탄소 발자국</span>
+	<c:if test="${selectedSpan == 'myCarbonResult'}">
+		<span class="text-success bg-success-subtle link-underline link-underline-opacity-0 menu-box border-end border-success">나의 탄소 발자국</span>
+	</c:if>
+	<c:if test="${selectedSpan != 'myCarbonResult'}">
+		<a href="<c:url value="/myPageMyCarbonResultView" />" class="not-selected-span link-underline link-underline-opacity-0 menu-box">나의 탄소 발자국</a>
+	</c:if>
 	<c:if test="${selectedSpan == 'mySuggestions'}">
 		<span class="text-success bg-success-subtle link-underline link-underline-opacity-0 menu-box border-end border-success">나의 건의사항</span>
 	</c:if>

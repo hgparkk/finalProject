@@ -1,6 +1,8 @@
 package com.codingbamboo.finalproject.user.web;
 
 import java.security.SecureRandom;
+import java.time.LocalDate;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -44,16 +46,17 @@ public class UserController {
 	// 로그인 창 이동
 	@RequestMapping(value = "/loginView", method = RequestMethod.GET)
 	public String loginView(HttpServletRequest request, Model model,
-			@RequestParam(value = "fromUrl", required = false) String fromUrl) {
+			@RequestParam(value = "fromUrl", required = false) String fromUrl, HttpSession session) {
 		if (fromUrl == null || fromUrl.isEmpty()) {
 			fromUrl = request.getHeader("Referer");
+			session.setAttribute("fromUrl", fromUrl);
 		}
-		String naverLoginUri = oauthService.getUri(request, false,"Naver");
+		String naverLoginUri = oauthService.getUri(request, false, "Naver");
 		String kakaoLoginUri = oauthService.getUri(request, false, "Kakao");
-		String googleLoginUri = oauthService.getUri(request,false,"Google");
+		String googleLoginUri = oauthService.getUri(request, false, "Google");
 		model.addAttribute("naverLoginUri", naverLoginUri);
-		model.addAttribute("kakaoLoginUri",kakaoLoginUri);
-		model.addAttribute("googleLoginUri",googleLoginUri);
+		model.addAttribute("kakaoLoginUri", kakaoLoginUri);
+		model.addAttribute("googleLoginUri", googleLoginUri);
 		model.addAttribute("fromUrl", fromUrl);
 		return "user/loginView";
 	}
@@ -301,6 +304,33 @@ public class UserController {
 		}
 	}
 
+	// 마이페이저 나의 탄소 발자국 뷰
+	@RequestMapping(value = "/myPageMyCarbonResultView", method = RequestMethod.GET)
+	public String myPageMyCarbonResultView(@RequestParam(value = "year", required = false) Integer year,
+			HttpSession session, Model model) {
+		if ((UserDTO) session.getAttribute("login") == null) {
+			return "redirect:/";
+		}
+
+		if (year == null || year == 0) {
+			year = LocalDate.now().getYear();
+		}
+
+		model.addAttribute("year", year);
+
+		return "user/myPageMyCarbonResultView";
+	}
+
+	// 마이페이지 나의 건의사항 뷰
+	@RequestMapping(value = "/myPageMySuggestionsView", method = RequestMethod.GET)
+	public String myPageMySuggestionsView(HttpSession session) {
+		if ((UserDTO) session.getAttribute("login") == null) {
+			return "redirect:/";
+		}
+
+		return "user/myPageMySuggestionsView";
+	}
+
 	// 마이페이지 회원 정보
 	@RequestMapping(value = "/myPageUserInfoView", method = RequestMethod.GET)
 	public String myPageUpdate(HttpSession session) {
@@ -349,47 +379,37 @@ public class UserController {
 			return "redirect:/";
 		}
 
-		String naverLinkUri = oauthService.getUri(request, true,"Naver");
-		String kakaoLinkUri = oauthService.getUri(request, true,"Kakao");
-		String googleLinkUri = oauthService.getUri(request, true,"Google");
+		String naverLinkUri = oauthService.getUri(request, true, "Naver");
+		String kakaoLinkUri = oauthService.getUri(request, true, "Kakao");
+		String googleLinkUri = oauthService.getUri(request, true, "Google");
 		model.addAttribute("naverLinkUri", naverLinkUri);
 		model.addAttribute("kakaoLinkUri", kakaoLinkUri);
 		model.addAttribute("googleLinkUri", googleLinkUri);
 
 		return "user/myPageSnsLinkManageView";
 	}
-	
+
 	// 마이페이지 sns 연동 해제
 	@RequestMapping(value = "/deleteSnsLinkDo", method = RequestMethod.POST)
 	public String deleteSnsLinkDo(HttpSession session, HttpServletRequest request) {
-		UserDTO login = (UserDTO)session.getAttribute("login");
+		UserDTO login = (UserDTO) session.getAttribute("login");
 		userService.updateUserForDeleteSnsLink(login.getUserId());
 		login.setUserProvider(null);
 		login.setUserProviderId(null);
 		session.setAttribute("login", login);
-		
+
 		request.setAttribute("msg", "소셜 계정 연동 정보가 삭제되었습니다.");
 		request.setAttribute("url", "/myPageSnsLinkManageView");
 		return "alert";
 	}
 
-	// 마이페이지 나의 건의사항 뷰
-	@RequestMapping(value = "/myPageMySuggestionsView", method = RequestMethod.GET)
-	public String myPageMySuggestionsView(HttpSession session) {
-		if ((UserDTO) session.getAttribute("login") == null) {
-			return "redirect:/";
-		}
-
-		return "user/myPageMySuggestionsView";
-	}
-	
 	// 회원 탈퇴
-	@RequestMapping(value = "/resignUserDo", method=RequestMethod.POST)
+	@RequestMapping(value = "/resignUserDo", method = RequestMethod.POST)
 	public String resignUserDo(HttpSession session, HttpServletRequest request) {
-		UserDTO login = (UserDTO)session.getAttribute("login");
-		
+		UserDTO login = (UserDTO) session.getAttribute("login");
+
 		// 유저가 남긴 건의 사항과 탄소 발자국 계산 결과를 삭제한다.
-		
+
 		userService.deleteUser(login.getUserId());
 		session.invalidate();
 		request.setAttribute("msg", "회원탈퇴가 완료되었습니다");
