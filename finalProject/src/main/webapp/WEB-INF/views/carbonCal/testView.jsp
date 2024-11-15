@@ -121,7 +121,7 @@
 
 	function updateCarbonDetails(data) {
 	    // 배출량 결과 텍스트 업데이트
-	    document.getElementById('resultCO2').innerText = `${data.totalCo2} kg`;
+	    document.getElementById('resultCO2').innerText = '${data.totalCo2} kg';
 	}
 
 	</script>

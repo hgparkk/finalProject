@@ -23,6 +23,7 @@ public class CarbonCalculateService {
 	// 탄소발자국 저장 결과 상세 조회
 		public CarbonCalculateDTO getCal(Date date) {
 			CarbonCalculateDTO result = dao.getCal(date);
+			
 		    
 		    return result;
 		}
