@@ -40,6 +40,7 @@ html, body {
     width: 100%;
     height: 80vh;
     object-fit: cover;
+    object-position: bottom;
 }
 
 .title::after {
@@ -101,7 +102,6 @@ html, body {
     color: #7fbf7f;
 }
 
-/* 대괄호 애니메이션 */
 .bracket {
     font-size: 40px;
     position: relative;
@@ -152,23 +152,7 @@ html, body {
     }
 }
 
-/* 전원 버튼과 텍스트 섹션 */
-.darkModePart {
-    width: 90%;
-    max-width: 1200px;
-    height: 80vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background-color: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    margin: 50px auto;
-    padding: 20px;
-    transition: background-color 0.3s, color 0.3s;
-}
+
 
 .power-button {
     position: relative;
@@ -199,15 +183,7 @@ html, body {
     text-align: center;
 }
 
-.speech-bubble::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: -10px;
-    transform: translateY(-50%);
-    border: 10px solid transparent;
-    border-right-color: #007bff;
-}
+
 
 .main-title {
     font-size: 2rem;
@@ -241,30 +217,8 @@ html, body {
     font-size: 14px;
 }
 
-/* 다크 모드 스타일 */
-.dark-mode {
-    background-color: #333 !important;
-    color: #ffffff !important;
-}
 
-.dark-mode .sub-title, .dark-mode .tag {
-    color: #ffffff !important;
-    background-color: #555 !important;
-}
 
-.dark-mode .speech-bubble {
-    background-color: #555 !important;
-}
-
-.dark-mode .speech-bubble::after {
-    border-right-color: #555 !important;
-}
-
-.dark-mode .power-button img {
-    filter: brightness(0) invert(1) !important;
-}
-
-/* threeBoxSelect 스타일 */
 .threeBoxSelect {
     display: flex;
     justify-content: space-between;
@@ -387,7 +341,6 @@ html, body {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
-    margin-top: 20px;
 }
 
 .homeBoxDetail .rule-item img {
@@ -395,8 +348,104 @@ html, body {
     height: 20px;
     margin-right: 10px;
     vertical-align: middle;
+    margin-top: 20px;
+}
+.content-wrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 30px; 
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
+
+
+.platePart {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.speech-bubble {
+    position: static; 
+    margin-left: 10px;
+    background-color: #32cd32;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    width: 280px;
+}
+
+.text-content {
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.plate-button {
+    position: relative;
+    text-align: center;
+}
+
+#plateImage {
+    width: 300px;
+    height: auto;
+    border-radius: 30%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+#plateImage:hover {
+    transform: scale(1.05);
+}
+
+
+
+.speech-bubble:before, .speech-bubble:after {
+    content: none !important;
+}
+
+.text-content {
+    text-align: left;
+    max-width: 500px;
+    margin-left: 20px; 
+}
+
+.main-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #333;
+    line-height: 1.4;
+    margin-bottom: 10px;
+}
+
+.tags {
+    margin: 10px 0;
+}
+
+.tag {
+    display: inline-block;
+    background-color: #e0f7e0;
+    color: #32cd32;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 14px;
+    margin-right: 8px;
+}
+
+.sub-title {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.6;
+    margin-top: 15px;
+}
 </style>
 
 </head>
@@ -406,24 +455,25 @@ html, body {
 
    <div class="title">
       <img
-         src="${pageContext.request.contextPath}/resources/image/energyReduceMain.jpg"
-         alt="에너지 절약 이미지">
+         src="${pageContext.request.contextPath}/resources/image/ecoSinksMain.jpg">
       <div class="title-content">
          <span>탄소중립</span>
-         <h1 class="mb-5">에너지 절약편</h1>
+         <h1 class="mb-5">흡수원편</h1>
 
          <div class="paired-text">
-            <h2 class="text-blue">전원은</h2>
             <span class="bracket bracket-left">[</span>
-            <h2 class="fade-in-text text-blue">끄고</h2>
+            <h2 class="fade-in-text text-info">숲은</h2>
             <span class="bracket bracket-right">]</span>
+            <h2 class="text-info">아껴주고</h2>
+
          </div>
 
          <div class="paired-text">
-            <h2 class="text-light-green">실천은</h2>
             <span class="bracket bracket-left">[</span>
-            <h2 class="fade-in-text text-light-green">켜자</h2>
+            <h2 class="fade-in-text text-light-green">나무는</h2>
             <span class="bracket bracket-right">]</span>
+            <h2 class="text-light-green">심어주고</h2>
+
          </div>
 
          <h1 class="mt-5">탄소중립은 대기 중 온실가스 농도가 인간 활동에 의해 더 이상 증가되지 않도록,</h1>
@@ -433,28 +483,42 @@ html, body {
    </div>
 
    <!-- 전원 버튼과 텍스트 부분 -->
-   <div class="darkModePart" id="darkModePart">
-      <div class="power-button" onclick="toggleDarkMode()">
-         <img
-            src="${pageContext.request.contextPath}/resources/image/on_off_button.png"
-            alt="전원 버튼" id="powerButtonImage">
-         <div class="speech-bubble">
-            전원버튼을 클릭하여<br>에너지 절약을 실천해 주세요!
-         </div>
-      </div>
+<div class="content-wrapper">
+    <div class="platePart">
+        <div class="plate-button">
+            <video id="plateVideo" width="300" height="300" onclick="togglePlate()" style="border-radius: 10%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); object-fit: cover;">
+                <source type="video/mp4" src="https://firebasestorage.googleapis.com/v0/b/study-6b60a.appspot.com/o/eco-sinks.mp4?alt=media&token=c319c8fd-9ff6-4334-96b9-ba9f45dbdb8a">
+            </video>
+            <div class="speech-bubble">
+                이미지를 클릭하여<br>흡수원 보호를 실천해 주세요!
+            </div>
+        </div>
+    </div>
 
-      <div class="main-title">조금 불편해도, 지구를 위해 에너지 절약을 실천했던 적이 있나요?</div>
+    <div class="text-content">
+        <div class="main-title">
+            조금 어려워도<br>
+            지구를 위해<br>
+            나무를 심은 적이 있나요?
+        </div>
 
-      <div class="tags">
-         <span class="tag">#생활 속</span> <span class="tag">#에너지 절약법</span>
-      </div>
+        <div class="tags">
+            <span class="tag">#생활 속</span>
+            <span class="tag">#흡수원 보호</span>
+        </div>
 
-      <div class="sub-title">
-         생활 속에서 실천할 수 있는 에너지 절약법은 무엇이 있을까요?<br> 모니터 화면이나 스마트폰 화면에서 다크 모드를
-         적용하면 소비전력이 25~30% 줄어들어 탄소 배출 저감에 기여할 수 있습니다. 탄소중립 사회 전환은 우리의 작은 생활습관의
-         변화로부터 시작합니다.
-      </div>
-   </div>
+        <div class="sub-title">
+            생활 속에서 실천할 수 있는<br>
+            흡수원 보호 방법은 무엇이 있을까요?
+            <br><br>
+산림은 이산화탄소를 흡수하고 산소를 내뿜어 대기질 개선에 도움을 줍니다.
+하지만 최근 10년간 산림면적이 지속적으로 줄어들고 있는데요.
+나무를 심거나 식물을 키우는 것만으로도 열섬 현상은 물론 대기오염까지 줄일 수 있습니다.
+탄소중립의 사회 전환은 우리의 작은 생활습관의 변화로부터 시작합니다.        </div>
+    </div>
+</div>
+
+
 
    <!-- 세 개의 박스 섹션 -->
    <div class="threeBoxSelect">
@@ -478,85 +542,62 @@ html, body {
 
    <!-- 집에서detail -->
 <div class="homeBoxDetail-container" id="homeDetail" style="display: none;">
-    <!-- 불필요한 조명기구 소등하기 -->
     <div class="homeBoxDetail-header" onclick="toggleDetail(this)">
-        <span>불필요한 조명기구 소등하기</span> <span class="toggle-icon">▲</span>
+        <span>탄소흡수원의 중요성 알고 보호하기</span> <span class="toggle-icon">▲</span>
     </div>
     <div class="homeBoxDetail-content">
         <div class="homeBoxDetail">
-            <img src="${pageContext.request.contextPath}/resources/image/practiceDetail/home_box_detail1.jpg" alt="조명기구">
-            <span>조명기구 한 개의 전기 사용량은 작지만 여러 개의 조명기구를 장시간 사용하기 때문에 전체 전기 사용량에서 조명이 차지하는 비중은 높은 편이다.</span>
-            <span class="effect">실천효과</span>
-            <span class="effect-value">1가구당 이산화탄소 감축량: 251kg</span>
-            <span class="rules-title">실천수칙</span>
+            <img src="${pageContext.request.contextPath}/resources/image/practiceDetail/home_box_detail13.jpg" alt="조명기구">
+            <span>탄소흡수원은 산림지, 농경지, 초지, 습지, 정주지 및 바다숲 등에서 자연적이거나 인위적으로 탄소를 저장 및 흡수하는 입목, 고사유기물, 토양, 목제품 및 산림바이오매스 에너지 등을 지칭하며, 대기 중 온실가스를 줄이고 지구온난화를 억제하는 데 기여하고 있다.</span>
+            <span class="rules-title">탄소흡수원 관련 기념일</span>
             <div class="rules">
                 <div class="rule-item">
                     <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>사용하지 않는 조명기구 소등하기</span>
+                    <span style="color:gray;">습지의날(2월 2일)</span>
                 </div>
                 <div class="rule-item">
                     <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>소등행사(4월 22일 지구의 날 등) 참여하기</span>
+                    <span style="color:gray;">식목일(4월 5일)</span>
+                </div>
+                <div class="rule-item">
+                    <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
+                    <span style="color:gray;">바다식목일 (5월 10일)</span>
+                </div>
+                <div class="rule-item">
+                    <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
+                    <span style="color:gray;">산의 날 (10월 18일)</span>
+                </div>
+                <div class="rule-item">
+                    <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
+                    <span style="color:gray;">토양의 날 (12월 5일)</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 세탁기 사용 횟수 줄이기 -->
     <div class="homeBoxDetail-header" onclick="toggleDetail(this)">
-        <span>세탁기 사용 횟수 줄이기</span> <span class="toggle-icon">▲</span>
+        <span>나무심기 운동 참여하기</span> <span class="toggle-icon">▲</span>
     </div>
     <div class="homeBoxDetail-content">
         <div class="homeBoxDetail">
-            <img src="${pageContext.request.contextPath}/resources/image/practiceDetail/home_box_detail2.jpg" alt="세탁기">
-            <span>세탁기의 전기 사용량을 줄이려면, 세탁물의 양보다는 사용 횟수를 줄이는 것이 효과적이다.</span>
-            <span class="effect">실천효과</span>
-            <span class="effect-value">1가구당 이산화탄소 감축량: 9kg</span>
+            <img src="${pageContext.request.contextPath}/resources/image/practiceDetail/home_box_detail14.jpg" alt="세탁기">
+            <span>최근 10년간 산림면적은 지속적으로 줄어들고 있어 생활 속에서 적극적인 나무심기를 실천할 필요가 있다.</span>
             <span class="rules-title">실천수칙</span>
             <div class="rules">
                 <div class="rule-item">
                     <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>빨래는 최대한 모아 세탁 횟수 줄이기</span>
+                    <span>정부, 지자체, 기업, 단체 등이 주최하는 식목행사에 관심을 가지고 참여하기</span>
                 </div>
                 <div class="rule-item">
                     <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>전기 사용량이 큰 온수 대신 냉수로 세탁하기</span>
-                </div>
-                <div class="rule-item">
-                    <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>건조기는 ‘강하게 모드’로 설정해 사용 시간 줄이기</span>
+                    <span>출생, 결혼, 승진, 창업 등 기념일에 나무를 심어 의미있는 기념일 만들기</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 전기장판 사용 줄이기 -->
-    <div class="homeBoxDetail-header" onclick="toggleDetail(this)">
-        <span>전기장판 사용 줄이기</span> <span class="toggle-icon">▲</span>
-    </div>
-    <div class="homeBoxDetail-content">
-        <div class="homeBoxDetail">
-            <img src="${pageContext.request.contextPath}/resources/image/practiceDetail/home_box_detail4.png" alt="전기장판">
-            <span>전기장판 사용 시간을 줄이고 체온과 비슷한 온도로 설정해 사용하면, 전기 사용량과 함께 장시간 사용 시 발생할 수 있는 화상의 위험도 줄일 수 있다.</span>
-            <span class="effect">실천효과</span>
-            <span class="effect-value">1가구당 이산화탄소 감축량: 315kg</span>
-            <span class="rules-title">실천수칙</span>
-            <div class="rules">
-                <div class="rule-item">
-                    <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>전기장판 사용 시간 줄이고, 필요한 시간만큼 타이머 설정해 사용하기</span>
-                </div>
-                <div class="rule-item">
-                    <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>보온성 유지를 위해 전기장판 위에 얇은 이불 덮어두기</span>
-                </div>
-                <div class="rule-item">
-                    <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>전기장판을 사용하지 않을 때는 전원 차단하기</span>
-                </div>
-            </div>
-        </div>
-    </div>
+
+
 </div>
 
 
@@ -564,79 +605,56 @@ html, body {
 
    <!-- 학교에서 detail -->
 <div class="homeBoxDetail-container" id="schoolDetail" style="display: none;">
-    <!-- 빈 교실의 조명은 소등한다 -->
+
     <div class="homeBoxDetail-header" onclick="toggleDetail(this)">
-        <span>빈 교실의 조명은 소등한다.</span> <span class="toggle-icon">▲</span>
+        <span>탄소흡수원의 중요성을 알고 보호한다</span> <span class="toggle-icon">▲</span>
     </div>
     <div class="homeBoxDetail-content">
         <div class="homeBoxDetail">
-            <img src="${pageContext.request.contextPath}/resources/image/practiceDetail/school_box_detail1.jpg" alt="조명기구">
-            <span>조명기구 한 개의 전기 사용량은 작지만 여러 개의 조명기구를 장시간 사용하기 때문에 전체 전기 사용량에서 조명이 차지하는 비중은 높은 편이다.</span>
-            <span class="effect">실천효과</span>
-            <span class="effect-value">우리 학교 이산화탄소 감축량: 0.7t</span>
+            <img src="${pageContext.request.contextPath}/resources/image/practiceDetail/school_box_detail13.jpg">
+            <span>탄소흡수원은 산림지, 농경지, 초지, 습지, 정주지 및 바다숲 등에서 자연적이거나 인위적으로 탄소를 저장 및 흡수하는 입목, 고사유기물, 토양, 목제품 및 산림바이오매스 에너지 등을 지칭하며, 대기 중 온실가스를 줄이고 지구온난화를 억제하는 데 기여하고 있다.</span>
             <span class="rules-title">실천수칙</span>
             <div class="rules">
                 <div class="rule-item">
                     <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>빈 교실의 조명기구 소등하기</span>
+                    <span>산불 예방, 삼림 훼손 방지로 산림 보호하기</span>
                 </div>
                 <div class="rule-item">
                     <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>학급별로 에너지 지킴이 임명하기</span>
-                </div>
-                <div class="rule-item">
-                    <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>학교 외벽 조명기구의 점등·소등 관리 철저히 하기</span>
+                    <span>탄소흡수원과 관련된 행사 동참하기</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="homeBoxDetail-header" onclick="toggleDetail(this)">
-        <span>전자기기 대기전력을 차단한다</span> <span class="toggle-icon">▲</span>
-    </div>
-    <div class="homeBoxDetail-content">
-        <div class="homeBoxDetail">
-            <img src="${pageContext.request.contextPath}/resources/image/practiceDetail/school_box_detail2.jpg" alt="전자기기">
-            <span>대기전력은 기기의 동작과 관계없이 전원을 끈 상태에서도 소비되는 전력으로 불필요하게 낭비되는 전기를 말한다.</span>
-            <span class="effect">실천효과</span>
-            <span class="effect-value">우리 학교 이산화탄소 감축량: 1t</span>
-            <span class="rules-title">실천수칙</span>
-            <div class="rules">
-                <div class="rule-item">
-                    <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>대기전력이 높거나, 일시적으로만 사용하는 전자기기 확인하기</span>
-                </div>
-                <div class="rule-item">
-                    <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>전자기기(에어컨 등)를 사용하지 않을 때는 콘센트 뽑기</span>
-                </div>
-                <div class="rule-item">
-                    <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>전자기기의 특성과 학사일정을 고려해 대기전력 차단장치 설치·관리하기</span>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div class="homeBoxDetail-header" onclick="toggleDetail(this)">
-        <span>절수 설비와 기기를 설치한다.</span> <span class="toggle-icon">▲</span>
+        <span>나무심기 운동에 참여한다.</span> <span class="toggle-icon">▲</span>
     </div>
     <div class="homeBoxDetail-content">
         <div class="homeBoxDetail">
-            <img src="${pageContext.request.contextPath}/resources/image/practiceDetail/school_box_detail3.jpg" alt="절수 설비">
-            <span>물을 적게 사용하도록 구조·규격 등의 기준에 맞게 제작된 절수 설비와 기존 설비에 부속품을 교체하거나 추가로 장착해 사용하는 절수 기기가 있다.</span>
-            <span class="effect">실천효과</span>
-            <span class="effect-value">우리 학교 이산화탄소 감축량: 5t</span>
-            <span class="rules-title">실천수칙</span>
+            <img src="${pageContext.request.contextPath}/resources/image/practiceDetail/school_box_detail14.jpg">
+            <span>최근 10년간 산림면적은 지속적으로 줄어들고 있어 생활 속에서 적극적인 나무심기를 실천할 필요가 있다.</span>
             <div class="rules">
                 <div class="rule-item">
                     <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>세면대, 변기 등의 교체 시 절수 설비(수도꼭지 등) 설치하기</span>
+                    <span style="color:gray;">습지의날(2월 2일)</span>
                 </div>
                 <div class="rule-item">
                     <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>수도꼭지, 양변기에 절수 기기 장착하기</span>
+                    <span style="color:gray;">식목일(4월 5일)</span>
+                </div>
+                <div class="rule-item">
+                    <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
+                    <span style="color:gray;">바다식목일 (5월 10일)</span>
+                </div>
+                <div class="rule-item">
+                    <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
+                    <span style="color:gray;">산의 날 (10월 18일)</span>
+                </div>
+                <div class="rule-item">
+                    <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
+                    <span style="color:gray;">토양의 날 (12월 5일)</span>
                 </div>
             </div>
         </div>
@@ -648,71 +666,55 @@ html, body {
 
    <!-- 기업에서 detail -->
 <div class="homeBoxDetail-container" id="enterpriseDetail" style="display: none;">
-    <!-- 승강기 격층 운행하고, 계단 이용하기 -->
     <div class="homeBoxDetail-header" onclick="toggleDetail(this)">
-        <span>승강기 격층 운행하고, 계단 이용하기</span> <span class="toggle-icon">▲</span>
+        <span>탄소흡수원의 중요성 알고 보호하기</span> <span class="toggle-icon">▲</span>
     </div>
     <div class="homeBoxDetail-content">
         <div class="homeBoxDetail">
-            <img src="${pageContext.request.contextPath}/resources/image/practiceDetail/enterprise_box_detail1.jpg" alt="승강기">
-            <span>건물 승강기의 평균 운행 횟수는 1대/일 1,200회 정도이며, 연간 약 41t의 탄소를 배출한다.</span>
-            <span class="effect">실천효과</span>
-            <span class="effect-value">우리 기업 이산화탄소 감축량: 1t</span>
+            <img src="${pageContext.request.contextPath}/resources/image/practiceDetail/enterprise_box_detail13.jpg">
+            <span>탄소흡수원은 산림지, 농경지, 초지, 습지, 정주지 및 바다숲 등에서 자연적이거나 인위적으로 탄소를 저장 및 흡수하는 입목, 고사유기물, 토양, 목제품 및 산림바이오매스 에너지 등을 지칭하며, 대기 중 온실가스를 줄이고 지구온난화를 억제하는 데 기여하고 있다.</span>
             <span class="rules-title">실천수칙</span>
             <div class="rules">
                 <div class="rule-item">
                     <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>승강기 격층 운행하기</span>
+                    <span style="color:gray;">습지의날(2월 2일)</span>
                 </div>
                 <div class="rule-item">
                     <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>승강기 대신 계단 이용하기</span>
+                    <span style="color:gray;">식목일(4월 5일)</span>
+                </div>
+                <div class="rule-item">
+                    <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
+                    <span style="color:gray;">바다식목일 (5월 10일)</span>
+                </div>
+                <div class="rule-item">
+                    <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
+                    <span style="color:gray;">산의 날 (10월 18일)</span>
+                </div>
+                <div class="rule-item">
+                    <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
+                    <span style="color:gray;">토양의 날 (12월 5일)</span>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="homeBoxDetail-header" onclick="toggleDetail(this)">
-        <span>전자기기 대기전력 차단하기</span> <span class="toggle-icon">▲</span>
+        <span>ESG와 연계하여 탄소중립 숲 조성하기</span> <span class="toggle-icon">▲</span>
     </div>
     <div class="homeBoxDetail-content">
         <div class="homeBoxDetail">
-            <img src="${pageContext.request.contextPath}/resources/image/practiceDetail/enterprise_box_detail2.jpg" alt="전자기기">
-            <span>대기전력은 기기의 동작과 관계없이 전원을 끈 상태에서도 소비되는 전력으로 불필요하게 낭비되는 전기를 말한다.</span>
-            <span class="effect">실천효과</span>
-            <span class="effect-value">우리 기업 이산화탄소 감축량: 0.4t</span>
+            <img src="${pageContext.request.contextPath}/resources/image/practiceDetail/enterprise_box_detail14.jpg" >
+            <span>산림은 ESG 중 환경(E)·사회(S) 부문에 기여할 수 있는 대표적인 수단으로서 최근 기업의 산림 분야 참여가 활발해지고 있다.</span>
             <span class="rules-title">실천수칙</span>
             <div class="rules">
                 <div class="rule-item">
                     <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>대기전력이 높거나, 일시적으로만 사용하는 전자기기 확인하기</span>
+                    <span>기업, 민간 단체, 지자체 등 다양한 기관이 함께 협력하여 탄소중립 숲 조성하기</span>
                 </div>
                 <div class="rule-item">
                     <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>전자기기 특성과 사용 정도를 고려해 대기전력 차단장치 설치·관리하기</span>
-                </div>
-                <div class="rule-item">
-                    <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>점심시간 및 퇴근 시 직원들이 대기전력 차단하는 사내 문화 조성하기</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="homeBoxDetail-header" onclick="toggleDetail(this)">
-        <span>고효율 전자기기 사용하기</span> <span class="toggle-icon">▲</span>
-    </div>
-    <div class="homeBoxDetail-content">
-        <div class="homeBoxDetail">
-            <img src="${pageContext.request.contextPath}/resources/image/practiceDetail/enterprise_box_detail3.jpg" alt="고효율 전자기기">
-            <span>에너지 효율등급이 1등급에 가까운 전자기기일수록 등급이 낮은 제품보다 구매 비용이 높지만, 장기적으로 전기요금을 절약하고 탄소 배출을 줄일 수 있다.</span>
-            <span class="effect">실천효과</span>
-            <span class="effect-value">우리 기업 이산화탄소 감축량: 23t</span>
-            <span class="rules-title">실천수칙</span>
-            <div class="rules">
-                <div class="rule-item">
-                    <img src="${pageContext.request.contextPath}/resources/image/check_box.png" alt="체크">
-                    <span>에너지 관련 제도별 로고를 확인하고, 고효율 전자기기 구매하기 (자세한 내용은 한국에너지공단 효율관리제도 누리집에서 확인)</span>
+                    <span>산불피해지 복원, 생물다양성 등 산림 분야 활동에 참여하기</span>
                 </div>
             </div>
         </div>
@@ -720,31 +722,7 @@ html, body {
 </div>
 
 
-   <div class="homeBoxDetail-container" id="enterpriseDetail"
-      style="display: none;">
-      <div class="homeBoxDetail-header" onclick="toggleDetail(this)">
-         <span>고효율 전자기기 사용하기</span> <span class="toggle-icon">▲</span>
-      </div>
-      <div class="homeBoxDetail-content">
-         <div class="homeBoxDetail">
-            <img
-               src="${pageContext.request.contextPath}/resources/image/practiceDetail/home_box_detail4.png"
-               > <span>에너지 효율등급이 1등급에 가까운 전자기기일수록 등급이 낮은
-               제품보다 구매 비용이 높지만, 장기적으로 전기요금을 절약하고 탄소 배출을 줄일 수 있다. </span> <span
-               class="effect">실천효과</span> <span class="effect-value">우리 기업
-               이산화탄소 감축량: 23t</span> <span class="rules-title">실천수칙</span>
-            <div class="rules">
-               <div class="rule-item">
-                  <img
-                     src="${pageContext.request.contextPath}/resources/image/check_box.png"
-                     alt="체크"> <span>에너지 관련 제도별 로고를 확인하고, 고효율 전자기기
-                     구매하기(자세한 내용은 한국에너지공단 효율관리제도 누리집(https://eep.energy.or.kr)에서 확인)</span>
-               </div>
-               
-            </div>
-         </div>
-      </div>
-   </div>
+
 
     <!-- footer 인클루드 파일 -->
     <%@ include file="/WEB-INF/inc/footer.jsp"%>
@@ -761,17 +739,7 @@ html, body {
             document.getElementById(id).style.display = 'block';
         }
 
-        function toggleDarkMode() {
-            const darkModePart = document.getElementById("darkModePart");
-            const powerButtonImage = document.getElementById("powerButtonImage");
-            darkModePart.classList.toggle("dark-mode");
-
-            if (darkModePart.classList.contains("dark-mode")) {
-                powerButtonImage.style.filter = "brightness(0) invert(1)";
-            } else {
-                powerButtonImage.style.filter = "none";
-            }
-        }
+       
 
         function toggleDetail(element) {
             const content = element.nextElementSibling;
@@ -786,6 +754,22 @@ html, body {
                 icon.textContent = "▼";
                 content.classList.add('open');
             }
+        }
+        function togglePlate() {
+            const video = document.getElementById("plateVideo");
+
+            
+            if (video.paused || video.ended) {
+                video.play();
+            } else {
+                video.pause();
+            }
+
+            
+            video.onended = function() {
+                video.pause();
+                video.currentTime = 0; 
+            };
         }
     </script>
 </body>

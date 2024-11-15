@@ -175,7 +175,7 @@
                 <!-- 친환경 소비 -->
                 <div class="carousel-item">
                     <div class="photo-item">
-                        <a href="링크2을_여기에_넣으세요">
+                        <a href="${pageContext.request.contextPath}/ecoConsumptionView">
                             <img src="${pageContext.request.contextPath}/resources/image/box2.jpg" class="img-fluid rounded" alt="친환경 소비">
                             <p class="photo-title">친환경 소비</p>
                         </a>
@@ -184,7 +184,7 @@
                 <!-- 친환경 이동 -->
                 <div class="carousel-item">
                     <div class="photo-item">
-                        <a href="링크3을_여기에_넣으세요">
+                        <a href="${pageContext.request.contextPath}/ecoMovementView">
                             <img src="${pageContext.request.contextPath}/resources/image/box3.jpg" class="img-fluid rounded" alt="친환경 이동">
                             <p class="photo-title">친환경 이동</p>
                         </a>
@@ -193,7 +193,7 @@
                 <!-- 자원순환 -->
                 <div class="carousel-item">
                     <div class="photo-item">
-                        <a href="링크4를_여기에_넣으세요">
+                        <a href="${pageContext.request.contextPath}/ecoConsumptionView">
                             <img src="${pageContext.request.contextPath}/resources/image/box4.jpg" class="img-fluid rounded" alt="자원순환">
                             <p class="photo-title">자원순환</p>
                         </a>
@@ -202,7 +202,7 @@
                 <!-- 흡수원 보호 -->
                 <div class="carousel-item">
                     <div class="photo-item">
-                        <a href="링크5를_여기에_넣으세요">
+                        <a href="${pageContext.request.contextPath}/ecoSinksView">
                             <img src="${pageContext.request.contextPath}/resources/image/box5.jpg" class="img-fluid rounded" alt="흡수원 보호">
                             <p class="photo-title">흡수원 보호</p>
                         </a>

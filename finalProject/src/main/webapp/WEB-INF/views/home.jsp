@@ -203,7 +203,7 @@ html, body {
 	<div class="container py-5">
 		<div class="row g-3 mb-5">
 			<div class="col-md-6">
-				<a href="#" class="service-link"> <img
+				<a href="${pageContext.request.contextPath}/lowCarbonPracticeView" class="service-link"> <img
 					src="${pageContext.request.contextPath}/resources/image/carbon_neutral.png"
 					alt="탄소 중립 아이콘">
 					<div>

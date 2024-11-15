@@ -19,4 +19,16 @@ public class LowCarbonPracticeController {
 	public String ecoConsumptionView() {
 		return "practice/ecoConsumptionView";
 	}
+	@RequestMapping("/ecoMovementView")
+	public String ecoMovementView() {
+		return "practice/ecoMovementView";
+	}
+	@RequestMapping("/ecoCircularView")
+	public String ecoCircularView() {
+		return "practice/ecoCircularView";
+	}
+	@RequestMapping("/ecoSinksView")
+	public String ecoSinksView() {
+		return "practice/ecoSinksView";
+	}
 }
