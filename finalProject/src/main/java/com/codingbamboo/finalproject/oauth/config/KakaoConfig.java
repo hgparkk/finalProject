@@ -5,13 +5,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@PropertySource("classpath:spring/appconfig.properties")
+@PropertySource("classpath:spring/config.properties")
 public class KakaoConfig {
 
 	@Value("${kakao.client-id}")
 	private String clientId;
 	
-	@Value("${kakao.client-secret")
+	@Value("${kakao.client-secret}")
 	private String clientSecret;
 
 	@Value("${kakao.link-redirect-uri}")

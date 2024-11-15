@@ -49,8 +49,8 @@
 								<span class="ms-3" style="color: #3C1E1E">KAKAO</span>
 							</c:if>
 							<c:if test="${sessionScope.login.userProvider == 'Google'}">
-								<img src="assets/google_login_assets/Web (mobile + desktop)/png@2x/light/web_light_rd_na_border@2x.png" class="ms-3" style="width: 35px;">
-								<span class="ms-3" style="color: #f2f2f2">Google</span>
+								<img src="assets/google_login_assets/Web (mobile + desktop)/png@2x/neutral/web_neutral_rd_na_border@2x.png" class="ms-3" style="width: 35px;">
+								<span class="ms-3" style="color: #000000">Google</span>
 							</c:if>
 						</div>
 					</c:if>

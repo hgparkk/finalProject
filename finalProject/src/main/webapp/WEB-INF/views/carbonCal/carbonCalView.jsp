@@ -22,8 +22,6 @@
 
 .title-box {
 	display: flex;
-	padding-left: 2vw;
-	padding-right: 2vw;
 }
 
 .carbonCal-title {
@@ -458,7 +456,7 @@
                 if (selectedFuelType && selectedFuelType.id === 'noCar') {
                     // '승용차 없음' 선택 시 inputFuel 필드를 비활성화
                     inputFuelField.disabled = true;
-                    inputFuelField.value = '';  // 값도 초기화
+                    inputFuelField.value = 0;  // 값도 초기화
                 } else {
                     // 다른 연료 선택 시 inputFuel 필드를 활성화
                     inputFuelField.disabled = false;
@@ -501,9 +499,8 @@
 	        document.getElementById("outputGas").value = roundedGasCo2;
 	
 		    // 교통 CO₂ 발생량 계산 (승용차 종류 선택에 따라)
-		    const v_inputFuel = document.getElementById('inputFuel').value;
+		    let v_inputFuel = document.getElementById('inputFuel').value;
 		    const selectedFuelType = document.querySelector('input[name="fuelType"]:checked');
-		    console.log(selectedFuelType.nextElementSibling.textContent.trim())
 		    let resultFuelCo2 = 0;
 		    
 		    /* 원하는 연료 선택 */
@@ -515,17 +512,17 @@
 		            resultFuelCo2 = (v_inputFuel / 15.35) * 2.582;
 		        } else if (fuelType === 'LPG') {
 		            resultFuelCo2 = (v_inputFuel / 11.06) * 1.868;
-		        } 
+		        }
 		    }
 		    
+		    const roundedFuelCo2 = Math.round(resultFuelCo2 * 100000) / 100000;
+	        document.getElementById("outputFuel").value = roundedFuelCo2;
+		    
 		    /* 승용차 없음 선택하면 outputFuel 비움 */
-		    if(selectedFuelType.nextElementSibling.textContent.trim() == '승용차없음'){
+		    if(selectedFuelType.nextElementSibling.textContent.trim() == '승용차 없음'){
 		    	document.getElementById("outputFuel").value = 0;
 	        }
 		    
-	        const roundedFuelCo2 = Math.round(resultFuelCo2 * 100000) / 100000;
-	        document.getElementById("outputFuel").value = roundedFuelCo2;
-	
 		    // 폐기물 CO₂ 발생량 계산
 		    const v_inputGarbage = document.getElementById('inputGarbage').value;
 	        const resultGarbageCo2 = v_inputGarbage * 0.5573;
@@ -559,6 +556,17 @@
 				return;
 			}
 			
+			const selectedFuelType = document.querySelector('input[name="fuelType"]:checked');
+			let v_inputFuel = document.getElementById('inputFuel').value
+			
+			if(selectedFuelType.nextElementSibling.textContent.trim() != '승용차 없음'){
+				if(v_inputFuel == 0){
+					alert("이동 거리를 입력해주세요")
+					return;
+				}
+				v_inputFuel = 0;
+			}
+			
 			if(confirm("결과창으로 이동하시겠습니까?")){
 				/* 기존에 존재하던 아이템들 삭제 */
 				sessionStorage.removeItem("resultElec");
@@ -571,7 +579,7 @@
 				sessionStorage.setItem("resultElec", document.getElementById("inputElectric").value);
 				sessionStorage.setItem("resultGas", document.getElementById("inputGas").value);
 				sessionStorage.setItem("resultGar", document.getElementById("inputGarbage").value);
-				sessionStorage.setItem("resultTrf", document.getElementById("inputFuel").value);
+				sessionStorage.setItem("resultTrf", v_inputFuel);
 				sessionStorage.setItem("resultTrfType", document.querySelector('input[name="fuelType"]:checked').nextElementSibling.textContent.trim());
 				document.getElementById("submitForm").submit();
 			}

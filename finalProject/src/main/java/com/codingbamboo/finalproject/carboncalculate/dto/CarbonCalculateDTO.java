@@ -1,25 +1,29 @@
-package com.codingbamboo.finalproject.carbonCalculate.dto;
+package com.codingbamboo.finalproject.carboncalculate.dto;
+
+import java.sql.Date;
 
 public class CarbonCalculateDTO {
 	public int resultNo;
 	public String userId;
-	public String resultDate;
+	public Date resultDate;
 	public int electricUsage;
-	public int gasUseage;
+	public int gasUsage;
 	public String trafficKind;
 	public int trafficValue;
 	public int wasteWeight;
 	
+	
 	public CarbonCalculateDTO() {
 	}
-	
-	public CarbonCalculateDTO(int resultNo, String userId, String resultDate, int electricUsage, int gasUseage,
+
+	public CarbonCalculateDTO(int resultNo, String userId, Date resultDate, int electricUsage, int gasUsage,
 			String trafficKind, int trafficValue, int wasteWeight) {
+		super();
 		this.resultNo = resultNo;
 		this.userId = userId;
 		this.resultDate = resultDate;
 		this.electricUsage = electricUsage;
-		this.gasUseage = gasUseage;
+		this.gasUsage = gasUsage;
 		this.trafficKind = trafficKind;
 		this.trafficValue = trafficValue;
 		this.wasteWeight = wasteWeight;
@@ -27,8 +31,8 @@ public class CarbonCalculateDTO {
 
 	@Override
 	public String toString() {
-		return "carbonCalculateDTO [resultNo=" + resultNo + ", userId=" + userId + ", resultDate=" + resultDate
-				+ ", electricUsage=" + electricUsage + ", gasUseage=" + gasUseage + ", trafficKind=" + trafficKind
+		return "CarbonCalculateDTO [resultNo=" + resultNo + ", userId=" + userId + ", resultDate=" + resultDate
+				+ ", electricUsage=" + electricUsage + ", gasUsage=" + gasUsage + ", trafficKind=" + trafficKind
 				+ ", trafficValue=" + trafficValue + ", wasteWeight=" + wasteWeight + "]";
 	}
 
@@ -48,11 +52,11 @@ public class CarbonCalculateDTO {
 		this.userId = userId;
 	}
 
-	public String getResultDate() {
+	public Date getResultDate() {
 		return resultDate;
 	}
 
-	public void setResultDate(String resultDate) {
+	public void setResultDate(Date resultDate) {
 		this.resultDate = resultDate;
 	}
 
@@ -64,12 +68,12 @@ public class CarbonCalculateDTO {
 		this.electricUsage = electricUsage;
 	}
 
-	public int getGasUseage() {
-		return gasUseage;
+	public int getGasUsage() {
+		return gasUsage;
 	}
 
-	public void setGasUseage(int gasUseage) {
-		this.gasUseage = gasUseage;
+	public void setGasUsage(int gasUsage) {
+		this.gasUsage = gasUsage;
 	}
 
 	public String getTrafficKind() {
@@ -95,6 +99,5 @@ public class CarbonCalculateDTO {
 	public void setWasteWeight(int wasteWeight) {
 		this.wasteWeight = wasteWeight;
 	}
-	
-	
+
 }

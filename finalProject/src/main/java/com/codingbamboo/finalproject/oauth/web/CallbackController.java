@@ -60,33 +60,7 @@ public class CallbackController {
 		UserDTO login = userService.selectUserForSnsLogin(loginUserInfo);
 
 		if (login != null) {
-			String fromUrl = request.getHeader("Referer");
-			session.setAttribute("login", login);
-			if (fromUrl == null || fromUrl.isEmpty() || fromUrl.contains("/login") || fromUrl.contains("/callback")) {
-				return "redirect:/";
-			} else {
-				return "redirect:" + fromUrl;
-			}
-		} else {
-			request.setAttribute("msg", "연동된 정보가 없습니다. 로그인 후 소셜 계정을 연동해서 사용해주세요.");
-			request.setAttribute("url", "/loginView");
-			return "alert";
-		}
-	}
-
-	// 콜백 처리 함수 (로그인한 카카오 아이디와 연동되어있는 계정 찾기)
-	@RequestMapping(value = "/login/kakao/callback", method = RequestMethod.GET)
-	public String loginCallbackKakao(@RequestParam String code, @RequestParam String state, HttpSession session,
-			HttpServletRequest request) {
-		Map<String, Object> userInfo = oauthService.handleCallback(code, state, false, session, "Kakao");
-
-		UserDTO loginUserInfo = new UserDTO();
-		loginUserInfo.setUserProvider("Kakao");
-		loginUserInfo.setUserProviderId((String) userInfo.get("id"));
-		UserDTO login = userService.selectUserForSnsLogin(loginUserInfo);
-
-		if (login != null) {
-			String fromUrl = request.getHeader("Referer");
+			String fromUrl = (String) session.getAttribute("fromUrl");
 			session.setAttribute("login", login);
 			if (fromUrl == null || fromUrl.isEmpty() || fromUrl.contains("/login") || fromUrl.contains("/callback")) {
 				return "redirect:/";
@@ -120,18 +94,19 @@ public class CallbackController {
 		return "alert";
 	}
 
-	// 콜백 처리 함수 (로그인한 네이버 아이디와 연동되어있는 계정 찾기)
-	@RequestMapping(value = "/login/google/callback", method = RequestMethod.GET)
-	public String loginCallbackGoogle(@RequestParam String code, @RequestParam String state, HttpSession session,
+	// 콜백 처리 함수 (로그인한 카카오 아이디와 연동되어있는 계정 찾기)
+	@RequestMapping(value = "/login/kakao/callback", method = RequestMethod.GET)
+	public String loginCallbackKakao(@RequestParam String code, @RequestParam String state, HttpSession session,
 			HttpServletRequest request) {
-		Map<String, Object> userInfo = oauthService.handleCallback(code, state, false, session, "Google");
+		Map<String, Object> userInfo = oauthService.handleCallback(code, state, false, session, "Kakao");
+
 		UserDTO loginUserInfo = new UserDTO();
-		loginUserInfo.setUserProvider("Google");
+		loginUserInfo.setUserProvider("Kakao");
 		loginUserInfo.setUserProviderId((String) userInfo.get("id"));
 		UserDTO login = userService.selectUserForSnsLogin(loginUserInfo);
 
 		if (login != null) {
-			String fromUrl = request.getHeader("Referer");
+			String fromUrl = (String) session.getAttribute("fromUrl");
 			session.setAttribute("login", login);
 			if (fromUrl == null || fromUrl.isEmpty() || fromUrl.contains("/login") || fromUrl.contains("/callback")) {
 				return "redirect:/";
@@ -145,7 +120,7 @@ public class CallbackController {
 		}
 	}
 
-	// 콜백 처리 함수 (기존 계정과 네이버 아이디 연동)
+	// 콜백 처리 함수 (기존 계정과 구글 아이디 연동)
 	@RequestMapping(value = "/link/google/callback", method = RequestMethod.GET)
 	public String linkCallbackGoogle(@RequestParam String code, @RequestParam String state, HttpSession session,
 			HttpServletRequest request) {
@@ -163,5 +138,30 @@ public class CallbackController {
 		request.setAttribute("msg", "해당 계정에 소셜 계정이 연동되었습니다.");
 		request.setAttribute("url", "/myPageSnsLinkManageView");
 		return "alert";
+	}
+
+	// 콜백 처리 함수 (로그인한 구글 아이디와 연동되어있는 계정 찾기)
+	@RequestMapping(value = "/login/google/callback", method = RequestMethod.GET)
+	public String loginCallbackGoogle(@RequestParam String code, @RequestParam String state, HttpSession session,
+			HttpServletRequest request) {
+		Map<String, Object> userInfo = oauthService.handleCallback(code, state, false, session, "Google");
+		UserDTO loginUserInfo = new UserDTO();
+		loginUserInfo.setUserProvider("Google");
+		loginUserInfo.setUserProviderId((String) userInfo.get("id"));
+		UserDTO login = userService.selectUserForSnsLogin(loginUserInfo);
+
+		if (login != null) {
+			String fromUrl = (String) session.getAttribute("fromUrl");
+			session.setAttribute("login", login);
+			if (fromUrl == null || fromUrl.isEmpty() || fromUrl.contains("/login") || fromUrl.contains("/callback")) {
+				return "redirect:/";
+			} else {
+				return "redirect:" + fromUrl;
+			}
+		} else {
+			request.setAttribute("msg", "연동된 정보가 없습니다. 로그인 후 소셜 계정을 연동해서 사용해주세요.");
+			request.setAttribute("url", "/loginView");
+			return "alert";
+		}
 	}
 }

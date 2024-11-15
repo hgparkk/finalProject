@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@PropertySource("classpath:spring/appconfig.properties")
+@PropertySource("classpath:spring/config.properties")
 public class GoogleConfig {
 
 	@Value("${google.client-id}")
