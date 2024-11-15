@@ -107,15 +107,15 @@
 							<span class="fs-4 info-box text-body-tertiary">연동된 SNS</span>
 							<c:if test="${sessionScope.login.userProvider == 'Naver'}">
 								<img src="assets/naver_login_assets/btnG_아이콘사각.png" class="ms-3" style="width: 35px;">
-								<span class="ms-3" style="color: #2DB400">NAVER</span>
+								<span class="ms-3 fs-5" style="color: #2DB400">NAVER</span>
 							</c:if>
 							<c:if test="${sessionScope.login.userProvider == 'Kakao'}">
 								<img src="assets/kakao_login_assets/kakaotalk_sharing_btn_small.png" class="ms-3" style="width: 35px;">
-								<span class="ms-3" style="color: #3C1E1E">KAKAO</span>
+								<span class="ms-3 fs-5" style="color: #3C1E1E">KAKAO</span>
 							</c:if>
 							<c:if test="${sessionScope.login.userProvider == 'Google'}">
-								<img src="assets/google_login_assets/Web (mobile + desktop)/png@2x/light/web_light_rd_na_border@2x.png" class="ms-3" style="width: 35px;">
-								<span class="ms-3" style="color: #f2f2f2">Google</span>
+								<img src="assets/google_login_assets/Web (mobile + desktop)/png@2x/neutral/web_neutral_rd_na_border@2x.png" class="ms-3" style="width: 35px;">
+								<span class="ms-3 fs-5" style="color: #000000">Google</span>
 							</c:if>
 						</div>
 						<div class="mt-5 mb-5">
