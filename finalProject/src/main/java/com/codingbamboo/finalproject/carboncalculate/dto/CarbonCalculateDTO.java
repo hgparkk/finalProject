@@ -12,7 +12,6 @@ public class CarbonCalculateDTO {
 	public int trafficValue;
 	public int wasteWeight;
 	
-	
 	public CarbonCalculateDTO() {
 	}
 

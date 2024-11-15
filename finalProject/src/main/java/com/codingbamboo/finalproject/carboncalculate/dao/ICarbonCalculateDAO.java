@@ -14,7 +14,6 @@ public interface ICarbonCalculateDAO {
 	// 탄소발자국 결과 저장하기
 	int insertCal(CarbonCalculateDTO carbonCalculateDTO);
 	
-	
 	// 탄소발자국 결과 조회하기
 	CarbonCalculateDTO getCal(Date date);
 	

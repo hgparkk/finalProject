@@ -83,7 +83,6 @@ public class CarbonCalculateController {
 		return "user/myCarbonStepView";
 	}
 	
-	
 	// 임시
 	// 연도와 월에 해당하는 데이터를 가져오는 메서드
 	@ResponseBody
