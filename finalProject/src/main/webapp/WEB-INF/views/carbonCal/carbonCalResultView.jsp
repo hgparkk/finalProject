@@ -7,9 +7,108 @@
 <meta charset="UTF-8">
 <title>Coding Bamboo</title>
 
+<style type="text/css">
+.graph-container {
+	width: 100%;
+	min-width: 500px;
+}
+
+.title-box {
+	display: flex;
+	padding-left: 2vw;
+	padding-right: 2vw;
+}
+
+.carbonCal-title {
+	width: 100%;
+	height: 7.5vw;
+}
+
+.home-go {
+	border: 1px solid #CCCCCC;
+	border-radius: 0.4vw;
+	padding: 0.3vw;
+	padding-left: 0.5vw;
+	padding-right: 0.5vw;
+	text-decoration: none;
+	color: black;
+	font-size: 1vw
+}
+
+.home-go>img {
+	width: 1vw;
+	height: 1vw;
+}
+
+.usage-result-box {
+	max-width: 1340px;
+	display: flex;
+	margin: auto;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.select-date-box {
+	width: 100%;
+	height: 2vw;
+}
+
+.graph-box {
+	width: 100%;
+	padding: 5vw;
+}
+
+.circle-graph-box {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.circle-graph {
+	width: 30%;
+}
+
+.circle-graph-explain-box {
+	width: 50%;
+}
+
+.bar-graph-box {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	margin-top: 2.5vw;
+}
+
+.allType-graph-box {
+	width: 18%;
+	height: 20vw;
+	padding: 0.5vw;
+	border: 1px solid #CCCCCC;
+	border-radius: 0.5vw;
+}
+
+.bar-graph-title {
+	display: flex;
+	height: 10%;
+}
+
+.img-box>img {
+	width: 1vw;
+	height: 1vw;
+}
+
+.bar-graph{
+	height: 90%;
+}
+
+#elecGraph{
+	width: 100%;
+	height: 100%;
+}
+</style>
+
 <!-- 그래프 그리기 -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<!-- <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script> -->
 
 <!-- header -->
 <%@ include file="/WEB-INF/inc/header.jsp"%>
@@ -19,75 +118,135 @@
 	<!-- top -->
 	<%@ include file="/WEB-INF/inc/top.jsp"%>
 
-	<div class="container">
-		<div>
-			<div>
-				<select id="year">
-					<option value="2022">2022</option>
-					<option value="2023">2023</option>
-					<option value="2024">2024</option>
-				</select> <select id="month">
-					<option value="01">1</option>
-					<option value="02">2</option>
-					<option value="03">3</option>
-					<option value="04">4</option>
-					<option value="05">5</option>
-					<option value="06">6</option>
-					<option value="07">7</option>
-					<option value="08">8</option>
-					<option value="09">9</option>
-					<option value="10">10</option>
-					<option value="11">11</option>
-					<option value="12">12</option>
-				</select>
+	<div class="graph-container">
+		<div class="title-box">
+			<div class="carbonCal-title w-50">
+				<h1 style="color: green; font-weight: bold;">탄소발자국 계산기</h1>
+				<span style="font-size: 0.7vw;">내가 생활 속에서 배출하는 이산화탄소의 양은 얼마나
+					될까요?</span>
+			</div>
+			<div class="w-50 d-flex align-items-center justify-content-end">
+				<a class="home-go" href="${pageContext.request.contextPath }"> <img
+					src="${pageContext.request.contextPath}/resources/image/home.png">
+					<span>홈으로 이동</span>
+				</a>
 			</div>
 		</div>
-		<div>
-			<div>
+		<div class="usage-result-box">
+			<div class="select-date-box">
 				<div>
-					<canvas id="myChart"></canvas>
-				</div>
-				<div>
-					<div>
-						<span>당신의 탄소배출량</span> <span>대충설명</span>
-					</div>
-					<div>
-						<span>또설명</span>
-					</div>
+					<select id="year">
+						<option value="2022">2022</option>
+						<option value="2023">2023</option>
+						<option value="2024">2024</option>
+					</select> <select id="month">
+						<option value="01">1</option>
+						<option value="02">2</option>
+						<option value="03">3</option>
+						<option value="04">4</option>
+						<option value="05">5</option>
+						<option value="06">6</option>
+						<option value="07">7</option>
+						<option value="08">8</option>
+						<option value="09">9</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+					</select>
 				</div>
 			</div>
-			<div>
-				<div>
-					<div>
-						<div>
-							<img src="">
-						</div>
-						<span>전기</span>
+			<div class="graph-box">
+				<div class="circle-graph-box">
+					<div class="circle-graph">
+						<canvas id="myChart"></canvas>
 					</div>
-					<div>
+					<div class="circle-graph-explain-box">
 						<div>
+							<h2>당신의 탄소배출량 결과</h2>
+							<c:if test="${sessionScope.login.userId != null }">
+								<p>${sessionScope.login.userId }님의이산화탄소(CO₂)발생량통계입니다.</p>
+							</c:if>
+							<c:if test="${sessionScope.login.userId == null }">
+								<p>나의 이산화탄소(CO₂) 발생량 통계</p>
+							</c:if>
+						</div>
+						<div>
+							<span>1님 가정은 이산화탄소 배출량은 총</span> <span id="resultCO2"></span> <span>kg
+								입니다. 왼쪽의 그래프를 보면 어느 부분에서 이산화탄소가 가장 많이 발생하고 있는지 확인할 수 있습니다.</span>
+						</div>
+					</div>
+				</div>
+				<div class="bar-graph-box">
+					<!-- 전기 -->
+					<div class="allType-graph-box">
+						<div class="bar-graph-title">
+							<div class="img-box">
+								<img src="image/electric.png">
+							</div>
+							<span>전기</span>
+						</div>
+						<div class="bar-graph">
 							<canvas id="elecGraph"></canvas>
 						</div>
 					</div>
+					
+					<!-- 가스 -->
+					<div class="allType-graph-box">
+						<div class="bar-graph-title">
+							<div class="img-box">
+								<img src="image/gas.jpg">
+							</div>
+							<span>가스</span>
+						</div>
+						<div class="bar-graph">
+							<canvas id="gasGraph"></canvas>
+						</div>
+					</div>
+					
+					<!-- 교통 -->
+					<div class="allType-graph-box">
+						<div class="bar-graph-title">
+							<div class="img-box">
+								<img src="image/traffic.png">
+							</div>
+							<span>교통</span>
+						</div>
+						<div class="bar-graph">
+							<canvas id="trafficGraph"></canvas>
+						</div>
+					</div>
+					
+					<!-- 폐기물 -->
+					<div class="allType-graph-box">
+						<div class="bar-graph-title">
+							<div class="img-box">
+								<img src="image/garbage.png">
+							</div>
+							<span>폐기물</span>
+						</div>
+						<div class="bar-graph">
+							<canvas id="garbageGraph"></canvas>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div>
-			<form id="resRegistForm"
-				action="${pageContext.request.contextPath }/carbonCalRegistDo"
-				method="POST">
-				<div class="d-none">
-					<input type="hidden" value="${sessionScope.login.userId }"
-						name="userId"> <input type="date" id="regDate"
-						name="resultDate" value="${carbonCalculateDTO.resultDate}">
-					<input type="hidden" id="resElec" name="electricUsage"> <input
-						type="hidden" id="resGas" name="gasUsage"> <input
-						type="hidden" id="resGar" name="wasteWeight"> <input
-						type="hidden" id="resTrfType" name="trafficKind"> <input
-						type="hidden" id="resTrf" name="trafficValue">
-				</div>
-				<button id="resRegistBtn" type="button">저장하기</button>
-			</form>
+			<div>
+				<form id="resRegistForm"
+					action="${pageContext.request.contextPath }/carbonCalRegistDo"
+					method="POST">
+					<div class="d-none">
+						<input type="hidden" value="${sessionScope.login.userId }"
+							name="userId"> <input type="date" id="regDate"
+							name="resultDate" value="${carbonCalculateDTO.resultDate}">
+						<input type="hidden" id="resElec" name="electricUsage"> <input
+							type="hidden" id="resGas" name="gasUsage"> <input
+							type="hidden" id="resGar" name="wasteWeight"> <input
+							type="hidden" id="resTrfType" name="trafficKind"> <input
+							type="hidden" id="resTrf" name="trafficValue">
+					</div>
+					<button id="resRegistBtn" type="button">저장하기</button>
+				</form>
+			</div>
 		</div>
 	</div>
 
@@ -147,7 +306,7 @@
 
     // 해당 값이 존재하면 input 태그에 설정합니다.
     if (resTrfTypeValue) {
-        document.getElementById('resTrfType').value = resTrfTypeValue;  // id값이 정확해야 합니다.
+        document.getElementById('resTrfType').value = resTrfTypeValue;
     }
 };
 
@@ -189,9 +348,16 @@ if (v_resultTrfType == '휘발유') {
     v_fuelCo2 = Math.round((v_resultTrf / 15.35) * 2.582 * 100000) / 100000;
 } else if (v_resultTrfType == 'LPG') {
     v_fuelCo2 = Math.round((v_resultTrf / 11.06) * 1.868 * 100000) / 100000;
-} else if (v_resultTrfType == '승용차 없음') {
-    v_fuelCo2 = 0;
 }
+
+sessionStorage.removeItem("resultCo2");
+let v_allCo2 = v_fuelCo2 + v_resultElec + v_resultGas + v_resultGar
+console.log(v_allCo2)
+sessionStorage.setItem("resultCo2", v_allCo2);
+document.getElementById("resultCO2").innerHTML += v_allCo2;
+
+		/* 배출량 원 그래프 */
+		let ctx = document.getElementById('myChart');
 
         new Chart(ctx, {
             type: 'pie',
@@ -203,17 +369,110 @@ if (v_resultTrfType == '휘발유') {
             }
         });
 
-        let ctx2 = document.getElementById('elecGraph');
+        let electricCtx = document.getElementById('elecGraph');
 
-        new Chart(ctx2, {
+        /* 전기 */
+        new Chart(electricCtx, {
             type: 'bar', // bar = 막대그래프는 항목별 수량, 수치를 비교할 때 적합하다.
             data: {
                 labels: ['내 건물', '다른 건물'],
                 datasets: [{
-                    data: [v_resultElec, 10]
+                    data: [v_resultElec, 10],
+					backgroundColor: "blue"
                 }]
             },
             options: {
+            	responsive: true, // 화면 크기에 따라 반응형 조정
+                maintainAspectRatio: false, // 비율을 유지하지 않음
+                plugins: {
+                    legend: {
+                        display: false // 범례 숨기기 (label 위쪽 부분)
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        
+        /* 가스 */
+        let gasCtx = document.getElementById('gasGraph');
+
+        new Chart(gasCtx, {
+            type: 'bar', // bar = 막대그래프는 항목별 수량, 수치를 비교할 때 적합하다.
+            data: {
+                labels: ['내 건물', '다른 건물'],
+                datasets: [{
+                    data: [v_resultGas, 10],
+					backgroundColor: "red"
+                }]
+            },
+            options: {
+            	responsive: true, // 화면 크기에 따라 반응형 조정
+                maintainAspectRatio: false, // 비율을 유지하지 않음
+                plugins: {
+                    legend: {
+                        display: false // 범례 숨기기 (label 위쪽 부분)
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        
+        /* 폐기물 */
+        let garbageCtx = document.getElementById('garbageGraph');
+
+        new Chart(garbageCtx, {
+            type: 'bar', // bar = 막대그래프는 항목별 수량, 수치를 비교할 때 적합하다.
+            data: {
+                labels: ['내 건물', '다른 건물'],
+                datasets: [{
+                    data: [v_resultGar, 10],
+					backgroundColor: "yellow"
+                }]
+            },
+            options: {
+            	responsive: true, // 화면 크기에 따라 반응형 조정
+                maintainAspectRatio: false, // 비율을 유지하지 않음
+                plugins: {
+                    legend: {
+                        display: false // 범례 숨기기 (label 위쪽 부분)
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        
+        /* 교통 */
+        let trafficCtx = document.getElementById('trafficGraph');
+
+        new Chart(trafficCtx, {
+            type: 'bar', // bar = 막대그래프는 항목별 수량, 수치를 비교할 때 적합하다.
+            data: {
+                labels: ['내 건물', '다른 건물'],
+                datasets: [{
+                    data: [v_resultTrf, 10],
+					backgroundColor: "purple"
+                }]
+            },
+            options: {
+            	responsive: true, // 화면 크기에 따라 반응형 조정
+                maintainAspectRatio: false, // 비율을 유지하지 않음
+                plugins: {
+                    legend: {
+                        display: false // 범례 숨기기 (label 위쪽 부분)
+                    }
+                },
                 scales: {
                     y: {
                         beginAtZero: true
