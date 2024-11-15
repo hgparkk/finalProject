@@ -163,69 +163,11 @@
 					<div class="circle-graph-explain-box">
 						<div>
 							<h2>당신의 탄소배출량 결과</h2>
-							<c:if test="${sessionScope.login.userId != null }">
-								<p>${sessionScope.login.userId }님의이산화탄소(CO₂)발생량통계입니다.</p>
-							</c:if>
-							<c:if test="${sessionScope.login.userId == null }">
-								<p>나의 이산화탄소(CO₂) 발생량 통계</p>
-							</c:if>
+							<p>${sessionScope.login.userId }님의 이번 달 이산화탄소(CO₂)발생량통계입니다.</p>
 						</div>
 						<div>
-							<span>1님 가정은 이산화탄소 배출량은 총</span> <span id="resultCO2"></span> <span>kg
+							<span>${sessionScope.login.userId }님의 이산화탄소 배출량은 총</span> <span id="resultCO2"></span> <span>kg
 								입니다. 왼쪽의 그래프를 보면 어느 부분에서 이산화탄소가 가장 많이 발생하고 있는지 확인할 수 있습니다.</span>
-						</div>
-					</div>
-				</div>
-				<div class="bar-graph-box">
-					<!-- 전기 -->
-					<div class="allType-graph-box">
-						<div class="bar-graph-title">
-							<div class="img-box">
-								<img src="image/electric.png">
-							</div>
-							<span>전기</span>
-						</div>
-						<div class="bar-graph">
-							<canvas id="elecGraph"></canvas>
-						</div>
-					</div>
-					
-					<!-- 가스 -->
-					<div class="allType-graph-box">
-						<div class="bar-graph-title">
-							<div class="img-box">
-								<img src="image/gas.jpg">
-							</div>
-							<span>가스</span>
-						</div>
-						<div class="bar-graph">
-							<canvas id="gasGraph"></canvas>
-						</div>
-					</div>
-					
-					<!-- 교통 -->
-					<div class="allType-graph-box">
-						<div class="bar-graph-title">
-							<div class="img-box">
-								<img src="image/traffic.png">
-							</div>
-							<span>교통</span>
-						</div>
-						<div class="bar-graph">
-							<canvas id="trafficGraph"></canvas>
-						</div>
-					</div>
-					
-					<!-- 폐기물 -->
-					<div class="allType-graph-box">
-						<div class="bar-graph-title">
-							<div class="img-box">
-								<img src="image/garbage.png">
-							</div>
-							<span>폐기물</span>
-						</div>
-						<div class="bar-graph">
-							<canvas id="garbageGraph"></canvas>
 						</div>
 					</div>
 				</div>
@@ -244,7 +186,7 @@
 							type="hidden" id="resTrfType" name="trafficKind"> <input
 							type="hidden" id="resTrf" name="trafficValue">
 					</div>
-					<button id="resRegistBtn" type="button">저장하기</button>
+					<button id="resRegistBtn" type="button">수정하기</button>
 				</form>
 			</div>
 		</div>
@@ -260,8 +202,8 @@
     const currentMonth = currentDate.getMonth() + 1; // 월은 0부터 시작하므로 1을 더해야 실제 월이 됩니다.
     const currentDay = currentDate.getDate();
 
- // Date 객체를 "yyyy-MM-dd" 형식으로 설정
- v_regDate.value = currentYear + '-' + (currentMonth < 10 ? '0' + currentMonth : currentMonth) + '-' + (currentDay < 10 ? '0' + currentDay : currentDay);
+	// Date 객체를 "yyyy-MM-dd" 형식으로 설정
+	v_regDate.value = currentYear + '-' + (currentMonth < 10 ? '0' + currentMonth : currentMonth) + '-' + (currentDay < 10 ? '0' + currentDay : currentDay);
 
     const yearSelect = document.getElementById('year');
     const monthSelect = document.getElementById('month');
@@ -271,17 +213,17 @@
 
     // 연도나 월이 변경될 때마다 달력을 업데이트
     function updateMonthOptions() {
-        const selectedYear = parseInt(yearSelect.value);
-        const selectedMonth = parseInt(monthSelect.value);
-
-        // Date 객체를 생성할 때 day는 1로 설정 (1일로 설정)
-        const selectedDate = new Date(selectedYear, selectedMonth - 1, 1); // month는 0부터 시작하므로 1을 빼줍니다.
-
-        // Date 객체를 "yyyy-MM-dd" 형식으로 업데이트
-        v_regDate.value = selectedDate.getFullYear() + "-" + (selectedDate.getMonth() + 1).toString().padStart(2, '0') + "-01"; // "YYYY-MM-DD" 형식으로 설정
-
-        // 선택된 년도와 월을 console에 출력 (확인용)
-        console.log("선택된 날짜 (년도-월): " + v_regDate.value);
+	    const selectedYear = parseInt(yearSelect.value);
+	    const selectedMonth = parseInt(monthSelect.value);
+	
+	    // Date 객체를 생성할 때 day는 1로 설정 (1일로 설정)
+	    const selectedDate = new Date(selectedYear, selectedMonth - 1, 1); // month는 0부터 시작하므로 1을 빼줍니다.
+	
+	    // Date 객체를 "yyyy-MM-dd" 형식으로 업데이트
+	    v_regDate.value = selectedDate.getFullYear() + "-" + (selectedDate.getMonth() + 1).toString().padStart(2, '0') + "-01"; // "YYYY-MM-DD" 형식으로 설정
+	
+	    // 선택된 년도와 월을 console에 출력 (확인용)
+	    console.log("선택된 날짜 (년도-월): " + v_regDate.value);
     }
 
     // 연도 선택 시 업데이트
@@ -296,8 +238,6 @@
 
     // 초기화 시 달력을 설정 (현재 연도, 월 기준)
     updateMonthOptions();
-    
-    console.log()
     
     window.onload = function() {
     // sessionStorage에서 'resultTrfType' 값을 가져옵니다.
@@ -366,118 +306,6 @@ document.getElementById("resultCO2").innerHTML += v_allCo2;
                 datasets: [{
                     data: [v_resultElec, v_resultGas, v_fuelCo2, v_resultGar]
                 }]
-            }
-        });
-
-        let electricCtx = document.getElementById('elecGraph');
-
-        /* 전기 */
-        new Chart(electricCtx, {
-            type: 'bar', // bar = 막대그래프는 항목별 수량, 수치를 비교할 때 적합하다.
-            data: {
-                labels: ['내 건물', '다른 건물'],
-                datasets: [{
-                    data: [v_resultElec, 10],
-					backgroundColor: "blue"
-                }]
-            },
-            options: {
-            	responsive: true, // 화면 크기에 따라 반응형 조정
-                maintainAspectRatio: false, // 비율을 유지하지 않음
-                plugins: {
-                    legend: {
-                        display: false // 범례 숨기기 (label 위쪽 부분)
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-        
-        /* 가스 */
-        let gasCtx = document.getElementById('gasGraph');
-
-        new Chart(gasCtx, {
-            type: 'bar', // bar = 막대그래프는 항목별 수량, 수치를 비교할 때 적합하다.
-            data: {
-                labels: ['내 건물', '다른 건물'],
-                datasets: [{
-                    data: [v_resultGas, 10],
-					backgroundColor: "red"
-                }]
-            },
-            options: {
-            	responsive: true, // 화면 크기에 따라 반응형 조정
-                maintainAspectRatio: false, // 비율을 유지하지 않음
-                plugins: {
-                    legend: {
-                        display: false // 범례 숨기기 (label 위쪽 부분)
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-        
-        /* 폐기물 */
-        let garbageCtx = document.getElementById('garbageGraph');
-
-        new Chart(garbageCtx, {
-            type: 'bar', // bar = 막대그래프는 항목별 수량, 수치를 비교할 때 적합하다.
-            data: {
-                labels: ['내 건물', '다른 건물'],
-                datasets: [{
-                    data: [v_resultGar, 10],
-					backgroundColor: "yellow"
-                }]
-            },
-            options: {
-            	responsive: true, // 화면 크기에 따라 반응형 조정
-                maintainAspectRatio: false, // 비율을 유지하지 않음
-                plugins: {
-                    legend: {
-                        display: false // 범례 숨기기 (label 위쪽 부분)
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-        
-        /* 교통 */
-        let trafficCtx = document.getElementById('trafficGraph');
-
-        new Chart(trafficCtx, {
-            type: 'bar', // bar = 막대그래프는 항목별 수량, 수치를 비교할 때 적합하다.
-            data: {
-                labels: ['내 건물', '다른 건물'],
-                datasets: [{
-                    data: [v_resultTrf, 10],
-					backgroundColor: "purple"
-                }]
-            },
-            options: {
-            	responsive: true, // 화면 크기에 따라 반응형 조정
-                maintainAspectRatio: false, // 비율을 유지하지 않음
-                plugins: {
-                    legend: {
-                        display: false // 범례 숨기기 (label 위쪽 부분)
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
             }
         });
     </script>
