@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.codingbamboo.finalproject.building.dao.IBuildingDAO">
+	<select id="selectAllBuildingList" resultType="BuildingDTO">
+		SELECT
+			building_no,
+			building_address_lot,
+			building_address_road,
+			building_area,
+			building_latitude,
+			building_longitude
+		FROM
+			building_info
+	</select>
+	
+	<select id="selectBEUList" parameterType="int" resultType="BEUDTO">
+		SELECT
+			beu_no,
+			building_no,
+			beu_month,
+			beu_electric
+		FROM
+			building_energy_usage
+		WHERE
+			building_no = #{buildingNo}
+	</select>
+</mapper>
