@@ -4,69 +4,69 @@
 
 <style>
 .footer {
-	width: 100%;
+    width: 100% !important;
 }
 
 .footer-container {
-	width: 100%;
-	height: 20vh;
+    width: 100% !important;
+    height: 20vh !important;
 }
 
 .footer-box {
-	width: 55%;
-	justify-content: center;
-	margin: 0px;
-	padding: 0px;
-	columns: 0;
-	flex-direction: column;
-	font-size: 1vw;
+    width: 55% !important;
+    justify-content: center !important;
+    margin: 0px !important;
+    padding: 0px !important;
+    columns: 0 !important;
+    flex-direction: column !important;
+    font-size: 1vw !important;
 }
 
 .dropdown-menu {
-	text-transform: translate(100px, 100px);
+    text-transform: translate(100px, 100px) !important;
 }
 
 .main-img-box {
-	width: 25%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+    width: 25% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
 }
 
 .btn-find {
-	width: 20%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+    width: 20% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
 }
 
 .tags {
-	display: flex;
-	justify-content: center;
+    display: flex !important;
+    justify-content: center !important;
 }
 
 .line {
-	border: 0.5px solid #DDDDDD;
+    border: 0.5px solid #DDDDDD !important;
 }
 
 .btn-success {
-	width: 13vw;
-	font-size: 1vw;
+    width: 13vw !important;
+    font-size: 1vw !important;
 }
 
 .detail2 {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-decoration: none;
-	font-size: 0.9vw;
-	color: black;
-	margin-top: 0.5vw;
-	margin-bottom: 0.5vw;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-decoration: none !important;
+    font-size: 0.9vw !important;
+    color: black !important;
+    margin-top: 0.5vw !important;
+    margin-bottom: 0.5vw !important;
 }
 
 .dropdown-menu {
-	width: 13vw;
+    width: 13vw !important;
 }
 </style>
 <!-- Footer-->

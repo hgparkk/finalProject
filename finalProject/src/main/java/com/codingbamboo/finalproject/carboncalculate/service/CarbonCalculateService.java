@@ -32,10 +32,4 @@ public class CarbonCalculateService {
 		List<CarbonCalculateDTO> result = dao.getCarbonCalList();
 		return result;
 	}
-	
-	// 임시
-	// 연도와 월에 해당하는 데이터를 가져오는 메서드
-    public List<CarbonCalculateDTO> getCarbonDataByMonth(int year, int month) {
-        return dao.getCarbonDataByMonth(year, month);
-    }
 }
