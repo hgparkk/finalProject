@@ -100,7 +100,7 @@
 }
 
 .login-box {
-	width: 13.5%;
+	width: 15%;
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
@@ -158,43 +158,91 @@
 
 	<nav class="navbar p-0">
 		<div class="d-flex top-container">
-			<div class="img-box d-flex align-items-center justify-content-center">
-				<a
-					class="nav-link main d-flex align-items-center justify-content-center"
-					href="${pageContext.request.contextPath }"> <img
-					src="image/favicon.ico"> Coding Bamboo
-				</a>
-			</div>
+			<c:if test="${sessionScope.login.userIsmaster != 1}">
+				<div
+					class="img-box d-flex align-items-center justify-content-center">
+					<a
+						class="nav-link main d-flex align-items-center justify-content-center"
+						href="${pageContext.request.contextPath }"> <img
+						src="image/favicon.ico"> Coding Bamboo
+					</a>
+				</div>
+			</c:if>
+			<c:if test="${sessionScope.login.userIsmaster == 1}">
+				<div
+					class="img-box d-flex align-items-center justify-content-center">
+					<a
+						class="nav-link main d-flex align-items-center justify-content-center"
+						href="${pageContext.request.contextPath }/adminHomeView"> <img
+						src="image/favicon.ico"> Coding Bamboo
+					</a>
+				</div>
+			</c:if>
 
 			<div class="d-flex main-box">
-
-				<!-- 탄소중립 알려드려요 드롭다운 -->
-				<div class="dropdown-body">
-					<a class="aTag" href="">탄소중립 알려드려요</a>
-					<div class="dropdown-select">
-						<a class="detail"
-							href="${pageContext.request.contextPath}/lowCarbonPracticeView">탄소중립
-							생활 실천 소개</a> <a class="detail" href="#">탄소저감기술 연구동향</a>
+				<c:if test="${sessionScope.login.userIsmaster != 1}">
+					<!-- 탄소중립 알려드려요 드롭다운 -->
+					<div class="dropdown-body">
+						<a class="aTag" href="">탄소중립 알려드려요</a>
+						<div class="dropdown-select">
+							<a class="detail"
+								href="${pageContext.request.contextPath}/lowCarbonPracticeView">탄소중립
+								생활 실천 소개</a> <a class="detail" href="#">탄소저감기술 연구동향</a>
+						</div>
 					</div>
-				</div>
 
-				<!-- 소통공간 드롭다운 -->
-				<div class="dropdown-body">
-					<a class="aTag">소통공간</a>
-					<div class="dropdown-select">
-						<c:if test="${sessionScope.login.userIsmaster != 1}">
-							<a class="detail" href="#">건의하기</a>
-						</c:if>
-						<c:if test="${sessionScope.login.userIsmaster == 1}">
-							<a class="detail" href="#">건의사항 목록</a>
-						</c:if>
-						<a class="detail" href="#">공지사항</a>
+					<!-- 탄소중립 참여해요 드롭다운 -->
+					<div class="dropdown-body">
+						<a class="aTag" href="">탄소중립 참여해요</a>
+						<div class="dropdown-select">
+							<a class="detail"
+								href="${pageContext.request.contextPath}/campaignView">캠페인</a>
+						</div>
 					</div>
-				</div>
 
-				<a class="nav-link co2"
-					href="${pageContext.request.contextPath }/carbonCalView">탄소발자국
-					계산</a> <a class="nav-link co2" href="#">태양광 발전 예측 지도</a>
+					<!-- 소통공간 드롭다운 -->
+					<div class="dropdown-body">
+						<a class="aTag">소통공간</a>
+						<div class="dropdown-select">
+							<a class="detail" href="#">건의하기</a> <a class="detail" href="#">공지사항</a>
+						</div>
+					</div>
+
+					<a class="nav-link co2"
+						href="${pageContext.request.contextPath }/carbonCalView">탄소발자국
+						계산</a>
+					<a class="nav-link co2" href="#">태양광 발전 예측 지도</a>
+				</c:if>
+				<c:if
+					test="${sessionScope.login != null && sessionScope.login.userIsmaster == 1}">
+					<!-- 탄소중립 알려드려요 드롭다운 -->
+					<div class="dropdown-body">
+						<a class="aTag" href="">탄소중립 알려드려요</a>
+						<div class="dropdown-select">
+							<a class="detail" href="#">탄소저감기술 연구동향</a>
+						</div>
+					</div>
+
+					<!-- 탄소중립 참여해요 드롭다운 -->
+					<div class="dropdown-body">
+						<a class="aTag" href="">탄소중립 참여해요</a>
+						<div class="dropdown-select">
+							<a class="detail"
+								href="${pageContext.request.contextPath}/campaignView">캠페인</a>
+						</div>
+					</div>
+
+					<!-- 소통공간 드롭다운 -->
+					<div class="dropdown-body">
+						<a class="aTag">소통공간</a>
+						<div class="dropdown-select">
+							<a class="detail"
+								href="${pageContext.request.contextPath}/adminSuggestionsView">건의사항
+								목록</a> <a class="detail" href="#">공지사항</a>
+						</div>
+					</div>
+				</c:if>
+
 			</div>
 
 			<!-- 로그인 부분 -->
@@ -203,15 +251,14 @@
 					<a class="nav-link login"
 						href="${pageContext.request.contextPath }/loginView">로그인</a>
 				</c:if>
-				<c:if
-					test="${sessionScope.login != null && sessionScope.login.userIsmaster == 1}">
-					<a class="aTag">${sessionScope.login.userId }</a>
+				<c:if test="${sessionScope.login.userIsmaster == 1}">
+					<a class="aTag">${sessionScope.login.userName }</a>
 					<a class="aTag" href="${pageContext.request.contextPath }/logoutDo">로그아웃</a>
 				</c:if>
 				<c:if
 					test="${sessionScope.login != null && sessionScope.login.userIsmaster != 1}">
 					<a class="aTag"
-						href="${pageContext.request.contextPath }/myPageUserInfoView">${sessionScope.login.userId }</a>
+						href="${pageContext.request.contextPath }/myPageMyCarbonResultView">${sessionScope.login.userName }</a>
 					<a class="aTag" href="${pageContext.request.contextPath }/logoutDo">로그아웃</a>
 				</c:if>
 			</div>
