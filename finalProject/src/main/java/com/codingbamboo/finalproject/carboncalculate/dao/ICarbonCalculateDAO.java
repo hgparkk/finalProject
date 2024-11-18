@@ -19,9 +19,4 @@ public interface ICarbonCalculateDAO {
 	
 	// 탄소발자국 결과 목록 조회
 	List<CarbonCalculateDTO> getCarbonCalList();
-	
-	//임시
-	// 연도와 월에 맞는 데이터를 조회하는 메서드
-    @Select("SELECT * FROM carbon_result WHERE YEAR(result_date) = #{year} AND MONTH(result_date) = #{month}")
-    List<CarbonCalculateDTO> getCarbonDataByMonth(@Param("year") int year, @Param("month") int month);
 }

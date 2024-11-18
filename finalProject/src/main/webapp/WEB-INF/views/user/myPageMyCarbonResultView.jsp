@@ -26,6 +26,7 @@ request.setAttribute("currentYear", Year.now().getValue());
 }
 
 .custom-select-dropdown {
+	background-color:white;
 	display: none;
 	position: absolute;
 	top: 100%;
@@ -61,8 +62,10 @@ request.setAttribute("currentYear", Year.now().getValue());
 				<div style="margin-top: 100px; width: 90%;">
 					<div class="d-flex justify-content-center" style="margin-bottom: 50px;">
 						<div class="d-flex align-items-center">
-							<span class="fs-1 me-3">&laquo;</span>
-							<a href="<c:url value="/myPageMyCarbonResultView?year=${year-1}" />" class="fs-3 me-3 text-secondary text-center local-text-btn">${year-1}</a>
+							<c:if test="${year != 2000}">
+								<a href="<c:url value="/myPageMyCarbonResultView?year=${year-1}" />" class="fs-1 me-3 text-black link-underline link-underline-opacity-0">&laquo;</a>
+								<a href="<c:url value="/myPageMyCarbonResultView?year=${year-1}" />" class="fs-3 me-3 text-secondary text-center local-text-btn">${year-1}</a>
+							</c:if>
 							<div class="custom-select-wrapper">
 								<span class="custom-select-trigger fs-1">${year}</span>
 								<select class="custom-select d-none">
@@ -78,9 +81,9 @@ request.setAttribute("currentYear", Year.now().getValue());
 							</div>
 							<c:if test="${year != currentYear}">
 								<a href="<c:url value="/myPageMyCarbonResultView?year=${year+1}" />" class="fs-3 ms-3 text-secondary text-center local-text-btn">${year+1}</a>
+								<a href="<c:url value="/myPageMyCarbonResultView?year=${year+1}" />" class="fs-1 ms-3 text-black link-underline link-underline-opacity-0">&raquo;</a>
 							</c:if>
 							<input type="hidden" value="${year}">
-							<span class="fs-1 ms-3">&raquo;</span>
 						</div>
 					</div>
 					<div class="accordion accordion-flush" id="myCalbonCalAccordion">

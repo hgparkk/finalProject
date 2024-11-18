@@ -64,40 +64,4 @@ public class CarbonCalculateController {
 
 		return "alert";
 	}
-	
-	// 나의 탄소발자국 페이지 이동
-	@RequestMapping("/myCarbonStepView")
-	public String myCarbonStepView(HttpSession session, Date date) {
-		com.codingbamboo.finalproject.user.dto.UserDTO login = (com.codingbamboo.finalproject.user.dto.UserDTO)session.getAttribute("login");
-		
-		System.out.println(login);
-		
-		if(login == null) {
-			return "redirect:/loginView";
-		}
-		
-		List<CarbonCalculateDTO> getCarbonCalList = carbonCalculateService.getCarbonCalList();
-		
-		CarbonCalculateDTO carbonCalculate = carbonCalculateService.getCal(date);
-		
-		return "user/myCarbonStepView";
-	}
-	
-	// 임시
-	// 연도와 월에 해당하는 데이터를 가져오는 메서드
-	@ResponseBody
-    @RequestMapping("/carbonCal/getCarbonData")
-    public ResponseEntity<Map<String, Object>> getCarbonData(@RequestParam("year") int year, @RequestParam("month") int month) {
-        // DB에서 해당 연도와 월에 맞는 탄소발자국 계산 결과를 가져오기
-        List<CarbonCalculateDTO> results = carbonCalculateService.getCarbonDataByMonth(year, month);
-
-        // 데이터 가공 (예: 총 배출량 계산 등)
-        Map<String, Object> response = new HashMap<>();
-        response.put("results", results);
-
-        // 필요한 데이터 추가로 응답 (예: 그래프에 필요한 값 등)
-        // 예시: response.put("totalCo2", calculateTotalCo2(results));
-
-        return ResponseEntity.ok(response);  // JSON 형식으로 응답
-    }
 }

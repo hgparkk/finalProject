@@ -6,7 +6,9 @@
 	</settings>
 	<typeAliases>
 		<typeAlias type="com.codingbamboo.finalproject.user.dto.UserDTO" alias="UserDTO"/>
-		<typeAlias type="com.codingbamboo.finalproject.carboncalculate.dto.CarbonCalculateDTO" alias="CarbonCalculate"/>
+		<typeAlias type="com.codingbamboo.finalproject.carboncalculate.dto.CarbonCalculateDTO" alias="CarbonCalculateDTO"/>
 		<typeAlias type="com.codingbamboo.finalproject.suggestions.dto.AdminSuggestionsDTO" alias="AdminSuggestionsDTO"/>
+		<typeAlias type="com.codingbamboo.finalproject.building.dto.BuildingDTO" alias="BuildingDTO" />
+		<typeAlias type="com.codingbamboo.finalproject.building.dto.BEUDTO" alias="BEUDTO" />
 	</typeAliases>
 </configuration>

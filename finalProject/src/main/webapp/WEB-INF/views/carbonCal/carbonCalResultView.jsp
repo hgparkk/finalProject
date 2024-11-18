@@ -164,14 +164,14 @@
 						<div>
 							<h2>당신의 탄소배출량 결과</h2>
 							<c:if test="${sessionScope.login.userId != null }">
-								<p>${sessionScope.login.userId }님의이산화탄소(CO₂)발생량통계입니다.</p>
+								<p>${sessionScope.login.userName }님의 이산화탄소(CO₂)발생량통계입니다.</p>
 							</c:if>
 							<c:if test="${sessionScope.login.userId == null }">
 								<p>나의 이산화탄소(CO₂) 발생량 통계</p>
 							</c:if>
 						</div>
 						<div>
-							<span>1님 가정은 이산화탄소 배출량은 총</span> <span id="resultCO2"></span> <span>kg
+							<span>${sessionScope.login.userName }님 가정의 이산화탄소 배출량은 총</span> <span id="resultCO2"></span> <span>kg
 								입니다. 왼쪽의 그래프를 보면 어느 부분에서 이산화탄소가 가장 많이 발생하고 있는지 확인할 수 있습니다.</span>
 						</div>
 					</div>
