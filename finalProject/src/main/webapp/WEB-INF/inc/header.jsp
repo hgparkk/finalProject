@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!-- Favicon-->
-<link rel="icon" type="image/png" sizes="16x16" href="image/favicon.ico"/>
+<link rel="icon" type="image/png" sizes="16x16" href="image/favicon.ico" />
 <!-- Font Awesome icons (free version)-->
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 
@@ -22,3 +22,7 @@
 
 <!-- commonCss -->
 <link href="css/commonStyle.css" rel="stylesheet" type="text/css">
+
+<!-- naver map api -->
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=s4hq14hort"></script>
+<script type="text/javascript" src="js/MarkerClustering.js"></script>
