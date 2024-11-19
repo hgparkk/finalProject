@@ -6,22 +6,23 @@
 	<!-- 공지사항 목록 조회 -->
 	<select id="getNoticeList" parameterType="map"
 		resultType="com.codingbamboo.finalproject.notice.dto.NoticeDTO">
+		SELECT *
+		FROM (
 		SELECT
 		notice_no AS noticeNo,
 		attach_no AS attachNo,
-		notice_title AS
-		noticeTitle,
+		notice_title AS noticeTitle,
 		notice_content AS noticeContent,
-		notice_date AS noticeDate
+		notice_date AS noticeDate,
+		ROWNUM AS rn
 		FROM notice
 		WHERE 1=1
 		<if test="searchKeyword != null and searchKeyword != ''">
 			AND notice_title LIKE '%' || #{searchKeyword} || '%'
 		</if>
 		ORDER BY notice_date DESC
-		<if test="limit != null">
-			FETCH FIRST #{limit} ROWS ONLY
-		</if>
+		)
+		WHERE rn BETWEEN #{offset} + 1 AND #{offset} + #{limit}
 	</select>
 
 
@@ -65,10 +66,11 @@
 
 
 
-	
-	
+
+
 	<!-- 공지사항 미리보기 -->
-    <select id="getNoticePreviewList" resultType="com.codingbamboo.finalproject.notice.dto.NoticeDTO">
+	<select id="getNoticePreviewList"
+		resultType="com.codingbamboo.finalproject.notice.dto.NoticeDTO">
         <![CDATA[
             SELECT
                 notice_no AS noticeNo,
@@ -84,7 +86,17 @@
             )
             WHERE ROWNUM <= 3
         ]]>
-    </select>
-	
+	</select>
+
+	<select id="selectNoticeCount" parameterType="map"
+		resultType="int">
+		SELECT COUNT(*)
+		FROM notice
+		WHERE 1=1
+		<if test="searchKeyword != null and searchKeyword != ''">
+			AND notice_title LIKE '%' || #{searchKeyword} || '%'
+		</if>
+	</select>
+
 
 </mapper>

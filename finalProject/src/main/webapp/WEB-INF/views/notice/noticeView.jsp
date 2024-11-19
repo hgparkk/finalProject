@@ -8,6 +8,9 @@
 <meta charset="UTF-8">
 <title>Coding Bamboo - 공지사항</title>
 <%@ include file="/WEB-INF/inc/header.jsp"%>
+<c:out value="${currentPage}" />
+<c:out value="${totalPages}" />
+<c:out value="${size}" />
 <style>
 html, body {
 	min-height: 100%;
@@ -185,7 +188,6 @@ html, body {
 	<div class="title-box">
 		<div class="carbonCal-title w-50">
 			<h1 style="color: green; font-weight: bold;">공지사항</h1>
-			<span style="font-size: 0.7vw;">Coding Bamboo Notice</span>
 		</div>
 	</div>
 
@@ -225,20 +227,28 @@ html, body {
 	</div>
 
 	<!-- 페이징 -->
-	<div class="pagination">
-		<c:if test="${totalPages > 1}">
+	<div class="pagination mb-5">
+		<c:if test="${totalPages > 0}">
 			<ul>
+				<!-- 이전 버튼 -->
 				<c:if test="${currentPage > 1}">
 					<li><a
-						href="?page=${currentPage - 1}&searchKeyword=${searchKeyword}">이전</a></li>
+						href="?page=${currentPage - 1}&size=${size}&searchKeyword=${searchKeyword}">이전</a>
+					</li>
 				</c:if>
+
+				<!-- 페이지 번호 -->
 				<c:forEach var="i" begin="1" end="${totalPages}">
-					<li><a href="?page=${i}&searchKeyword=${searchKeyword}"
-						class="${i == currentPage ? 'active' : ''}"> ${i} </a></li>
+					<li><a
+						href="?page=${i}&size=${size}&searchKeyword=${searchKeyword}"
+						class="${i == currentPage ? 'active' : ''}">${i}</a></li>
 				</c:forEach>
+
+				<!-- 다음 버튼 -->
 				<c:if test="${currentPage < totalPages}">
 					<li><a
-						href="?page=${currentPage + 1}&searchKeyword=${searchKeyword}">다음</a></li>
+						href="?page=${currentPage + 1}&size=${size}&searchKeyword=${searchKeyword}">다음</a>
+					</li>
 				</c:if>
 			</ul>
 		</c:if>

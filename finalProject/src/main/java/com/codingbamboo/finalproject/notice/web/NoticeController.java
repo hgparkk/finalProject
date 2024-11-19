@@ -34,27 +34,36 @@ public class NoticeController {
         // 세션에서 로그인 정보 가져오기
         UserDTO loginUser = (UserDTO) session.getAttribute("login");
 
-        // 검색 조건 처리
+        // 검색 키워드 초기화 (NULL 처리)
+        if (searchKeyword == null || searchKeyword.trim().isEmpty()) {
+            searchKeyword = null; // NULL로 설정해 SQL에서 전체 검색 가능
+        }
+
+        // 페이지와 사이즈 검증
+        if (page < 1) page = 1; // 최소 페이지는 1
+        if (size < 1) size = 10; // 최소 페이지 크기 기본값 설정
+
+        // 검색 조건 및 페이징 처리 파라미터 설정
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("searchKeyword", searchKeyword);
         paramMap.put("offset", (page - 1) * size); // 시작점 계산
-        paramMap.put("limit", size); // 페이지 크기
+        paramMap.put("limit", size); // 페이지 크기 설정
 
         // 공지사항 목록 조회
         List<NoticeDTO> noticeList = noticeService.getNoticeList(paramMap);
 
-        // 전체 공지사항 개수 및 페이지 계산
-        int totalNotices = noticeService.getNoticeCount(paramMap); // 공지사항 총 개수
+        // 전체 공지사항 개수 조회 및 페이지 수 계산
+        int totalNotices = noticeService.getNoticeCount(paramMap);
         int totalPages = (int) Math.ceil((double) totalNotices / size); // 전체 페이지 수 계산
 
         // 데이터 모델에 추가
-        model.addAttribute("noticeList", noticeList);
-        model.addAttribute("searchKeyword", searchKeyword);
-        model.addAttribute("currentPage", page);
-        model.addAttribute("totalPages", totalPages);
-        model.addAttribute("size", size);
+        model.addAttribute("noticeList", noticeList); // 공지사항 리스트
+        model.addAttribute("searchKeyword", searchKeyword); // 검색 키워드
+        model.addAttribute("currentPage", page); // 현재 페이지
+        model.addAttribute("totalPages", totalPages); // 전체 페이지 수
+        model.addAttribute("size", size); // 페이지 크기
 
-        // ismaster 정보 추가 (loginUser가 null인 경우 기본값 설정)
+        // 로그인 여부 및 권한 추가
         model.addAttribute("ismaster", loginUser != null ? loginUser.getUserIsmaster() : 0);
 
         return "notice/noticeView";
