@@ -5,9 +5,5 @@ import org.springframework.stereotype.Service;
 
 import com.codingbamboo.finalproject.usersg.dao.IUserSgDAO;
 
-@Service
 public class UserSgService {
-	
-	@Autowired
-	IUserSgDAO dao;
 }

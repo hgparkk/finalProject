@@ -125,7 +125,7 @@
 }
 
 .input {
-	width: 18vw;
+	width: 16vw;
 	height: 2.5vw;
 	padding: 0.4vw;
 	text-align: right;
@@ -236,7 +236,7 @@
 #submitForm{
 	width: 100%;
 	text-align: right;
-	height: 3vw;
+	height: 2vw;
 }
 
 #submitBtn {

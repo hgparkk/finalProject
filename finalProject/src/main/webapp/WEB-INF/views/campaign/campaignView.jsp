@@ -200,60 +200,13 @@ a>span {
 								</span>
 							</span>
 						</a></li>
-						<li id="ttitle"></li>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</section>
 
-	<h1>RSS Feed from Gihoo</h1>
-    <div id="rss-container"></div>
-
     <script>
-        // 서버에서 제공하는 프록시 URL
-        const proxyUrl = 'http://localhost:9009/rss-proxy';
-
-        // fetch를 사용하여 서버로부터 데이터를 요청
-        fetch(proxyUrl)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.text();
-            })
-            .then(data => {
-                // XML 데이터를 파싱
-                const parser = new DOMParser();
-                const xmlDoc = parser.parseFromString(data, 'application/xml');
-
-                // RSS 아이템 추출
-                const items = xmlDoc.getElementsByTagName('item');
-                const rssContainer = document.getElementById('rss-container');
-                
-                // 각 아이템을 화면에 출력
-                Array.from(items).forEach(item => {
-                    const title = item.getElementsByTagName('title')[0].textContent;
-                    const link = item.getElementsByTagName('link')[0].textContent;
-                    const description = item.getElementsByTagName('description')[0].textContent;
-
-                    // 새로운 HTML 요소 생성
-                    const rssItem = document.createElement('div');
-                    rssItem.classList.add('rss-item');
-                    
-                    rssItem.innerHTML = `
-                        <h3><a href="${link}" target="_blank">${title}</a></h3>
-                        <p>${description}</p>
-                    `;
-
-                    // 컨테이너에 추가
-                    rssContainer.appendChild(rssItem);
-                });
-            })
-            .catch(error => {
-                console.error('Error fetching RSS feed:', error);
-                document.getElementById('rss-container').innerHTML = 'Failed to load RSS feed.';
-            });
     </script>
 
 </body>

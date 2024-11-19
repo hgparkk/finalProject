@@ -99,8 +99,16 @@
 	color: green;
 }
 
+.aTag-not {
+	font-size: 1vw;
+	font-weight: bold;
+	color: black;
+	text-decoration: none;
+	padding: 0 1vw; /* 좌우 간격을 균등하게 추가 */
+}
+
 .login-box {
-	width: 15%;
+	width: 18%;
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
@@ -204,7 +212,7 @@
 					<div class="dropdown-body">
 						<a class="aTag">소통공간</a>
 						<div class="dropdown-select">
-							<a class="detail" href="#">건의하기</a> <a class="detail" href="#">공지사항</a>
+							<a class="detail" href="#">건의하기</a> <a class="detail" href="${pageContext.request.contextPath }/noticeView">공지사항</a>
 						</div>
 					</div>
 
@@ -252,13 +260,15 @@
 						href="${pageContext.request.contextPath }/loginView">로그인</a>
 				</c:if>
 				<c:if test="${sessionScope.login.userIsmaster == 1}">
-					<a class="aTag">${sessionScope.login.userName }</a>
+					<span class="aTag-not">${sessionScope.login.userName}</span>
+					<a class="aTag" href="${pageContext.request.contextPath }/adminHomeView">관리 메뉴</a>
 					<a class="aTag" href="${pageContext.request.contextPath }/logoutDo">로그아웃</a>
 				</c:if>
 				<c:if
 					test="${sessionScope.login != null && sessionScope.login.userIsmaster != 1}">
+					<span class="aTag-not">${sessionScope.login.userName}</span>
 					<a class="aTag"
-						href="${pageContext.request.contextPath }/myPageMyCarbonResultView">${sessionScope.login.userName }</a>
+						href="${pageContext.request.contextPath }/myPageMyCarbonResultView">마이페이지</a>
 					<a class="aTag" href="${pageContext.request.contextPath }/logoutDo">로그아웃</a>
 				</c:if>
 			</div>
