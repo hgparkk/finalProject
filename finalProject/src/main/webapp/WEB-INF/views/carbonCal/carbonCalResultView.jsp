@@ -364,7 +364,7 @@ document.getElementById("resultCO2").innerHTML += v_allCo2;
             data: {
                 labels: ['전기', '가스', '폐기물', '교통'],
                 datasets: [{
-                    data: [v_resultElec, v_resultGas, v_fuelCo2, v_resultGar]
+                    data: [v_resultElec, v_resultGas, v, v_resultGar]
                 }]
             }
         });

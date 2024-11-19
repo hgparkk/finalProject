@@ -1,5 +1,7 @@
 package com.codingbamboo.finalproject.campaign.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +14,15 @@ public class CampaignService {
 	@Autowired
 	ICampaignDAO dao;
 	
-	// Ä·ÆäÀÎ µî·Ï
+	// ìº í˜ì¸ ë“±ë¡
 	public int registCampaign(CampaignDTO campaign) {
 		int result = dao.registCampaign(campaign);
+		return result;
+	}
+	
+	// ìº í˜ì¸ ëª©ë¡ ì¡°íšŒ
+	public List<CampaignDTO> getCampaignList(){
+		List<CampaignDTO> result = dao.getCampaignList();
 		return result;
 	}
 }

@@ -58,6 +58,7 @@
 .dropdown-select {
 	width: var(- -dropdown-width);
 	opacity: 0;
+	visibility: hidden;
 	position: absolute;
 	left: 0;
 	top: 100%;
@@ -73,6 +74,7 @@
 
 .dropdown-body:hover>.dropdown-select {
 	opacity: 100%;
+	visibility: visible;
 }
 
 .co2 {
@@ -191,7 +193,7 @@
 				<c:if test="${sessionScope.login.userIsmaster != 1}">
 					<!-- 탄소중립 알려드려요 드롭다운 -->
 					<div class="dropdown-body">
-						<a class="aTag" href="">탄소중립 알려드려요</a>
+						<span class="aTag dropdown-text">탄소중립 알려드려요</span>
 						<div class="dropdown-select">
 							<a class="detail"
 								href="${pageContext.request.contextPath}/lowCarbonPracticeView">탄소중립
@@ -201,7 +203,7 @@
 
 					<!-- 탄소중립 참여해요 드롭다운 -->
 					<div class="dropdown-body">
-						<a class="aTag" href="">탄소중립 참여해요</a>
+						<span class="aTag dropdown-text">탄소중립 참여해요</span>
 						<div class="dropdown-select">
 							<a class="detail"
 								href="${pageContext.request.contextPath}/campaignView">캠페인</a>
@@ -210,7 +212,7 @@
 
 					<!-- 소통공간 드롭다운 -->
 					<div class="dropdown-body">
-						<a class="aTag">소통공간</a>
+						<span class="aTag dropdown-text">소통공간</span>
 						<div class="dropdown-select">
 							<a class="detail" href="#">건의하기</a> <a class="detail" href="${pageContext.request.contextPath }/noticeView">공지사항</a>
 						</div>
@@ -219,13 +221,13 @@
 					<a class="nav-link co2"
 						href="${pageContext.request.contextPath }/carbonCalView">탄소발자국
 						계산</a>
-					<a class="nav-link co2" href="#">태양광 발전 예측 지도</a>
+					<a class="nav-link co2" href="${pageContext.request.contextPath}/solarRadiationView">태양광 발전 예측 지도</a>
 				</c:if>
 				<c:if
 					test="${sessionScope.login != null && sessionScope.login.userIsmaster == 1}">
 					<!-- 탄소중립 알려드려요 드롭다운 -->
 					<div class="dropdown-body">
-						<a class="aTag" href="">탄소중립 알려드려요</a>
+						<span class="aTag dropdown-text">탄소중립 알려드려요</span>
 						<div class="dropdown-select">
 							<a class="detail" href="#">탄소저감기술 연구동향</a>
 						</div>
@@ -233,7 +235,7 @@
 
 					<!-- 탄소중립 참여해요 드롭다운 -->
 					<div class="dropdown-body">
-						<a class="aTag" href="">탄소중립 참여해요</a>
+						<span class="aTag dropdown-text">탄소중립 참여해요</span>
 						<div class="dropdown-select">
 							<a class="detail"
 								href="${pageContext.request.contextPath}/campaignView">캠페인</a>
@@ -242,11 +244,11 @@
 
 					<!-- 소통공간 드롭다운 -->
 					<div class="dropdown-body">
-						<a class="aTag">소통공간</a>
+						<span class="aTag dropdown-text">소통공간</span>
 						<div class="dropdown-select">
 							<a class="detail"
 								href="${pageContext.request.contextPath}/adminSuggestionsView">건의사항
-								목록</a> <a class="detail" href="#">공지사항</a>
+								목록</a> <a class="detail" href="${pageContext.request.contextPath }/noticeView">공지사항</a>
 						</div>
 					</div>
 				</c:if>

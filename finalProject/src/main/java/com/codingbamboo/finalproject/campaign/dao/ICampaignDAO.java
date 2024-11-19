@@ -1,11 +1,16 @@
 package com.codingbamboo.finalproject.campaign.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.codingbamboo.finalproject.campaign.dto.CampaignDTO;
 
 @Mapper
 public interface ICampaignDAO {
-	// Ä·ÆäÀÎ µî·ÏÇÏ±â
+	// ìº í˜ì¸ ë“±ë¡
 	int registCampaign(CampaignDTO campaign);
+	
+	// ìº í˜ì¸ ëª©ë¡ ì¡°íšŒ
+	List<CampaignDTO> getCampaignList();
 }

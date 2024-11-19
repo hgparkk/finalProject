@@ -4,26 +4,28 @@ import java.sql.Date;
 
 public class CampaignDTO {
 	private int campaignNo;
-	private int attachNo;
+	private String campaignImg;
 	private String campaignTitle;
-	private Date campaingDate;
+	private Date campaignDate;
 	private String campaignUrl;
 
 	public CampaignDTO() {
 	}
 
-	public CampaignDTO(int campaignNo, int attachNo, String campaignTitle, Date campaingDate, String campaignUrl) {
+	public CampaignDTO(int campaignNo, String campaignImg, String campaignTitle, Date campaignDate,
+			String campaignUrl) {
+		super();
 		this.campaignNo = campaignNo;
-		this.attachNo = attachNo;
+		this.campaignImg = campaignImg;
 		this.campaignTitle = campaignTitle;
-		this.campaingDate = campaingDate;
+		this.campaignDate = campaignDate;
 		this.campaignUrl = campaignUrl;
 	}
 
 	@Override
 	public String toString() {
-		return "CampaignDTO [campaignNo=" + campaignNo + ", attachNo=" + attachNo + ", campaignTitle=" + campaignTitle
-				+ ", campaingDate=" + campaingDate + ", campaignUrl=" + campaignUrl + "]";
+		return "CampaignDTO [campaignNo=" + campaignNo + ", campaignImg=" + campaignImg + ", campaignTitle="
+				+ campaignTitle + ", campaignDate=" + campaignDate + ", campaignUrl=" + campaignUrl + "]";
 	}
 
 	public int getCampaignNo() {
@@ -34,12 +36,12 @@ public class CampaignDTO {
 		this.campaignNo = campaignNo;
 	}
 
-	public int getAttachNo() {
-		return attachNo;
+	public String getCampaignImg() {
+		return campaignImg;
 	}
 
-	public void setAttachNo(int attachNo) {
-		this.attachNo = attachNo;
+	public void setCampaignImg(String campaignImg) {
+		this.campaignImg = campaignImg;
 	}
 
 	public String getCampaignTitle() {
@@ -50,12 +52,12 @@ public class CampaignDTO {
 		this.campaignTitle = campaignTitle;
 	}
 
-	public Date getCampaingDate() {
-		return campaingDate;
+	public Date getCampaignDate() {
+		return campaignDate;
 	}
 
-	public void setCampaingDate(Date campaingDate) {
-		this.campaingDate = campaingDate;
+	public void setCampaignDate(Date campaignDate) {
+		this.campaignDate = campaignDate;
 	}
 
 	public String getCampaignUrl() {
@@ -65,5 +67,8 @@ public class CampaignDTO {
 	public void setCampaignUrl(String campaignUrl) {
 		this.campaignUrl = campaignUrl;
 	}
+
+	
+
 
 }

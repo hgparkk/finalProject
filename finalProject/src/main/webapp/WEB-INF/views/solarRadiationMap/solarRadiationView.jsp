@@ -44,7 +44,6 @@
 	position: absolute;
 	z-index: 100;
 	width: 57%;
-	max-height: 200px;
 	overflow-y: auto;
 	max-height: 200px;
 }
@@ -60,6 +59,16 @@
 
 .selectDiv:hover {
 	background-color: #f0f0f0;
+}
+
+.result-text {
+	height: 28px;
+	line-height: 28px;
+}
+
+.result-input {
+	width: 150px;
+	height: 28px;
 }
 </style>
 </head>
@@ -88,9 +97,61 @@
 			</div>
 			<div class="position-relative" style="width: 1200px; height: 600px;">
 				<div class="position-absolute" id="map" style="width: 1200px; height: 600px; padding: 0, margin:0;"></div>
-				<div id="solarRadiationResult" class="position-absolute bg-white overflow-hidden" style="z-index: 101; transition-duration: 0.4s; width: 0px; height: 600px; right: 0px;">
-					<div class="bg-primary d-flex align-items-center" style="height: 50px; width: 300px;">
+				<div id="solarRadiationResult" class="position-absolute bg-white overflow-x-hidden overflow-y-scroll" style="z-index: 101; transition-duration: 0.4s; width: 0px; height: 600px; right: 0px;">
+					<div class="bg-primary d-flex align-items-center" style="height: 50px; width: 400px;">
 						<span class="fs-4 fw-bold text-white ms-2">태양광 발전량 모의 예측</span>
+					</div>
+					<div class="d-flex" style="width: 400px;">
+						<div class="d-flex flex-column">
+							<span class="ms-4 mt-3 result-text">건축 면적</span>
+							<span class="ms-4 mt-3 result-text">전기 사용량</span>
+							<span class="ms-4 mt-3 result-text">
+								CO<sub>2</sub> 배출량
+							</span>
+						</div>
+						<div class="d-flex flex-column">
+							<span class="ms-4 mt-3 result-text">&nbsp;‏‎</span>
+							<span class="ms-4 mt-3 result-text">약</span>
+							<span class="ms-4 mt-3 result-text">약</span>
+						</div>
+						<div class="d-flex flex-column">
+							<span class="mt-3 ms-1 result-text">
+								<input id="buildingAreaInput" class="result-input" readonly>
+							</span>
+							<span class="mt-3 ms-1 result-text">
+								<input id="buildingElectricUsage" class="result-input" readonly>
+							</span>
+							<span class="mt-3 ms-1 result-text">
+								<input id="buildingCO2Emission" class="result-input" readonly>
+							</span>
+						</div>
+						<div class="d-flex flex-column">
+							<span class="mt-3 ms-1 result-text">㎡</span>
+							<span class="mt-3 ms-1 result-text">kWh</span>
+							<span class="mt-3 ms-1 result-text">kgCO2eq</span>
+						</div>
+					</div>
+					<div style="margin-top: 50px; width: 400px;">
+						<span class="mb-3">이 건물에서 배출된 이상화탄소 배출량은</span>
+						<img src="assets/car.png" style="width: 380px;">
+						<span class="mt-3">
+							승용차 1대가
+							<span id="carCarbonEmission"></span>
+							km 이동 할 때 배출하는 이산화 탄소 배출량과 동일합니다.
+						</span>
+					</div>
+					<div class="d-flex" style="margin-top: 50px; width: 400px;">
+						<div class="d-flex flex-column">
+							<span class="ms-4 mt-3 result-text">연 합계 전천 일사량</span>
+						</div>
+						<div class="d-flex flex-column">
+							<span class="mt-3 ms-1 result-text">
+								<input id="totalSolarRadiation" class="result-input" readonly>
+							</span>
+						</div>
+						<div class="d-flex flex-column">
+							<span class="mt-3 ms-1 result-text">kWh/㎡</span>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -196,7 +257,7 @@
 					solarRadiationResult.style.width = "0px"
 					infoWindow.close();
 				}else{
-					solarRadiationResult.style.width = "300px"
+					solarRadiationResult.style.width = "400px"
 					map.panTo(marker.position)
 					infoWindow.open(map,marker)
 					$.ajax({
@@ -222,8 +283,8 @@
 
 		// 입력 이벤트 리스너
 		v_searchInput.addEventListener("input", ()=> {
-  			const value = this.value;
-  			const matchedItems = dataList.filter(item => 
+  			const value = v_searchInput.value
+  			const matchedItems = dataList.filter(item =>
     			item.toLowerCase().includes(value)
   			)
   
@@ -234,33 +295,32 @@
 		function displayResults(results) {
 			let content = ""
 	  		for(let i = 0; i < results.length; i++){
-	  			content += '<div class="selectDiv" onclick="gotoSearchList('+results[i]+')">'+results[i]+'</div>'
+	  			content += '<div class="selectDiv" onclick="gotoSearchList(\''+results[i]+'\')">'+results[i]+'</div>'
 	  		}
 			if(results.length != 0){
 				autocomplete.classList.add("searchedResultShow")
+			}else{
+				autocomplete.classList.remove("searchedResultShow")
 			}
 	  		autocomplete.innerHTML = content
 		}
 
 		// 검색 결과로 이동
 		function gotoSearchList(searchWord){
-			let seq
+			let seq = -1
 			
 			for(let i=0; i<data.length; i++){
 				if(searchWord == data[i].buildingAddressRoad || searchWord == data[i].buildingAddressLot){
 					seq = i
-					console.log(seq)
 					break
 				}
 			}
-		
-			v_searchInput.value = ""
-				const event = new InputEvent('input', {
-		  			bubbles: true,
-		  			cancelable: true,
-				});
-				v_searchInput.dispatchEvent(event);
-			getClickHandler(i)
+			v_searchInput.value=""
+			displayResults("")
+			map.setZoom(20)
+			setTimeout(()=>{
+				naver.maps.Event.trigger(markers[seq],"click")
+			},100)
 		}
 	</script>
 </body>
