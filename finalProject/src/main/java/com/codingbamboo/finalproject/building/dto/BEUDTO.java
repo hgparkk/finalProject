@@ -1,18 +1,18 @@
 package com.codingbamboo.finalproject.building.dto;
 
-import oracle.sql.DATE;
+import java.util.Date;
 
 public class BEUDTO {
 	private int beuNo;
 	private int buildingNo;
-	private DATE beuMonth;
+	private Date beuMonth;
 	private int beuElectric;
 	
 	public BEUDTO() {
 		super();
 	}
 
-	public BEUDTO(int beuNo, int buildingNo, DATE beuMonth, int beuElectric) {
+	public BEUDTO(int beuNo, int buildingNo, Date beuMonth, int beuElectric) {
 		super();
 		this.beuNo = beuNo;
 		this.buildingNo = buildingNo;
@@ -36,11 +36,11 @@ public class BEUDTO {
 		this.buildingNo = buildingNo;
 	}
 
-	public DATE getBeuMonth() {
+	public Date getBeuMonth() {
 		return beuMonth;
 	}
 
-	public void setBeuMonth(DATE beuMonth) {
+	public void setBeuMonth(Date beuMonth) {
 		this.beuMonth = beuMonth;
 	}
 
