@@ -102,9 +102,8 @@ a {
 
 a>span {
 	text-decoration: none;
-	font-size: 1vw;
 	color: black;
-	font-size: 1vw;
+	font-size: 0.9vw;
 }
 </style>
 <!-- header -->
@@ -156,58 +155,92 @@ a>span {
 				</div>
 				<div class="campaign-list">
 					<ul class="campaign-list-ul d-flex justify-content-between">
-						<li class="campaign"><a class="d-flex flex-column"
-							href="https://www.gihoo.or.kr/gallery.es?mid=a10302000000&bid=0001&b_list=9&act=view&list_no=766&nPage=1&vlist_no_npage=0&keyField=&orderby=&cid=0022">
-								<i> <img alt=""
-									src="https://www.gihoo.or.kr/galleryThumbView.es?bid=0001&list_no=766">
-							</i> <span class="campaign-explain"> <strong>(11월
-										챌린지) 이달의 실천수칙</strong> <br> <span> <strong>작성일</strong>
-										2024/10/15
-								</span> <span> <strong>조회수</strong> 1473
+						<c:forEach items="${keyGetCampaignList }" var="campaignDTO">
+							<li class="campaign"><a class="d-flex flex-column"
+								href="${campaignDTO.campaignUrl }"> <i> <img
+										src="${campaignDTO.campaignImg }">
+								</i> <span class="campaign-explain"> <strong>${campaignDTO.campaignTitle }</strong>
+										<br> <span> <strong>작성일</strong>
+											${campaignDTO.campaignDate }
+									</span>
 								</span>
-							</span>
-						</a></li>
-						<li class="campaign"><a class="d-flex flex-column"
-							href="https://www.gihoo.or.kr/gallery.es?mid=a10302000000&bid=0001&b_list=9&act=view&list_no=766&nPage=1&vlist_no_npage=0&keyField=&orderby=&cid=0022">
-								<i> <img alt=""
-									src="https://www.gihoo.or.kr/galleryThumbView.es?bid=0001&list_no=766">
-							</i> <span class="campaign-explain"> <strong>(11월
-										챌린지) 이달의 실천수칙</strong> <br> <span> <strong>작성일</strong>
-										2024/10/15
-								</span> <span> <strong>조회수</strong> 1473
-								</span>
-							</span>
-						</a></li>
-						<li class="campaign"><a class="d-flex flex-column"
-							href="https://www.gihoo.or.kr/gallery.es?mid=a10302000000&bid=0001&b_list=9&act=view&list_no=766&nPage=1&vlist_no_npage=0&keyField=&orderby=&cid=0022">
-								<i> <img alt=""
-									src="https://www.gihoo.or.kr/galleryThumbView.es?bid=0001&list_no=766">
-							</i> <span class="campaign-explain"> <strong>(11월
-										챌린지) 이달의 실천수칙</strong> <br> <span> <strong>작성일</strong>
-										2024/10/15
-								</span> <span> <strong>조회수</strong> 1473
-								</span>
-							</span>
-						</a></li>
-						<li class="campaign"><a class="d-flex flex-column"
-							href="https://www.gihoo.or.kr/gallery.es?mid=a10302000000&bid=0001&b_list=9&act=view&list_no=766&nPage=1&vlist_no_npage=0&keyField=&orderby=&cid=0022">
-								<i> <img alt=""
-									src="https://www.gihoo.or.kr/galleryThumbView.es?bid=0001&list_no=766">
-							</i> <span class="campaign-explain"> <strong>(11월
-										챌린지) 이달의 실천수칙</strong> <br> <span> <strong>작성일</strong>
-										2024/10/15
-								</span> <span> <strong>조회수</strong> 1473
-								</span>
-							</span>
-						</a></li>
+							</a></li>
+						</c:forEach>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</section>
+	<div>
+		<c:if test="${sessionScope.login.userIsmaster == 1 }">
+			<form action="${pageContext.request.contextPath }/campaignWriteView">
+				<button type="button" id="camBtn">캠페인 등록하기</button>
+			</form>
+		</c:if>
+	</div>
+	<!-- 페이지 부분 -->
+	<!-- 페이징 -->
+	<c:if test="${keyCampaignList.size() != 0 }">
+		<div class="d-flex justify-content-center">
+			<nav aria-label="Page navigation example">
+				<ul class="pagination">
+					<!-- 이전 페이지 -->
+					<li
+						class="page-item ${keySearch.firstPage == 1 ? 'disabled' : '' }">
+						<c:if test="${searchWord == null }">
+							<a class="page-link"
+								href="${pageContext.request.contextPath }/campaignView?pageNo=${keySearch.firstPage - 1 }"
+								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+							</a>
+						</c:if> <c:if test="${searchWord != null }">
+							<a class="page-link"
+								href="${pageContext.request.contextPath }/campaignView?pageNo=${keySearch.firstPage - 1 }&searchOption=${keySearch.searchOption}&searchWord=${keySearch.searchWord}"
+								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+							</a>
+						</c:if>
+					</li>
 
-    <script>
-    </script>
+					<!-- 중간 페이지 번호 부분 -->
+					<c:forEach begin="${keySearch.firstPage }"
+						end="${keySearch.lastPage }" var="num">
+						<li class="page-item ${keySearch.pageNo == num ? 'active' : ''}">
+							<c:if test="${keySearch.searchWord == null }">
+								<a class="page-link"
+									href="${pageContext.request.contextPath }/campaignView?pageNo=${num }">${num }</a>
+							</c:if> <c:if test="${keySearch.searchWord != null }">
+								<a class="page-link"
+									href="${pageContext.request.contextPath }/campaignView?pageNo=${num }&searchOption=${keySearch.searchOption}&searchWord=${keySearch.searchWord}">${num }</a>
+							</c:if>
+						</li>
+					</c:forEach>
+
+					<!-- 다음 페이지 -->
+					<li
+						class="page-item ${keySearch.lastPage == keySearch.finalPage ? 'disabled' : '' }">
+						<c:if test="${keySearch.searchWord == null }">
+							<a class="page-link"
+								href="${pageContext.request.contextPath }/campaignView?pageNo=${keySearch.lastPage + 1 }"
+								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+							</a>
+						</c:if> <c:if test="${keySearch.searchWord != null }">
+							<a class="page-link"
+								href="${pageContext.request.contextPath }/campaignView?pageNo=${keySearch.lastPage + 1 }&searchOption=${keySearch.searchOption}&searchWord=${keySearch.searchWord}"
+								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+							</a>
+						</c:if>
+					</li>
+
+				</ul>
+			</nav>
+		</div>
+	</c:if>
+
+	<script type="text/javascript">
+		document.getElementById("camBtn").addEventListener('click', ()=>{
+			console.log(event.target);
+			document.getElementById("camBtn").parentElement.submit();
+		})
+	</script>
 
 </body>
 </html>
