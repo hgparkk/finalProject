@@ -3,11 +3,11 @@ package com.codingbamboo.finalproject.notice.dto;
 import java.util.Date;
 
 public class NoticeDTO {
-    private int noticeNo; // 공지사항 번호
-    private int attachNo; // 첨부파일 번호
-    private String noticeTitle; // 제목
-    private String noticeContent; // 내용
-    private Date noticeDate; // 날짜          
+    private int noticeNo;
+    private int attachNo;
+    private String noticeTitle;
+    private String noticeContent;
+    private Date noticeDate;        
 	@Override
 	public String toString() {
 		return "NoticeDTO [noticeNo=" + noticeNo + ", attachNo=" + attachNo + ", noticeTitle=" + noticeTitle

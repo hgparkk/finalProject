@@ -1,7 +1,7 @@
 package com.codingbamboo.finalproject.notice.service;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,19 +15,23 @@ public class NoticeService {
     @Autowired
     private INoticeDAO dao;
 
-    // °øÁö»çÇ× ¸®½ºÆ® °¡Á®¿À±â
-    public List<NoticeDTO> getNoticeList() {
-        List<NoticeDTO> noticeList = dao.getNoticeList();
-        return noticeList != null ? noticeList : Collections.emptyList();
+    // ê³µì§€ì‚¬í•­ ë¦¬ìŠ¤íŠ¸ ê°€ì ¸ì˜¤ê¸°
+    public List<NoticeDTO> getNoticeList(Map<String, Object> paramMap) {
+        return dao.getNoticeList(paramMap);
     }
 
-    // °øÁö»çÇ× µî·Ï
+    // ê³µì§€ì‚¬í•­ ë“±ë¡
     public int registNotice(NoticeDTO notice) {
         return dao.registNotice(notice);
     }
-    
-    //°øÁö»çÇ× µğÅ×ÀÏ °¡Á®¿À±â
+
+    // ê³µì§€ì‚¬í•­ ë””í…Œì¼ ê°€ì ¸ì˜¤ê¸°
     public NoticeDTO getNoticeDetail(int noticeNo) {
         return dao.getNoticeDetail(noticeNo);
+    }
+
+    // ê³µì§€ì‚¬í•­ ì‚­ì œ
+    public int deleteNotice(int noticeNo) {
+        return dao.deleteNotice(noticeNo);
     }
 }

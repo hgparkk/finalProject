@@ -24,7 +24,6 @@
 html, body {
 	overflow: hidden;
 	background-color: #f4f7f6;
-	
 }
 
 .video-container {
@@ -203,7 +202,8 @@ html, body {
 	<div class="container py-5">
 		<div class="row g-3 mb-5">
 			<div class="col-md-6">
-				<a href="${pageContext.request.contextPath}/lowCarbonPracticeView" class="service-link"> <img
+				<a href="${pageContext.request.contextPath}/lowCarbonPracticeView"
+					class="service-link"> <img
 					src="${pageContext.request.contextPath}/resources/image/carbon_neutral.png"
 					alt="탄소 중립 아이콘">
 					<div>
@@ -227,27 +227,32 @@ html, body {
 		<!-- 공지사항 미리보기 -->
 		<div class="position-relative mb-4">
 			<h2 class="text-center fw-bold m-0">공지사항</h2>
-			<a href="#"
+			<a href="${pageContext.request.contextPath}/noticeView"
 				class="position-absolute text-decoration-none text-success"
 				style="right: 20px; bottom: 0; margin-left: -20px;">더보기</a>
 		</div>
 
 		<div class="not_slide">
 			<ul class="list-unstyled">
-				<li><a href=""
-					class="d-flex justify-content-between text-decoration-none text-dark w-100">
-						<span>공지사항1</span> <span class="text-muted">2000.00.00</span>
-				</a></li>
-				<li><a href=""
-					class="d-flex justify-content-between text-decoration-none text-dark w-100">
-						<span>공지사항2</span> <span class="text-muted">2000.00.00</span>
-				</a></li>
-				<li><a href=""
-					class="d-flex justify-content-between text-decoration-none text-dark w-100">
-						<span>공지사항3</span> <span class="text-muted">2000.00.00</span>
-				</a></li>
+				<c:forEach var="notice" items="${noticePreviewList}"
+					varStatus="status">
+					<c:if test="${status.index < 3}">
+						<li><a
+							href="${pageContext.request.contextPath}/noticeDetailView?noticeNo=${notice.noticeNo}"
+							class="d-flex justify-content-between text-decoration-none text-dark w-100">
+								<span>${notice.noticeTitle}</span> <span class="text-muted">
+									<fmt:formatDate value="${notice.noticeDate}"
+										pattern="yyyy.MM.dd" />
+							</span>
+						</a></li>
+					</c:if>
+				</c:forEach>
+				<c:if test="${empty noticePreviewList}">
+					<li class="text-center text-muted py-4">등록된 공지사항이 없습니다.</li>
+				</c:if>
 			</ul>
 		</div>
+
 
 		<!-- 탄소저감기술 연구 동향 -->
 		<div class="position-relative mb-5 mt-5">
