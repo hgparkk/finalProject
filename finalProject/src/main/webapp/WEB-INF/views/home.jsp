@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <html>
 <head>
@@ -12,9 +13,6 @@
 
 <!-- 헤더 인클루드 파일 -->
 <%@ include file="/WEB-INF/inc/header.jsp"%>
-
-
-
 
 <!-- Locomotive Scroll CSS -->
 <link rel="stylesheet"
@@ -198,33 +196,8 @@ html, body {
 		</div>
 	</section>
 
-	<!-- 탄소실천, 고객 문의 -->
+	<!-- 공지사항 미리보기 -->
 	<div class="container py-5">
-		<div class="row g-3 mb-5">
-			<div class="col-md-6">
-				<a href="${pageContext.request.contextPath}/lowCarbonPracticeView"
-					class="service-link"> <img
-					src="${pageContext.request.contextPath}/resources/image/carbon_neutral.png"
-					alt="탄소 중립 아이콘">
-					<div>
-						<h3>탄소 중립 생활 실천</h3>
-						<p>탄소 중립 생활 실천 방법을 안내해 드립니다.</p>
-					</div>
-				</a>
-			</div>
-			<div class="col-md-6">
-				<a href="#" class="service-link"> <img
-					src="${pageContext.request.contextPath}/resources/image/talk.png"
-					alt="고객 건의 아이콘">
-					<div>
-						<h3>건의 사항</h3>
-						<p>언제나 고객의 소리에 귀 기울이겠습니다.</p>
-					</div>
-				</a>
-			</div>
-		</div>
-
-		<!-- 공지사항 미리보기 -->
 		<div class="position-relative mb-4">
 			<h2 class="text-center fw-bold m-0">공지사항</h2>
 			<a href="${pageContext.request.contextPath}/noticeView"
@@ -234,18 +207,12 @@ html, body {
 
 		<div class="not_slide">
 			<ul class="list-unstyled">
-				<c:forEach var="notice" items="${noticePreviewList}"
-					varStatus="status">
-					<c:if test="${status.index < 3}">
-						<li><a
-							href="${pageContext.request.contextPath}/noticeDetailView?noticeNo=${notice.noticeNo}"
-							class="d-flex justify-content-between text-decoration-none text-dark w-100">
-								<span>${notice.noticeTitle}</span> <span class="text-muted">
-									<fmt:formatDate value="${notice.noticeDate}"
-										pattern="yyyy.MM.dd" />
-							</span>
-						</a></li>
-					</c:if>
+				<c:forEach var="notice" items="${noticePreviewList}">
+					<li><a
+						href="${pageContext.request.contextPath}/noticeDetailView?noticeNo=${notice.noticeNo}"
+						class="d-flex justify-content-between text-decoration-none text-dark w-100">
+							<span>${notice.noticeTitle}</span> <span class="text-muted">${notice.formattedDate}</span>
+					</a></li>
 				</c:forEach>
 				<c:if test="${empty noticePreviewList}">
 					<li class="text-center text-muted py-4">등록된 공지사항이 없습니다.</li>
@@ -253,33 +220,32 @@ html, body {
 			</ul>
 		</div>
 
+	</div>
 
-		<!-- 탄소저감기술 연구 동향 -->
-		<div class="position-relative mb-5 mt-5">
+	<!-- 탄소저감기술 연구 동향 -->
+	<div class="container py-5">
+		<div class="position-relative mb-4">
 			<h2 class="text-center fw-bold m-0">탄소저감기술 연구 동향</h2>
 			<a href="#"
 				class="position-absolute text-decoration-none text-success"
 				style="right: 20px; bottom: 0; margin-left: -20px;">더보기</a>
 		</div>
 
-		<div class="not_slide mb-5 mt-5">
+		<div class="not_slide">
 			<ul class="list-unstyled">
-				<li><a href=""
-					class="d-flex justify-content-between text-decoration-none text-dark w-100">
-						<span>연구동향1</span> <span class="text-muted">2000.00.00</span>
-				</a></li>
-				<li><a href=""
-					class="d-flex justify-content-between text-decoration-none text-dark w-100">
-						<span>연구동향2</span> <span class="text-muted">2000.00.00</span>
-				</a></li>
-				<li><a href=""
-					class="d-flex justify-content-between text-decoration-none text-dark w-100">
-						<span>연구동향3</span> <span class="text-muted">2000.00.00</span>
-				</a></li>
+				<c:forEach var="trend" items="${trendPreviewList}">
+					<li><a
+						href="${pageContext.request.contextPath}/trendDetailView?trendNo=${trend.trendNo}"
+						class="d-flex justify-content-between text-decoration-none text-dark w-100">
+							<span>${trend.trendTitle}</span> <span class="text-muted">${trend.trendDate}</span>
+					</a></li>
+				</c:forEach>
+				<c:if test="${empty trendPreviewList}">
+					<li class="text-center text-muted py-4">등록된 연구 동향이 없습니다.</li>
+				</c:if>
 			</ul>
 		</div>
 	</div>
-
 
 	<!-- footer 인클루드 파일 -->
 	<%@ include file="/WEB-INF/inc/footer.jsp"%>

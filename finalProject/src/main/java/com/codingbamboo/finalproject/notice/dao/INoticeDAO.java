@@ -20,4 +20,10 @@ public interface INoticeDAO {
 
 	// 공지사항 삭제
 	int deleteNotice(int noticeNo);
+	
+	//공지사항 미리보기 조회
+	List<NoticeDTO> getNoticePreviewList();
+	
+    // 공지사항 총 개수 조회 (페이징)
+    int selectNoticeCount(Map<String, Object> paramMap);
 }

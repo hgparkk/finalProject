@@ -9,7 +9,8 @@
 		SELECT
 		notice_no AS noticeNo,
 		attach_no AS attachNo,
-		notice_title AS noticeTitle,
+		notice_title AS
+		noticeTitle,
 		notice_content AS noticeContent,
 		notice_date AS noticeDate
 		FROM notice
@@ -61,5 +62,29 @@
 		WHERE
 		notice_no = #{noticeNo}
 	</delete>
+
+
+
+	
+	
+	<!-- 공지사항 미리보기 -->
+    <select id="getNoticePreviewList" resultType="com.codingbamboo.finalproject.notice.dto.NoticeDTO">
+        <![CDATA[
+            SELECT
+                notice_no AS noticeNo,
+                notice_title AS noticeTitle,
+                notice_date AS noticeDate
+            FROM (
+                SELECT
+                    notice_no,
+                    notice_title,
+                    notice_date
+                FROM notice
+                ORDER BY notice_date DESC
+            )
+            WHERE ROWNUM <= 3
+        ]]>
+    </select>
+	
 
 </mapper>

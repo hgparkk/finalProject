@@ -34,4 +34,14 @@ public class NoticeService {
     public int deleteNotice(int noticeNo) {
         return dao.deleteNotice(noticeNo);
     }
+    
+    // 공지사항 미리보기 리스트 가져오기
+    public List<NoticeDTO> getNoticePreviewList() {
+        return dao.getNoticePreviewList();
+    }
+    // 공지사항 총 개수 가져오기 (페이징 처리)
+    public int getNoticeCount(Map<String, Object> paramMap) {
+        return dao.selectNoticeCount(paramMap); 
+    }
+    
 }

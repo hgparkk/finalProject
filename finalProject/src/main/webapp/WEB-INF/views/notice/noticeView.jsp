@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
@@ -9,7 +10,7 @@
 <%@ include file="/WEB-INF/inc/header.jsp"%>
 <style>
 html, body {
-	min-height: 100%; /* 모든 페이지에서 최소 높이 설정 */
+	min-height: 100%;
 	display: flex;
 	flex-direction: column;
 	margin: 0;
@@ -79,7 +80,7 @@ html, body {
 
 .write-button-container {
 	display: flex;
-	justify-content: center; /* 버튼을 중앙 정렬 */
+	justify-content: center;
 	margin: 20px 0;
 }
 
@@ -139,6 +140,42 @@ html, body {
 	font-size: 0.9rem;
 	color: #666;
 }
+
+.pagination {
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+}
+
+.pagination ul {
+	display: flex;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.pagination li {
+	margin: 0 5px;
+}
+
+.pagination a {
+	text-decoration: none;
+	padding: 5px 10px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	color: #333;
+	transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination a:hover {
+	background-color: #007bff;
+	color: white;
+}
+
+.pagination a.active {
+	background-color: #007bff;
+	color: white;
+}
 </style>
 </head>
 <body>
@@ -187,6 +224,25 @@ html, body {
 		</div>
 	</div>
 
+	<!-- 페이징 -->
+	<div class="pagination">
+		<c:if test="${totalPages > 1}">
+			<ul>
+				<c:if test="${currentPage > 1}">
+					<li><a
+						href="?page=${currentPage - 1}&searchKeyword=${searchKeyword}">이전</a></li>
+				</c:if>
+				<c:forEach var="i" begin="1" end="${totalPages}">
+					<li><a href="?page=${i}&searchKeyword=${searchKeyword}"
+						class="${i == currentPage ? 'active' : ''}"> ${i} </a></li>
+				</c:forEach>
+				<c:if test="${currentPage < totalPages}">
+					<li><a
+						href="?page=${currentPage + 1}&searchKeyword=${searchKeyword}">다음</a></li>
+				</c:if>
+			</ul>
+		</c:if>
+	</div>
 	<!-- Footer -->
 	<%@ include file="/WEB-INF/inc/footer.jsp"%>
 </body>
