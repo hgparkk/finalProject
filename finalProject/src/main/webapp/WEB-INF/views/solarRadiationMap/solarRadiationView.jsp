@@ -39,6 +39,28 @@
 	width: 1vw;
 	height: 1vw;
 }
+
+.searchedResult {
+	position: absolute;
+	z-index: 100;
+	width: 57%;
+	max-height: 200px;
+	overflow-y: auto;
+	max-height: 200px;
+}
+
+.searchedResultShow {
+	border: 1px solid gray;
+	background-color: white;
+}
+
+.selectDiv {
+	cursor: pointer;
+}
+
+.selectDiv:hover {
+	background-color: #f0f0f0;
+}
 </style>
 </head>
 
@@ -58,8 +80,11 @@
 			</div>
 		</div>
 		<div class="d-flex flex-column justify-content-center align-items-center" style="margin-top: 30px; margin-bottom: 100px;">
-			<div class="mt-3 mb-3 d-flex justify-content-start" style="width:100%">
-				<input id="searchInput" class="form-control me-3" type="text" style="width:60%" placeholder="지번 주소나 도로명 주소 입력">
+			<div class="mt-3 mb-3 d-flex justify-content-start" style="width: 100%">
+				<div style="width: 60%">
+					<input id="searchInput" class="form-control me-3" type="text" placeholder="지번 주소나 도로명 주소 입력">
+					<div id="autocomplete" class="searchedResult"></div>
+				</div>
 			</div>
 			<div class="position-relative" style="width: 1200px; height: 600px;">
 				<div class="position-absolute" id="map" style="width: 1200px; height: 600px; padding: 0, margin:0;"></div>
@@ -89,6 +114,8 @@
 		var infoWindows = []
 
 		let data = []
+		
+		let dataList = []
 
 		<c:forEach items="${buildingList}" var="building">
 		recentData = {
@@ -101,6 +128,8 @@
 		}
 		
 		data.push(recentData)
+		dataList.push(recentData.buildingAddressLot)
+		dataList.push(recentData.buildingAddressRoad)
 		</c:forEach>
 		
 		for(var i = 0, ii = data.length; i < ii; i++){
@@ -187,10 +216,52 @@
 		}
 		
 		const v_searchInput = document.getElementById("searchInput")
-		
-		v_searchInput.addEventListener("input",()=>{
-			
+
+		// 자동완성 결과 요소 
+		const autocomplete = document.getElementById("autocomplete")
+
+		// 입력 이벤트 리스너
+		v_searchInput.addEventListener("input", ()=> {
+  			const value = this.value;
+  			const matchedItems = dataList.filter(item => 
+    			item.toLowerCase().includes(value)
+  			)
+  
+  			displayResults(matchedItems)
 		})
+
+		// 결과 표시 함수
+		function displayResults(results) {
+			let content = ""
+	  		for(let i = 0; i < results.length; i++){
+	  			content += '<div class="selectDiv" onclick="gotoSearchList('+results[i]+')">'+results[i]+'</div>'
+	  		}
+			if(results.length != 0){
+				autocomplete.classList.add("searchedResultShow")
+			}
+	  		autocomplete.innerHTML = content
+		}
+
+		// 검색 결과로 이동
+		function gotoSearchList(searchWord){
+			let seq
+			
+			for(let i=0; i<data.length; i++){
+				if(searchWord == data[i].buildingAddressRoad || searchWord == data[i].buildingAddressLot){
+					seq = i
+					console.log(seq)
+					break
+				}
+			}
+		
+			v_searchInput.value = ""
+				const event = new InputEvent('input', {
+		  			bubbles: true,
+		  			cancelable: true,
+				});
+				v_searchInput.dispatchEvent(event);
+			getClickHandler(i)
+		}
 	</script>
 </body>
 
