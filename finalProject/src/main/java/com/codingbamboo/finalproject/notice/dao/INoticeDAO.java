@@ -1,18 +1,23 @@
 package com.codingbamboo.finalproject.notice.dao;
 
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 import com.codingbamboo.finalproject.notice.dto.NoticeDTO;
 
 @Mapper
 public interface INoticeDAO {
 
-    // °øÁö»çÇ× µî·Ï
-    int registNotice(NoticeDTO notice);
+	// ê³µì§€ì‚¬í•­ ë“±ë¡
+	int registNotice(NoticeDTO notice);
 
-    // °øÁö»çÇ× ¸ñ·Ï Á¶È¸
-    List<NoticeDTO> getNoticeList();
+	// ê³µì§€ì‚¬í•­ ëª©ë¡ ì¡°íšŒ
+	List<NoticeDTO> getNoticeList(Map<String, Object> paramMap);
 
-    // °øÁö»çÇ× »ó¼¼ Á¶È¸
-    NoticeDTO getNoticeDetail(int noticeNo); // »ó¼¼ Á¶È¸ ¸Ş¼­µå Ãß°¡
+	// ê³µì§€ì‚¬í•­ ìƒì„¸ ì¡°íšŒ
+	NoticeDTO getNoticeDetail(int noticeNo);
+
+	// ê³µì§€ì‚¬í•­ ì‚­ì œ
+	int deleteNotice(int noticeNo);
 }

@@ -13,7 +13,6 @@
             margin-top: 20px;
         }
         .welcome-box, .content-box {
-            border: 2px solid black;
             padding: 20px;
             text-align: center;
             margin-bottom: 20px;
@@ -31,12 +30,18 @@
             margin-bottom: 130px;
         }
         .content-box {
+        	border: 2px solid black;
+        	border-radius: 40px;
             width: 45%;
             height: 150px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.2rem;
+        }
+        .contentL{
+        	text-decoration: none;
+        	color: black;
         }
 </style>
 </head>
@@ -49,10 +54,10 @@
 
 	<div class="content-row">
 		<div class="content-box">
-			<div>건의사항 목록/답변하기</div>
+			<a class="contentL" href="${pageContext.request.contextPath }/adminSuggestionsView">건의사항 목록/답변하기</a>
 		</div>
 		<div class="content-box">
-			<div>계산식 수정하기</div>
+			<a>탄소 발자국 계산식 수정하기</a>
 		</div>
 	</div>
 </div>
