@@ -37,6 +37,9 @@
 							<td>${suggestion.sgTitle }</td>
 							<td>${suggestion.userId }</td>
 							<td>${suggestion.sgDate }</td>
+							<td>
+								<a href="${pageContext.request.contextPath}/admin/suggestions/${suggestion.sgNo}" class="btn btn-primary">보기</a>
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>

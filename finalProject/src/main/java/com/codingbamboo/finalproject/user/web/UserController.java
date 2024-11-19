@@ -277,6 +277,9 @@ public class UserController {
 
 		if (login != null && passwordEncoder.matches(userInfo.getUserPw(), login.getUserPw())) {
 			session.setAttribute("login", login);
+			if(login.getUserIsmaster() == 1) {
+				return "redirect:/adminHomeView";
+			}
 			if (login.getUserIstemp() == 1) {
 				return "redirect:/myPagePwChangeView";
 			}
