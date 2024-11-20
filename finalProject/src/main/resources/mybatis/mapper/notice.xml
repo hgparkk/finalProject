@@ -22,7 +22,8 @@
 		</if>
 		ORDER BY notice_date DESC
 		)
-		WHERE rn BETWEEN #{offset} + 1 AND #{offset} + #{limit}
+		WHERE rn BETWEEN #{offset} + 1 AND #{offset}
+		+ #{limit}
 	</select>
 
 
@@ -97,6 +98,15 @@
 			AND notice_title LIKE '%' || #{searchKeyword} || '%'
 		</if>
 	</select>
+
+	<update id="updateNotice"
+		parameterType="com.codingbamboo.finalproject.notice.dto.NoticeDTO">
+		UPDATE notice
+		SET notice_title = #{noticeTitle},
+		notice_content = #{noticeContent},
+		notice_date = SYSDATE
+		WHERE notice_no = #{noticeNo}
+	</update>
 
 
 </mapper>

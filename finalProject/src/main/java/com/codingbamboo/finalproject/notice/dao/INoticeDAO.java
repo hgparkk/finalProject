@@ -26,4 +26,7 @@ public interface INoticeDAO {
 	
     // 공지사항 총 개수 조회 (페이징)
     int selectNoticeCount(Map<String, Object> paramMap);
+    
+    //공지사항 수정
+    int updateNotice(NoticeDTO notice);
 }

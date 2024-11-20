@@ -3,7 +3,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>Coding Bamboo - 공지사항 작성</title>
+<title>Coding Bamboo - 공지사항 수정</title>
 <%@ include file="/WEB-INF/inc/header.jsp"%>
 <style>
 html, body {
@@ -16,9 +16,9 @@ html, body {
     font-family: 'Noto Sans KR', sans-serif;
 }
 
-.write-container {
+.edit-container {
     padding: 50px 20px;
-    width:800px;
+    width: 800px;
     max-width: 800px;
     margin: 0 auto;
     background-color: #ffffff;
@@ -41,13 +41,13 @@ html, body {
     font-weight: bold;
 }
 
-.write-form {
+.edit-form {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.write-form input[type="text"] {
+.edit-form input[type="text"] {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
@@ -55,7 +55,7 @@ html, body {
     font-size: 1rem;
 }
 
-.write-form textarea {
+.edit-form textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
@@ -65,10 +65,10 @@ html, body {
     height: 300px;
 }
 
-.write-form button {
+.edit-form button {
     width: 100%;
     padding: 10px;
-    background-color: #28a745;
+    background-color: #007bff;
     color: white;
     font-size: 1rem;
     border: none;
@@ -77,8 +77,8 @@ html, body {
     transition: background-color 0.3s;
 }
 
-.write-form button:hover {
-    background-color: #218838;
+.edit-form button:hover {
+    background-color: #0056b3;
 }
 </style>
 <script src="https://cdn.ckeditor.com/4.20.2/standard/ckeditor.js"></script>
@@ -88,27 +88,30 @@ html, body {
     <%@ include file="/WEB-INF/inc/top.jsp"%>
 
     <div class="title-box">
-        <h1>공지사항 작성</h1>
+        <h1>공지사항 수정</h1>
         <span style="font-size: 0.7vw;">Coding Bamboo Notice</span>
     </div>
 
-    <!-- 글쓰기 폼 -->
-    <div class="write-container">
-        <form action="noticeWriteDo" method="post" class="write-form">
+    <!-- 수정 폼 -->
+    <div class="edit-container">
+        <form action="noticeEditDo" method="post" class="edit-form">
+            <!-- 공지사항 번호 (숨겨진 필드) -->
+            <input type="hidden" name="noticeNo" value="${notice.noticeNo}" />
+
             <!-- 제목 -->
             <div>
                 <label for="noticeTitle" style="font-weight: bold;">제목</label>
-                <input type="text" id="noticeTitle" name="noticeTitle" placeholder="제목을 입력하세요" required>
+                <input type="text" id="noticeTitle" name="noticeTitle" value="${notice.noticeTitle}" placeholder="제목을 입력하세요" required>
             </div>
 
             <!-- 내용 -->
             <div>
                 <label for="noticeContent" style="font-weight: bold;">내용</label>
-                <textarea id="noticeContent" name="noticeContent" placeholder="내용을 입력하세요" required></textarea>
+                <textarea id="noticeContent" name="noticeContent" required>${notice.noticeContent}</textarea>
             </div>
 
-            <!-- 등록 버튼 -->
-            <button type="submit">등록</button>
+            <!-- 수정 버튼 -->
+            <button type="submit">수정</button>
         </form>
     </div>
 

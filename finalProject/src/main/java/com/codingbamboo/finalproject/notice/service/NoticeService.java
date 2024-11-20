@@ -44,4 +44,9 @@ public class NoticeService {
         return dao.selectNoticeCount(paramMap); 
     }
     
+    //공지수정
+    public int editNotice(NoticeDTO notice) {
+        return dao.updateNotice(notice);
+    }
+    
 }

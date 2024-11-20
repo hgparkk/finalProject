@@ -174,7 +174,7 @@ html, body {
 						<div class="content-overlay">
 							<h4>탄소 발자국 계산기</h4>
 							<p>당신의 생활에서 발생하는 탄소 배출량을 계산하고 줄이는 방법을 알아보세요.</p>
-							<a href="#" class="btn btn-primary mt-3">계산기 사용하기</a>
+							<a href="${pageContext.request.contextPath}/carbonCalView" class="btn btn-primary mt-3">계산하기</a>
 						</div>
 					</div>
 				</div>
@@ -188,7 +188,7 @@ html, body {
 						<div class="content-overlay">
 							<h4>태양열 발전 예측 지도</h4>
 							<p>당신의 지역에서 태양열 발전량을 예측하고 환경에 미치는 영향을 확인해보세요.</p>
-							<a href="#" class="btn btn-primary mt-3">예측 하기</a>
+							<a href="${pageContext.request.contextPath}/solarRadiationView" class="btn btn-primary mt-3">예측 하기</a>
 						</div>
 					</div>
 				</div>
