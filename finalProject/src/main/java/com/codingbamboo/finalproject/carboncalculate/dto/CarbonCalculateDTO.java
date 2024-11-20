@@ -1,6 +1,7 @@
 package com.codingbamboo.finalproject.carboncalculate.dto;
 
 import java.sql.Date;
+import java.util.Calendar;
 
 public class CarbonCalculateDTO {
 	public int resultNo;
@@ -98,5 +99,16 @@ public class CarbonCalculateDTO {
 	public void setWasteWeight(int wasteWeight) {
 		this.wasteWeight = wasteWeight;
 	}
+	
+	public int getYear() {
+	    Calendar cal = Calendar.getInstance();
+	    cal.setTime(resultDate);
+	    return cal.get(Calendar.YEAR);
+	}
 
+	public int getMonth() {
+	    Calendar cal = Calendar.getInstance();
+	    cal.setTime(resultDate);
+	    return cal.get(Calendar.MONTH) + 1; // 월은 0부터 시작하므로 1을 더함
+	}
 }

@@ -2,6 +2,7 @@ package com.codingbamboo.finalproject.user.web;
 
 import java.security.SecureRandom;
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.codingbamboo.finalproject.carboncalculate.dto.CarbonCalculateDTO;
+import com.codingbamboo.finalproject.carboncalculate.service.CarbonCalculateService;
 import com.codingbamboo.finalproject.oauth.service.OAuthService;
 import com.codingbamboo.finalproject.user.dto.UserDTO;
 import com.codingbamboo.finalproject.user.service.UserService;
@@ -42,6 +45,9 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	CarbonCalculateService carboncalcuateService;
 
 	// 로그인 창 이동
 	@RequestMapping(value = "/loginView", method = RequestMethod.GET)
@@ -319,6 +325,9 @@ public class UserController {
 			year = LocalDate.now().getYear();
 		}
 
+		List<CarbonCalculateDTO> myCalList = carboncalcuateService.selectCalList(((UserDTO) session.getAttribute("login")).getUserId());
+		
+		model.addAttribute("myCalList",myCalList);
 		model.addAttribute("year", year);
 
 		return "user/myPageMyCarbonResultView";

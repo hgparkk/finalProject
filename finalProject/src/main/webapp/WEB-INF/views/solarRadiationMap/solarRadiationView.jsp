@@ -153,6 +153,53 @@
 							<span class="mt-3 ms-1 result-text">kWh/㎡</span>
 						</div>
 					</div>
+					<div class="d-flex" style="margin-top: 25px; width: 400px;">
+						<div class="d-flex flex-column">
+							<span class="ms-5 mt-3 result-text">태양광 패널 효율에 따른 전력 발전량</span>
+						</div>
+					</div>
+					<div class="accordion accordion-flush" id="generationAccordion" style="margin-top: 25px; margin-bottom: 25px; width: 400px;">
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">18%</button>
+							</h2>
+							<div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#generationAccordion">
+								<div class="accordion-body"></div>
+							</div>
+						</div>
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">19%</button>
+							</h2>
+							<div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#generationAccordion">
+								<div class="accordion-body"></div>
+							</div>
+						</div>
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">20%</button>
+							</h2>
+							<div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#generationAccordion">
+								<div class="accordion-body"></div>
+							</div>
+						</div>
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">21%</button>
+							</h2>
+							<div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#generationAccordion">
+								<div class="accordion-body"></div>
+							</div>
+						</div>
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">22%</button>
+							</h2>
+							<div id="flush-collapseFive" class="accordion-collapse collapse" data-bs-parent="#generationAccordion">
+								<div class="accordion-body"></div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

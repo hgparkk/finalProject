@@ -1,6 +1,5 @@
 package com.codingbamboo.finalproject.carboncalculate.service;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,22 +13,14 @@ public class CarbonCalculateService {
 	@Autowired
 	ICarbonCalculateDAO dao;
 
-	// Åº¼Ò¹ßÀÚ±¹ °è»ê °á°ú ÀúÀå
+	// íƒ„ì†Œ ë°œìêµ­ ê²°ê³¼ ì €ì¥
 	public int insertCal(CarbonCalculateDTO carbonCalculate) {
 		int result = dao.insertCal(carbonCalculate);
 		return result;
 	}
-	
-	// Åº¼Ò¹ßÀÚ±¹ ÀúÀå °á°ú »ó¼¼ Á¶È¸
-		public CarbonCalculateDTO getCal(Date date) {
-			CarbonCalculateDTO result = dao.getCal(date);
-		    
-		    return result;
-		}
 
-	// Åº¼Ò¹ßÀÚ±¹ ÀúÀå ¸ñ·Ï °¡Á®¿À±â
-	public List<CarbonCalculateDTO> getCarbonCalList() {
-		List<CarbonCalculateDTO> result = dao.getCarbonCalList();
-		return result;
+	// íƒ„ì†Œ ë°œìêµ­ ê²°ê³¼ ë¶ˆëŸ¬ì˜¤ê¸°
+	public List<CarbonCalculateDTO> selectCalList(String userId) {
+		return dao.selectCalList(userId);
 	}
 }

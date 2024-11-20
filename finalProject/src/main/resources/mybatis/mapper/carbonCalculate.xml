@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper
 	namespace="com.codingbamboo.finalproject.carboncalculate.dao.ICarbonCalculateDAO">
-	<insert id="insertCal" parameterType="com.codingbamboo.finalproject.carboncalculate.dto.CarbonCalculateDTO">
+	<insert id="insertCal" parameterType="CarbonCalculateDTO">
 		INSERT INTO carbon_result(
 			result_no
 			, user_id
@@ -24,37 +24,19 @@
 		)
 	</insert>
 	
-	<select id="getCal" resultType="com.codingbamboo.finalproject.carboncalculate.dto.CarbonCalculateDTO">
+	<select id="selectCalList" parameterType="String" resultType="CarbonCalculateDTO">
 		SELECT
-			a.result_no
-			, a.user_id
-			, a.result_date
-			, a.electric_usage
-			, a.gas_usage
-			, a.traffic_kind
-			, a.traffic_value
-			, a.waste_weight
+			result_no
+			, user_id
+			, result_date
+			, electric_usage
+			, gas_usage
+			, traffic_kind
+			, traffic_value
+			, waste_weight
 		FROM
-			carbon_result a, user_info b
+			carbon_result
 		WHERE 1=1
-			AND a.user_id = b.user_id
-			AND a.result_date = #{date, jdbcType=DATE}
-	</select>
-	
-	<!-- 탄소발자국 계산 결과 목록 가져오기 -->
-	<select id="getCarbonCalList" resultType="com.codingbamboo.finalproject.carboncalculate.dto.CarbonCalculateDTO">
-		SELECT
-			a.result_no
-			, a.user_id
-			, a.result_date
-			, a.electric_usage
-			, a.gas_usage
-			, a.traffic_kind
-			, a.traffic_value
-			, a.waste_weight
-		FROM
-			carbon_result a, user_info b
-		WHERE 1=1
-			AND a.user_id = b.user_id
+			AND user_id = #{userId}
 	</select>
 </mapper>

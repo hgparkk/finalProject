@@ -1,22 +1,16 @@
 package com.codingbamboo.finalproject.carboncalculate.dao;
 
-import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 
 import com.codingbamboo.finalproject.carboncalculate.dto.CarbonCalculateDTO;
 
 @Mapper
 public interface ICarbonCalculateDAO {
-	// Åº¼Ò¹ßÀÚ±¹ °á°ú ÀúÀåÇÏ±â
+	// íƒ„ì†Œ ë°œìêµ­ ê²°ê³¼ ì €ì¥
 	int insertCal(CarbonCalculateDTO carbonCalculateDTO);
 	
-	// Åº¼Ò¹ßÀÚ±¹ °á°ú Á¶È¸ÇÏ±â
-	CarbonCalculateDTO getCal(Date date);
-	
-	// Åº¼Ò¹ßÀÚ±¹ °á°ú ¸ñ·Ï Á¶È¸
-	List<CarbonCalculateDTO> getCarbonCalList();
+	// íƒ„ì†Œ ë°œìêµ­ ê²°ê³¼ ë¶ˆëŸ¬ì˜¤ê¸°
+	List<CarbonCalculateDTO> selectCalList(String userId);
 }
