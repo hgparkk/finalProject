@@ -25,43 +25,51 @@ public class CarbonCalculateController {
 
 	@Autowired
 	ICarbonCalculateDAO dao;
-	
+
 	@Autowired
 	CarbonCalculateService carbonCalculateService;
-	
+
 	@RequestMapping("/testView")
 	public String testView() {
 		return "carbonCal/testView";
 	}
 
-	// Åº¼Ò¹ßÀÚ±¹ °è»ê±â ÆäÀÌÁö ÀÌµ¿
+	// íƒ„ì†Œ ê³„ì‚°ê¸° ë·° í˜ì´ì§€ë¡œ ì´ë™
 	@RequestMapping("/carbonCalView")
 	public String carbonCalView() {
 		return "carbonCal/carbonCalView";
 	}
 
-	// Åº¼Ò¹ßÀÚ±¹ °è»ê °á°ú ÆäÀÌÁö ÀÌµ¿
+	// íƒ„ì†Œ ê³„ì‚°ê¸° ê²°ê³¼ í˜ì´ì§€ë¡œ ì´ë™
 	@RequestMapping("/carbonCalResultView")
 	public String carbonCalResultView() {
 		return "carbonCal/carbonCalResultView";
 	}
 
-	// Åº¼Ò¹ßÀÚ±¹ °è»ê °á°ú ÀúÀå
+	// íƒ„ì†Œ ê³„ì‚°ê¸° ê²°ê³¼ ë“±ë¡
 	@PostMapping("/carbonCalRegistDo")
-	public String carbonCalRegistDo(CarbonCalculateDTO carbonCalculate, HttpServletRequest request, HttpSession session) {
-		com.codingbamboo.finalproject.user.dto.UserDTO login = (com.codingbamboo.finalproject.user.dto.UserDTO)session.getAttribute("login");
-		
-		if(login == null) {
+	public String carbonCalRegistDo(CarbonCalculateDTO carbonCalculate, HttpServletRequest request,
+			HttpSession session) {
+		com.codingbamboo.finalproject.user.dto.UserDTO login = (com.codingbamboo.finalproject.user.dto.UserDTO) session
+				.getAttribute("login");
+
+		// ë¡œê·¸ì¸ ì •ë³´ê°€ ì—†ìœ¼ë©´ ë¡œê·¸ì¸ í˜ì´ì§€ë¡œ ë¦¬ë‹¤ì´ë ‰íŠ¸
+		if (login == null) {
 			return "redirect:/loginView";
 		}
+
+		// íƒ„ì†Œ ê³„ì‚° ê²°ê³¼ ë‚ ì§œ í™•ì¸
 		carbonCalculate.getResultDate();
 		System.out.println(carbonCalculate);
-		
+
+		// íƒ„ì†Œ ê³„ì‚° ê²°ê³¼ ì €ì¥
 		carbonCalculateService.insertCal(carbonCalculate);
 
-		request.setAttribute("msg", "°á°ú°¡ µî·ÏµÇ¾ú½À´Ï´Ù.");
+		// ì‚¬ìš©ìì—ê²Œ ë©”ì‹œì§€ ì „ë‹¬
+		request.setAttribute("msg", "íƒ„ì†Œ ê³„ì‚° ê²°ê³¼ê°€ ì •ìƒì ìœ¼ë¡œ ë“±ë¡ë˜ì—ˆìŠµë‹ˆë‹¤.");
 		request.setAttribute("url", "/carbonCalView");
 
 		return "alert";
 	}
+
 }

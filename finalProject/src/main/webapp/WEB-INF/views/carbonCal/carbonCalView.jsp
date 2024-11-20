@@ -64,9 +64,9 @@
 .inputUsage-box {
 	border: 1px solid #CCCCCC;
 	border-radius: 0.5vw;
-	width: 48%;
+	width: 49.5%;
 	height: 25vw;
-	margin-bottom: 5vh;
+	margin-bottom: 3vh;
 	display: inline-block;
 }
 
@@ -189,9 +189,7 @@
 	border-top-right-radius: 0.3vw;
 	border-top-left-radius: 0.3vw;
 	width: 220px;
-	padding-top: 7px;
-	padding-right: 7px;
-	padding-left: 7px;
+	padding: 5px;
 	height: 20%;
 }
 
@@ -540,32 +538,26 @@
 		}
 	
 		document.getElementById('submitBtn').addEventListener('click', ()=>{
-			/* 사용자가 사용량을 입력하지 못하면 알람창을 띄우고 다시 돌아감 */
-			if(document.getElementById("outputElectric").value == null || document.getElementById("outputElectric").value == 0){
-				alert("전기 사용량을 입력해주세요.");
-				return;
-			}
-			
-			if(document.getElementById("outputGas").value == null || document.getElementById("outputGas").value == 0){
-				alert("가스 사용량을 입력해주세요.");
-				return;
-			}
-			
-			if(document.getElementById("outputGarbage").value == null || document.getElementById("outputGarbage").value == 0){
-				alert("폐기물 사용량을 입력해주세요.");
-				return;
-			}
-			
 			const selectedFuelType = document.querySelector('input[name="fuelType"]:checked');
 			let v_inputFuel = document.getElementById('inputFuel').value
 			
 			if(selectedFuelType.nextElementSibling.textContent.trim() != '승용차 없음'){
+				if(document.getElementById("outputElectric").value == 0 && document.getElementById("outputGas").value == 0 && document.getElementById("outputGarbage").value == 0){
+					alert("사용량을 입력해주세요.");
+					return;
+				}
 				if(v_inputFuel == 0){
-					alert("이동 거리를 입력해주세요")
+					alert("이동거리를 입력해주세요")
+					return;
+				}
+			}else{
+				if(document.getElementById("outputElectric").value == 0 && document.getElementById("outputGas").value == 0 && document.getElementById("outputGarbage").value == 0){
+					alert("사용량을 입력해주세요.");
 					return;
 				}
 				v_inputFuel = 0;
 			}
+			
 			
 			if(confirm("결과창으로 이동하시겠습니까?")){
 				/* 기존에 존재하던 아이템들 삭제 */

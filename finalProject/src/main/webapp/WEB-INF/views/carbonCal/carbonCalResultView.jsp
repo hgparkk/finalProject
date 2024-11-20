@@ -165,14 +165,18 @@
 							<h2>당신의 탄소배출량 결과</h2>
 							<c:if test="${sessionScope.login.userId != null }">
 								<p>${sessionScope.login.userName }님의 이산화탄소(CO₂)발생량통계입니다.</p>
+								<div>
+									<span>${sessionScope.login.userName }님 가정의 이산화탄소 배출량은 총</span> <span id="resultCO2"></span> <span>kg
+										입니다. 왼쪽의 그래프를 보면 어느 부분에서 이산화탄소가 가장 많이 발생하고 있는지 확인할 수 있습니다.</span>
+								</div>
 							</c:if>
 							<c:if test="${sessionScope.login.userId == null }">
 								<p>나의 이산화탄소(CO₂) 발생량 통계</p>
+								<div>
+									<span>고객님 가정의 이산화탄소 배출량은 총</span> <span id="resultCO2"></span> <span>kg
+										입니다. 왼쪽의 그래프를 보면 어느 부분에서 이산화탄소가 가장 많이 발생하고 있는지 확인할 수 있습니다.</span>
+								</div>
 							</c:if>
-						</div>
-						<div>
-							<span>${sessionScope.login.userName }님 가정의 이산화탄소 배출량은 총</span> <span id="resultCO2"></span> <span>kg
-								입니다. 왼쪽의 그래프를 보면 어느 부분에서 이산화탄소가 가장 많이 발생하고 있는지 확인할 수 있습니다.</span>
 						</div>
 					</div>
 				</div>
@@ -319,11 +323,35 @@ let v_resultElec = sessionStorage.getItem('resultElec');
 let v_resultGas = sessionStorage.getItem('resultGas');
 let v_resultGar = sessionStorage.getItem('resultGar');
 
-document.getElementById("resElec").value += v_resultElec;
-document.getElementById("resGas").value += v_resultGas;
-document.getElementById("resGar").value += v_resultGar;
-document.getElementById("resTrfType").value += v_resultTrfType;
-document.getElementById("resTrf").value += v_resultTrf;
+if(!v_resultElec){
+	document.getElementById("resElec").value = 0
+}else{
+	document.getElementById("resElec").value = v_resultElec;
+}
+
+if(!v_resultGas){
+	document.getElementById("resGas").value = 0
+}else{
+	document.getElementById("resGas").value = v_resultGas;
+}
+
+if(!v_resultGar){
+	document.getElementById("resGar").value = 0
+}else{
+	document.getElementById("resGar").value = v_resultGar;
+}
+
+if(!v_resultTrfType){
+	document.getElementById("resTrfType").value = 0
+}else{
+	document.getElementById("resTrfType").value = v_resultTrfType;
+}
+
+if(!v_resultTrf){
+	document.getElementById("resTrf").value = 0
+}else{
+	document.getElementById("resTrf").value = v_resultTrf;
+}
 
 console.log(document.getElementById("resTrf").value);
 
@@ -364,7 +392,7 @@ document.getElementById("resultCO2").innerHTML += v_allCo2;
             data: {
                 labels: ['전기', '가스', '폐기물', '교통'],
                 datasets: [{
-                    data: [v_resultElec, v_resultGas, v, v_resultGar]
+                    data: [v_resultElec, v_resultGas, v_resultGar, v_fuelCo2]
                 }]
             }
         });

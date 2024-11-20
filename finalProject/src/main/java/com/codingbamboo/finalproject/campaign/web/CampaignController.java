@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.codingbamboo.finalproject.campaign.dto.CampaignDTO;
 import com.codingbamboo.finalproject.campaign.service.CampaignService;
+import com.codingbamboo.finalproject.common.vo.SearchVO;
+import com.codingbamboo.finalproject.user.dto.UserDTO;
 
 @Controller
 public class CampaignController {
@@ -20,9 +22,23 @@ public class CampaignController {
 
 	// 캠페인 페이지 이동
 	@RequestMapping("campaignView")
-	public String campaignView(Model model) {
+	public String campaignView(Model model, SearchVO search) {
+		// 캠페인 전체 갯수 조회
+		int campaignCount = campaignService.getCampaignCount();
+		model.addAttribute("keyCampaignCount", campaignCount);
+		
+		// 캠페인 한 페이지 갯수 조회
+		int campaignPageCount = campaignService.getCampaignPageCount(search);
+		
+		search.setCampaignCount(campaignPageCount);
+		
+		// 검색 조건 설정
+		search.campaignSetting();
+		
+		model.addAttribute("keySearch", search);
+		
 		// 캠페인 목록 조회
-		List<CampaignDTO> getCampaignList = campaignService.getCampaignList();
+		List<CampaignDTO> getCampaignList = campaignService.getCampaignList(search);
 		model.addAttribute("keyGetCampaignList", getCampaignList);
 
 		return "campaign/campaignView";
@@ -31,13 +47,13 @@ public class CampaignController {
 	// 캠페인 작성 페이지 이동
 	@RequestMapping("/campaignWriteView")
 	public String campaignWriteView(HttpSession session) {
-		com.codingbamboo.finalproject.user.dto.UserDTO login = (com.codingbamboo.finalproject.user.dto.UserDTO) session.getAttribute("login");
-		System.out.println(login.getUserIsmaster());
-
+		UserDTO login = (UserDTO) session.getAttribute("login");
+		
 		// 로그인하지 않은 경우, 로그인 페이지로 리다이렉트
-		if (login.getUserIsmaster() != 1) {
+		if (login == null ||login.getUserIsmaster() != 1) {
 			return "redirect:/";
 		}
+		
 		return "campaign/campaignWriteView";
 	}
 }

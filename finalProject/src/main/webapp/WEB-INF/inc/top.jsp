@@ -30,7 +30,7 @@
 }
 
 .main-box {
-	width: 60%;
+	width: 55%;
 	display: flex;
 	justify-content: space-between;
 	font-size: 1vw;
@@ -110,7 +110,7 @@
 }
 
 .login-box {
-	width: 18%;
+	width: 22%;
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;

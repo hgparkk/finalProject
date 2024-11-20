@@ -16,10 +16,6 @@ ul {
 	color: gray;
 }
 
-.campaing-section {
-	max-width: 1340px;
-}
-
 .campaign-container {
 	max-width: 1300px;
 	margin: auto;
@@ -80,15 +76,33 @@ ul {
 	margin-top: 0.7vw;
 	list-style-type: none;
 	display: flex;
-	flex-wrap: wrap; /* 항목들이 여러 줄로 넘어가도록 허용 */
+	flex-wrap: wrap;
 	justify-content: space-between;
 	padding: 0;
-	margin-top: 0.7vw; /* 항목들 간에 간격을 동일하게 분배 */
+	gap: 2%;
+	margin-top: 0.7vw;
 }
 
 .campaign {
 	width: 32%;
+	display: block;
 	margin-bottom: 0.7vw;
+}
+
+@media ( max-width : 1100px) {
+	.campaign {
+		width: 48%; /* 화면 크기가 줄어들면 2개만 한 줄에 보이도록 설정 */
+	}
+}
+
+@media ( max-width : 600px) {
+	.campaign {
+		width: 98%; /* 화면 크기가 더 줄어들면 1개만 보이도록 설정 */
+	}
+}
+
+.campaign-img {
+	height: 22vh;
 }
 
 i>img {
@@ -133,16 +147,29 @@ a>span {
 			<div class="campaign-box">
 				<div class="campaign-info">
 					<p>
-						<span>전체</span> <span>페이지</span> <a
-							href="https://www.gihoo.or.kr/rss/gallery.es?mid=a10302000000&bid=0001">ㅇㅇ</a>
+						<c:if test="${keyGetCampaignList.size() == 0 }">
+							<span>전체</span>
+							<b>${keyGetCampaignList.size() }건</b>
+							<span>페이지</span>
+							<b>${keySearch.pageNo }</b>
+							<span>/</span>
+							<b>${keySearch.lastPage+1 }</b>
+						</c:if>
+						<c:if test="${keyGetCampaignList.size() != 0 }">
+							<span>전체</span>
+							<b>${keyCampaignCount}건</b>
+							<span>페이지</span>
+							<b>${keySearch.pageNo }</b>
+							<span>/</span>
+							<b>${keySearch.lastPage }</b>
+						</c:if>
 					</p>
+					<!-- 검색바 -->
 					<form class="d-flex justify-content-around"
-						action="${pageContext.request.contextPath }/campaignWriteView"
+						action="${pageContext.request.contextPath }/campaignView"
 						method="get">
 						<select class="form-select w-25" name="searchOption">
-							<option value="all">전체</option>
 							<option value="title">제목</option>
-							<option value="content">내용</option>
 						</select> <input type="text" class="form-control w-50" name="searchWord">
 						<button class="btn btn-primary" type="submit">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -153,24 +180,33 @@ a>span {
 						</button>
 					</form>
 				</div>
+				<!-- 캠페인 부분 -->
 				<div class="campaign-list">
-					<ul class="campaign-list-ul d-flex justify-content-between">
-						<c:forEach items="${keyGetCampaignList }" var="campaignDTO">
-							<li class="campaign"><a class="d-flex flex-column"
-								href="${campaignDTO.campaignUrl }"> <i> <img
-										src="${campaignDTO.campaignImg }">
-								</i> <span class="campaign-explain"> <strong>${campaignDTO.campaignTitle }</strong>
-										<br> <span> <strong>작성일</strong>
-											${campaignDTO.campaignDate }
+					<c:if test="${keyGetCampaignList.size() != 0}">
+						<ul class="campaign-list-ul">
+							<c:forEach items="${keyGetCampaignList }" var="campaignDTO">
+								<li class="campaign"><a class="d-flex flex-column"
+									href="${campaignDTO.campaignUrl }" target="_blank"> <i>
+											<img src="${campaignDTO.campaignImg }" class="campaign-img">
+									</i> <span class="campaign-explain"> <strong>${campaignDTO.campaignTitle }</strong>
+											<br> <span> <strong>작성일</strong>
+												${campaignDTO.campaignDate }
+										</span>
 									</span>
-								</span>
-							</a></li>
-						</c:forEach>
-					</ul>
+								</a></li>
+							</c:forEach>
+						</ul>
+					</c:if>
+					<c:if test="${keyGetCampaignList.size() == 0}">
+						<ul class="campaign-list-ul">
+							<li>검색 결과를 찾을 수 없습니다.</li>
+						</ul>
+					</c:if>
 				</div>
 			</div>
 		</div>
 	</section>
+	<!-- 캠페인 등록 -->
 	<div>
 		<c:if test="${sessionScope.login.userIsmaster == 1 }">
 			<form action="${pageContext.request.contextPath }/campaignWriteView">
@@ -234,10 +270,11 @@ a>span {
 			</nav>
 		</div>
 	</c:if>
+	<!-- footer 부분 -->
+	<%@ include file="/WEB-INF/inc/footer.jsp"%>
 
 	<script type="text/javascript">
 		document.getElementById("camBtn").addEventListener('click', ()=>{
-			console.log(event.target);
 			document.getElementById("camBtn").parentElement.submit();
 		})
 	</script>
