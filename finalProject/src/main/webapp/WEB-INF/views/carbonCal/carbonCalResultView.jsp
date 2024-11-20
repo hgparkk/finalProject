@@ -109,6 +109,7 @@
 
 <!-- 그래프 그리기 -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
 <!-- header -->
 <%@ include file="/WEB-INF/inc/header.jsp"%>
@@ -394,8 +395,29 @@ document.getElementById("resultCO2").innerHTML += v_allCo2;
                 datasets: [{
                     data: [v_resultElec, v_resultGas, v_resultGar, v_fuelCo2]
                 }]
-            }
+            },
+            options: {
+                responsive: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    datalabels: {
+                        color: '#fff', // 데이터 글자 색상
+                        font: {
+                            size: 15, // 글자 크기
+                        },
+                        formatter: (value, context) => {
+                        	if(value == 0) return ''
+                            return value + "kg";
+                        }
+                    }
+                }
+            },
+            plugins: [ChartDataLabels] // 플러그인 활성화
         });
+        
+        
 
         let electricCtx = document.getElementById('elecGraph');
 

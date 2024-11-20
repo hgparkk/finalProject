@@ -73,11 +73,13 @@
 .inputUsage {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 }
 
 .outputCo2 {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 }
 
 .clicked {
@@ -121,13 +123,13 @@
 }
 
 .span {
-	padding-right: 2vw;
+	width: 6vw;
 }
 
 .input {
 	width: 16vw;
 	height: 2.5vw;
-	padding: 0.4vw;
+	padding: 0.2vw;
 	text-align: right;
 }
 
@@ -234,7 +236,7 @@
 #submitForm{
 	width: 100%;
 	text-align: right;
-	height: 2vw;
+	height: 3vh;
 }
 
 #submitBtn {
