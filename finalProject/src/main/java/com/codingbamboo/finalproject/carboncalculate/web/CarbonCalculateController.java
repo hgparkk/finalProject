@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.codingbamboo.finalproject.carboncalculate.dao.ICarbonCalculateDAO;
 import com.codingbamboo.finalproject.carboncalculate.dto.CarbonCalculateDTO;
 import com.codingbamboo.finalproject.carboncalculate.service.CarbonCalculateService;
+import com.codingbamboo.finalproject.user.dto.UserDTO;
 
 @Controller
 public class CarbonCalculateController {
@@ -50,8 +51,7 @@ public class CarbonCalculateController {
 	@PostMapping("/carbonCalRegistDo")
 	public String carbonCalRegistDo(CarbonCalculateDTO carbonCalculate, HttpServletRequest request,
 			HttpSession session) {
-		com.codingbamboo.finalproject.user.dto.UserDTO login = (com.codingbamboo.finalproject.user.dto.UserDTO) session
-				.getAttribute("login");
+		UserDTO login = (UserDTO) session.getAttribute("login");
 
 		// 로그인 정보가 없으면 로그인 페이지로 리다이렉트
 		if (login == null) {
@@ -60,7 +60,6 @@ public class CarbonCalculateController {
 
 		// 탄소 계산 결과 날짜 확인
 		carbonCalculate.getResultDate();
-		System.out.println(carbonCalculate);
 
 		// 탄소 계산 결과 저장
 		carbonCalculateService.insertCal(carbonCalculate);

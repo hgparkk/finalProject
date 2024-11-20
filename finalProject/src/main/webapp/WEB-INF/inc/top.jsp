@@ -112,7 +112,7 @@
 .login-box {
 	width: 22%;
 	display: flex;
-	justify-content: flex-start;
+	justify-content: flex-end;
 	align-items: center;
 	margin-right: 0.5vw;
 }
