@@ -312,7 +312,20 @@
 						url: "<c:url value='/getElectricUsage' />",
 						data: { "buildingNo": data[seq].buildingNo},
 						success: function(result){
-							console.log(result)
+							document.getElementById("buildingAreaInput").value = data[seq].buildingArea
+							let sum = 0
+							for (let i = 0; i <result.length; i ++){
+								sum += result[i].beuElectric
+							}
+							document.getElementById("buildingElectricUsage").value = sum / result.length
+						}
+					})
+					$.ajax({
+						type:'POST',
+						url: "<c:url value='/getElectricEmission' />",
+						data: { "coefficientName": "전기 CO2 발생량"},
+						success: function(result){
+							document.getElementById("bulidingCO2Emission").value = document.getElementById("buildingElectricUsage").value * result
 						}
 					})
 				}

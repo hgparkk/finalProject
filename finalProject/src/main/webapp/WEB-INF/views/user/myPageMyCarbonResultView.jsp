@@ -86,12 +86,12 @@ request.setAttribute("currentYear", Year.now().getValue());
 							<input type="hidden" value="${year}">
 						</div>
 					</div>
-					<div class="accordion accordion-flush" id="myCalbonCalAccordion">
+					<div class="accordion accordion-flush" id="myCarbonCalAccordion">
 						<div class="accordion-item">
 							<h2 class="accordion-header">
 								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">1월</button>
 							</h2>
-							<div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#myCalbonCalAccordion">
+							<div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#myCarbonCalAccordion">
 								<div class="accordion-body"></div>
 							</div>
 						</div>
@@ -99,7 +99,7 @@ request.setAttribute("currentYear", Year.now().getValue());
 							<h2 class="accordion-header">
 								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">2월</button>
 							</h2>
-							<div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#myCalbonCalAccordion">
+							<div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#myCarbonCalAccordion">
 								<div class="accordion-body"></div>
 							</div>
 						</div>
@@ -107,7 +107,7 @@ request.setAttribute("currentYear", Year.now().getValue());
 							<h2 class="accordion-header">
 								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">3월</button>
 							</h2>
-							<div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#myCalbonCalAccordion">
+							<div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#myCarbonCalAccordion">
 								<div class="accordion-body"></div>
 							</div>
 						</div>
@@ -115,7 +115,7 @@ request.setAttribute("currentYear", Year.now().getValue());
 							<h2 class="accordion-header">
 								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">4월</button>
 							</h2>
-							<div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#myCalbonCalAccordion">
+							<div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#myCarbonCalAccordion">
 								<div class="accordion-body"></div>
 							</div>
 						</div>
@@ -123,7 +123,7 @@ request.setAttribute("currentYear", Year.now().getValue());
 							<h2 class="accordion-header">
 								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">5월</button>
 							</h2>
-							<div id="flush-collapseFive" class="accordion-collapse collapse" data-bs-parent="#myCalbonCalAccordion">
+							<div id="flush-collapseFive" class="accordion-collapse collapse" data-bs-parent="#myCarbonCalAccordion">
 								<div class="accordion-body"></div>
 							</div>
 						</div>
@@ -131,7 +131,7 @@ request.setAttribute("currentYear", Year.now().getValue());
 							<h2 class="accordion-header">
 								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">6월</button>
 							</h2>
-							<div id="flush-collapseSix" class="accordion-collapse collapse" data-bs-parent="#myCalbonCalAccordion">
+							<div id="flush-collapseSix" class="accordion-collapse collapse" data-bs-parent="#myCarbonCalAccordion">
 								<div class="accordion-body"></div>
 							</div>
 						</div>
@@ -139,7 +139,7 @@ request.setAttribute("currentYear", Year.now().getValue());
 							<h2 class="accordion-header">
 								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSeven" aria-expanded="false" aria-controls="flush-collapseSeven">7월</button>
 							</h2>
-							<div id="flush-collapseSeven" class="accordion-collapse collapse" data-bs-parent="#myCalbonCalAccordion">
+							<div id="flush-collapseSeven" class="accordion-collapse collapse" data-bs-parent="#myCarbonCalAccordion">
 								<div class="accordion-body"></div>
 							</div>
 						</div>
@@ -147,7 +147,7 @@ request.setAttribute("currentYear", Year.now().getValue());
 							<h2 class="accordion-header">
 								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseEight" aria-expanded="false" aria-controls="flush-collapseEight">8월</button>
 							</h2>
-							<div id="flush-collapseEight" class="accordion-collapse collapse" data-bs-parent="#myCalbonCalAccordion">
+							<div id="flush-collapseEight" class="accordion-collapse collapse" data-bs-parent="#myCarbonCalAccordion">
 								<div class="accordion-body"></div>
 							</div>
 						</div>
@@ -155,7 +155,7 @@ request.setAttribute("currentYear", Year.now().getValue());
 							<h2 class="accordion-header">
 								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseNine" aria-expanded="false" aria-controls="flush-collapseNine">9월</button>
 							</h2>
-							<div id="flush-collapseNine" class="accordion-collapse collapse" data-bs-parent="#myCalbonCalAccordion">
+							<div id="flush-collapseNine" class="accordion-collapse collapse" data-bs-parent="#myCarbonCalAccordion">
 								<div class="accordion-body"></div>
 							</div>
 						</div>
@@ -163,7 +163,7 @@ request.setAttribute("currentYear", Year.now().getValue());
 							<h2 class="accordion-header">
 								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTen" aria-expanded="false" aria-controls="flush-collapseTen">10월</button>
 							</h2>
-							<div id="flush-collapseTen" class="accordion-collapse collapse" data-bs-parent="#myCalbonCalAccordion">
+							<div id="flush-collapseTen" class="accordion-collapse collapse" data-bs-parent="#myCarbonCalAccordion">
 								<div class="accordion-body"></div>
 							</div>
 						</div>
@@ -171,7 +171,7 @@ request.setAttribute("currentYear", Year.now().getValue());
 							<h2 class="accordion-header">
 								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseEleven" aria-expanded="false" aria-controls="flush-collapseEleven">11월</button>
 							</h2>
-							<div id="flush-collapseEleven" class="accordion-collapse collapse" data-bs-parent="#myCalbonCalAccordion">
+							<div id="flush-collapseEleven" class="accordion-collapse collapse" data-bs-parent="#myCarbonCalAccordion">
 								<div class="accordion-body">
 									<c:forEach items="${myCalList}" var="myCal">
 										<c:if test="${myCal.year == year && myCal.month == 11}">
@@ -189,7 +189,7 @@ request.setAttribute("currentYear", Year.now().getValue());
 							<h2 class="accordion-header">
 								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwelve" aria-expanded="false" aria-controls="flush-collapseTwelve">12월</button>
 							</h2>
-							<div id="flush-collapseTwelve" class="accordion-collapse collapse" data-bs-parent="#myCalbonCalAccordion">
+							<div id="flush-collapseTwelve" class="accordion-collapse collapse" data-bs-parent="#myCarbonCalAccordion">
 								<div class="accordion-body"></div>
 							</div>
 						</div>
