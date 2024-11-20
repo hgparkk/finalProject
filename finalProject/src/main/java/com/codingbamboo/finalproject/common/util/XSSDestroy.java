@@ -14,16 +14,20 @@ public class XSSDestroy {
 			return null;
 		}
 
-		// '@' ¹®ÀÚ¸¦ ÀÓ½Ã ÅäÅ«À¸·Î ´ëÃ¼
-		String tempToken = "##AT_SYMBOL##";
-		inputText = inputText.replace("@", tempToken);
+		String atSymbolToken = "##AT_SYMBOL##";
+		String equalSignToken = "##EQUAL_SIGN##";
+	    
+	    // '@'ì™€ '=' ë¬¸ìë¥¼ ì„ì‹œ í† í°ìœ¼ë¡œ ëŒ€ì²´
+	    inputText = inputText.replace("@", atSymbolToken);
+	    inputText = inputText.replace("=", equalSignToken);
 
-		// HTML »ì±Õ Ã³¸®
-		String sanitized = policy.sanitize(inputText);
+	    // HTML ì‚´ê·  ì²˜ë¦¬ ìˆ˜í–‰
+	    String sanitized = policy.sanitize(inputText);
 
-		// ÀÓ½Ã ÅäÅ«À» ´Ù½Ã '@'·Î º¯È¯
-		sanitized = sanitized.replace(tempToken, "@");
-
-		return sanitized;
+	    // ì„ì‹œ í† í°ì„ ì›ë˜ì˜ '@'ì™€ '=' ë¬¸ìë¡œ ë³µì›
+	    sanitized = sanitized.replace(atSymbolToken, "@");
+	    sanitized = sanitized.replace(equalSignToken, "=");
+	    
+	    return sanitized;
 	}
 }
