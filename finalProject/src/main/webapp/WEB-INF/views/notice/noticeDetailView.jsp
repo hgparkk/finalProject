@@ -19,16 +19,6 @@ html, body {
 	font-family: 'Noto Sans KR', sans-serif;
 }
 
-.title-box {
-	display: flex;
-	padding: 20px;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	text-align: center;
-	margin-bottom: 20px;
-}
-
 .notice-container {
 	padding: 50px 20px;
 	max-width: 800px;
@@ -36,6 +26,7 @@ html, body {
 	background-color: #ffffff;
 	border-radius: 15px;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	min-height: 600px;
 }
 
 .notice-title {
@@ -45,6 +36,7 @@ html, body {
 	margin-bottom: 20px;
 	border-bottom: 2px solid #d0f0c0;
 	padding-bottom: 10px;
+	text-align: center;
 }
 
 .notice-content {
@@ -52,6 +44,7 @@ html, body {
 	line-height: 1.6;
 	color: #333;
 	margin-bottom: 30px;
+	min-height: 300px;
 }
 
 .notice-meta {
@@ -61,6 +54,41 @@ html, body {
 	margin-top: 15px;
 	border-top: 1px solid #ddd;
 	padding-top: 10px;
+}
+
+.attach-files {
+	margin-top: 30px;
+	padding: 20px;
+	background-color: #f9f9f9;
+	border-radius: 10px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.attach-files h4 {
+	font-size: 1.2rem;
+	margin-bottom: 15px;
+	color: #333;
+	font-weight: bold;
+}
+
+.attach-files ul {
+	list-style: none;
+	padding: 0;
+}
+
+.attach-files li {
+	margin-bottom: 10px;
+	font-size: 1rem;
+}
+
+.attach-files a {
+	text-decoration: none;
+	color: #007bff;
+	transition: color 0.3s;
+}
+
+.attach-files a:hover {
+	color: #0056b3;
 }
 
 .button-container {
@@ -75,12 +103,12 @@ html, body {
 	color: white;
 	padding: 10px 20px;
 	border-radius: 5px;
-	background-color: #6c757d; /* 회색 계열 */
+	background-color: #6c757d;
 	transition: background-color 0.3s;
 }
 
 .back-button a:hover, .delete-button a:hover, .edit-button a:hover {
-	background-color: #5a6268; /* 짙은 회색 */
+	background-color: #5a6268;
 }
 </style>
 </head>
@@ -97,6 +125,21 @@ html, body {
 			<c:out value="${notice.noticeContent}" escapeXml="false" />
 		</div>
 
+		<c:if test="${not empty notice.attachList}">
+			<div class="attach-files">
+				<h4>첨부파일</h4>
+				<ul>
+					<c:forEach var="attach" items="${notice.attachList}">
+						<li><a href="/uploads/${attach.attachName}"
+							download="${attach.attachOriginalName}" target="_blank"
+							title="Download ${attach.attachOriginalName}">
+								${attach.attachOriginalName} (${attach.attachSize / 1024} KB) </a></li>
+					</c:forEach>
+				</ul>
+			</div>
+		</c:if>
+
+		<!-- 작성일 -->
 		<div class="notice-meta">
 			작성일:
 			<fmt:formatDate value="${notice.noticeDate}" pattern="yyyy-MM-dd" />
@@ -106,7 +149,9 @@ html, body {
 		<div class="button-container">
 			<!-- 목록으로 돌아가기 버튼 -->
 			<div class="back-button">
-				<a href="noticeView">목록으로 돌아가기</a>
+				<a
+					href="noticeView?page=${param.page}&searchKeyword=${param.searchKeyword}">목록으로
+					돌아가기</a>
 			</div>
 
 			<!-- 삭제 및 수정 버튼 (관리자 권한이 있을 때만 표시) -->
@@ -115,12 +160,12 @@ html, body {
 					<!-- 삭제 버튼 -->
 					<div class="delete-button" style="margin-right: 10px;">
 						<a href="noticeDeleteDo?noticeNo=${notice.noticeNo}"
-							onclick="return confirm('이 공지사항을 삭제하시겠습니까?');"> 삭제 </a>
+							onclick="return confirm('이 공지사항을 삭제하시겠습니까?');">삭제</a>
 					</div>
 
 					<!-- 수정 버튼 -->
 					<div class="edit-button">
-						<a href="noticeEditView?noticeNo=${notice.noticeNo}"> 수정 </a>
+						<a href="noticeEditView?noticeNo=${notice.noticeNo}">수정</a>
 					</div>
 				</div>
 			</c:if>

@@ -8,9 +8,7 @@
 <meta charset="UTF-8">
 <title>Coding Bamboo - 공지사항</title>
 <%@ include file="/WEB-INF/inc/header.jsp"%>
-<c:out value="${currentPage}" />
-<c:out value="${totalPages}" />
-<c:out value="${size}" />
+
 <style>
 html, body {
 	min-height: 100%;

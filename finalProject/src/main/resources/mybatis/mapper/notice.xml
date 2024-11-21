@@ -10,7 +10,6 @@
 		FROM (
 		SELECT
 		notice_no AS noticeNo,
-		attach_no AS attachNo,
 		notice_title AS noticeTitle,
 		notice_content AS noticeContent,
 		notice_date AS noticeDate,
@@ -26,13 +25,11 @@
 		+ #{limit}
 	</select>
 
-
 	<!-- 공지사항 상세 조회 -->
 	<select id="getNoticeDetail" parameterType="int"
 		resultType="com.codingbamboo.finalproject.notice.dto.NoticeDTO">
 		SELECT
 		notice_no AS noticeNo,
-		attach_no AS attachNo,
 		notice_title AS noticeTitle,
 		notice_content AS noticeContent,
 		notice_date AS noticeDate
@@ -41,22 +38,26 @@
 	</select>
 
 	<!-- 공지사항 등록 -->
-	<insert id="registNotice"
-		parameterType="com.codingbamboo.finalproject.notice.dto.NoticeDTO">
-		INSERT INTO notice (
-		notice_no,
-		attach_no,
-		notice_title,
-		notice_content,
-		notice_date
-		) VALUES (
-		NOTICE_SEQ.NEXTVAL,
-		#{attachNo},
-		#{noticeTitle},
-		#{noticeContent},
-		SYSDATE
-		)
-	</insert>
+<insert id="registNotice" parameterType="com.codingbamboo.finalproject.notice.dto.NoticeDTO" useGeneratedKeys="true" keyProperty="noticeNo" keyColumn="NOTICE_NO">
+    INSERT INTO notice (
+        notice_no,
+        notice_title,
+        notice_content,
+        notice_date
+    ) VALUES (
+        NOTICE_SEQ.NEXTVAL, 
+        #{noticeTitle},
+        #{noticeContent},
+        SYSDATE
+    )
+</insert>
+
+
+	<select id="getCurrentNoticeNo" resultType="int">
+		SELECT
+		NOTICE_SEQ.CURRVAL FROM DUAL
+	</select>
+
 
 	<!-- 공지사항 삭제 -->
 	<delete id="deleteNotice" parameterType="int">
@@ -64,10 +65,6 @@
 		WHERE
 		notice_no = #{noticeNo}
 	</delete>
-
-
-
-
 
 	<!-- 공지사항 미리보기 -->
 	<select id="getNoticePreviewList"
@@ -89,6 +86,7 @@
         ]]>
 	</select>
 
+	<!-- 공지사항 총 개수 조회 -->
 	<select id="selectNoticeCount" parameterType="map"
 		resultType="int">
 		SELECT COUNT(*)
@@ -99,14 +97,16 @@
 		</if>
 	</select>
 
+	<!-- 공지사항 수정 -->
 	<update id="updateNotice"
 		parameterType="com.codingbamboo.finalproject.notice.dto.NoticeDTO">
 		UPDATE notice
-		SET notice_title = #{noticeTitle},
+		SET
+		notice_title = #{noticeTitle},
 		notice_content = #{noticeContent},
 		notice_date = SYSDATE
-		WHERE notice_no = #{noticeNo}
+		WHERE notice_no
+		= #{noticeNo}
 	</update>
-
 
 </mapper>

@@ -18,7 +18,7 @@ html, body {
 
 .write-container {
     padding: 50px 20px;
-    width:800px;
+    width: 800px;
     max-width: 800px;
     margin: 0 auto;
     background-color: #ffffff;
@@ -47,7 +47,8 @@ html, body {
     gap: 20px;
 }
 
-.write-form input[type="text"] {
+.write-form input[type="text"],
+.write-form input[type="file"] {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
@@ -94,7 +95,7 @@ html, body {
 
     <!-- 글쓰기 폼 -->
     <div class="write-container">
-        <form action="noticeWriteDo" method="post" class="write-form">
+        <form action="noticeWriteDo" method="post" class="write-form" enctype="multipart/form-data">
             <!-- 제목 -->
             <div>
                 <label for="noticeTitle" style="font-weight: bold;">제목</label>
@@ -105,6 +106,13 @@ html, body {
             <div>
                 <label for="noticeContent" style="font-weight: bold;">내용</label>
                 <textarea id="noticeContent" name="noticeContent" placeholder="내용을 입력하세요" required></textarea>
+            </div>
+
+            <!-- 첨부파일 -->
+            <div>
+                <label for="attachFiles" style="font-weight: bold;">첨부파일</label>
+                <input type="file" id="attachFiles" name="attachFiles" multiple>
+                <small style="color: #888;">여러 파일을 업로드하려면 파일을 선택한 뒤 추가로 선택하세요.</small>
             </div>
 
             <!-- 등록 버튼 -->
