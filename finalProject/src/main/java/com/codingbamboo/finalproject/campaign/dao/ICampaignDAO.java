@@ -20,4 +20,7 @@ public interface ICampaignDAO {
 	
 	// 캠페인 한 페이지 갯수 조회
 	int getCampaignPageCount(SearchVO search);
+	
+	// 계수 가져오기
+	List<CampaignDTO> getCoefficientList(double coefficient);
 }

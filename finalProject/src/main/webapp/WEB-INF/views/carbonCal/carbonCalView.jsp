@@ -253,6 +253,7 @@
 <body>
 	<!-- top -->
 	<%@ include file="/WEB-INF/inc/top.jsp"%>
+	<div>${keyCoefficientList }</div>
 	<div class="carbonCal-container">
 		<div class="title-box">
 			<div class="carbonCal-title w-50">

@@ -1,34 +1,30 @@
 package com.codingbamboo.finalproject.carboncalculate.web;
 
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.codingbamboo.finalproject.carboncalculate.dao.ICarbonCalculateDAO;
 import com.codingbamboo.finalproject.carboncalculate.dto.CarbonCalculateDTO;
 import com.codingbamboo.finalproject.carboncalculate.service.CarbonCalculateService;
+import com.codingbamboo.finalproject.coefficient.dto.CoefficientDTO;
+import com.codingbamboo.finalproject.coefficient.service.CoefficientService;
 import com.codingbamboo.finalproject.user.dto.UserDTO;
 
 @Controller
 public class CarbonCalculateController {
 
 	@Autowired
-	ICarbonCalculateDAO dao;
+	CarbonCalculateService carbonCalculateService;
 
 	@Autowired
-	CarbonCalculateService carbonCalculateService;
+	CoefficientService coefficientService;
 
 	@RequestMapping("/testView")
 	public String testView() {
@@ -37,7 +33,10 @@ public class CarbonCalculateController {
 
 	// 탄소 계산기 뷰 페이지로 이동
 	@RequestMapping("/carbonCalView")
-	public String carbonCalView() {
+	public String carbonCalView(Model model) {
+		// 2. Coefficient 데이터 가져오기
+        List<CoefficientDTO> coefficientList = coefficientService.getAllCoefficient();
+        model.addAttribute("keyCoefficientList", coefficientList);
 		return "carbonCal/carbonCalView";
 	}
 

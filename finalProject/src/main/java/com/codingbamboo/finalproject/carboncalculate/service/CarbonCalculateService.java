@@ -23,4 +23,9 @@ public class CarbonCalculateService {
 	public List<CarbonCalculateDTO> selectCalList(String userId) {
 		return dao.selectCalList(userId);
 	}
+	
+	// 계수 불러오기
+	List<CarbonCalculateDTO> getCoefficientValue(double coefficientValue){
+		return dao.getCoefficientValue(coefficientValue);
+	}
 }

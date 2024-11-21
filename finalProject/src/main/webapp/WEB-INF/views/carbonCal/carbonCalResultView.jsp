@@ -107,10 +107,6 @@
 }
 </style>
 
-<!-- 그래프 그리기 -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
-
 <!-- header -->
 <%@ include file="/WEB-INF/inc/header.jsp"%>
 

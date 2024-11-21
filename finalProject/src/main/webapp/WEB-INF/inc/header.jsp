@@ -26,3 +26,7 @@
 <!-- naver map api -->
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=s4hq14hort"></script>
 <script type="text/javascript" src="js/MarkerClustering.js"></script>
+
+<!-- 그래프 그리기 -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
