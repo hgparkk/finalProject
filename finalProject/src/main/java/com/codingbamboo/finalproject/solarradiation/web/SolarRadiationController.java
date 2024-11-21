@@ -12,12 +12,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.codingbamboo.finalproject.building.dto.BEUDTO;
 import com.codingbamboo.finalproject.building.dto.BuildingDTO;
 import com.codingbamboo.finalproject.building.service.BuildingService;
+import com.codingbamboo.finalproject.solarradiation.dto.SolarRadiationDTO;
+import com.codingbamboo.finalproject.solarradiation.service.SolarRadiationService;
 
 @Controller
 public class SolarRadiationController {
 
 	@Autowired
 	BuildingService buildingService;
+	
+	@Autowired
+	SolarRadiationService solarRadiationService;
 
 	@RequestMapping(value = "/solarRadiationView", method = RequestMethod.GET)
 	public String solarRadiationView(Model model) {
@@ -33,5 +38,11 @@ public class SolarRadiationController {
 	@ResponseBody
 	public List<BEUDTO> getElectricUsage(int buildingNo) {
 		return buildingService.selectBEUList(buildingNo);
+	}
+	
+	@RequestMapping(value="/getSolarRadiation", method=RequestMethod.POST)
+	@ResponseBody
+	public List<SolarRadiationDTO> getSolarRadiation(String year){
+		return solarRadiationService.selectSolarRadiation(year);
 	}
 }

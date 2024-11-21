@@ -250,9 +250,16 @@
 			
 			markers.push(marker)
 			
-			let infoWindow = new naver.maps.InfoWindow({
-				content:'<div style="width:200px; text-align:center; padding:10px;"<b>'+ spot.buildingAddressRoad +'</b><br></div>'
-			})
+			let infoWindow
+			if(spot.buildingAddressRoad){
+				infoWindow = new naver.maps.InfoWindow({
+					content:'<div style="width:200px; text-align:center; padding:10px;"<b>'+ spot.buildingAddressRoad +'</b><br></div>'
+				})
+			}else{
+				infoWindow = new naver.maps.InfoWindow({
+					content:'<div style="width:200px; text-align:center; padding:10px;"<b>'+ spot.buildingAddressLot +'</b><br></div>'
+				})
+			}
 			
 			infoWindows.push(infoWindow)
 		}
@@ -295,6 +302,7 @@
 			}
 		})
 		
+		// 마커를 클릭했을 때 이벤트
 		function getClickHandler(seq){
 			return function(e){
 				let marker = markers[seq]
@@ -328,8 +336,45 @@
 							document.getElementById("bulidingCO2Emission").value = document.getElementById("buildingElectricUsage").value * result
 						}
 					})
+					$.ajax({
+						type:'POST',
+						url: "<c:url value='/getSolarRadiation' />",
+						data: { "year": "2023"},
+						success: function(result){
+							let sum = 0
+							for (let i = 0; i < result.length; i++){
+								sum += result[i].srRadiation
+							}
+							document.getElementById("totalSolarRadiation").value = sum.toFixed(5)
+							let accordions = ["flush-collapseOne","flush-collapseTwo","flush-collapseThree","flush-collapseFour","flush-collapseFive"]
+							let efficiencys = [18,19,20,21,22]
+							for(let i = 0 ; i<accordions.length; i++){
+								const canvas = document.createElement("canvas")
+								drawGraph(canvas,)
+								document.getElementById(accordions[i]).children[0].innerHTML = 
+							}
+						}
+					})
 				}
 			}
+		}
+		
+		function drawGraph(canvas,solarRadiation,area,efficiency){
+			let result = []
+			for(let i = 0; i<solarRadiation.length; i++){
+				result.push(solarRadiation[i]*area*efficiency))
+			}
+			const lineExampleChart = new Chart(canvas,{
+				type: 'line',
+				data: {
+					labels['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
+					datasets:[{
+						label: '예상 월별 태양광 발전량',
+						data: result,
+						fill: false
+					}]
+				}
+			})
 		}
 		
 		for(let i = 0, ii = markers.length; i <ii; i++){

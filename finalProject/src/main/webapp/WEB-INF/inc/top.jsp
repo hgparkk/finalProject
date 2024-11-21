@@ -197,7 +197,7 @@
 						<div class="dropdown-select">
 							<a class="detail"
 								href="${pageContext.request.contextPath}/lowCarbonPracticeView">탄소중립
-								생활 실천 소개</a> <a class="detail" href="#">탄소저감기술 연구동향</a>
+								생활 실천 소개</a> <a class="detail" href="${pageContext.request.contextPath }/carbonResearchView">탄소저감기술 연구동향</a>
 						</div>
 					</div>
 
@@ -229,7 +229,7 @@
 					<div class="dropdown-body">
 						<span class="aTag dropdown-text">탄소중립 알려드려요</span>
 						<div class="dropdown-select">
-							<a class="detail" href="#">탄소저감기술 연구동향</a>
+							<a class="detail" href="${pageContext.request.contextPath }/carbonResearchView">탄소저감기술 연구동향</a>
 						</div>
 					</div>
 

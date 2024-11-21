@@ -1,6 +1,6 @@
 package com.codingbamboo.finalproject.building.dto;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class BEUDTO {
 	private int beuNo;
