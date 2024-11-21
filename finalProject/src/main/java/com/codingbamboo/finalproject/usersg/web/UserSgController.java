@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class UserSgController {
 
-	@RequestMapping("/userSgView")
+	@RequestMapping("/userSuggestionsView")
 	public String userSgView() {
-		return "user/userSgView";
+		return "user/userSuggestionsView";
 	}
 }
