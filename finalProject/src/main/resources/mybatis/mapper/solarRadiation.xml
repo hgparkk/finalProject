@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.codingbamboo.finalproject.solarradiation.dao.ISolarRadiationDAO">
+	<select id="selectSolarRadiation" parameterType="String" resultType="SolarRadiationDTO">
+		SELECT
+			sr_no,
+			sr_month,
+			sr_radiation
+		FROM
+			solar_radiation
+		WHERE
+			TO_CHAR(sr_month,'YYYY') = #{year}
+		ORDER BY
+			sr_month ASC
+	</select>
+</mapper>
