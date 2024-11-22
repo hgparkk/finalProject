@@ -6,7 +6,7 @@ public class NoticeAttachDTO {
     private String attachName;          // 서버에 저장된 첨부파일 이름
     private String attachOriginalName;  // 업로드된 파일의 원본 이름
     private long attachSize;            // 첨부파일 크기 (byte 단위)
-    private String attachType = "default"; // 기본값
+    private String attachType; // 기본값
     private String attachPath;          // 첨부파일이 저장된 경로
     private int noticeNo;               // 공지사항 번호 (Foreign Key)
 
