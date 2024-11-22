@@ -26,6 +26,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.codingbamboo.finalproject.carboncalculate.dto.CarbonCalculateDTO;
 import com.codingbamboo.finalproject.carboncalculate.service.CarbonCalculateService;
+import com.codingbamboo.finalproject.coefficient.dto.CoefficientDTO;
+import com.codingbamboo.finalproject.coefficient.service.CoefficientService;
 import com.codingbamboo.finalproject.oauth.service.OAuthService;
 import com.codingbamboo.finalproject.user.dto.UserDTO;
 import com.codingbamboo.finalproject.user.service.UserService;
@@ -48,6 +50,9 @@ public class UserController {
 	
 	@Autowired
 	CarbonCalculateService carboncalcuateService;
+	
+	@Autowired
+	CoefficientService coefficientService;
 
 	// 로그인 창 이동
 	@RequestMapping(value = "/loginView", method = RequestMethod.GET)
@@ -325,8 +330,10 @@ public class UserController {
 			year = LocalDate.now().getYear();
 		}
 
+		List<CoefficientDTO> coefficientList = coefficientService.getCoefficientValue();
 		List<CarbonCalculateDTO> myCalList = carboncalcuateService.selectCalList(((UserDTO) session.getAttribute("login")).getUserId());
 		
+		model.addAttribute("coefficientList",coefficientList);
 		model.addAttribute("myCalList",myCalList);
 		model.addAttribute("year", year);
 

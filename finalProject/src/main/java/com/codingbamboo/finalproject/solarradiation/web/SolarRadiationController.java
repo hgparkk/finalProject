@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.codingbamboo.finalproject.building.dto.BEUDTO;
 import com.codingbamboo.finalproject.building.dto.BuildingDTO;
 import com.codingbamboo.finalproject.building.service.BuildingService;
+import com.codingbamboo.finalproject.coefficient.dto.CoefficientDTO;
+import com.codingbamboo.finalproject.coefficient.service.CoefficientService;
 import com.codingbamboo.finalproject.solarradiation.dto.SolarRadiationDTO;
 import com.codingbamboo.finalproject.solarradiation.service.SolarRadiationService;
 
@@ -20,7 +22,10 @@ public class SolarRadiationController {
 
 	@Autowired
 	BuildingService buildingService;
-	
+
+	@Autowired
+	CoefficientService coefficientService;
+
 	@Autowired
 	SolarRadiationService solarRadiationService;
 
@@ -33,16 +38,28 @@ public class SolarRadiationController {
 
 		return "solarRadiationMap/solarRadiationView";
 	}
-	
-	@RequestMapping(value="/getElectricUsage",method=RequestMethod.POST)
+
+	@RequestMapping(value = "/getElectricUsage", method = RequestMethod.POST)
 	@ResponseBody
 	public List<BEUDTO> getElectricUsage(int buildingNo) {
 		return buildingService.selectBEUList(buildingNo);
 	}
-	
-	@RequestMapping(value="/getSolarRadiation", method=RequestMethod.POST)
+
+	@RequestMapping(value = "/getEmission", method = RequestMethod.POST)
 	@ResponseBody
-	public List<SolarRadiationDTO> getSolarRadiation(String year){
+	public CoefficientDTO getElectricEmission(String coefficientName) {
+		List<CoefficientDTO> coefficientList = coefficientService.getCoefficientValue();
+		for (int i = 0; i < coefficientList.size(); i++) {
+			if (coefficientList.get(i).getCoefficientName().equals(coefficientName)) {
+				return coefficientList.get(i);
+			}
+		}
+		return null;
+	}
+
+	@RequestMapping(value = "/getSolarRadiation", method = RequestMethod.POST)
+	@ResponseBody
+	public List<SolarRadiationDTO> getSolarRadiation(String year) {
 		return solarRadiationService.selectSolarRadiation(year);
 	}
 }
