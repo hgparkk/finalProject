@@ -276,7 +276,7 @@
 			</c:if>
 		</c:forEach>
 	</div>
-
+	
 	<div class="carbonCal-container">
 		<div class="title-box">
 			<div class="carbonCal-title w-50">
@@ -312,12 +312,12 @@
 							</div>
 							<div class="outputCo2">
 								<span class="span">CO₂ 발생량</span> <input class="input"
-									id="outputElectric"> <span>kg/월</span>
+									id="outputElectric" disabled="disabled"> <span>kg/월</span>
 							</div>
 						</div>
 						<div
 							class="explain-box d-flex align-items-end justify-content-end">
-							<span>전기 CO₂ 발생량 | (전기 사용량 * 0.4781)</span>
+							<span>전기 CO₂ 발생량 | (전기 사용량 * ${keyGetCoefficientValue[2]['coefficientValue'] })</span>
 						</div>
 					</div>
 				</div>
@@ -342,7 +342,7 @@
 						</div>
 						<div
 							class="explain-box d-flex align-items-end justify-content-end">
-							<span>가스 CO₂ 발생량 | (가스 사용량 * 2.176)</span>
+							<span>가스 CO₂ 발생량 | (가스 사용량 * ${keyGetCoefficientValue[3]['coefficientValue'] })</span>
 						</div>
 					</div>
 				</div>
@@ -380,7 +380,6 @@
 											<input type="radio" name="fuelType" id="noCar" value="3">
 											<label for="noCar">승용차 없음</label>
 										</div>
-
 									</div>
 								</div>
 							</div>
@@ -397,8 +396,8 @@
 						</div>
 						<div
 							class="explain-box d-flex flex-column align-items-end justify-content-end">
-							<span>교통 CO₂ 발생량 | 휘발유 : (이동거리 / 16.04 * 2.097)</span> <span>
-								경유 : (이동거리 / 15.35 * 2.582) LPG : (이동거리 / 11.06 * 1.868) </span>
+							<span>교통 CO₂ 발생량 | 휘발유 : (이동거리 / ${keyGetCoefficientValue[4]['coefficientValue'] })</span> <span>
+								경유 : (이동거리 / ${keyGetCoefficientValue[5]['coefficientValue'] }) LPG : (이동거리 / ${keyGetCoefficientValue[6]['coefficientValue'] }) </span>
 						</div>
 					</div>
 				</div>
@@ -425,7 +424,7 @@
 						<div
 							class="explain-box d-flex flex-column align-items-end justify-content-end">
 							<span style="visibility: hidden;">가 </span> <span>생활 폐기물
-								CO₂ 발생량 | (폐기물 사용량 * 0.5573)</span>
+								CO₂ 발생량 | (폐기물 사용량 * ${keyGetCoefficientValue[7]['coefficientValue'] })</span>
 						</div>
 					</div>
 				</div>

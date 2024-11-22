@@ -137,6 +137,92 @@
 			</c:if>
 		</c:forEach>
 	</div>
+	
+	<div>${keyGetHte }</div>
+
+	<div class="house">
+		<span class="span">주거 형태</span>
+	</div>
+	<div class="house-type-select-box">
+		<div class="house-type-select d-flex">
+			<div class="house-type">
+				<input type="radio" name="housing_type1" id="housing_type1"
+					value="0" checked> <label for="housing_type1">아파트</label>
+			</div>
+			<div class="house-type">
+				<input type="radio" name="housing_type2" id="housing_type2"
+					value="1"> <label for="housing_type2">단독주택</label>
+			</div>
+			<div class="house-type">
+				<input type="radio" name="housing_type3" id="housing_type3"
+					value="2"> <label for="housing_type3">연립 및 다세대</label>
+			</div>
+			<div class="house-type">
+				<input type="radio" name="housing_type4" id="housing_type4"
+					value="3"> <label for="housing_type4">기타</label>
+			</div>
+		</div>
+	</div>
+
+	<div class="area">
+		<span class="span">거주면적</span>
+	</div>
+	<div class="resdential-area-select-box">
+		<div class="resdential-area-select d-flex">
+			<div class="resdential-area">
+				<input type="radio" name="resdentialArea1" id="resdentialArea1"
+					value="0" checked> <label for="resdentialArea1">~33㎡ 이하</label>
+			</div>
+			<div class="resdential-area">
+				<input type="radio" name="resdentialArea2" id="resdentialArea2"
+					value="1"> <label for="resdentialArea2">33㎡ 초과 ~ 66㎡ 이하</label>
+			</div>
+			<div class="resdential-area">
+				<input type="radio" name="resdentialArea3" id="resdentialArea3"
+					value="2"> <label for="resdentialArea3">66㎡ 초과~99㎡ 이하</label>
+			</div>
+			<div class="resdential-area">
+				<input type="radio" name="resdentialArea4" id="resdentialArea4"
+					value="3"> <label for="resdentialArea4">99㎡ 초과~132㎡ 이하</label>
+			</div>
+			<div class="resdential-area">
+				<input type="radio" name="resdentialArea5" id="resdentialArea5"
+					value="4"> <label for="resdentialArea5">132㎡ 초과~</label>
+			</div>
+		</div>
+	</div>
+	
+	<div class="member">
+		<span class="span">거주인원</span>
+	</div>
+	<div class="house-member-select-box">
+		<div class="house-member-select d-flex">
+			<div class="house-member">
+				<input type="radio" name="livingMember1" id="livingMember1"
+					value="0" checked> <label for="livingMember1">1명</label>
+			</div>
+			<div class="house-member">
+				<input type="radio" name="livingMember2" id="livingMember2"
+					value="1"> <label for="livingMember2">2명</label>
+			</div>
+			<div class="house-member">
+				<input type="radio" name="livingMember3" id="livingMember3"
+					value="2"> <label for="livingMember3">3명</label>
+			</div>
+			<div class="house-member">
+				<input type="radio" name="livingMember4" id="livingMember4"
+					value="3"> <label for="livingMember4">4명</label>
+			</div>
+			<div class="house-member">
+				<input type="radio" name="livingMember5" id="livingMember5"
+					value="4"> <label for="livingMember5">5명</label>
+			</div>
+			<div class="house-member">
+				<input type="radio" name="livingMember6" id="livingMember6"
+					value="5"> <label for="livingMember6">6명 이상</label>
+			</div>
+		</div>
+	</div>
 
 	<div class="graph-container">
 		<div class="title-box">
