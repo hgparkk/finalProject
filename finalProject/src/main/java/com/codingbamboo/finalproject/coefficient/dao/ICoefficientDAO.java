@@ -4,12 +4,13 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.codingbamboo.finalproject.carboncalculate.dto.CarbonCalculateDTO;
 import com.codingbamboo.finalproject.coefficient.dto.CoefficientDTO;
 
 @Mapper
 public interface ICoefficientDAO {
-	
-	// 모든 계수 정보 가져오기
-    List<CoefficientDTO> selectAllCoefficients();
+    
+    // co2계산 계수 불러오기
+ 	List<CoefficientDTO> getCoefficientValue();
 	
 }

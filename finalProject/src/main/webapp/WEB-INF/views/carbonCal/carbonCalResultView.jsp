@@ -97,11 +97,11 @@
 	height: 1vw;
 }
 
-.bar-graph{
+.bar-graph {
 	height: 90%;
 }
 
-#elecGraph{
+#elecGraph {
 	width: 100%;
 	height: 100%;
 }
@@ -114,6 +114,115 @@
 <body>
 	<!-- top -->
 	<%@ include file="/WEB-INF/inc/top.jsp"%>
+	<div style="display: none;">
+		<c:forEach items="${keyGetCoefficientValue}" var="getCoefficient">
+			<c:if test="${getCoefficient.coefficientName == '전기 CO2 발생량'}">
+				<div id="electricCoefficient">${getCoefficient.coefficientValue}</div>
+			</c:if>
+			<c:if test="${getCoefficient.coefficientName == '가스 CO2 발생량'}">
+				<div id="gasCoefficient">${getCoefficient.coefficientValue}</div>
+			</c:if>
+			<c:if test="${getCoefficient.coefficientName == '휘발유 CO2 발생량'}">
+				<div id="gasolineCoefficient">${getCoefficient.coefficientValue}</div>
+
+			</c:if>
+			<c:if test="${getCoefficient.coefficientName == '경유 CO2 발생량'}">
+				<div id="dieselCoefficient">${getCoefficient.coefficientValue}</div>
+			</c:if>
+			<c:if test="${getCoefficient.coefficientName == 'LPG CO2 발생량'}">
+				<div id="lpgCoefficient">${getCoefficient.coefficientValue}</div>
+			</c:if>
+			<c:if test="${getCoefficient.coefficientName == '폐기물 CO2 발생량'}">
+				<div id="wasteCoefficient">${getCoefficient.coefficientValue}</div>
+			</c:if>
+		</c:forEach>
+	</div>
+	
+	<div>${keyGetHte }</div>
+
+	<div class="house">
+		<span class="span">주거 형태</span>
+	</div>
+	<div class="house-type-select-box">
+		<div class="house-type-select d-flex">
+			<div class="house-type">
+				<input type="radio" name="housing_type1" id="housing_type1"
+					value="0" checked> <label for="housing_type1">아파트</label>
+			</div>
+			<div class="house-type">
+				<input type="radio" name="housing_type2" id="housing_type2"
+					value="1"> <label for="housing_type2">단독주택</label>
+			</div>
+			<div class="house-type">
+				<input type="radio" name="housing_type3" id="housing_type3"
+					value="2"> <label for="housing_type3">연립 및 다세대</label>
+			</div>
+			<div class="house-type">
+				<input type="radio" name="housing_type4" id="housing_type4"
+					value="3"> <label for="housing_type4">기타</label>
+			</div>
+		</div>
+	</div>
+
+	<div class="area">
+		<span class="span">거주면적</span>
+	</div>
+	<div class="resdential-area-select-box">
+		<div class="resdential-area-select d-flex">
+			<div class="resdential-area">
+				<input type="radio" name="resdentialArea1" id="resdentialArea1"
+					value="0" checked> <label for="resdentialArea1">~33㎡ 이하</label>
+			</div>
+			<div class="resdential-area">
+				<input type="radio" name="resdentialArea2" id="resdentialArea2"
+					value="1"> <label for="resdentialArea2">33㎡ 초과 ~ 66㎡ 이하</label>
+			</div>
+			<div class="resdential-area">
+				<input type="radio" name="resdentialArea3" id="resdentialArea3"
+					value="2"> <label for="resdentialArea3">66㎡ 초과~99㎡ 이하</label>
+			</div>
+			<div class="resdential-area">
+				<input type="radio" name="resdentialArea4" id="resdentialArea4"
+					value="3"> <label for="resdentialArea4">99㎡ 초과~132㎡ 이하</label>
+			</div>
+			<div class="resdential-area">
+				<input type="radio" name="resdentialArea5" id="resdentialArea5"
+					value="4"> <label for="resdentialArea5">132㎡ 초과~</label>
+			</div>
+		</div>
+	</div>
+	
+	<div class="member">
+		<span class="span">거주인원</span>
+	</div>
+	<div class="house-member-select-box">
+		<div class="house-member-select d-flex">
+			<div class="house-member">
+				<input type="radio" name="livingMember1" id="livingMember1"
+					value="0" checked> <label for="livingMember1">1명</label>
+			</div>
+			<div class="house-member">
+				<input type="radio" name="livingMember2" id="livingMember2"
+					value="1"> <label for="livingMember2">2명</label>
+			</div>
+			<div class="house-member">
+				<input type="radio" name="livingMember3" id="livingMember3"
+					value="2"> <label for="livingMember3">3명</label>
+			</div>
+			<div class="house-member">
+				<input type="radio" name="livingMember4" id="livingMember4"
+					value="3"> <label for="livingMember4">4명</label>
+			</div>
+			<div class="house-member">
+				<input type="radio" name="livingMember5" id="livingMember5"
+					value="4"> <label for="livingMember5">5명</label>
+			</div>
+			<div class="house-member">
+				<input type="radio" name="livingMember6" id="livingMember6"
+					value="5"> <label for="livingMember6">6명 이상</label>
+			</div>
+		</div>
+	</div>
 
 	<div class="graph-container">
 		<div class="title-box">
@@ -161,17 +270,19 @@
 						<div>
 							<h2>당신의 탄소배출량 결과</h2>
 							<c:if test="${sessionScope.login.userId != null }">
-								<p>${sessionScope.login.userName }님의 이산화탄소(CO₂)발생량통계입니다.</p>
+								<p>${sessionScope.login.userName }님의이산화탄소(CO₂)발생량통계입니다.</p>
 								<div>
-									<span>${sessionScope.login.userName }님 가정의 이산화탄소 배출량은 총</span> <span id="resultCO2"></span> <span>kg
-										입니다. 왼쪽의 그래프를 보면 어느 부분에서 이산화탄소가 가장 많이 발생하고 있는지 확인할 수 있습니다.</span>
+									<span>${sessionScope.login.userName }님 가정의 이산화탄소 배출량은 총</span>
+									<span id="resultCO2"></span> <span>kg 입니다. 왼쪽의 그래프를 보면
+										어느 부분에서 이산화탄소가 가장 많이 발생하고 있는지 확인할 수 있습니다.</span>
 								</div>
 							</c:if>
 							<c:if test="${sessionScope.login.userId == null }">
 								<p>나의 이산화탄소(CO₂) 발생량 통계</p>
 								<div>
-									<span>고객님 가정의 이산화탄소 배출량은 총</span> <span id="resultCO2"></span> <span>kg
-										입니다. 왼쪽의 그래프를 보면 어느 부분에서 이산화탄소가 가장 많이 발생하고 있는지 확인할 수 있습니다.</span>
+									<span>고객님 가정의 이산화탄소 배출량은 총</span> <span id="resultCO2"></span>
+									<span>kg 입니다. 왼쪽의 그래프를 보면 어느 부분에서 이산화탄소가 가장 많이 발생하고 있는지
+										확인할 수 있습니다.</span>
 								</div>
 							</c:if>
 						</div>
@@ -190,7 +301,7 @@
 							<canvas id="elecGraph"></canvas>
 						</div>
 					</div>
-					
+
 					<!-- 가스 -->
 					<div class="allType-graph-box">
 						<div class="bar-graph-title">
@@ -203,7 +314,7 @@
 							<canvas id="gasGraph"></canvas>
 						</div>
 					</div>
-					
+
 					<!-- 교통 -->
 					<div class="allType-graph-box">
 						<div class="bar-graph-title">
@@ -216,7 +327,7 @@
 							<canvas id="trafficGraph"></canvas>
 						</div>
 					</div>
-					
+
 					<!-- 폐기물 -->
 					<div class="allType-graph-box">
 						<div class="bar-graph-title">
@@ -258,11 +369,11 @@
 	let v_regDate = document.getElementById("regDate");
     const currentDate = new Date();
     const currentYear = currentDate.getFullYear();
-    const currentMonth = currentDate.getMonth() + 1; // 월은 0부터 시작하므로 1을 더해야 실제 월이 됩니다.
+    const currentMonth = currentDate.getMonth() + 1;
     const currentDay = currentDate.getDate();
 
- // Date 객체를 "yyyy-MM-dd" 형식으로 설정
- v_regDate.value = currentYear + '-' + (currentMonth < 10 ? '0' + currentMonth : currentMonth) + '-' + (currentDay < 10 ? '0' + currentDay : currentDay);
+	// Date 객체를 "yyyy-MM-dd" 형식으로 설정
+	v_regDate.value = currentYear + '-' + (currentMonth < 10 ? '0' + currentMonth : currentMonth) + '-' + (currentDay < 10 ? '0' + currentDay : currentDay);
 
     const yearSelect = document.getElementById('year');
     const monthSelect = document.getElementById('month');
@@ -272,8 +383,8 @@
 
     // 연도나 월이 변경될 때마다 달력을 업데이트
     function updateMonthOptions() {
-        const selectedYear = parseInt(yearSelect.value);
-        const selectedMonth = parseInt(monthSelect.value);
+		const selectedYear = parseInt(yearSelect.value);
+		const selectedMonth = parseInt(monthSelect.value);
 
         // Date 객체를 생성할 때 day는 1로 설정 (1일로 설정)
         const selectedDate = new Date(selectedYear, selectedMonth - 1, 1); // month는 0부터 시작하므로 1을 빼줍니다.
@@ -297,8 +408,6 @@
 
     // 초기화 시 달력을 설정 (현재 연도, 월 기준)
     updateMonthOptions();
-    
-    console.log()
     
     window.onload = function() {
     // sessionStorage에서 'resultTrfType' 값을 가져옵니다.
@@ -363,16 +472,16 @@ document.getElementById("resRegistBtn").addEventListener('click', () => {
     document.getElementById("resRegistForm").submit();
 });
 
-v_resultElec = Math.round(v_resultElec * 0.4781 * 100000) / 100000;
-v_resultGas = Math.round(v_resultGas * 2.176 * 100000) / 100000;
-v_resultGar = Math.round(v_resultGar * 0.5573 * 100000) / 100000;
+v_resultElec = Math.round(v_resultElec * document.getElementById("electricCoefficient").innerHTML * 100000) / 100000;
+v_resultGas = Math.round(v_resultGas * document.getElementById("gasCoefficient").innerHTML * 100000) / 100000;
+v_resultGar = Math.round(v_resultGar * document.getElementById("wasteCoefficient").innerHTML * 100000) / 100000;
 
 if (v_resultTrfType == '휘발유') {
-    v_fuelCo2 = Math.round((v_resultTrf / 16.04) * 2.097 * 100000) / 100000;
+    v_fuelCo2 = Math.round(v_resultTrf * document.getElementById("gasolineCoefficient").innerHTML * 100000) / 100000;
 } else if (v_resultTrfType == '경유') {
-    v_fuelCo2 = Math.round((v_resultTrf / 15.35) * 2.582 * 100000) / 100000;
+    v_fuelCo2 = Math.round(v_resultTrf * document.getElementById("dieselCoefficient").innerHTML * 100000) / 100000;
 } else if (v_resultTrfType == 'LPG') {
-    v_fuelCo2 = Math.round((v_resultTrf / 11.06) * 1.868 * 100000) / 100000;
+    v_fuelCo2 = Math.round(v_resultTrf * document.getElementById("lpgCoefficient").innerHTML * 100000) / 100000;
 }
 
 sessionStorage.removeItem("resultCo2");

@@ -26,7 +26,7 @@ request.setAttribute("currentYear", Year.now().getValue());
 }
 
 .custom-select-dropdown {
-	background-color:white;
+	background-color: white;
 	display: none;
 	position: absolute;
 	top: 100%;
@@ -92,7 +92,29 @@ request.setAttribute("currentYear", Year.now().getValue());
 								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">1월</button>
 							</h2>
 							<div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#myCarbonCalAccordion">
-								<div class="accordion-body"></div>
+								<div class="accordion-body">
+									<c:choose>
+										<c:when test="${not empty myCalList}">
+											<c:set var="found" value="false" />
+											<c:forEach items="${myCalList}" var="myCal">
+												<c:if test="${myCal.year == year && myCal.month == 1}">
+													<c:set var="found" value="true" />
+													<div>${myCal.electricUsage}</div>
+													<div>${myCal.gasUsage}</div>
+													<div>${myCal.trafficKind}</div>
+													<div>${myCal.trafficValue}</div>
+													<div>${myCal.wasteWeight}</div>
+												</c:if>
+											</c:forEach>
+											<c:if test="${not found}">
+												<div>저장된 결과가 없습니다.</div>
+											</c:if>
+										</c:when>
+										<c:otherwise>
+											<div>저장된 결과가 없습니다.</div>
+										</c:otherwise>
+									</c:choose>
+								</div>
 							</div>
 						</div>
 						<div class="accordion-item">
@@ -100,7 +122,29 @@ request.setAttribute("currentYear", Year.now().getValue());
 								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">2월</button>
 							</h2>
 							<div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#myCarbonCalAccordion">
-								<div class="accordion-body"></div>
+								<div class="accordion-body">
+									<c:choose>
+										<c:when test="${not empty myCalList}">
+											<c:set var="found" value="false" />
+											<c:forEach items="${myCalList}" var="myCal">
+												<c:if test="${myCal.year == year && myCal.month == 2}">
+													<c:set var="found" value="true" />
+													<div>${myCal.electricUsage}</div>
+													<div>${myCal.gasUsage}</div>
+													<div>${myCal.trafficKind}</div>
+													<div>${myCal.trafficValue}</div>
+													<div>${myCal.wasteWeight}</div>
+												</c:if>
+											</c:forEach>
+											<c:if test="${not found}">
+												<div>저장된 결과가 없습니다.</div>
+											</c:if>
+										</c:when>
+										<c:otherwise>
+											<div>저장된 결과가 없습니다.</div>
+										</c:otherwise>
+									</c:choose>
+								</div>
 							</div>
 						</div>
 						<div class="accordion-item">
@@ -108,7 +152,29 @@ request.setAttribute("currentYear", Year.now().getValue());
 								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">3월</button>
 							</h2>
 							<div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#myCarbonCalAccordion">
-								<div class="accordion-body"></div>
+								<div class="accordion-body">
+									<c:choose>
+										<c:when test="${not empty myCalList}">
+											<c:set var="found" value="false" />
+											<c:forEach items="${myCalList}" var="myCal">
+												<c:if test="${myCal.year == year && myCal.month == 3}">
+													<c:set var="found" value="true" />
+													<div>${myCal.electricUsage}</div>
+													<div>${myCal.gasUsage}</div>
+													<div>${myCal.trafficKind}</div>
+													<div>${myCal.trafficValue}</div>
+													<div>${myCal.wasteWeight}</div>
+												</c:if>
+											</c:forEach>
+											<c:if test="${not found}">
+												<div>저장된 결과가 없습니다.</div>
+											</c:if>
+										</c:when>
+										<c:otherwise>
+											<div>저장된 결과가 없습니다.</div>
+										</c:otherwise>
+									</c:choose>
+								</div>
 							</div>
 						</div>
 						<div class="accordion-item">
@@ -116,7 +182,29 @@ request.setAttribute("currentYear", Year.now().getValue());
 								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">4월</button>
 							</h2>
 							<div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#myCarbonCalAccordion">
-								<div class="accordion-body"></div>
+								<div class="accordion-body">
+									<c:choose>
+										<c:when test="${not empty myCalList}">
+											<c:set var="found" value="false" />
+											<c:forEach items="${myCalList}" var="myCal">
+												<c:if test="${myCal.year == year && myCal.month == 4}">
+													<c:set var="found" value="true" />
+													<div>${myCal.electricUsage}</div>
+													<div>${myCal.gasUsage}</div>
+													<div>${myCal.trafficKind}</div>
+													<div>${myCal.trafficValue}</div>
+													<div>${myCal.wasteWeight}</div>
+												</c:if>
+											</c:forEach>
+											<c:if test="${not found}">
+												<div>저장된 결과가 없습니다.</div>
+											</c:if>
+										</c:when>
+										<c:otherwise>
+											<div>저장된 결과가 없습니다.</div>
+										</c:otherwise>
+									</c:choose>
+								</div>
 							</div>
 						</div>
 						<div class="accordion-item">
@@ -124,7 +212,29 @@ request.setAttribute("currentYear", Year.now().getValue());
 								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">5월</button>
 							</h2>
 							<div id="flush-collapseFive" class="accordion-collapse collapse" data-bs-parent="#myCarbonCalAccordion">
-								<div class="accordion-body"></div>
+								<div class="accordion-body">
+									<c:choose>
+										<c:when test="${not empty myCalList}">
+											<c:set var="found" value="false" />
+											<c:forEach items="${myCalList}" var="myCal">
+												<c:if test="${myCal.year == year && myCal.month == 5}">
+													<c:set var="found" value="true" />
+													<div>${myCal.electricUsage}</div>
+													<div>${myCal.gasUsage}</div>
+													<div>${myCal.trafficKind}</div>
+													<div>${myCal.trafficValue}</div>
+													<div>${myCal.wasteWeight}</div>
+												</c:if>
+											</c:forEach>
+											<c:if test="${not found}">
+												<div>저장된 결과가 없습니다.</div>
+											</c:if>
+										</c:when>
+										<c:otherwise>
+											<div>저장된 결과가 없습니다.</div>
+										</c:otherwise>
+									</c:choose>
+								</div>
 							</div>
 						</div>
 						<div class="accordion-item">
@@ -132,7 +242,29 @@ request.setAttribute("currentYear", Year.now().getValue());
 								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">6월</button>
 							</h2>
 							<div id="flush-collapseSix" class="accordion-collapse collapse" data-bs-parent="#myCarbonCalAccordion">
-								<div class="accordion-body"></div>
+								<div class="accordion-body">
+									<c:choose>
+										<c:when test="${not empty myCalList}">
+											<c:set var="found" value="false" />
+											<c:forEach items="${myCalList}" var="myCal">
+												<c:if test="${myCal.year == year && myCal.month == 6}">
+													<c:set var="found" value="true" />
+													<div>${myCal.electricUsage}</div>
+													<div>${myCal.gasUsage}</div>
+													<div>${myCal.trafficKind}</div>
+													<div>${myCal.trafficValue}</div>
+													<div>${myCal.wasteWeight}</div>
+												</c:if>
+											</c:forEach>
+											<c:if test="${not found}">
+												<div>저장된 결과가 없습니다.</div>
+											</c:if>
+										</c:when>
+										<c:otherwise>
+											<div>저장된 결과가 없습니다.</div>
+										</c:otherwise>
+									</c:choose>
+								</div>
 							</div>
 						</div>
 						<div class="accordion-item">
@@ -140,7 +272,29 @@ request.setAttribute("currentYear", Year.now().getValue());
 								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSeven" aria-expanded="false" aria-controls="flush-collapseSeven">7월</button>
 							</h2>
 							<div id="flush-collapseSeven" class="accordion-collapse collapse" data-bs-parent="#myCarbonCalAccordion">
-								<div class="accordion-body"></div>
+								<div class="accordion-body">
+									<c:choose>
+										<c:when test="${not empty myCalList}">
+											<c:set var="found" value="false" />
+											<c:forEach items="${myCalList}" var="myCal">
+												<c:if test="${myCal.year == year && myCal.month == 7}">
+													<c:set var="found" value="true" />
+													<div>${myCal.electricUsage}</div>
+													<div>${myCal.gasUsage}</div>
+													<div>${myCal.trafficKind}</div>
+													<div>${myCal.trafficValue}</div>
+													<div>${myCal.wasteWeight}</div>
+												</c:if>
+											</c:forEach>
+											<c:if test="${not found}">
+												<div>저장된 결과가 없습니다.</div>
+											</c:if>
+										</c:when>
+										<c:otherwise>
+											<div>저장된 결과가 없습니다.</div>
+										</c:otherwise>
+									</c:choose>
+								</div>
 							</div>
 						</div>
 						<div class="accordion-item">
@@ -148,7 +302,29 @@ request.setAttribute("currentYear", Year.now().getValue());
 								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseEight" aria-expanded="false" aria-controls="flush-collapseEight">8월</button>
 							</h2>
 							<div id="flush-collapseEight" class="accordion-collapse collapse" data-bs-parent="#myCarbonCalAccordion">
-								<div class="accordion-body"></div>
+								<div class="accordion-body">
+									<c:choose>
+										<c:when test="${not empty myCalList}">
+											<c:set var="found" value="false" />
+											<c:forEach items="${myCalList}" var="myCal">
+												<c:if test="${myCal.year == year && myCal.month == 8}">
+													<c:set var="found" value="true" />
+													<div>${myCal.electricUsage}</div>
+													<div>${myCal.gasUsage}</div>
+													<div>${myCal.trafficKind}</div>
+													<div>${myCal.trafficValue}</div>
+													<div>${myCal.wasteWeight}</div>
+												</c:if>
+											</c:forEach>
+											<c:if test="${not found}">
+												<div>저장된 결과가 없습니다.</div>
+											</c:if>
+										</c:when>
+										<c:otherwise>
+											<div>저장된 결과가 없습니다.</div>
+										</c:otherwise>
+									</c:choose>
+								</div>
 							</div>
 						</div>
 						<div class="accordion-item">
@@ -156,7 +332,29 @@ request.setAttribute("currentYear", Year.now().getValue());
 								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseNine" aria-expanded="false" aria-controls="flush-collapseNine">9월</button>
 							</h2>
 							<div id="flush-collapseNine" class="accordion-collapse collapse" data-bs-parent="#myCarbonCalAccordion">
-								<div class="accordion-body"></div>
+								<div class="accordion-body">
+									<c:choose>
+										<c:when test="${not empty myCalList}">
+											<c:set var="found" value="false" />
+											<c:forEach items="${myCalList}" var="myCal">
+												<c:if test="${myCal.year == year && myCal.month == 9}">
+													<c:set var="found" value="true" />
+													<div>${myCal.electricUsage}</div>
+													<div>${myCal.gasUsage}</div>
+													<div>${myCal.trafficKind}</div>
+													<div>${myCal.trafficValue}</div>
+													<div>${myCal.wasteWeight}</div>
+												</c:if>
+											</c:forEach>
+											<c:if test="${not found}">
+												<div>저장된 결과가 없습니다.</div>
+											</c:if>
+										</c:when>
+										<c:otherwise>
+											<div>저장된 결과가 없습니다.</div>
+										</c:otherwise>
+									</c:choose>
+								</div>
 							</div>
 						</div>
 						<div class="accordion-item">
@@ -164,7 +362,29 @@ request.setAttribute("currentYear", Year.now().getValue());
 								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTen" aria-expanded="false" aria-controls="flush-collapseTen">10월</button>
 							</h2>
 							<div id="flush-collapseTen" class="accordion-collapse collapse" data-bs-parent="#myCarbonCalAccordion">
-								<div class="accordion-body"></div>
+								<div class="accordion-body">
+									<c:choose>
+										<c:when test="${not empty myCalList}">
+											<c:set var="found" value="false" />
+											<c:forEach items="${myCalList}" var="myCal">
+												<c:if test="${myCal.year == year && myCal.month == 10}">
+													<c:set var="found" value="true" />
+													<div>${myCal.electricUsage}</div>
+													<div>${myCal.gasUsage}</div>
+													<div>${myCal.trafficKind}</div>
+													<div>${myCal.trafficValue}</div>
+													<div>${myCal.wasteWeight}</div>
+												</c:if>
+											</c:forEach>
+											<c:if test="${not found}">
+												<div>저장된 결과가 없습니다.</div>
+											</c:if>
+										</c:when>
+										<c:otherwise>
+											<div>저장된 결과가 없습니다.</div>
+										</c:otherwise>
+									</c:choose>
+								</div>
 							</div>
 						</div>
 						<div class="accordion-item">
@@ -173,15 +393,27 @@ request.setAttribute("currentYear", Year.now().getValue());
 							</h2>
 							<div id="flush-collapseEleven" class="accordion-collapse collapse" data-bs-parent="#myCarbonCalAccordion">
 								<div class="accordion-body">
-									<c:forEach items="${myCalList}" var="myCal">
-										<c:if test="${myCal.year == year && myCal.month == 11}">
-											<div>${myCal.electricUsage}</div>
-											<div>${myCal.gasUsage}</div>
-											<div>${myCal.trafficKind}</div>
-											<div>${myCal.trafficValue}</div>
-											<div>${myCal.wasteWeight}</div>
-										</c:if>
-									</c:forEach>
+									<c:choose>
+										<c:when test="${not empty myCalList}">
+											<c:set var="found" value="false" />
+											<c:forEach items="${myCalList}" var="myCal">
+												<c:if test="${myCal.year == year && myCal.month == 11}">
+													<c:set var="found" value="true" />
+													<div>${myCal.electricUsage}</div>
+													<div>${myCal.gasUsage}</div>
+													<div>${myCal.trafficKind}</div>
+													<div>${myCal.trafficValue}</div>
+													<div>${myCal.wasteWeight}</div>
+												</c:if>
+											</c:forEach>
+											<c:if test="${not found}">
+												<div>저장된 결과가 없습니다.</div>
+											</c:if>
+										</c:when>
+										<c:otherwise>
+											<div>저장된 결과가 없습니다.</div>
+										</c:otherwise>
+									</c:choose>
 								</div>
 							</div>
 						</div>
@@ -190,7 +422,29 @@ request.setAttribute("currentYear", Year.now().getValue());
 								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwelve" aria-expanded="false" aria-controls="flush-collapseTwelve">12월</button>
 							</h2>
 							<div id="flush-collapseTwelve" class="accordion-collapse collapse" data-bs-parent="#myCarbonCalAccordion">
-								<div class="accordion-body"></div>
+								<div class="accordion-body">
+									<c:choose>
+										<c:when test="${not empty myCalList}">
+											<c:set var="found" value="false" />
+											<c:forEach items="${myCalList}" var="myCal">
+												<c:if test="${myCal.year == year && myCal.month == 12}">
+													<c:set var="found" value="true" />
+													<div>${myCal.electricUsage}</div>
+													<div>${myCal.gasUsage}</div>
+													<div>${myCal.trafficKind}</div>
+													<div>${myCal.trafficValue}</div>
+													<div>${myCal.wasteWeight}</div>
+												</c:if>
+											</c:forEach>
+											<c:if test="${not found}">
+												<div>저장된 결과가 없습니다.</div>
+											</c:if>
+										</c:when>
+										<c:otherwise>
+											<div>저장된 결과가 없습니다.</div>
+										</c:otherwise>
+									</c:choose>
+								</div>
 							</div>
 						</div>
 						<div style="height: 100px;"></div>

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.codingbamboo.finalproject.coefficient.dao.ICoefficientDAO">
-	<select id="selectAllCoefficients" resultType="com.codingbamboo.finalproject.coefficient.dto.CoefficientDTO">
+	<select id="getCoefficientValue" resultType="com.codingbamboo.finalproject.coefficient.dto.CoefficientDTO">
 		SELECT
-			coefficient_no
-			, coefficient_name
+			coefficient_name
 			, coefficient_value
 		FROM
 			coefficient

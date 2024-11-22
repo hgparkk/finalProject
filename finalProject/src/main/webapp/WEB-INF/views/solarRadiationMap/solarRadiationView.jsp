@@ -132,15 +132,15 @@
 						</div>
 					</div>
 					<div style="margin-top: 50px; width: 400px;">
-						<span class="mb-3">이 건물에서 배출된 이상화탄소 배출량은</span>
+						<span class="ms-4 mb-3">이 건물에서 배출된 이상화탄소 배출량은</span>
 						<img src="assets/car.png" style="width: 380px;">
-						<span class="mt-3">
+						<span class="ms-4 mt-3">
 							승용차 1대가
 							<span id="carCarbonEmission"></span>
 							km 이동 할 때 배출하는 이산화 탄소 배출량과 동일합니다.
 						</span>
 					</div>
-					<div class="d-flex" style="margin-top: 50px; width: 400px;">
+					<div class="d-flex" style="margin-top: 25px; width: 400px;">
 						<div class="d-flex flex-column">
 							<span class="ms-4 mt-3 result-text">연 합계 전천 일사량</span>
 						</div>
@@ -251,13 +251,13 @@
 			markers.push(marker)
 			
 			let infoWindow
-			if(spot.buildingAddressRoad){
+			if(spot.buildingAddressRoad != " "){
 				infoWindow = new naver.maps.InfoWindow({
-					content:'<div style="width:200px; text-align:center; padding:10px;"<b>'+ spot.buildingAddressRoad +'</b><br></div>'
+					content:'<div style="width:200px; text-align:center; padding:10px;"><b>'+ spot.buildingAddressRoad +'</b><br></div>'
 				})
 			}else{
 				infoWindow = new naver.maps.InfoWindow({
-					content:'<div style="width:200px; text-align:center; padding:10px;"<b>'+ spot.buildingAddressLot +'</b><br></div>'
+					content:'<div style="width:200px; text-align:center; padding:10px;"><b>'+ spot.buildingAddressLot +'</b><br></div>'
 				})
 			}
 			
@@ -319,55 +319,123 @@
 						type:'POST',
 						url: "<c:url value='/getElectricUsage' />",
 						data: { "buildingNo": data[seq].buildingNo},
-						success: function(result){
+						success: function(result1){
 							document.getElementById("buildingAreaInput").value = data[seq].buildingArea
 							let sum = 0
-							for (let i = 0; i <result.length; i ++){
-								sum += result[i].beuElectric
+							for (let i = 0; i <result1.length; i ++){
+								sum += result1[i].beuElectric
 							}
-							document.getElementById("buildingElectricUsage").value = sum / result.length
-						}
-					})
-					$.ajax({
-						type:'POST',
-						url: "<c:url value='/getElectricEmission' />",
-						data: { "coefficientName": "전기 CO2 발생량"},
-						success: function(result){
-							document.getElementById("bulidingCO2Emission").value = document.getElementById("buildingElectricUsage").value * result
-						}
-					})
-					$.ajax({
-						type:'POST',
-						url: "<c:url value='/getSolarRadiation' />",
-						data: { "year": "2023"},
-						success: function(result){
-							let sum = 0
-							for (let i = 0; i < result.length; i++){
-								sum += result[i].srRadiation
-							}
-							document.getElementById("totalSolarRadiation").value = sum.toFixed(5)
-							let accordions = ["flush-collapseOne","flush-collapseTwo","flush-collapseThree","flush-collapseFour","flush-collapseFive"]
-							let efficiencys = [18,19,20,21,22]
-							for(let i = 0 ; i<accordions.length; i++){
-								const canvas = document.createElement("canvas")
-								drawGraph(canvas,)
-								document.getElementById(accordions[i]).children[0].innerHTML = 
-							}
+							document.getElementById("buildingElectricUsage").value = Math.round(((sum / result1.length) * 12) * 10000) / 10000
+							
+							$.ajax({
+								type:'POST',
+								url: "<c:url value='/getEmission' />",
+								data: { "coefficientName": "전기 CO2 발생량"},
+								success: function(result2){
+									document.getElementById("buildingCO2Emission").value = Math.round((document.getElementById("buildingElectricUsage").value * result2.coefficientValue) * 10000) / 10000
+									$.ajax({
+										type:'POST',
+										url: "<c:url value='/getEmission' />",
+										data: { "coefficientName": "자동차 거리당 CO2 발생량"},
+										success: function(result){
+											document.getElementById("carCarbonEmission").innerHTML = Math.round((document.getElementById("buildingCO2Emission").value * result.coefficientValue) * 10000) / 10000
+										}
+									})
+									$.ajax({
+										type:'POST',
+										url: "<c:url value='/getSolarRadiation' />",
+										data: { "year": "2023"},
+										success: function(result3){
+											srRadiation = []
+											let sum = 0
+											for (let i = 0; i < result3.length; i++){
+												sum += result3[i].srRadiation
+												srRadiation.push(result3[i].srRadiation)
+											}
+											document.getElementById("totalSolarRadiation").value = Math.round(sum * 10000) / 10000
+											let accordions = ["flush-collapseOne","flush-collapseTwo","flush-collapseThree","flush-collapseFour","flush-collapseFive"]
+											let efficiencys = [18,19,20,21,22]
+											for(let i = 0 ; i<accordions.length; i++){
+												const canvasDiv = document.createElement("div")
+												const canvas = document.createElement("canvas")
+												canvas.style.width = "360px"
+												drawGraph(canvas,srRadiation,data[seq].buildingArea,efficiencys[i])
+												document.getElementById(accordions[i]).children[0].innerHTML = ""
+												canvasDiv.appendChild(canvas)
+												document.getElementById(accordions[i]).children[0].appendChild(canvasDiv)
+												sumRadiation = 0
+												for(let j = 0; j<srRadiation.length; j++){
+													sumRadiation += srRadiation[j]*data[seq].buildingArea*(efficiencys[i]/100)
+												}
+												let infoDiv = document.createElement("div")
+												infoDiv.classList.add("d-flex")
+												let reduce = document.getElementById("buildingCO2Emission").value - Math.round((sumRadiation * result2.coefficientValue) * 10000) / 10000
+												if(reduce < 0){
+													reduce = 0
+												}
+												infoDiv.innerHTML += '<div class="d-flex flex-column">'
+												+	'<span class="mt-3 result-text">총 예상 발전량</span>'
+												+	'<span class="mt-3 result-text">탄소 배출 저감량</span>'
+												+	'<span class="mt-3 result-text">최종 탄소 배출량</span>'
+												+	'</div>'
+												+	'<div class="d-flex flex-column">'
+												+	'<span class="mt-3 ms-1 result-text">'
+												+	'<input class="result-input" value="'
+												+ 	Math.round(sumRadiation * 10000) / 10000
+												+	'" readonly>'
+												+	'</span>'
+												+	'<span class="mt-3 ms-1 result-text">'
+												+	'<input class="result-input" value="'
+												+	Math.round((sumRadiation * result2.coefficientValue) * 10000) / 10000
+												+	'" readonly>'
+												+	'</span>'
+												+	'<span class="mt-3 ms-1 result-text">'
+												+	'<input class="result-input" value="'
+												+	Math.round(reduce * 10000) / 10000
+												+	'" readonly>'
+												+	'</span>'
+												+	'</div>'
+												+	'<div class="d-flex flex-column">'
+												+	'<span class="mt-3 ms-1 result-text">kWh</span>'
+												+	'<span class="mt-3 ms-1 result-text">kgCO2eq</span>'
+												+	'<span class="mt-3 ms-1 result-text">kgCO2eq</span>'
+												+	'</div>'
+												document.getElementById(accordions[i]).children[0].appendChild(infoDiv)
+												$.ajax({
+													type:'POST',
+													url: "<c:url value='/getEmission' />",
+													data: { "coefficientName": "톤당 편백나무 그루수"},
+													success: function(result4){
+														treeDiv = document.createElement("div")
+														treeDiv.classList.add("mt-3")
+														treeDiv.classList.add("d-flex")
+														treeDiv.innerHTML += '<img src="assets/cypress.png" style="width: 50px;">'
+														treeDiv.innerHTML += '<div class="d-flex align-items-center">편백나무 '
+														+ result4.coefficientValue * (Math.round(sumRadiation * result2.coefficientValue) / 10000)
+														+ ' 그루를 심은 것과 같은 효과입니다.</div>'
+														document.getElementById(accordions[i]).children[0].appendChild(treeDiv)
+													}
+												})
+											}
+										}
+									})
+								}
+							})
 						}
 					})
 				}
 			}
 		}
 		
-		function drawGraph(canvas,solarRadiation,area,efficiency){
+ 		function drawGraph(canvas,solarRadiation,area,efficiency){
 			let result = []
 			for(let i = 0; i<solarRadiation.length; i++){
-				result.push(solarRadiation[i]*area*efficiency))
+				result.push(solarRadiation[i]*area*(efficiency/100))
 			}
 			const lineExampleChart = new Chart(canvas,{
 				type: 'line',
 				data: {
-					labels['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
+					labels:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
 					datasets:[{
 						label: '예상 월별 태양광 발전량',
 						data: result,
