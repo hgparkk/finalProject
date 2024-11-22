@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.codingbamboo.finalproject.carboncalculate.dto.CarbonCalculateDTO;
 import com.codingbamboo.finalproject.coefficient.dao.ICoefficientDAO;
 import com.codingbamboo.finalproject.coefficient.dto.CoefficientDTO;
 
@@ -12,11 +13,11 @@ import com.codingbamboo.finalproject.coefficient.dto.CoefficientDTO;
 public class CoefficientService {
 	
 	@Autowired
-	ICoefficientDAO coefficientDAO;
-	
-	// Coefficient 데이터 가져오는 메서드
-    public List<CoefficientDTO> getAllCoefficient() {
-        return coefficientDAO.selectAllCoefficients();
-    }
+	ICoefficientDAO dao;
+    
+    // 계수 불러오기
+ 	public List<CoefficientDTO> getCoefficientValue(){
+ 		return dao.getCoefficientValue();
+ 	}
 
 }

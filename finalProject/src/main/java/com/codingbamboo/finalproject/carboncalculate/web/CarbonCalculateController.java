@@ -34,15 +34,20 @@ public class CarbonCalculateController {
 	// 탄소 계산기 뷰 페이지로 이동
 	@RequestMapping("/carbonCalView")
 	public String carbonCalView(Model model) {
-		// 2. Coefficient 데이터 가져오기
-        List<CoefficientDTO> coefficientList = coefficientService.getAllCoefficient();
-        model.addAttribute("keyCoefficientList", coefficientList);
+		// 계수 데이터 가져오기
+        List<CoefficientDTO> getCoefficientValue = coefficientService.getCoefficientValue();
+        model.addAttribute("keyGetCoefficientValue", getCoefficientValue);
+        
 		return "carbonCal/carbonCalView";
 	}
 
 	// 탄소 계산기 결과 페이지로 이동
 	@RequestMapping("/carbonCalResultView")
-	public String carbonCalResultView() {
+	public String carbonCalResultView(Model model) {
+		// 계수 데이터 가져오기
+        List<CoefficientDTO> getCoefficientValue = coefficientService.getCoefficientValue();
+        model.addAttribute("keyGetCoefficientValue", getCoefficientValue);
+        
 		return "carbonCal/carbonCalResultView";
 	}
 

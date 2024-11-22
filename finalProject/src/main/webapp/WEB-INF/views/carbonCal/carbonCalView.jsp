@@ -56,7 +56,7 @@
 	min-width: 500px;
 }
 
-.usage-group{
+.usage-group {
 	display: flex;
 	justify-content: space-between;
 }
@@ -229,11 +229,11 @@
 	padding: 0.5vw;
 }
 
-.empty2{
+.empty2 {
 	height: 5%
 }
 
-#submitForm{
+#submitForm {
 	width: 100%;
 	text-align: right;
 	height: 3vh;
@@ -253,7 +253,30 @@
 <body>
 	<!-- top -->
 	<%@ include file="/WEB-INF/inc/top.jsp"%>
-	<div>${keyCoefficientList }</div>
+	<div style="display: none;">
+		<c:forEach items="${keyGetCoefficientValue}" var="getCoefficient">
+			<c:if test="${getCoefficient.coefficientName == '전기 CO2 발생량'}">
+				<div id="electricCoefficient">${getCoefficient.coefficientValue}</div>
+			</c:if>
+			<c:if test="${getCoefficient.coefficientName == '가스 CO2 발생량'}">
+				<div id="gasCoefficient">${getCoefficient.coefficientValue}</div>
+			</c:if>
+			<c:if test="${getCoefficient.coefficientName == '휘발유 CO2 발생량'}">
+				<div id="gasolineCoefficient">${getCoefficient.coefficientValue}</div>
+
+			</c:if>
+			<c:if test="${getCoefficient.coefficientName == '경유 CO2 발생량'}">
+				<div id="dieselCoefficient">${getCoefficient.coefficientValue}</div>
+			</c:if>
+			<c:if test="${getCoefficient.coefficientName == 'LPG CO2 발생량'}">
+				<div id="lpgCoefficient">${getCoefficient.coefficientValue}</div>
+			</c:if>
+			<c:if test="${getCoefficient.coefficientName == '폐기물 CO2 발생량'}">
+				<div id="wasteCoefficient">${getCoefficient.coefficientValue}</div>
+			</c:if>
+		</c:forEach>
+	</div>
+
 	<div class="carbonCal-container">
 		<div class="title-box">
 			<div class="carbonCal-title w-50">
@@ -289,7 +312,7 @@
 							</div>
 							<div class="outputCo2">
 								<span class="span">CO₂ 발생량</span> <input class="input"
-									id="outputElectric" disabled="disabled"> <span>kg/월</span>
+									id="outputElectric"> <span>kg/월</span>
 							</div>
 						</div>
 						<div
@@ -488,14 +511,14 @@
 		function co2Emission()  {
 			/* 전기 CO₂ 발생량 계산 */
 			const v_inputElectric = document.getElementById('inputElectric').value;
-			const resultElectricCo2 = v_inputElectric * 0.4781
+			const resultElectricCo2 = v_inputElectric * document.getElementById("electricCoefficient").innerHTML
 			const result = Math.floor(resultElectricCo2 * 100000);
 			const result2 = result / 100000;
 			document.getElementById("outputElectric").value = result2;
 			
 			// 가스 CO₂ 발생량 계산
 		    const v_inputGas = document.getElementById('inputGas').value;
-	        const resultGasCo2 = v_inputGas * 2.176;
+	        const resultGasCo2 = v_inputGas * document.getElementById("gasCoefficient").innerHTML;
 	        const roundedGasCo2 = Math.round(resultGasCo2 * 100000) / 100000;
 	        document.getElementById("outputGas").value = roundedGasCo2;
 	
@@ -508,11 +531,11 @@
 		    if (selectedFuelType && v_inputFuel) {
 		        const fuelType = selectedFuelType.nextElementSibling.textContent.trim();
 		        if (fuelType === '휘발유') {
-		            resultFuelCo2 = (v_inputFuel / 16.04) * 2.097;
+		            resultFuelCo2 = v_inputFuel * document.getElementById("gasolineCoefficient").innerHTML;
 		        } else if (fuelType === '경유') {
-		            resultFuelCo2 = (v_inputFuel / 15.35) * 2.582;
+		            resultFuelCo2 = v_inputFuel * document.getElementById("dieselCoefficient").innerHTML;
 		        } else if (fuelType === 'LPG') {
-		            resultFuelCo2 = (v_inputFuel / 11.06) * 1.868;
+		            resultFuelCo2 = v_inputFuel * document.getElementById("lpgCoefficient").innerHTML;
 		        }
 		    }
 		    
@@ -526,7 +549,7 @@
 		    
 		    // 폐기물 CO₂ 발생량 계산
 		    const v_inputGarbage = document.getElementById('inputGarbage').value;
-	        const resultGarbageCo2 = v_inputGarbage * 0.5573;
+	        const resultGarbageCo2 = v_inputGarbage * document.getElementById("wasteCoefficient").innerHTML;
 	        const roundedGarbageCo2 = Math.round(resultGarbageCo2 * 100000) / 100000;
 	        document.getElementById("outputGarbage").value = roundedGarbageCo2;
 	        
