@@ -28,7 +28,7 @@ public class CallbackController {
 		this.oauthService = oauthService;
 	}
 
-	// Äİ¹é Ã³¸® ÇÔ¼ö (±âÁ¸ °èÁ¤°ú ³×ÀÌ¹ö ¾ÆÀÌµğ ¿¬µ¿)
+	// ë„¤ì´ë²„ ë¡œê·¸ì¸ ì—°ë™
 	@RequestMapping(value = "/link/naver/callback", method = RequestMethod.GET)
 	public String linkCallbackNaver(@RequestParam String code, @RequestParam String state, HttpSession session,
 			HttpServletRequest request) {
@@ -43,12 +43,12 @@ public class CallbackController {
 
 		session.setAttribute("login", loginUser);
 
-		request.setAttribute("msg", "ÇØ´ç °èÁ¤¿¡ ¼Ò¼È °èÁ¤ÀÌ ¿¬µ¿µÇ¾ú½À´Ï´Ù.");
+		request.setAttribute("msg", "í•´ë‹¹ ê³„ì •ì— snsê°€ ì—°ë™ë˜ì—ˆìŠµë‹ˆë‹¤.");
 		request.setAttribute("url", "/myPageSnsLinkManageView");
 		return "alert";
 	}
 
-	// Äİ¹é Ã³¸® ÇÔ¼ö (·Î±×ÀÎÇÑ ³×ÀÌ¹ö ¾ÆÀÌµğ¿Í ¿¬µ¿µÇ¾îÀÖ´Â °èÁ¤ Ã£±â)
+	// ë„¤ì´ë²„ ë¡œê·¸ì¸
 	@RequestMapping(value = "/login/naver/callback", method = RequestMethod.GET)
 	public String loginCallbackNaver(@RequestParam String code, @RequestParam String state, HttpSession session,
 			HttpServletRequest request) {
@@ -68,13 +68,13 @@ public class CallbackController {
 				return "redirect:" + fromUrl;
 			}
 		} else {
-			request.setAttribute("msg", "¿¬µ¿µÈ Á¤º¸°¡ ¾ø½À´Ï´Ù. ·Î±×ÀÎ ÈÄ ¼Ò¼È °èÁ¤À» ¿¬µ¿ÇØ¼­ »ç¿ëÇØÁÖ¼¼¿ä.");
+			request.setAttribute("msg", "ì—°ë™ëœ ê³„ì •ì´ ì—†ìŠµë‹ˆë‹¤. ê¸°ì¡´ ê³„ì •ì— ì—°ë™ í›„ ë¡œê·¸ì¸í•´ ì£¼ì„¸ìš”.");
 			request.setAttribute("url", "/loginView");
 			return "alert";
 		}
 	}
 
-	// Äİ¹é Ã³¸® ÇÔ¼ö (±âÁ¸ °èÁ¤°ú Ä«Ä«¿À ¾ÆÀÌµğ ¿¬µ¿)
+	// ì¹´ì¹´ì˜¤ ë¡œê·¸ì¸ ì—°ë™
 	@RequestMapping(value = "/link/kakao/callback", method = RequestMethod.GET)
 	public String linkCallbackKakao(@RequestParam String code, @RequestParam String state, HttpSession session,
 			HttpServletRequest request) {
@@ -89,12 +89,12 @@ public class CallbackController {
 
 		session.setAttribute("login", loginUser);
 
-		request.setAttribute("msg", "ÇØ´ç °èÁ¤¿¡ ¼Ò¼È °èÁ¤ÀÌ ¿¬µ¿µÇ¾ú½À´Ï´Ù.");
+		request.setAttribute("msg", "í•´ë‹¹ ê³„ì •ì— snsê°€ ì—°ë™ë˜ì—ˆìŠµë‹ˆë‹¤.");
 		request.setAttribute("url", "/myPageSnsLinkManageView");
 		return "alert";
 	}
 
-	// Äİ¹é Ã³¸® ÇÔ¼ö (·Î±×ÀÎÇÑ Ä«Ä«¿À ¾ÆÀÌµğ¿Í ¿¬µ¿µÇ¾îÀÖ´Â °èÁ¤ Ã£±â)
+	// ì¹´ì¹´ì˜¤ ë¡œê·¸ì¸
 	@RequestMapping(value = "/login/kakao/callback", method = RequestMethod.GET)
 	public String loginCallbackKakao(@RequestParam String code, @RequestParam String state, HttpSession session,
 			HttpServletRequest request) {
@@ -114,13 +114,13 @@ public class CallbackController {
 				return "redirect:" + fromUrl;
 			}
 		} else {
-			request.setAttribute("msg", "¿¬µ¿µÈ Á¤º¸°¡ ¾ø½À´Ï´Ù. ·Î±×ÀÎ ÈÄ ¼Ò¼È °èÁ¤À» ¿¬µ¿ÇØ¼­ »ç¿ëÇØÁÖ¼¼¿ä.");
+			request.setAttribute("msg", "ì—°ë™ëœ ê³„ì •ì´ ì—†ìŠµë‹ˆë‹¤. ê¸°ì¡´ ê³„ì •ì— ì—°ë™ í›„ ë¡œê·¸ì¸í•´ ì£¼ì„¸ìš”.");
 			request.setAttribute("url", "/loginView");
 			return "alert";
 		}
 	}
 
-	// Äİ¹é Ã³¸® ÇÔ¼ö (±âÁ¸ °èÁ¤°ú ±¸±Û ¾ÆÀÌµğ ¿¬µ¿)
+	// êµ¬ê¸€ ë¡œê·¸ì¸ ì—°ë™
 	@RequestMapping(value = "/link/google/callback", method = RequestMethod.GET)
 	public String linkCallbackGoogle(@RequestParam String code, @RequestParam String state, HttpSession session,
 			HttpServletRequest request) {
@@ -135,12 +135,12 @@ public class CallbackController {
 
 		session.setAttribute("login", loginUser);
 
-		request.setAttribute("msg", "ÇØ´ç °èÁ¤¿¡ ¼Ò¼È °èÁ¤ÀÌ ¿¬µ¿µÇ¾ú½À´Ï´Ù.");
+		request.setAttribute("msg", "í•´ë‹¹ ê³„ì •ì— snsê°€ ì—°ë™ë˜ì—ˆìŠµë‹ˆë‹¤.");
 		request.setAttribute("url", "/myPageSnsLinkManageView");
 		return "alert";
 	}
 
-	// Äİ¹é Ã³¸® ÇÔ¼ö (·Î±×ÀÎÇÑ ±¸±Û ¾ÆÀÌµğ¿Í ¿¬µ¿µÇ¾îÀÖ´Â °èÁ¤ Ã£±â)
+	// êµ¬ê¸€ ë¡œê·¸ì¸
 	@RequestMapping(value = "/login/google/callback", method = RequestMethod.GET)
 	public String loginCallbackGoogle(@RequestParam String code, @RequestParam String state, HttpSession session,
 			HttpServletRequest request) {
@@ -159,7 +159,7 @@ public class CallbackController {
 				return "redirect:" + fromUrl;
 			}
 		} else {
-			request.setAttribute("msg", "¿¬µ¿µÈ Á¤º¸°¡ ¾ø½À´Ï´Ù. ·Î±×ÀÎ ÈÄ ¼Ò¼È °èÁ¤À» ¿¬µ¿ÇØ¼­ »ç¿ëÇØÁÖ¼¼¿ä.");
+			request.setAttribute("msg", "ì—°ë™ëœ ê³„ì •ì´ ì—†ìŠµë‹ˆë‹¤. ê¸°ì¡´ ê³„ì •ì— ì—°ë™ í›„ ë¡œê·¸ì¸í•´ ì£¼ì„¸ìš”.");
 			request.setAttribute("url", "/loginView");
 			return "alert";
 		}
