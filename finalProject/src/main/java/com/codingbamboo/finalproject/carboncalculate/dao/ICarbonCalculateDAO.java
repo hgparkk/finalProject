@@ -15,6 +15,4 @@ public interface ICarbonCalculateDAO {
 	// 탄소 발자국 결과 불러오기
 	List<CarbonCalculateDTO> selectCalList(String userId);
 	
-	// co2계산 계수 불러오기
-	List<CarbonCalculateDTO> getCoefficientValue(double coefficientValue);
 }
