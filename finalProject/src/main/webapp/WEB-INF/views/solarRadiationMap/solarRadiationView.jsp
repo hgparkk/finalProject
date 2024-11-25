@@ -66,6 +66,11 @@
 	line-height: 28px;
 }
 
+.result-text-2 {
+	height: 56px;
+	line-height: 56px;
+}
+
 .result-input {
 	width: 150px;
 	height: 28px;
@@ -105,6 +110,8 @@
 						<div class="d-flex flex-column">
 							<span class="ms-4 mt-3 result-text">건축 면적</span>
 							<span class="ms-4 mt-3 result-text">전기 사용량</span>
+							<span class="ms-4 mt-3 result-text">단위 면적당</span>
+							<span class="ms-4 result-text">전기 사용량</span>
 							<span class="ms-4 mt-3 result-text">
 								CO<sub>2</sub> 배출량
 							</span>
@@ -112,6 +119,8 @@
 						<div class="d-flex flex-column">
 							<span class="ms-4 mt-3 result-text">&nbsp;‏‎</span>
 							<span class="ms-4 mt-3 result-text">약</span>
+							<span class="ms-4 mt-3 result-text">약</span>
+							<span class="ms-4 result-text"></span>
 							<span class="ms-4 mt-3 result-text">약</span>
 						</div>
 						<div class="d-flex flex-column">
@@ -122,12 +131,18 @@
 								<input id="buildingElectricUsage" class="result-input" readonly>
 							</span>
 							<span class="mt-3 ms-1 result-text">
+								<input id="areaElectricUsage" class="result-input" readonly>
+							</span>
+							<span class="ms-1 result-text"> </span>
+							<span class="mt-3 ms-1 result-text">
 								<input id="buildingCO2Emission" class="result-input" readonly>
 							</span>
 						</div>
 						<div class="d-flex flex-column">
 							<span class="mt-3 ms-1 result-text">㎡</span>
 							<span class="mt-3 ms-1 result-text">kWh</span>
+							<span class="mt-3 ms-1 result-text">kWh</span>
+							<span class="ms-1 result-text"></span>
 							<span class="mt-3 ms-1 result-text">kgCO2eq</span>
 						</div>
 					</div>
@@ -326,7 +341,7 @@
 								sum += result1[i].beuElectric
 							}
 							document.getElementById("buildingElectricUsage").value = Math.round(((sum / result1.length) * 12) * 10000) / 10000
-							
+							document.getElementById("areaElectricUsage").value = Math.round((((sum / result1.length) * 12)/data[seq].buildingArea)*10000)/10000
 							$.ajax({
 								type:'POST',
 								url: "<c:url value='/getEmission' />",
@@ -411,7 +426,7 @@
 														treeDiv.classList.add("d-flex")
 														treeDiv.innerHTML += '<img src="assets/cypress.png" style="width: 50px;">'
 														treeDiv.innerHTML += '<div class="d-flex align-items-center">편백나무 '
-														+ result4.coefficientValue * (Math.round(sumRadiation * result2.coefficientValue) / 10000)
+														+ Math.round((result4.coefficientValue * (Math.round(sumRadiation * result2.coefficientValue) / 10000))*10000)/10000
 														+ ' 그루를 심은 것과 같은 효과입니다.</div>'
 														document.getElementById(accordions[i]).children[0].appendChild(treeDiv)
 													}

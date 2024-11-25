@@ -139,6 +139,42 @@
 	</div>
 	
 	<div>${keyGetHte }</div>
+	
+	<!-- 주거형태별 탄소배출량 -->
+	<div style="display:none;">
+		<div id="cgDh">${keyGetHte[0]['hteConsumption'] }</div>
+		<div id="cgApt">${keyGetHte[1]['hteConsumption'] }</div>
+		<div id="cgMph">${keyGetHte[2]['hteConsumption'] }</div>
+		<div id="cgElse">${keyGetHte[3]['hteConsumption'] }</div>
+		<div id="eDh">${keyGetHte[4]['hteConsumption'] }</div>
+		<div id="eApt">${keyGetHte[5]['hteConsumption'] }</div>
+		<div id="eMph">${keyGetHte[6]['hteConsumption'] }</div>
+		<div id="eElse">${keyGetHte[7]['hteConsumption'] }</div>
+	</div>
+	
+	<!-- 주거형태 -->
+	<div style="display:none;">
+		<div id="cgDh">${keyGetHte[0]['hteConsumption'] }</div>
+		<div id="cgApt">${keyGetHte[1]['hteConsumption'] }</div>
+		<div id="cgMph">${keyGetHte[2]['hteConsumption'] }</div>
+		<div id="cgElse">${keyGetHte[3]['hteConsumption'] }</div>
+		<div id="eDh">${keyGetHte[4]['hteConsumption'] }</div>
+		<div id="eApt">${keyGetHte[5]['hteConsumption'] }</div>
+		<div id="eMph">${keyGetHte[6]['hteConsumption'] }</div>
+		<div id="eElse">${keyGetHte[7]['hteConsumption'] }</div>
+	</div>
+	
+	<!-- 가구원수 -->
+	<div style="display:none;">
+		<div id="cgDh">${keyGetHte[0]['hteConsumption'] }</div>
+		<div id="cgApt">${keyGetHte[1]['hteConsumption'] }</div>
+		<div id="cgMph">${keyGetHte[2]['hteConsumption'] }</div>
+		<div id="cgElse">${keyGetHte[3]['hteConsumption'] }</div>
+		<div id="eDh">${keyGetHte[4]['hteConsumption'] }</div>
+		<div id="eApt">${keyGetHte[5]['hteConsumption'] }</div>
+		<div id="eMph">${keyGetHte[6]['hteConsumption'] }</div>
+		<div id="eElse">${keyGetHte[7]['hteConsumption'] }</div>
+	</div>
 
 	<div class="house">
 		<span class="span">주거 형태</span>
@@ -146,19 +182,19 @@
 	<div class="house-type-select-box">
 		<div class="house-type-select d-flex">
 			<div class="house-type">
-				<input type="radio" name="housing_type1" id="housing_type1"
+				<input type="radio" name="housing_type" id="housing_type1"
 					value="0" checked> <label for="housing_type1">아파트</label>
 			</div>
 			<div class="house-type">
-				<input type="radio" name="housing_type2" id="housing_type2"
+				<input type="radio" name="housing_type" id="housing_type2"
 					value="1"> <label for="housing_type2">단독주택</label>
 			</div>
 			<div class="house-type">
-				<input type="radio" name="housing_type3" id="housing_type3"
+				<input type="radio" name="housing_type" id="housing_type3"
 					value="2"> <label for="housing_type3">연립 및 다세대</label>
 			</div>
 			<div class="house-type">
-				<input type="radio" name="housing_type4" id="housing_type4"
+				<input type="radio" name="housing_type" id="housing_type4"
 					value="3"> <label for="housing_type4">기타</label>
 			</div>
 		</div>
@@ -170,23 +206,23 @@
 	<div class="resdential-area-select-box">
 		<div class="resdential-area-select d-flex">
 			<div class="resdential-area">
-				<input type="radio" name="resdentialArea1" id="resdentialArea1"
+				<input type="radio" name="resdentialArea" id="resdentialArea1"
 					value="0" checked> <label for="resdentialArea1">~33㎡ 이하</label>
 			</div>
 			<div class="resdential-area">
-				<input type="radio" name="resdentialArea2" id="resdentialArea2"
+				<input type="radio" name="resdentialArea" id="resdentialArea2"
 					value="1"> <label for="resdentialArea2">33㎡ 초과 ~ 66㎡ 이하</label>
 			</div>
 			<div class="resdential-area">
-				<input type="radio" name="resdentialArea3" id="resdentialArea3"
+				<input type="radio" name="resdentialArea" id="resdentialArea3"
 					value="2"> <label for="resdentialArea3">66㎡ 초과~99㎡ 이하</label>
 			</div>
 			<div class="resdential-area">
-				<input type="radio" name="resdentialArea4" id="resdentialArea4"
+				<input type="radio" name="resdentialArea" id="resdentialArea4"
 					value="3"> <label for="resdentialArea4">99㎡ 초과~132㎡ 이하</label>
 			</div>
 			<div class="resdential-area">
-				<input type="radio" name="resdentialArea5" id="resdentialArea5"
+				<input type="radio" name="resdentialArea" id="resdentialArea5"
 					value="4"> <label for="resdentialArea5">132㎡ 초과~</label>
 			</div>
 		</div>
@@ -198,27 +234,27 @@
 	<div class="house-member-select-box">
 		<div class="house-member-select d-flex">
 			<div class="house-member">
-				<input type="radio" name="livingMember1" id="livingMember1"
+				<input type="radio" name="livingMember" id="livingMember1"
 					value="0" checked> <label for="livingMember1">1명</label>
 			</div>
 			<div class="house-member">
-				<input type="radio" name="livingMember2" id="livingMember2"
+				<input type="radio" name="livingMember" id="livingMember2"
 					value="1"> <label for="livingMember2">2명</label>
 			</div>
 			<div class="house-member">
-				<input type="radio" name="livingMember3" id="livingMember3"
+				<input type="radio" name="livingMember" id="livingMember3"
 					value="2"> <label for="livingMember3">3명</label>
 			</div>
 			<div class="house-member">
-				<input type="radio" name="livingMember4" id="livingMember4"
+				<input type="radio" name="livingMember" id="livingMember4"
 					value="3"> <label for="livingMember4">4명</label>
 			</div>
 			<div class="house-member">
-				<input type="radio" name="livingMember5" id="livingMember5"
+				<input type="radio" name="livingMember" id="livingMember5"
 					value="4"> <label for="livingMember5">5명</label>
 			</div>
 			<div class="house-member">
-				<input type="radio" name="livingMember6" id="livingMember6"
+				<input type="radio" name="livingMember" id="livingMember6"
 					value="5"> <label for="livingMember6">6명 이상</label>
 			</div>
 		</div>
@@ -635,6 +671,38 @@ document.getElementById("resultCO2").innerHTML += v_allCo2;
                 }
             }
         });
+        
+        // 
+        radioButtons.forEach(radioButton => {
+            radioButton.addEventListener('change', function() {
+                const selectedHousingType = document.querySelector('input[name="housing_type"]:checked');
+            });
+        });
+
+        // 기본적으로 "아파트" 라디오 버튼이 체크된 상태로 설정
+        const defaultHousingType = document.getElementById('housing_type1');
+        if (defaultHousingType) {
+        	defaultHousingType.checked = true;
+        }
+        
+        // 사용자가 주거형태나 거주면적을 바꾸면 비교되는 그래프의 값이 바뀜
+        function changeCo2(){
+        	const selectedHousingType = document.querySelector('input[name="housing_type"]:checked');
+        	
+        	/* 원하는 상태 선택 */
+		    if (selectedHousingType && v_inputFuel) {
+		        const housingType = selectedHousingType.nextElementSibling.textContent.trim();
+		        if (housingType === '아파트') {
+		            resultFuelCo2 = v_inputFuel * document.getElementById("gasolineCoefficient").innerHTML;
+		        } else if (housingType === '단독주택') {
+		            resultFuelCo2 = v_inputFuel * document.getElementById("dieselCoefficient").innerHTML;
+		        } else if (housingType === '연립 및 다세대') {
+		            resultFuelCo2 = v_inputFuel * document.getElementById("lpgCoefficient").innerHTML;
+		        } else if (housingType === '기타') {
+		            resultFuelCo2 = v_inputFuel * document.getElementById("lpgCoefficient").innerHTML;
+		        }
+		    }
+        }
     </script>
 
 
