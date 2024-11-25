@@ -1,7 +1,5 @@
 package com.codingbamboo.finalproject.notice.web;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -14,21 +12,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.codingbamboo.finalproject.attach.service.AttachService;
+import com.codingbamboo.finalproject.common.util.FileUploadUtils;
 import com.codingbamboo.finalproject.notice.dto.NoticeDTO;
 import com.codingbamboo.finalproject.notice.service.NoticeService;
-import com.codingbamboo.finalproject.noticeattach.dto.NoticeAttachDTO;
-import com.codingbamboo.finalproject.noticeattach.service.NoticeAttachService;
 import com.codingbamboo.finalproject.user.dto.UserDTO;
 
 @Controller
 public class NoticeController {
 
-	@Autowired
-	private NoticeAttachService noticeAttachService;
+
 	
     @Autowired
     private NoticeService noticeService;
 
+    @Autowired
+    AttachService attachService;
+    
+    @Autowired
+    FileUploadUtils fileUploadUtils;
+    
     /**
      * 공지사항 목록 페이지
      */
@@ -75,22 +78,11 @@ public class NoticeController {
         // 공지사항 상세 정보 가져오기
         NoticeDTO notice = noticeService.getNoticeDetail(noticeNo);
 
-        if (notice == null) {
-            model.addAttribute("errorMsg", "존재하지 않는 공지사항입니다.");
-            return "redirect:/noticeView";
-        }
 
-        // 첨부파일 리스트 가져오기
-        List<NoticeAttachDTO> attachList = noticeAttachService.getAttachListByNoticeNo(noticeNo);
-        notice.setAttachList(attachList);
 
         model.addAttribute("notice", notice);
         return "notice/noticeDetailView";
     }
-
-
-
-
 
 
     /**
@@ -113,10 +105,8 @@ public class NoticeController {
      */
     @RequestMapping("/noticeWriteDo")
     public String noticeWriteDo(
-            @RequestParam("noticeTitle") String noticeTitle,
-            @RequestParam("noticeContent") String noticeContent,
-            @RequestParam(value = "attachFiles", required = false) List<MultipartFile> attachFiles,
-            HttpSession session, RedirectAttributes redirectAttributes) {
+    		NoticeDTO notice, String noticeContent,
+            HttpSession session, RedirectAttributes redirectAttributes, MultipartFile[] boFile) {
 
         UserDTO loginUser = (UserDTO) session.getAttribute("login");
 
@@ -125,54 +115,18 @@ public class NoticeController {
             return "redirect:/noticeView";
         }
 
-        // 공지사항 생성
-        NoticeDTO notice = new NoticeDTO();
-        notice.setNoticeTitle(noticeTitle);
-        notice.setNoticeContent(noticeContent);
-
-        try {
-            // 첨부파일 업로드 처리
-            List<NoticeAttachDTO> attachList = new ArrayList<>();
-            if (attachFiles != null && !attachFiles.isEmpty()) {
-                for (MultipartFile file : attachFiles) {
-                    if (!file.isEmpty()) {
-                        NoticeAttachDTO attach = new NoticeAttachDTO();
-                        attach.setAttachName(System.currentTimeMillis() + "_" + file.getOriginalFilename());
-                        attach.setAttachOriginalName(file.getOriginalFilename());
-                        attach.setAttachSize(file.getSize());
-                        attach.setAttachType(file.getContentType());
-                        attach.setAttachPath("C:/uploads/" + attach.getAttachName());
-
-                        // 파일 저장
-                        File dest = new File(attach.getAttachPath());
-                        dest.getParentFile().mkdirs();
-                        file.transferTo(dest);
-
-                        attachList.add(attach);
-                    }
-                }
-            }
-
-            // 디버깅: 첨부파일 리스트 출력
-            for (NoticeAttachDTO attach : attachList) {
-                System.out.println("첨부파일 이름: " + attach.getAttachOriginalName());
-                System.out.println("첨부파일 크기: " + attach.getAttachSize());
-            }
-
-            // 공지사항 등록
-            int result = noticeService.registNotice(notice, attachList);
-
-            if (result > 0) {
-                redirectAttributes.addFlashAttribute("successMsg", "공지사항이 등록되었습니다.");
-            } else {
-                redirectAttributes.addFlashAttribute("errorMsg", "공지사항 등록에 실패했습니다.");
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace(); // 디버깅: 예외 메시지 출력
-            redirectAttributes.addFlashAttribute("errorMsg", "공지사항 등록 중 오류가 발생했습니다.");
+        // 공지사항 DB 저장
+        boolean isInserted = noticeService.registNotice(notice);
+        if (!isInserted) {
+            redirectAttributes.addFlashAttribute("errorMsg", "공지사항 등록에 실패했습니다.");
+            return "redirect:/noticeWrite";
+        }
+        
+        if(boFile != null && boFile.length > 0 && !boFile[0].isEmpty()) {
+        	
         }
 
+        redirectAttributes.addFlashAttribute("successMsg", "공지사항이 등록되었습니다.");
         return "redirect:/noticeView";
     }
 

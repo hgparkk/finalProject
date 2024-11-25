@@ -5,9 +5,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<c:forEach var="attach" items="${notice.attachList}">
-	<div>${attach.attachOriginalName}(${attach.attachSize})</div>
-</c:forEach>
+
 <meta charset="UTF-8">
 <title>Coding Bamboo - 공지사항 상세</title>
 <%@ include file="/WEB-INF/inc/header.jsp"%>
@@ -130,31 +128,6 @@ html, body {
 		<div class="notice-content">
 			<c:out value="${notice.noticeContent}" escapeXml="false" />
 		</div>
-
-		<!-- 첨부파일 리스트 -->
-		<c:if test="${not empty notice.attachList}">
-			<div class="attach-files">
-				<h4>첨부파일 목록</h4>
-				<ul>
-					<c:forEach var="attach" items="${notice.attachList}">
-						<li><a
-							href="notice/attachment/download?attachNo=${attach.attachNo}"
-							download="${attach.attachOriginalName}"> <c:out
-									value="${attach.attachOriginalName}" />
-						</a> <span> <c:choose>
-									<c:when test="${attach.attachSize >= 1048576}">
-										<c:out value="${attach.attachSize / 1048576}" /> MB
-                            </c:when>
-									<c:otherwise>
-										<c:out value="${attach.attachSize / 1024}" /> KB
-                            </c:otherwise>
-								</c:choose>
-						</span></li>
-					</c:forEach>
-				</ul>
-			</div>
-		</c:if>
-
 
 		<!-- 작성일 -->
 		<div class="notice-meta">

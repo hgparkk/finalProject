@@ -17,25 +17,16 @@
 
 	<!-- 공지사항 등록 -->
 	<insert id="registNotice"
-		parameterType="com.codingbamboo.finalproject.notice.dto.NoticeDTO"
-		useGeneratedKeys="true" keyProperty="noticeNo" keyColumn="NOTICE_NO">
-		INSERT INTO
-		notice (
-		notice_no,
-		notice_title,
-		notice_content,
-		notice_date
-		) VALUES (
-		NOTICE_SEQ.NEXTVAL,
-		#{noticeTitle},
-		#{noticeContent},
-		SYSDATE
-		)
+		parameterType="com.codingbamboo.finalproject.notice.dto.NoticeDTO">
+		INSERT INTO NOTICE (NOTICE_NO,
+		NOTICE_TITLE, NOTICE_CONTENT, NOTICE_DATE)
+		VALUES (NOTICE_SEQ.NEXTVAL,
+		#{noticeTitle}, #{noticeContent}, SYSDATE)
 	</insert>
 
-	<select id="getCurrentNoticeNo" resultType="int">
-		SELECT
-		NOTICE_SEQ.CURRVAL FROM DUAL
+	<select id="getCurrentNo">
+		SELECT NOTICE_NO
+		FROM (SELECT * FROM NOTICE ORDER BY NOTICE_NO DESC) WHERE ROWNUM = 1;
 	</select>
 
 	<!-- 공지사항 삭제 -->

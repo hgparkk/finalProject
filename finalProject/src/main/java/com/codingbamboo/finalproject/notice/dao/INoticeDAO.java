@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.codingbamboo.finalproject.notice.dto.NoticeDTO;
-import com.codingbamboo.finalproject.noticeattach.dto.NoticeAttachDTO;
 
 @Mapper
 public interface INoticeDAO {
@@ -46,8 +45,5 @@ public interface INoticeDAO {
     int registNotice(NoticeDTO notice);
     
     int getCurrentNoticeNo();
-    
-    List<NoticeAttachDTO> getAttachListByNoticeNo(@Param("noticeNo") int noticeNo);
-    
 }
 

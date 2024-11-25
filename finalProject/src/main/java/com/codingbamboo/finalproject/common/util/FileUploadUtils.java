@@ -5,82 +5,64 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.codingbamboo.finalproject.noticeattach.dto.NoticeAttachDTO;
+import com.codingbamboo.finalproject.attach.dto.AttachDTO;
 
 @Component
 public class FileUploadUtils {
 
-    @Value("${util.file.upload.path}")
-    private String uploadPath;
+	@Value("#{util['file.upload.path']}")
+	private String uploadPath;
 
-    /**
-     * MultipartFile 배열을 처리하여 서버에 저장하고, 첨부파일 정보를 반환.
-     * 
-     * @param files MultipartFile 배열
-     * @return 첨부파일 정보 리스트
-     * @throws IOException
-     */
-    public List<NoticeAttachDTO> uploadFiles(List<MultipartFile> files) throws IOException {
-        if (uploadPath == null || uploadPath.isEmpty()) {
-            throw new IllegalStateException("파일 업로드 경로가 설정되지 않았습니다.");
-        }
+	public List<AttachDTO> getAttachListByMultiparts(MultipartFile[] boFileArray) throws IOException {
+		List<AttachDTO> attachList = new ArrayList<>();
 
-        List<NoticeAttachDTO> attachList = new ArrayList<>();
+		for (MultipartFile boFile : boFileArray) {
+			if (!boFile.isEmpty()) {
+				AttachDTO attach = getAttachByMultipart(boFile);
+				attachList.add(attach);
+			}
+		}
 
-        for (MultipartFile file : files) {
-            if (!file.isEmpty()) {
-                // 저장 파일명 생성
-                String originalFileName = file.getOriginalFilename();
-                String savedFileName = System.currentTimeMillis() + "_" + originalFileName;
+		return attachList;
+	}
 
-                // 저장 경로 설정
-                String fullPath = uploadPath.endsWith(File.separator) 
-                                  ? uploadPath + savedFileName 
-                                  : uploadPath + File.separator + savedFileName;
+	public AttachDTO getAttachByMultipart(MultipartFile boFile) throws IOException {
+		String fileName = UUID.randomUUID().toString();
 
-                // 파일 저장
-                File dest = new File(fullPath);
-                if (!dest.getParentFile().exists()) {
-                    dest.getParentFile().mkdirs(); // 디렉토리가 없으면 생성
-                }
-                file.transferTo(dest);
+		File uploadFolder = new File(uploadPath);
+		uploadFolder.mkdir();
 
-                // 첨부파일 정보 생성
-                NoticeAttachDTO attach = new NoticeAttachDTO();
-                attach.setAttachName(savedFileName);
-                attach.setAttachOriginalName(originalFileName);
-                attach.setAttachSize(file.getSize());
-                attach.setAttachPath(fullPath);
+		String filePath = uploadPath + File.separatorChar + fileName;
 
-                attachList.add(attach);
-            }
-        }
+		boFile.transferTo(new File(filePath));
 
-        return attachList;
-    }
+		AttachDTO attach = new AttachDTO();
+		attach.setAttachName(fileName);
+		attach.setAttachOriginalName(boFile.getOriginalFilename());
+		attach.setAttachSize(boFile.getSize());
+		attach.setAttachFancySize(transferFancySize(boFile.getSize()));
+		attach.setAttachType(boFile.getContentType());
+		attach.setAttachPath(filePath);
 
-    /**
-     * 파일 크기를 보기 좋은 형식으로 변환.
-     * 
-     * @param size 파일 크기 (byte)
-     * @return 보기 좋은 파일 크기 문자열
-     */
-    public String transferFancySize(long size) {
-        DecimalFormat df = new DecimalFormat("#,###.0");
+		return attach;
+	}
 
-        if (size < 1024) {
-            return size + " B";
-        } else if (size < 1024 * 1024) {
-            return df.format(size / 1024.0) + " KB";
-        } else if (size < 1024 * 1024 * 1024) {
-            return df.format(size / (1024.0 * 1024.0)) + " MB";
-        } else {
-            return df.format(size / (1024.0 * 1024.0 * 1024.0)) + " GB";
-        }
-    }
+	private String transferFancySize(long size) {
+		DecimalFormat df = new DecimalFormat("#,###.0");
+
+		if (size < (long) (Math.pow(2.0, 10.0)))
+			return df.format(size) + "Byte";
+		else if (size < (long) (Math.pow(2.0, 20.0)))
+			return df.format((size / (long) (Math.pow(2.0, 10.0)))) + "KB";
+		else if (size < (long) (Math.pow(2.0, 30.0)))
+			return df.format((size / (long) (Math.pow(2.0, 20.0)))) + "MB";
+		else
+			return df.format((size / (long) (Math.pow(2.0, 30.0)))) + "GB";
+	}
 }

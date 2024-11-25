@@ -210,7 +210,7 @@ html, body {
 		<div class="noticeDetail">
 			<ul>
 				<c:forEach var="notice" items="${noticeList}">
-					<li><a href="noticeDetailView?noticeNo=${notice.noticeNo}">
+					<li><a href="${pageContext.request.contextPath}/noticeDetailView?noticeNo=${notice.noticeNo}">
 							<span>${notice.noticeTitle}</span> <span class="text-muted">
 								<fmt:formatDate value="${notice.noticeDate}"
 									pattern="yyyy-MM-dd" />
