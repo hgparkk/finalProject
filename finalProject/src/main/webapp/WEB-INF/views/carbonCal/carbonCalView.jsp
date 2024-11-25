@@ -113,7 +113,7 @@
 .output-box {
 	border-top: 1px solid #CCCCCC;
 	height: 22vw;
-	padding: 1vw;
+	padding: 0.5vw;
 }
 
 .inAndOut-box {
@@ -123,11 +123,11 @@
 }
 
 .span {
-	width: 6vw;
+	width: 7vw;
 }
 
 .input {
-	width: 16vw;
+	width: 15vw;
 	height: 2.5vw;
 	padding: 0.2vw;
 	text-align: right;
@@ -213,7 +213,7 @@
 .fuel {
 	border: 1px solid #CCCCCC;
 	width: 20%;
-	font-size: 11px;
+	font-size: 0.5vw;
 }
 
 .result-container {
@@ -358,12 +358,12 @@
 					</div>
 					<div class="output-box">
 						<div class="inAndOut-box justify-content-between">
-							<div class="car-container d-flex">
+							<div class="car-container">
 								<div class="car">
 									<span class="span">승용차 종류</span>
 								</div>
 								<div class="fuel-select-box">
-									<div class="fuel-select d-flex">
+									<div class="fuel-select">
 										<div class="fuel">
 											<input type="radio" name="fuelType" id="gasoline" value="0"
 												checked> <label for="gasoline">휘발유</label>
@@ -396,8 +396,8 @@
 						</div>
 						<div
 							class="explain-box d-flex flex-column align-items-end justify-content-end">
-							<span>교통 CO₂ 발생량 | 휘발유 : (이동거리 / ${keyGetCoefficientValue[4]['coefficientValue'] })</span> <span>
-								경유 : (이동거리 / ${keyGetCoefficientValue[5]['coefficientValue'] }) LPG : (이동거리 / ${keyGetCoefficientValue[6]['coefficientValue'] }) </span>
+							<span>교통 CO₂ 발생량 | 휘발유 : (이동거리 * ${keyGetCoefficientValue[4]['coefficientValue'] })</span> <span>
+								경유 : (이동거리 * ${keyGetCoefficientValue[5]['coefficientValue'] }) LPG : (이동거리 * ${keyGetCoefficientValue[6]['coefficientValue'] }) </span>
 						</div>
 					</div>
 				</div>
