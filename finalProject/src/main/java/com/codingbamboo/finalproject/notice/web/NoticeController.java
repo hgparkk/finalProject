@@ -1,25 +1,15 @@
 package com.codingbamboo.finalproject.notice.web;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -27,80 +17,107 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.codingbamboo.finalproject.notice.dto.NoticeDTO;
 import com.codingbamboo.finalproject.notice.service.NoticeService;
 import com.codingbamboo.finalproject.noticeattach.dto.NoticeAttachDTO;
+import com.codingbamboo.finalproject.noticeattach.service.NoticeAttachService;
 import com.codingbamboo.finalproject.user.dto.UserDTO;
 
 @Controller
 public class NoticeController {
 
+	@Autowired
+	private NoticeAttachService noticeAttachService;
+	
     @Autowired
     private NoticeService noticeService;
 
-    private static final String UPLOAD_DIR = "C:/uploads/"; // 파일 저장 경로
-
+    /**
+     * 공지사항 목록 페이지
+     */
     @RequestMapping("/noticeView")
-    public String noticeView(@RequestParam(value = "searchKeyword", required = false) String searchKeyword,
-                              @RequestParam(value = "page", defaultValue = "1") int page,
-                              @RequestParam(value = "size", defaultValue = "10") int size, HttpSession session, Model model) {
+    public String noticeView(
+            @RequestParam(value = "searchKeyword", required = false) String searchKeyword,
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "size", defaultValue = "10") int size,
+            Model model, HttpSession session) {
 
-        UserDTO loginUser = (UserDTO) session.getAttribute("login");
-
+        // 검색 키워드 초기화
         if (searchKeyword == null || searchKeyword.trim().isEmpty()) {
             searchKeyword = null;
         }
 
-        if (page < 1) page = 1;
-        if (size < 1) size = 10;
+        // 페이징 계산
+        int offset = (page - 1) * size;
 
-        Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("searchKeyword", searchKeyword);
-        paramMap.put("offset", (page - 1) * size);
-        paramMap.put("limit", size);
-
-        List<NoticeDTO> noticeList = noticeService.getNoticeList(paramMap);
-        int totalNotices = noticeService.getNoticeCount(paramMap);
+        // 공지사항 데이터 가져오기
+        List<NoticeDTO> noticeList = noticeService.getNoticeList(searchKeyword, offset, size);
+        int totalNotices = noticeService.getNoticeCount(searchKeyword);
         int totalPages = (int) Math.ceil((double) totalNotices / size);
 
+        // 사용자 정보 확인 (관리자 여부)
+        UserDTO loginUser = (UserDTO) session.getAttribute("login");
+        int isMaster = (loginUser != null) ? loginUser.getUserIsmaster() : 0;
+
+        // 모델 데이터 추가
         model.addAttribute("noticeList", noticeList);
         model.addAttribute("searchKeyword", searchKeyword);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("size", size);
-
-        model.addAttribute("ismaster", loginUser != null ? loginUser.getUserIsmaster() : 0);
+        model.addAttribute("isMaster", isMaster);
 
         return "notice/noticeView";
     }
 
+    /**
+     * 공지사항 상세 페이지
+     */
     @RequestMapping("/noticeDetailView")
     public String noticeDetailView(@RequestParam("noticeNo") int noticeNo, Model model) {
-        // 공지사항 상세 정보 및 첨부파일 목록 가져오기
+        // 공지사항 상세 정보 가져오기
         NoticeDTO notice = noticeService.getNoticeDetail(noticeNo);
 
-        // 디버깅: Notice와 AttachList 데이터 출력
-        if (notice != null) {
-            System.out.println("공지사항 데이터: " + notice);
-            System.out.println("첨부파일 데이터: " + notice.getAttachList());
+        if (notice == null) {
+            model.addAttribute("errorMsg", "존재하지 않는 공지사항입니다.");
+            return "redirect:/noticeView";
         }
+
+        // 첨부파일 리스트 가져오기
+        List<NoticeAttachDTO> attachList = noticeAttachService.getAttachListByNoticeNo(noticeNo);
+        notice.setAttachList(attachList);
 
         model.addAttribute("notice", notice);
         return "notice/noticeDetailView";
     }
 
+
+
+
+
+
+    /**
+     * 공지사항 등록 페이지
+     */
     @RequestMapping("/noticeWriteView")
     public String noticeWriteView(HttpSession session, Model model) {
         UserDTO loginUser = (UserDTO) session.getAttribute("login");
+
         if (loginUser == null || loginUser.getUserIsmaster() != 1) {
             model.addAttribute("errorMsg", "권한이 없습니다.");
             return "redirect:/noticeView";
         }
+
         return "notice/noticeWriteView";
     }
 
+    /**
+     * 공지사항 등록 처리
+     */
     @RequestMapping("/noticeWriteDo")
-    public String noticeWriteDo(@RequestParam("noticeTitle") String noticeTitle,
-                                 @RequestParam("noticeContent") String noticeContent,
-                                 @RequestParam(value = "attachFiles", required = false) List<MultipartFile> attachFiles,
-                                 HttpSession session, RedirectAttributes redirectAttributes) {
+    public String noticeWriteDo(
+            @RequestParam("noticeTitle") String noticeTitle,
+            @RequestParam("noticeContent") String noticeContent,
+            @RequestParam(value = "attachFiles", required = false) List<MultipartFile> attachFiles,
+            HttpSession session, RedirectAttributes redirectAttributes) {
+
         UserDTO loginUser = (UserDTO) session.getAttribute("login");
 
         if (loginUser == null || loginUser.getUserIsmaster() != 1) {
@@ -108,84 +125,59 @@ public class NoticeController {
             return "redirect:/noticeView";
         }
 
+        // 공지사항 생성
         NoticeDTO notice = new NoticeDTO();
         notice.setNoticeTitle(noticeTitle);
         notice.setNoticeContent(noticeContent);
 
-        List<NoticeAttachDTO> attachList = handleFileUpload(attachFiles, redirectAttributes);
-        if (attachList == null) {
-            return "redirect:/noticeView";
-        }
+        try {
+            // 첨부파일 업로드 처리
+            List<NoticeAttachDTO> attachList = new ArrayList<>();
+            if (attachFiles != null && !attachFiles.isEmpty()) {
+                for (MultipartFile file : attachFiles) {
+                    if (!file.isEmpty()) {
+                        NoticeAttachDTO attach = new NoticeAttachDTO();
+                        attach.setAttachName(System.currentTimeMillis() + "_" + file.getOriginalFilename());
+                        attach.setAttachOriginalName(file.getOriginalFilename());
+                        attach.setAttachSize(file.getSize());
+                        attach.setAttachType(file.getContentType());
+                        attach.setAttachPath("C:/uploads/" + attach.getAttachName());
 
-        int result = noticeService.registNotice(notice, attachList);
+                        // 파일 저장
+                        File dest = new File(attach.getAttachPath());
+                        dest.getParentFile().mkdirs();
+                        file.transferTo(dest);
 
-        if (result > 0) {
-            redirectAttributes.addFlashAttribute("successMsg", "공지사항이 등록되었습니다.");
-        } else {
-            redirectAttributes.addFlashAttribute("errorMsg", "공지사항 등록에 실패했습니다.");
+                        attachList.add(attach);
+                    }
+                }
+            }
+
+            // 디버깅: 첨부파일 리스트 출력
+            for (NoticeAttachDTO attach : attachList) {
+                System.out.println("첨부파일 이름: " + attach.getAttachOriginalName());
+                System.out.println("첨부파일 크기: " + attach.getAttachSize());
+            }
+
+            // 공지사항 등록
+            int result = noticeService.registNotice(notice, attachList);
+
+            if (result > 0) {
+                redirectAttributes.addFlashAttribute("successMsg", "공지사항이 등록되었습니다.");
+            } else {
+                redirectAttributes.addFlashAttribute("errorMsg", "공지사항 등록에 실패했습니다.");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace(); // 디버깅: 예외 메시지 출력
+            redirectAttributes.addFlashAttribute("errorMsg", "공지사항 등록 중 오류가 발생했습니다.");
         }
 
         return "redirect:/noticeView";
     }
 
-    @RequestMapping("/notice/attachment/download")
-    public ResponseEntity<Resource> downloadAttachment(@RequestParam("attachNo") int attachNo) throws IOException {
-        NoticeAttachDTO attach = noticeService.getAttachByAttachNo(attachNo);
 
-        if (attach == null) {
-            throw new FileNotFoundException("파일 정보를 찾을 수 없습니다.");
-        }
 
-        String absolutePath = attach.getAttachPath();
-        File file = new File(absolutePath);
 
-        if (!file.exists()) {
-            throw new FileNotFoundException("파일이 존재하지 않습니다: " + absolutePath);
-        }
 
-        Resource resource = new FileSystemResource(file);
-        String encodedFileName = URLEncoder.encode(attach.getAttachOriginalName(), "UTF-8").replaceAll("\\+", "%20");
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + encodedFileName + "\"");
-        headers.add(HttpHeaders.CONTENT_TYPE, attach.getAttachType());
-
-        return ResponseEntity.ok()
-                .headers(headers)
-                .body(resource);
-    }
-
-    private List<NoticeAttachDTO> handleFileUpload(List<MultipartFile> files, RedirectAttributes redirectAttributes) {
-        List<NoticeAttachDTO> attachList = new ArrayList<>();
-        if (files != null) {
-            for (MultipartFile file : files) {
-                if (!file.isEmpty()) {
-                    try {
-                        String originalFileName = file.getOriginalFilename();
-                        String savedFileName = System.currentTimeMillis() + "_" + originalFileName;
-                        String filePath = UPLOAD_DIR + savedFileName;
-
-                        File dest = new File(filePath);
-                        if (!dest.getParentFile().exists()) {
-                            dest.getParentFile().mkdirs();
-                        }
-                        file.transferTo(dest);
-
-                        NoticeAttachDTO attach = new NoticeAttachDTO();
-                        attach.setAttachName(savedFileName);
-                        attach.setAttachOriginalName(originalFileName);
-                        attach.setAttachSize(file.getSize());
-                        attach.setAttachPath(filePath);
-                        attachList.add(attach);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        redirectAttributes.addFlashAttribute("errorMsg", "파일 업로드 중 오류 발생: " + e.getMessage());
-                        return null;
-                    }
-                }
-            }
-        }
-        return attachList;
-    }
 }

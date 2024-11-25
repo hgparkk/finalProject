@@ -5,6 +5,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+<c:forEach var="attach" items="${notice.attachList}">
+	<div>${attach.attachOriginalName}(${attach.attachSize})</div>
+</c:forEach>
 <meta charset="UTF-8">
 <title>Coding Bamboo - 공지사항 상세</title>
 <%@ include file="/WEB-INF/inc/header.jsp"%>
@@ -118,26 +121,40 @@ html, body {
 
 	<!-- 공지사항 상세 내용 -->
 	<div class="notice-container">
-		<div class="notice-title">${notice.noticeTitle}</div>
+		<!-- 제목 -->
+		<div class="notice-title">
+			<c:out value="${notice.noticeTitle}" />
+		</div>
 
-		<!-- HTML 콘텐츠를 렌더링 -->
-		<div class="notice-content ql-editor">
+		<!-- 내용 -->
+		<div class="notice-content">
 			<c:out value="${notice.noticeContent}" escapeXml="false" />
 		</div>
 
+		<!-- 첨부파일 리스트 -->
 		<c:if test="${not empty notice.attachList}">
 			<div class="attach-files">
-				<h4>첨부파일</h4>
+				<h4>첨부파일 목록</h4>
 				<ul>
 					<c:forEach var="attach" items="${notice.attachList}">
-						<li><a href="/uploads/${attach.attachName}"
-							download="${attach.attachOriginalName}" target="_blank"
-							title="Download ${attach.attachOriginalName}">
-								${attach.attachOriginalName} (${attach.attachSize / 1024} KB) </a></li>
+						<li><a
+							href="notice/attachment/download?attachNo=${attach.attachNo}"
+							download="${attach.attachOriginalName}"> <c:out
+									value="${attach.attachOriginalName}" />
+						</a> <span> <c:choose>
+									<c:when test="${attach.attachSize >= 1048576}">
+										<c:out value="${attach.attachSize / 1048576}" /> MB
+                            </c:when>
+									<c:otherwise>
+										<c:out value="${attach.attachSize / 1024}" /> KB
+                            </c:otherwise>
+								</c:choose>
+						</span></li>
 					</c:forEach>
 				</ul>
 			</div>
 		</c:if>
+
 
 		<!-- 작성일 -->
 		<div class="notice-meta">
@@ -147,25 +164,19 @@ html, body {
 
 		<!-- 버튼 컨테이너 -->
 		<div class="button-container">
-			<!-- 목록으로 돌아가기 버튼 -->
 			<div class="back-button">
 				<a
-					href="noticeView?page=${param.page}&searchKeyword=${param.searchKeyword}">목록으로
-					돌아가기</a>
+					href="noticeView?page=${param.page}&searchKeyword=${param.searchKeyword}">
+					목록으로 돌아가기 </a>
 			</div>
-
-			<!-- 삭제 및 수정 버튼 (관리자 권한이 있을 때만 표시) -->
 			<c:if test="${sessionScope.login.userIsmaster == 1}">
 				<div style="display: flex;">
-					<!-- 삭제 버튼 -->
 					<div class="delete-button" style="margin-right: 10px;">
 						<a href="noticeDeleteDo?noticeNo=${notice.noticeNo}"
-							onclick="return confirm('이 공지사항을 삭제하시겠습니까?');">삭제</a>
+							onclick="return confirm('이 공지사항을 삭제하시겠습니까?');"> 삭제 </a>
 					</div>
-
-					<!-- 수정 버튼 -->
 					<div class="edit-button">
-						<a href="noticeEditView?noticeNo=${notice.noticeNo}">수정</a>
+						<a href="noticeEditView?noticeNo=${notice.noticeNo}"> 수정 </a>
 					</div>
 				</div>
 			</c:if>
@@ -174,9 +185,5 @@ html, body {
 
 	<!-- Footer -->
 	<%@ include file="/WEB-INF/inc/footer.jsp"%>
-
-	<!-- Scripts -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

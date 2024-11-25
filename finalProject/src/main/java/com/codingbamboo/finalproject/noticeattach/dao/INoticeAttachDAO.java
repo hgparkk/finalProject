@@ -9,27 +9,21 @@ import com.codingbamboo.finalproject.noticeattach.dto.NoticeAttachDTO;
 
 @Mapper
 public interface INoticeAttachDAO {
-
-	// 공지사항 첨부파일 등록
-	int insertNoticeAttach(NoticeAttachDTO attach);
-
-	// 첨부파일 정보를 attach 테이블에 삽입
+	// 첨부파일 등록
 	int insertAttach(NoticeAttachDTO attach);
 
-	// 공지사항과 첨부파일 매핑 정보를 notice_attach 테이블에 삽입
-	int insertNoticeAttach(@Param("noticeNo") int noticeNo, @Param("attachNo") int attachNo);
-
-	// 공지사항 번호로 첨부파일 조회
+	// 특정 공지사항에 해당하는 첨부파일 목록 가져오기
 	List<NoticeAttachDTO> getAttachListByNoticeNo(@Param("noticeNo") int noticeNo);
 
-	// 공지사항 번호로 첨부파일 매핑 삭제
-	int deleteAttachByNoticeNo(@Param("noticeNo") int noticeNo);
-
-	// 첨부파일 삭제
-	int deleteAttachByAttachNo(@Param("attachNo") int attachNo);
-
-	int getCurrentNoticeNo();
-	
+	// 특정 첨부파일 정보 가져오기
 	NoticeAttachDTO getAttachByAttachNo(int attachNo);
+
+	// 특정 공지사항에 연결된 첨부파일 삭제
+	int deleteAttachByNoticeNo(int noticeNo);
+
+	// 첨부파일 자체 삭제
+	int deleteAttachByAttachNo(int attachNo);
+
+	int insertNoticeAttach(@Param("noticeNo") int noticeNo, @Param("attachNo") int attachNo);
 
 }

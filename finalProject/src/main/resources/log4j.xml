@@ -40,10 +40,5 @@
 		<appender-ref ref="console" />
 	</root>
 
-	<configuration>
-		<settings>
-			<setting name="logImpl" value="STDOUT_LOGGING" />
-		</settings>
-	</configuration>
 
 </log4j:configuration>

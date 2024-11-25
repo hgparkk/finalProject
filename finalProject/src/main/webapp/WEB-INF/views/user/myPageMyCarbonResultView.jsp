@@ -46,6 +46,16 @@ request.setAttribute("currentYear", Year.now().getValue());
 .custom-select-dropdown div:hover {
 	background-color: #f0f0f0;
 }
+
+.content-line {
+	margin-top: 24px;
+	margin-bottom: 24px;
+	margin-right: 10px;
+}
+
+.content-text {
+	font-size: 20px;
+}
 </style>
 </head>
 
@@ -99,11 +109,44 @@ request.setAttribute("currentYear", Year.now().getValue());
 											<c:forEach items="${myCalList}" var="myCal">
 												<c:if test="${myCal.year == year && myCal.month == 1}">
 													<c:set var="found" value="true" />
-													<div>${myCal.electricUsage}</div>
-													<div>${myCal.gasUsage}</div>
-													<div>${myCal.trafficKind}</div>
-													<div>${myCal.trafficValue}</div>
-													<div>${myCal.wasteWeight}</div>
+													<div class="d-flex">
+														<div>
+															<input value="${myCal.electricUsage}" type="hidden">
+															<input value="${myCal.gasUsage}" type="hidden">
+															<input value="${myCal.trafficKind}" type="hidden">
+															<input value="${myCal.trafficValue}" type="hidden">
+															<input value="${myCal.wasteWeight}" type="hidden">
+															<canvas class="myCalResult"></canvas>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text fw-bold">전기 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">가스 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">교통 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">폐기물량</span>
+															</div>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+														</div>
+													</div>
 												</c:if>
 											</c:forEach>
 											<c:if test="${not found}">
@@ -129,11 +172,44 @@ request.setAttribute("currentYear", Year.now().getValue());
 											<c:forEach items="${myCalList}" var="myCal">
 												<c:if test="${myCal.year == year && myCal.month == 2}">
 													<c:set var="found" value="true" />
-													<div>${myCal.electricUsage}</div>
-													<div>${myCal.gasUsage}</div>
-													<div>${myCal.trafficKind}</div>
-													<div>${myCal.trafficValue}</div>
-													<div>${myCal.wasteWeight}</div>
+													<div class="d-flex">
+														<div>
+															<input value="${myCal.electricUsage}" type="hidden">
+															<input value="${myCal.gasUsage}" type="hidden">
+															<input value="${myCal.trafficKind}" type="hidden">
+															<input value="${myCal.trafficValue}" type="hidden">
+															<input value="${myCal.wasteWeight}" type="hidden">
+															<canvas class="myCalResult"></canvas>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text fw-bold">전기 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">가스 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">교통 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">폐기물량</span>
+															</div>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+														</div>
+													</div>
 												</c:if>
 											</c:forEach>
 											<c:if test="${not found}">
@@ -159,11 +235,44 @@ request.setAttribute("currentYear", Year.now().getValue());
 											<c:forEach items="${myCalList}" var="myCal">
 												<c:if test="${myCal.year == year && myCal.month == 3}">
 													<c:set var="found" value="true" />
-													<div>${myCal.electricUsage}</div>
-													<div>${myCal.gasUsage}</div>
-													<div>${myCal.trafficKind}</div>
-													<div>${myCal.trafficValue}</div>
-													<div>${myCal.wasteWeight}</div>
+													<div class="d-flex">
+														<div>
+															<input value="${myCal.electricUsage}" type="hidden">
+															<input value="${myCal.gasUsage}" type="hidden">
+															<input value="${myCal.trafficKind}" type="hidden">
+															<input value="${myCal.trafficValue}" type="hidden">
+															<input value="${myCal.wasteWeight}" type="hidden">
+															<canvas class="myCalResult"></canvas>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text fw-bold">전기 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">가스 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">교통 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">폐기물량</span>
+															</div>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+														</div>
+													</div>
 												</c:if>
 											</c:forEach>
 											<c:if test="${not found}">
@@ -189,11 +298,44 @@ request.setAttribute("currentYear", Year.now().getValue());
 											<c:forEach items="${myCalList}" var="myCal">
 												<c:if test="${myCal.year == year && myCal.month == 4}">
 													<c:set var="found" value="true" />
-													<div>${myCal.electricUsage}</div>
-													<div>${myCal.gasUsage}</div>
-													<div>${myCal.trafficKind}</div>
-													<div>${myCal.trafficValue}</div>
-													<div>${myCal.wasteWeight}</div>
+													<div class="d-flex">
+														<div>
+															<input value="${myCal.electricUsage}" type="hidden">
+															<input value="${myCal.gasUsage}" type="hidden">
+															<input value="${myCal.trafficKind}" type="hidden">
+															<input value="${myCal.trafficValue}" type="hidden">
+															<input value="${myCal.wasteWeight}" type="hidden">
+															<canvas class="myCalResult"></canvas>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text fw-bold">전기 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">가스 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">교통 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">폐기물량</span>
+															</div>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+														</div>
+													</div>
 												</c:if>
 											</c:forEach>
 											<c:if test="${not found}">
@@ -219,11 +361,44 @@ request.setAttribute("currentYear", Year.now().getValue());
 											<c:forEach items="${myCalList}" var="myCal">
 												<c:if test="${myCal.year == year && myCal.month == 5}">
 													<c:set var="found" value="true" />
-													<div>${myCal.electricUsage}</div>
-													<div>${myCal.gasUsage}</div>
-													<div>${myCal.trafficKind}</div>
-													<div>${myCal.trafficValue}</div>
-													<div>${myCal.wasteWeight}</div>
+													<div class="d-flex">
+														<div>
+															<input value="${myCal.electricUsage}" type="hidden">
+															<input value="${myCal.gasUsage}" type="hidden">
+															<input value="${myCal.trafficKind}" type="hidden">
+															<input value="${myCal.trafficValue}" type="hidden">
+															<input value="${myCal.wasteWeight}" type="hidden">
+															<canvas class="myCalResult"></canvas>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text fw-bold">전기 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">가스 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">교통 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">폐기물량</span>
+															</div>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+														</div>
+													</div>
 												</c:if>
 											</c:forEach>
 											<c:if test="${not found}">
@@ -249,11 +424,44 @@ request.setAttribute("currentYear", Year.now().getValue());
 											<c:forEach items="${myCalList}" var="myCal">
 												<c:if test="${myCal.year == year && myCal.month == 6}">
 													<c:set var="found" value="true" />
-													<div>${myCal.electricUsage}</div>
-													<div>${myCal.gasUsage}</div>
-													<div>${myCal.trafficKind}</div>
-													<div>${myCal.trafficValue}</div>
-													<div>${myCal.wasteWeight}</div>
+													<div class="d-flex">
+														<div>
+															<input value="${myCal.electricUsage}" type="hidden">
+															<input value="${myCal.gasUsage}" type="hidden">
+															<input value="${myCal.trafficKind}" type="hidden">
+															<input value="${myCal.trafficValue}" type="hidden">
+															<input value="${myCal.wasteWeight}" type="hidden">
+															<canvas class="myCalResult"></canvas>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text fw-bold">전기 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">가스 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">교통 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">폐기물량</span>
+															</div>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+														</div>
+													</div>
 												</c:if>
 											</c:forEach>
 											<c:if test="${not found}">
@@ -279,11 +487,44 @@ request.setAttribute("currentYear", Year.now().getValue());
 											<c:forEach items="${myCalList}" var="myCal">
 												<c:if test="${myCal.year == year && myCal.month == 7}">
 													<c:set var="found" value="true" />
-													<div>${myCal.electricUsage}</div>
-													<div>${myCal.gasUsage}</div>
-													<div>${myCal.trafficKind}</div>
-													<div>${myCal.trafficValue}</div>
-													<div>${myCal.wasteWeight}</div>
+													<div class="d-flex">
+														<div>
+															<input value="${myCal.electricUsage}" type="hidden">
+															<input value="${myCal.gasUsage}" type="hidden">
+															<input value="${myCal.trafficKind}" type="hidden">
+															<input value="${myCal.trafficValue}" type="hidden">
+															<input value="${myCal.wasteWeight}" type="hidden">
+															<canvas class="myCalResult"></canvas>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text fw-bold">전기 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">가스 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">교통 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">폐기물량</span>
+															</div>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+														</div>
+													</div>
 												</c:if>
 											</c:forEach>
 											<c:if test="${not found}">
@@ -309,11 +550,44 @@ request.setAttribute("currentYear", Year.now().getValue());
 											<c:forEach items="${myCalList}" var="myCal">
 												<c:if test="${myCal.year == year && myCal.month == 8}">
 													<c:set var="found" value="true" />
-													<div>${myCal.electricUsage}</div>
-													<div>${myCal.gasUsage}</div>
-													<div>${myCal.trafficKind}</div>
-													<div>${myCal.trafficValue}</div>
-													<div>${myCal.wasteWeight}</div>
+													<div class="d-flex">
+														<div>
+															<input value="${myCal.electricUsage}" type="hidden">
+															<input value="${myCal.gasUsage}" type="hidden">
+															<input value="${myCal.trafficKind}" type="hidden">
+															<input value="${myCal.trafficValue}" type="hidden">
+															<input value="${myCal.wasteWeight}" type="hidden">
+															<canvas class="myCalResult"></canvas>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text fw-bold">전기 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">가스 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">교통 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">폐기물량</span>
+															</div>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+														</div>
+													</div>
 												</c:if>
 											</c:forEach>
 											<c:if test="${not found}">
@@ -339,11 +613,44 @@ request.setAttribute("currentYear", Year.now().getValue());
 											<c:forEach items="${myCalList}" var="myCal">
 												<c:if test="${myCal.year == year && myCal.month == 9}">
 													<c:set var="found" value="true" />
-													<div>${myCal.electricUsage}</div>
-													<div>${myCal.gasUsage}</div>
-													<div>${myCal.trafficKind}</div>
-													<div>${myCal.trafficValue}</div>
-													<div>${myCal.wasteWeight}</div>
+													<div class="d-flex">
+														<div>
+															<input value="${myCal.electricUsage}" type="hidden">
+															<input value="${myCal.gasUsage}" type="hidden">
+															<input value="${myCal.trafficKind}" type="hidden">
+															<input value="${myCal.trafficValue}" type="hidden">
+															<input value="${myCal.wasteWeight}" type="hidden">
+															<canvas class="myCalResult"></canvas>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text fw-bold">전기 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">가스 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">교통 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">폐기물량</span>
+															</div>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+														</div>
+													</div>
 												</c:if>
 											</c:forEach>
 											<c:if test="${not found}">
@@ -369,11 +676,44 @@ request.setAttribute("currentYear", Year.now().getValue());
 											<c:forEach items="${myCalList}" var="myCal">
 												<c:if test="${myCal.year == year && myCal.month == 10}">
 													<c:set var="found" value="true" />
-													<div>${myCal.electricUsage}</div>
-													<div>${myCal.gasUsage}</div>
-													<div>${myCal.trafficKind}</div>
-													<div>${myCal.trafficValue}</div>
-													<div>${myCal.wasteWeight}</div>
+													<div class="d-flex">
+														<div>
+															<input value="${myCal.electricUsage}" type="hidden">
+															<input value="${myCal.gasUsage}" type="hidden">
+															<input value="${myCal.trafficKind}" type="hidden">
+															<input value="${myCal.trafficValue}" type="hidden">
+															<input value="${myCal.wasteWeight}" type="hidden">
+															<canvas class="myCalResult"></canvas>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text fw-bold">전기 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">가스 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">교통 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">폐기물량</span>
+															</div>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+														</div>
+													</div>
 												</c:if>
 											</c:forEach>
 											<c:if test="${not found}">
@@ -399,11 +739,44 @@ request.setAttribute("currentYear", Year.now().getValue());
 											<c:forEach items="${myCalList}" var="myCal">
 												<c:if test="${myCal.year == year && myCal.month == 11}">
 													<c:set var="found" value="true" />
-													<div>${myCal.electricUsage}</div>
-													<div>${myCal.gasUsage}</div>
-													<div>${myCal.trafficKind}</div>
-													<div>${myCal.trafficValue}</div>
-													<div>${myCal.wasteWeight}</div>
+													<div class="d-flex">
+														<div>
+															<input value="${myCal.electricUsage}" type="hidden">
+															<input value="${myCal.gasUsage}" type="hidden">
+															<input value="${myCal.trafficKind}" type="hidden">
+															<input value="${myCal.trafficValue}" type="hidden">
+															<input value="${myCal.wasteWeight}" type="hidden">
+															<canvas class="myCalResult"></canvas>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text fw-bold">전기 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">가스 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">교통 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">폐기물량</span>
+															</div>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+														</div>
+													</div>
 												</c:if>
 											</c:forEach>
 											<c:if test="${not found}">
@@ -429,11 +802,44 @@ request.setAttribute("currentYear", Year.now().getValue());
 											<c:forEach items="${myCalList}" var="myCal">
 												<c:if test="${myCal.year == year && myCal.month == 12}">
 													<c:set var="found" value="true" />
-													<div>${myCal.electricUsage}</div>
-													<div>${myCal.gasUsage}</div>
-													<div>${myCal.trafficKind}</div>
-													<div>${myCal.trafficValue}</div>
-													<div>${myCal.wasteWeight}</div>
+													<div class="d-flex">
+														<div>
+															<input value="${myCal.electricUsage}" type="hidden">
+															<input value="${myCal.gasUsage}" type="hidden">
+															<input value="${myCal.trafficKind}" type="hidden">
+															<input value="${myCal.trafficValue}" type="hidden">
+															<input value="${myCal.wasteWeight}" type="hidden">
+															<canvas class="myCalResult"></canvas>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text fw-bold">전기 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">가스 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">교통 사용량</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">폐기물량</span>
+															</div>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+															<div class="content-line">
+																<span class="content-text"></span>
+															</div>
+														</div>
+													</div>
 												</c:if>
 											</c:forEach>
 											<c:if test="${not found}">
@@ -479,6 +885,81 @@ request.setAttribute("currentYear", Year.now().getValue());
             document.querySelector('.custom-select-dropdown').style.display = 'none';
         }
     });
+    
+    let charts = [];
+    
+    // 그래프 그리기
+    let canvas = document.getElementsByClassName("myCalResult")
+    for (let i = 0; i < canvas.length; i++){
+    	let electricUsage = canvas[i].parentElement.children[0]
+		let gasUsage = canvas[i].parentElement.children[1]
+		let trafficKind = canvas[i].parentElement.children[2]
+		let trafficValue = canvas[i].parentElement.children[3]
+		let wasteWeight = canvas[i].parentElement.children[4]
+    	
+    	$.ajax({
+			type:'POST',
+			url: "<c:url value='/getEmissionList' />",
+			success: function(result){
+				let electricCO2
+				let gasCO2
+				let trafficCO2
+				let wasteCO2
+				for(let j = 0; j < result.length; j++){
+					if(result[j].coefficientName == "전기 CO2 발생량"){
+						electricCO2 = electricUsage.value * result[j].coefficientValue
+					}
+					if(result[j].coefficientName == "가스 CO2 발생량"){
+						gasCO2 = gasUsage.value * result[j].coefficientValue
+					}
+					if(result[j].coefficientName == "경유 CO2 발생량" && trafficKind.value == "경유"){
+						trafficCO2 = trafficValue.value * result[j].coefficientValue
+					}
+					if(result[j].coefficientName == "휘발유 CO2 발생량" && trafficKind.value == "휘발유"){
+						trafficCO2 = trafficValue.value * result[j].coefficientValue
+					}
+					if(result[j].coefficientName == "LPG CO2 발생량" && trafficKind.value == "LPG"){
+						trafficCO2 = trafficValue.value * result[j].coefficientValue
+					}
+					if(result[j].coefficientName == "폐기물 CO2 발생량"){
+						wasteCO2 = wasteWeight.value * result[j].coefficientValue
+					}
+				}
+				canvas[i].parentElement.parentElement.children[2].children[0].children[0].innerHTML = " : " +electricCO2
+				canvas[i].parentElement.parentElement.children[2].children[1].children[0].innerHTML = " : " +gasCO2
+				canvas[i].parentElement.parentElement.children[2].children[2].children[0].innerHTML = " : " +trafficCO2
+				canvas[i].parentElement.parentElement.children[2].children[3].children[0].innerHTML = " : " +wasteCO2
+				charts[i] = new Chart(canvas[i], {
+		            type: 'pie',
+		            data: {
+		                labels: ['전기', '가스', '폐기물', '교통'],
+		                datasets: [{
+		                    data: [electricCO2, gasCO2, wasteCO2, trafficCO2]
+		                }]
+		            },
+		            options: {
+		                responsive: false,
+		                plugins: {
+		                    legend: {
+		                        position: 'top',
+		                    },
+		                    datalabels: {
+		                        color: '#fff', // 데이터 글자 색상
+		                        font: {
+		                            size: 15, // 글자 크기
+		                        },
+		                        formatter: (value, context) => {
+		                        	if(value == 0) return ''
+		                            return value + "kg";
+		                        }
+		                    }
+		                }
+		            },
+		            plugins: [ChartDataLabels] // 플러그인 활성화
+		        })
+			}
+		})
+    }
 	</script>
 </body>
 
