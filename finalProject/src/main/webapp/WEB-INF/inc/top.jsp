@@ -56,11 +56,10 @@
 }
 
 .dropdown-select {
-	width: var(- -dropdown-width);
 	opacity: 0;
 	visibility: hidden;
 	position: absolute;
-	left: 0;
+	left: -10%;
 	top: 100%;
 	background-color: green;
 	padding-top: 1vh;
@@ -159,7 +158,7 @@
 
 .dropdown-select {
 	margin-top: 0.4vw;
-	width: 100%;
+	width: 120%;
 }
 </style>
 </head>

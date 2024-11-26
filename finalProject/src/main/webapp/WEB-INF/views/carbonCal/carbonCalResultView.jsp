@@ -138,7 +138,20 @@
 		</c:forEach>
 	</div>
 	
+	<b>주거형태별 에너지소비량</b>
 	<div>${keyGetHte }</div>
+	<br>
+	<b>주거형태별 인구비율</b>
+	<div>${keyGetHtr }</div>
+	<br>
+	<b>가구별 가구원수 및 비율</b>
+	<div>${keyGetHmc }</div>
+	<br>
+	<b>사용면적별 에너지소비량</b>
+	<div>${keyGetRae }</div>
+	<br>
+	<b>가구원별 에너지소비량</b>
+	<div>${keyGetHme }</div>
 	
 	<!-- 주거형태별 탄소배출량 -->
 	<div style="display:none;">

@@ -15,10 +15,14 @@ import com.codingbamboo.finalproject.carboncalculate.dto.CarbonCalculateDTO;
 import com.codingbamboo.finalproject.carboncalculate.service.CarbonCalculateService;
 import com.codingbamboo.finalproject.coefficient.dto.CoefficientDTO;
 import com.codingbamboo.finalproject.coefficient.service.CoefficientService;
+import com.codingbamboo.finalproject.hmc.dto.HmcDTO;
+import com.codingbamboo.finalproject.hmc.service.HmcService;
 import com.codingbamboo.finalproject.hme.dto.HmeDTO;
 import com.codingbamboo.finalproject.hme.service.HmeService;
 import com.codingbamboo.finalproject.hte.dto.HteDTO;
 import com.codingbamboo.finalproject.hte.service.HteService;
+import com.codingbamboo.finalproject.htr.dto.HtrDTO;
+import com.codingbamboo.finalproject.htr.service.HtrService;
 import com.codingbamboo.finalproject.rae.dto.RaeDTO;
 import com.codingbamboo.finalproject.rae.service.RaeService;
 import com.codingbamboo.finalproject.user.dto.UserDTO;
@@ -40,6 +44,12 @@ public class CarbonCalculateController {
 	
 	@Autowired
 	RaeService raeService;
+	
+	@Autowired
+	HmcService hmcService;
+	
+	@Autowired
+	HtrService htrService;
 
 	@RequestMapping("/testView")
 	public String testView() {
@@ -74,6 +84,14 @@ public class CarbonCalculateController {
         // 건물 면적별 탄소 배출량
         List<RaeDTO> getRae = raeService.getRae();
         model.addAttribute("keyGetRae", getRae);
+        
+        // 가구원수별 인구와 비율
+        List<HmcDTO> getHmc = hmcService.getHmc();
+        model.addAttribute("keyGetHmc", getHmc);
+        
+        // 거주
+        List<HtrDTO> getHtr = htrService.getHtr();
+        model.addAttribute("keyGetHtr", getHtr);
         
 		return "carbonCal/carbonCalResultView";
 	}
