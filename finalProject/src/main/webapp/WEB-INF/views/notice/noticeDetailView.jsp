@@ -158,5 +158,10 @@ html, body {
 
 	<!-- Footer -->
 	<%@ include file="/WEB-INF/inc/footer.jsp"%>
+	<script type="text/javascript">
+		<c:forEach var="attach" items="${attachList}">
+			console.log(${attach})
+		</c:forEach>
+	</script>
 </body>
 </html>

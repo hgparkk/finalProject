@@ -17,8 +17,8 @@ public class NoticeService {
 
 // 1. 공지사항 등록
 
-	public boolean registNotice(NoticeDTO notice) {
-		return noticeDAO.registNotice(notice) > 0;
+	public int registNotice(NoticeDTO notice) {
+		return noticeDAO.registNotice(notice);
 	}
 
 	/**
@@ -45,4 +45,10 @@ public class NoticeService {
 	public List<NoticeDTO> getNoticePreviewList() {
 		return noticeDAO.getNoticePreviewList();
 	}
+	
+	public int getNoticeNo() {
+		int result = noticeDAO.getNoticeNo();
+		return result;
+	}
+	
 }

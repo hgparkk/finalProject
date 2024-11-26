@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mybatis.mapper.attach">
+<mapper namespace="com.codingbamboo.finalproject.attach.dao.IAttachDAO">
 
 <insert id="insertAttach" parameterType="com.codingbamboo.finalproject.attach.dto.AttachDTO">
 	INSERT INTO attach(
@@ -12,7 +12,7 @@
 		attach_type,
 		attach_path
 	)VALUES(
-		seq_attach.nextval,
+		attach_seq.nextval,
 		#{attachName},
 		#{attachOriginalName},
 		#{attachSize},
@@ -21,6 +21,7 @@
 		#{attachPath}
 	)
 </insert>
+
 <select id="getAttachList" parameterType="int" resultType="com.codingbamboo.finalproject.attach.dto.AttachDTO">
     SELECT
         a.attach_no,
@@ -38,12 +39,12 @@
       AND na.notice_no = #{noticeNo}
 </select>
 
-
-
-
-
-
-
-
-
+<select id="getAttachNo" parameterType="String" resultType="int">
+	SELECT
+		attach_no
+	FROM
+		attach
+	WHERE
+		attach_name = #{attachName}
+</select>
 </mapper>

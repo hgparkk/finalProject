@@ -24,11 +24,6 @@
 		#{noticeTitle}, #{noticeContent}, SYSDATE)
 	</insert>
 
-	<select id="getCurrentNo">
-		SELECT NOTICE_NO
-		FROM (SELECT * FROM NOTICE ORDER BY NOTICE_NO DESC) WHERE ROWNUM = 1;
-	</select>
-
 	<!-- 공지사항 삭제 -->
 	<delete id="deleteNotice" parameterType="int">
 		DELETE FROM notice
@@ -111,7 +106,16 @@
 			AND notice_title LIKE '%' || #{searchKeyword} || '%'
 		</if>
 	</select>
-
-
-
+	
+	<select id="getNoticeNo" resultType="int">
+		SELECT
+			notice_no
+		FROM(
+			SELECT *
+			FROM notice
+			ORDER BY notice_date DESC
+		)
+		WHERE
+			ROWNUM = 1
+	</select>
 </mapper>

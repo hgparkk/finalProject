@@ -42,8 +42,14 @@ public interface INoticeDAO {
     // 공지사항 총 개수 조회 (검색 키워드 기반)
     int getNoticeCount(@Param("searchKeyword") String searchKeyword);
     
+    
     int registNotice(NoticeDTO notice);
     
+    
     int getCurrentNoticeNo();
+    
+
+
+	int getNoticeNo();
 }
 

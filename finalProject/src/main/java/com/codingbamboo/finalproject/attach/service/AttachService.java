@@ -25,5 +25,8 @@ public class AttachService {
 		List<AttachDTO> result = dao.getAttachList(noticeNo);
 		return result;
 	}
-
+	
+	public int getAttachNo(String attachName) {
+		return dao.getAttachNo(attachName);
+	}
 }

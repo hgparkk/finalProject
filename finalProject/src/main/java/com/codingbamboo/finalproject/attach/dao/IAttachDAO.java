@@ -17,7 +17,7 @@ public interface IAttachDAO {
 	// 특정 첨부파일 정보 가져오기
 	AttachDTO getAttachByAttachNo(int attachNo);
 
-
+	int getAttachNo(String attachName);
 
 
 

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.codingbamboo.finalproject.noticeattach.dao.INoticeAttachDAO">
+	<insert id="insertNoticeAttach" parameterType="com.codingbamboo.finalproject.noticeattach.dto.NoticeAttachDTO">
+		INSERT INTO notice_attach(
+			na_no,
+			notice_no,
+			attach_no
+		) VALUES (
+			na_seq.NEXTVAL,
+			#{noticeNo},
+			#{attachNo}
+		)
+	</insert>
+</mapper>
