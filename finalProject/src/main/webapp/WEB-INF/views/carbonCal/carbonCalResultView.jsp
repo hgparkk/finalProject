@@ -152,42 +152,8 @@
 	<br>
 	<b>가구원별 에너지소비량</b>
 	<div>${keyGetHme }</div>
-	
-	<!-- 주거형태별 탄소배출량 -->
-	<div style="display:none;">
-		<div id="cgDh">${keyGetHte[0]['hteConsumption'] }</div>
-		<div id="cgApt">${keyGetHte[1]['hteConsumption'] }</div>
-		<div id="cgMph">${keyGetHte[2]['hteConsumption'] }</div>
-		<div id="cgElse">${keyGetHte[3]['hteConsumption'] }</div>
-		<div id="eDh">${keyGetHte[4]['hteConsumption'] }</div>
-		<div id="eApt">${keyGetHte[5]['hteConsumption'] }</div>
-		<div id="eMph">${keyGetHte[6]['hteConsumption'] }</div>
-		<div id="eElse">${keyGetHte[7]['hteConsumption'] }</div>
-	</div>
-	
-	<!-- 주거형태 -->
-	<div style="display:none;">
-		<div id="cgDh">${keyGetHte[0]['hteConsumption'] }</div>
-		<div id="cgApt">${keyGetHte[1]['hteConsumption'] }</div>
-		<div id="cgMph">${keyGetHte[2]['hteConsumption'] }</div>
-		<div id="cgElse">${keyGetHte[3]['hteConsumption'] }</div>
-		<div id="eDh">${keyGetHte[4]['hteConsumption'] }</div>
-		<div id="eApt">${keyGetHte[5]['hteConsumption'] }</div>
-		<div id="eMph">${keyGetHte[6]['hteConsumption'] }</div>
-		<div id="eElse">${keyGetHte[7]['hteConsumption'] }</div>
-	</div>
-	
-	<!-- 가구원수 -->
-	<div style="display:none;">
-		<div id="cgDh">${keyGetHte[0]['hteConsumption'] }</div>
-		<div id="cgApt">${keyGetHte[1]['hteConsumption'] }</div>
-		<div id="cgMph">${keyGetHte[2]['hteConsumption'] }</div>
-		<div id="cgElse">${keyGetHte[3]['hteConsumption'] }</div>
-		<div id="eDh">${keyGetHte[4]['hteConsumption'] }</div>
-		<div id="eApt">${keyGetHte[5]['hteConsumption'] }</div>
-		<div id="eMph">${keyGetHte[6]['hteConsumption'] }</div>
-		<div id="eElse">${keyGetHte[7]['hteConsumption'] }</div>
-	</div>
+	<b>주거형태, 면적, 가구원수</b>
+	<div>${keyGetHtac }</div>
 
 	<div class="house">
 		<span class="span">주거 형태</span>
@@ -685,22 +651,41 @@ document.getElementById("resultCO2").innerHTML += v_allCo2;
             }
         });
         
-        // 
-        radioButtons.forEach(radioButton => {
+        const htRadioButtons = document.querySelectorAll('input[name="housing_type"]');
+        const RaRadioButtons = document.querySelectorAll('input[name="resdentialArea"]');
+        const HhRadioButtons = document.querySelectorAll('input[name="livingMember"]');
+        
+        // 주거형태 선택
+        htRadioButtons.forEach(radioButton => {
             radioButton.addEventListener('change', function() {
                 const selectedHousingType = document.querySelector('input[name="housing_type"]:checked');
+                if(selectedHousingType == '아파트'){
+	                console.log("변화")
+                }
+                console.log(selectedHousingType.nextElementSibling.textContent.trim())
             });
         });
-
-        // 기본적으로 "아파트" 라디오 버튼이 체크된 상태로 설정
-        const defaultHousingType = document.getElementById('housing_type1');
-        if (defaultHousingType) {
-        	defaultHousingType.checked = true;
-        }
+        
+     	// 거주면적 선택
+        RaRadioButtons.forEach(radioButton => {
+            radioButton.addEventListener('change', function() {
+                const selectedResidentialArea = document.querySelector('input[name="resdentialArea"]:checked');
+                console.log(selectedResidentialArea.nextElementSibling.textContent.trim())
+            });
+        });
+        
+     	// 가구원수 선택
+        HhRadioButtons.forEach(radioButton => {
+            radioButton.addEventListener('change', function() {
+                const selectedHousehold = document.querySelector('input[name="livingMember"]:checked');
+                console.log(selectedHousehold.nextElementSibling.textContent.trim())
+            });
+        });
         
         // 사용자가 주거형태나 거주면적을 바꾸면 비교되는 그래프의 값이 바뀜
         function changeCo2(){
         	const selectedHousingType = document.querySelector('input[name="housing_type"]:checked');
+        	console.log(selectedHousingType)
         	
         	/* 원하는 상태 선택 */
 		    if (selectedHousingType && v_inputFuel) {
@@ -716,6 +701,8 @@ document.getElementById("resultCO2").innerHTML += v_allCo2;
 		        }
 		    }
         }
+        
+        
     </script>
 
 

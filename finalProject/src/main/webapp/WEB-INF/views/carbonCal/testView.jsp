@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="ko">
@@ -17,6 +17,18 @@
 <body>
 	<!-- top -->
 	<%@ include file="/WEB-INF/inc/top.jsp"%>
+	
+	<div>${keyGetHtac[1] }</div>
+	<div>${keyGetHtac[0]['htacHouseType'] }</div>
+	<div>${keyGetHtac.size() }</div>
+	
+	<div>${sessionStorage.getItem("selectMember") }</div>
+	<div>${sessionStorage.getItem("selectArea") }</div>
+	<div>${sessionStorage.getItem("selectType") }</div>
+	
+	<div id="key">
+	
+	</div>
 
 	<div class="container">
 		<div>
@@ -25,8 +37,7 @@
 					<option value="2022">2022</option>
 					<option value="2023">2023</option>
 					<option value="2024">2024</option>
-				</select> 
-				<select id="month">
+				</select> <select id="month">
 					<option value="01">1</option>
 					<option value="02">2</option>
 					<option value="03">3</option>
@@ -44,87 +55,167 @@
 		</div>
 	</div>
 
-	<div class="graph-container">
-		<div class="usage-result-box">
-			<div class="graph-box">
-				<div class="circle-graph-box">
-					<div class="circle-graph">
-						<canvas id="myChart"></canvas>
-					</div>
-					<div class="circle-graph-explain-box">
-						<div>
-							<h2>당신의 탄소배출량 결과</h2>
-							<p>${sessionScope.login.userId }님의 이번 달 이산화탄소(CO₂)발생량통계입니다.</p>
-						</div>
-						<div>
-							<span>${sessionScope.login.userId }님의 이산화탄소 배출량은 총</span> 
-							<span id="resultCO2"></span> <span>kg입니다. 왼쪽의 그래프를 보면 어느 부분에서 이산화탄소가 가장 많이 발생하고 있는지 확인할 수 있습니다.</span>
-						</div>
-					</div>
-				</div>
+	<!-- 주거 형태 -->
+	<div class="house">
+		<span class="span">주거 형태</span>
+	</div>
+	<div class="house-type-select-box">
+		<div class="house-type-select d-flex">
+			<div class="house-type">
+				<input type="radio" name="housing_type" id="housing_type1"
+					value="아파트" checked> <label for="housing_type1">아파트</label>
+			</div>
+			<div class="house-type">
+				<input type="radio" name="housing_type" id="housing_type2"
+					value="단독주택"> <label for="housing_type2">단독주택</label>
+			</div>
+			<div class="house-type">
+				<input type="radio" name="housing_type" id="housing_type3"
+					value="연립 및 다세대주택"> <label for="housing_type3">연립 및
+					다세대</label>
+			</div>
+			<div class="house-type">
+				<input type="radio" name="housing_type" id="housing_type4"
+					value="기타"> <label for="housing_type4">기타</label>
 			</div>
 		</div>
 	</div>
+	
+	<!-- 거주 면적 -->
+	<div class="area">
+		<span class="span">거주면적</span>
+	</div>
+	<div class="resdential-area-select-box">
+		<div class="resdential-area-select d-flex">
+			<div class="resdential-area">
+				<input type="radio" name="resdentialArea" id="resdentialArea1"
+					value="~33㎡ 이하" checked> <label for="resdentialArea1">~33㎡
+					이하</label>
+			</div>
+			<div class="resdential-area">
+				<input type="radio" name="resdentialArea" id="resdentialArea2"
+					value="33㎡ 초과 ~ 66㎡ 이하"> <label for="resdentialArea2">33㎡
+					초과 ~ 66㎡ 이하</label>
+			</div>
+			<div class="resdential-area">
+				<input type="radio" name="resdentialArea" id="resdentialArea3"
+					value="66㎡ 초과 ~ 99㎡ 이하"> <label for="resdentialArea3">66㎡
+					초과 ~ 99㎡ 이하</label>
+			</div>
+			<div class="resdential-area">
+				<input type="radio" name="resdentialArea" id="resdentialArea4"
+					value="99㎡ 초과 ~ 132㎡ 이하"> <label for="resdentialArea4">99㎡
+					초과 ~ 132㎡ 이하</label>
+			</div>
+			<div class="resdential-area">
+				<input type="radio" name="resdentialArea" id="resdentialArea5"
+					value="132㎡ 초과~"> <label for="resdentialArea5">132㎡
+					초과~</label>
+			</div>
+		</div>
+	</div>
+
+	<!-- 가구원 수 -->
+	<div class="member">
+		<span class="span">거주인원</span>
+	</div>
+	<div class="house-member-select-box">
+		<div class="house-member-select d-flex">
+			<div class="house-member">
+				<input type="radio" name="livingMember" id="livingMember1"
+					value="1명" checked> <label for="livingMember1">1명</label>
+			</div>
+			<div class="house-member">
+				<input type="radio" name="livingMember" id="livingMember2"
+					value="2명"> <label for="livingMember2">2명</label>
+			</div>
+			<div class="house-member">
+				<input type="radio" name="livingMember" id="livingMember3"
+					value="3명"> <label for="livingMember3">3명</label>
+			</div>
+			<div class="house-member">
+				<input type="radio" name="livingMember" id="livingMember4"
+					value="4명"> <label for="livingMember4">4명</label>
+			</div>
+			<div class="house-member">
+				<input type="radio" name="livingMember" id="livingMember5"
+					value="5명"> <label for="livingMember5">5명</label>
+			</div>
+			<div class="house-member">
+				<input type="radio" name="livingMember" id="livingMember6"
+					value="6명 이상"> <label for="livingMember6">6명 이상</label>
+			</div>
+		</div>
+	</div>
+	
+	<div style="display:hidden;">
+		<div id="type"></div>
+		<div id="area"></div>
+		<div id="member"></div>
+	</div>
+	
+	<button type="button" id="resultBtn">결과 보기</button>
 
 	<!-- footer -->
 	<%@ include file="/WEB-INF/inc/footer.jsp"%>
 
 	<script type="text/javascript">
-	// 연도와 월 선택 시 데이터 요청
-	function fetchCarbonData(year, month) {
-	    // AJAX 요청 보내기
-	    fetch(`/carbonCal/getCarbonData?year=${year}&month=${month}`, {
-	        method: 'GET'
-	    })
-	    .then(response => response.json())
-	    .then(data => {
-	        // 서버에서 받은 데이터를 사용해 페이지 업데이트
-	        updateCarbonGraph(data);
-	        updateCarbonDetails(data);
-	    })
-	    .catch(error => {
-	        console.error('데이터를 가져오는 데 실패했습니다:', error);
-	    });
-	}
+	const htRadioButtons = document.querySelectorAll('input[name="housing_type"]');
+    const RaRadioButtons = document.querySelectorAll('input[name="resdentialArea"]');
+    const HhRadioButtons = document.querySelectorAll('input[name="livingMember"]');
+    
+    // 주거형태 선택
+    htRadioButtons.forEach(radioButton => {
+        radioButton.addEventListener('change', function() {
+            const selectedHousingType = document.querySelector('input[name="housing_type"]:checked');
+            console.log(selectedHousingType.nextElementSibling.textContent.trim())
+            document.getElementById("type").textContent = selectedHousingType.nextElementSibling.textContent.trim()
+        });
+    });
+    
+ 	// 거주면적 선택
+    RaRadioButtons.forEach(radioButton => {
+        radioButton.addEventListener('change', function() {
+            const selectedResidentialArea = document.querySelector('input[name="resdentialArea"]:checked');
+            console.log(selectedResidentialArea.nextElementSibling.textContent.trim())
+            document.getElementById("area").textContent = selectedResidentialArea.nextElementSibling.textContent.trim()
+        });
+    });
+    
+ 	// 가구원수 선택
+    HhRadioButtons.forEach(radioButton => {
+        radioButton.addEventListener('change', function() {
+            const selectedHousehold = document.querySelector('input[name="livingMember"]:checked');
+            console.log(selectedHousehold.nextElementSibling.textContent.trim())
+            document.getElementById("member").textContent = selectedHousehold.nextElementSibling.textContent.trim()
+        });
+    });
+ 	
+    document.querySelectorAll('input[name="housing_type"]').forEach(radio => {
+    	  radio.addEventListener('change', function() {
+    	    if (this.value === '아파트') {
+    	      document.getElementById('result').textContent = '${keyGetHtac[0]}';
+    	    }
+    	  });
+    	});
+    
+    document.getElementById("resultBtn").addEventListener('click', ()=>{
+    	sessionStorage.removeItem("selectType");
+		sessionStorage.removeItem("selectArea");
+		sessionStorage.removeItem("selectMember");
+		
+		sessionStorage.setItem("selectType", document.getElementById("type").textContent);
+		sessionStorage.setItem("selectArea", document.getElementById("area").textContent);
+		sessionStorage.setItem("selectMember", document.getElementById("member").textContent);
+		
+    })
+    
+	for(let i = 0; i < ${keyGetHtac.size()}; i++ ){
+		document.getElementById("id").textContent = ${keyGetHtac[i]}
+	};
+    
+    </script>
 
-	// 연도와 월 선택 시 이벤트 리스너 추가
-	const yearSelect = document.getElementById('year');
-	const monthSelect = document.getElementById('month');
-
-	yearSelect.addEventListener('change', function() {
-	    const selectedYear = yearSelect.value;
-	    const selectedMonth = monthSelect.value;
-	    fetchCarbonData(selectedYear, selectedMonth);  // 데이터 요청
-	});
-
-	monthSelect.addEventListener('change', function() {
-	    const selectedYear = yearSelect.value;
-	    const selectedMonth = monthSelect.value;
-	    fetchCarbonData(selectedYear, selectedMonth);  // 데이터 요청
-	});
-	
-	// 그래프와 세부 정보를 업데이트하는 함수
-	function updateCarbonGraph(data) {
-	    // 기존의 그래프를 업데이트
-	    const ctx = document.getElementById('myChart').getContext('2d');
-	    const myChart = new Chart(ctx, {
-	        type: 'pie',
-	        data: {
-	            labels: ['전기', '가스', '폐기물', '교통'],
-	            datasets: [{
-	                data: [data.electric, data.gas, data.traffic, data.waste],
-	                backgroundColor: ['#FF0000', '#00FF00', '#0000FF', '#FFFF00']
-	            }]
-	        }
-	    });
-	}
-
-	function updateCarbonDetails(data) {
-	    // 배출량 결과 텍스트 업데이트
-	    document.getElementById('resultCO2').innerText = '${data.totalCo2} kg';
-	}
-
-	</script>
-
+	<%@ include file="/WEB-INF/inc/footer.jsp"%>
 </body>
 </html>

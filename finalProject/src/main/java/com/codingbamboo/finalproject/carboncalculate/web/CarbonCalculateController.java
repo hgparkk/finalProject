@@ -19,6 +19,8 @@ import com.codingbamboo.finalproject.hmc.dto.HmcDTO;
 import com.codingbamboo.finalproject.hmc.service.HmcService;
 import com.codingbamboo.finalproject.hme.dto.HmeDTO;
 import com.codingbamboo.finalproject.hme.service.HmeService;
+import com.codingbamboo.finalproject.htac.dto.HtacDTO;
+import com.codingbamboo.finalproject.htac.service.HtacService;
 import com.codingbamboo.finalproject.hte.dto.HteDTO;
 import com.codingbamboo.finalproject.hte.service.HteService;
 import com.codingbamboo.finalproject.htr.dto.HtrDTO;
@@ -50,9 +52,16 @@ public class CarbonCalculateController {
 	
 	@Autowired
 	HtrService htrService;
+	
+	@Autowired
+	HtacService htacService;
 
 	@RequestMapping("/testView")
-	public String testView() {
+	public String testView(Model model) {
+		// 거주형태, 면적, 가구원수 별 가구수 가져오기
+        List<HtacDTO> getHtac = htacService.getHtac();
+        model.addAttribute("keyGetHtac", getHtac);
+		
 		return "carbonCal/testView";
 	}
 
@@ -93,6 +102,10 @@ public class CarbonCalculateController {
         List<HtrDTO> getHtr = htrService.getHtr();
         model.addAttribute("keyGetHtr", getHtr);
         
+        // 거주형태, 면적, 가구원수 별 가구수 가져오기
+        List<HtacDTO> getHtac = htacService.getHtac();
+        model.addAttribute("keyGetHtac", getHtac);
+        
 		return "carbonCal/carbonCalResultView";
 	}
 
@@ -119,5 +132,7 @@ public class CarbonCalculateController {
 
 		return "alert";
 	}
+	
+	/* @PostMapping("/carbonGraphDo") */
 
 }
