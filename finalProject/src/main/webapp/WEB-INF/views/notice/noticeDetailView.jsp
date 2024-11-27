@@ -135,6 +135,7 @@ html, body {
 			<fmt:formatDate value="${notice.noticeDate}" pattern="yyyy-MM-dd" />
 		</div>
 
+
 		<!-- 버튼 컨테이너 -->
 		<div class="button-container">
 			<div class="back-button">
@@ -154,14 +155,33 @@ html, body {
 				</div>
 			</c:if>
 		</div>
-	</div>
+		<!-- 첨부파일 -->
+		<div class="attach-files">
+			<h4>첨부파일</h4>
+			<c:if test="${not empty attachList}">
+				<ul>
+					<!-- 첨부파일 목록 반복 -->
+					<c:forEach var="attach" items="${attachList}">
+						<li>
+							<!-- 파일 다운로드 링크 생성 --> <a
+							href="${pageContext.request.contextPath}/filedownload?attachName=${attach.attachName}&attachOriginalName=${attach.attachOriginalName}"
+							target="_blank"> ${attach.attachOriginalName}
+								(${attach.attachFancySize}) </a>
+						</li>
+					</c:forEach>
+				</ul>
+			</c:if>
+			<c:if test="${empty attachList}">
+				<p>첨부파일이 없습니다.</p>
+			</c:if>
+		</div>
 
-	<!-- Footer -->
-	<%@ include file="/WEB-INF/inc/footer.jsp"%>
-	<script type="text/javascript">
-		<c:forEach var="attach" items="${attachList}">
-			console.log(${attach})
-		</c:forEach>
-	</script>
+
+
+
+
+	</div>
 </body>
+<!-- Footer -->
+<%@ include file="/WEB-INF/inc/footer.jsp"%>
 </html>

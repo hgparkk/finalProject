@@ -426,9 +426,9 @@ html, body {
             <span class="bracket bracket-right">]</span>
          </div>
 
-         <h1 class="mt-5">탄소중립은 대기 중 온실가스 농도가 인간 활동에 의해 더 이상 증가되지 않도록,</h1>
-         <h1>배출량을 최대한 줄이고, 흡수량을 늘려 순 배출량이 ‘0’이 되도록 하는 것입니다.</h1>
-         <h1>‘넷 제로(Net Zero), 탄소 제로(Carbon Zero)’라고도 합니다.</h1>
+		<h1 class="mt-5">탄소중립은 모두가 함께 만들어가는 변화입니다.</h1>
+		<h1>온실가스를 줄이고 흡수를 늘려,</h1>
+		<h1>지속 가능한 지구를 위해 노력합시다.</h1>
       </div>
    </div>
 
@@ -443,7 +443,8 @@ html, body {
          </div>
       </div>
 
-      <div class="main-title">조금 불편해도, 지구를 위해 에너지 절약을 실천했던 적이 있나요?</div>
+      <div class="main-title">조금의 불편함이 더 나은 미래를 만듭니다.<br> 에너지 절약, 여러분도 실천하고 계신가요?
+</div>
 
       <div class="tags">
          <span class="tag">#생활 속</span> <span class="tag">#에너지 절약법</span>

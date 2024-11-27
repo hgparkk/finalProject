@@ -51,5 +51,7 @@ public interface INoticeDAO {
 
 
 	int getNoticeNo();
+	
+
 }
 

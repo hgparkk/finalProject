@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.codingbamboo.finalproject.attach.dto.AttachDTO;
 import com.codingbamboo.finalproject.notice.dao.INoticeDAO;
 import com.codingbamboo.finalproject.notice.dto.NoticeDTO;
 
@@ -50,5 +49,14 @@ public class NoticeService {
 		int result = noticeDAO.getNoticeNo();
 		return result;
 	}
+    public int updateNotice(NoticeDTO notice) {
+        return noticeDAO.updateNotice(notice);
+    }
+
+    public int deleteNotice(int noticeNo) {
+        return noticeDAO.deleteNotice(noticeNo);
+    }
+    
+
 	
 }

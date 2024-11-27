@@ -47,4 +47,16 @@
 	WHERE
 		attach_name = #{attachName}
 </select>
+
+<delete id="deleteAttach" parameterType="int">
+    DELETE FROM attach
+    WHERE attach_no = #{attachNo}
+</delete>
+
+<delete id="deleteNoticeAttach" parameterType="int">
+    DELETE FROM notice_attach
+    WHERE attach_no = #{attachNo}
+</delete>
+
+
 </mapper>

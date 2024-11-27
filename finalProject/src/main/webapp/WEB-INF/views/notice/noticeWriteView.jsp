@@ -29,6 +29,7 @@ html, body {
 	border-radius: 15px;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 	flex-grow: 1;
+	text-align: center;
 }
 
 .title-box {
@@ -38,6 +39,7 @@ html, body {
 	flex-direction: column;
 	margin-bottom: 20px;
 	text-align: center;
+	
 }
 
 .title-box h1 {
@@ -49,15 +51,26 @@ html, body {
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
+	align-items: center;
+
 }
 
-.write-form input[type="text"], .write-form input[type="file"] {
-	width: 100%;
+.write-form input[type="text"]{
+	width: 80%;
 	padding: 10px;
 	border: 1px solid #ddd;
 	border-radius: 5px;
 	font-size: 1rem;
+	margin-left: 0px;
 }
+ .write-form input[type="file"] {
+	width: 700px;
+	margin: 0;
+	display: flex;
+	
+	
+}
+
 
 .write-form textarea {
 	width: 100%;
@@ -97,24 +110,24 @@ html, body {
 
 	<!-- 글쓰기 폼 -->
 	<div class="write-container">
-		<form action="${pageContext.request.contextPath}/noticeWriteDo" method="post" class="write-form" enctype="multipart/form-data">
+		<form id="noticeWriteForm" action="${pageContext.request.contextPath}/noticeWriteDo" method="post" class="write-form" enctype="multipart/form-data">
 			<!-- 제목 -->
-			<div style="width: 80%;">
+			<div style="width: 750px;">
 				<input type="text" id="noticeTitle" name="noticeTitle" placeholder="제목을 입력하세요" required>
 			</div>
 
 			<!-- 내용 -->
-			<div>
-				<textarea id="noticeContent" name="noticeContent"></textarea>
+			<div style="width: 80%;">
+				<textarea id="noticeContent" name="noticeContent" style="width:95%"></textarea>
 			</div>
 
 			<!-- 첨부파일 -->
 			<div>
-				<label for="formFileMultiple" class="form-label">파일첨부</label>
+				<label for="formFileMultiple" class="form-label" style="text-align:left;">파일첨부</label>
 				<input class="form-control" name="boFile" type="file" id="formFileMultiple" multiple>
 			</div>
 			<!-- 등록 버튼 -->
-			<button type="submit">등록</button>
+			<button id="noticeWriteBtn" type="button">등록</button>
 		</form>
 	</div>
 	<!-- Footer -->
@@ -122,12 +135,16 @@ html, body {
 	<script type="text/javascript">
 		var oEditors = [];
 
-		nhn.husky.EZCreator
-				.createInIFrame({
+		nhn.husky.EZCreator.createInIFrame({
 					oAppRef : oEditors,
 					elPlaceHolder : "noticeContent",
 					sSkinURI : "${pageContext.request.contextPath}/nse/SmartEditor2Skin.html",
 				});
+		
+		document.getElementById('noticeWriteBtn').addEventListener('click', ()=>{
+			oEditors.getById["noticeContent"].exec("UPDATE_CONTENTS_FIELD", []);
+			document.getElementById('noticeWriteForm').submit();
+		});
 	</script>
 
 

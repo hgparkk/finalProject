@@ -19,7 +19,13 @@ public interface IAttachDAO {
 
 	int getAttachNo(String attachName);
 
+	int deleteAttach(int attachNo);
+	
+	int deleteByNoticeNo(int noticeNo);
+	
+	int deleteByAttachNo(int attachNo);
 
+	int deleteNoticeAttach(int attachNo);
 
 	
 
