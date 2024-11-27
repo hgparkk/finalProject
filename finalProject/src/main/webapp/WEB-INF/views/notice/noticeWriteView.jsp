@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -8,8 +7,7 @@
 <%@ include file="/WEB-INF/inc/header.jsp"%>
 
 <!-- 네이버스마트에디터 js -->
-<script
-	src="${pageContext.request.contextPath }/nse/js/HuskyEZCreator.js"></script>
+<script src="${pageContext.request.contextPath}/nse/js/HuskyEZCreator.js"></script>
 
 <style>
 html, body {
@@ -87,7 +85,6 @@ html, body {
 	background-color: #218838;
 }
 </style>
-<script src="https://cdn.ckeditor.com/4.20.2/standard/ckeditor.js"></script>
 </head>
 <body>
 	<!-- Header -->
@@ -100,12 +97,10 @@ html, body {
 
 	<!-- 글쓰기 폼 -->
 	<div class="write-container">
-		<form action="${pageContext.request.contextPath}/noticeWriteDo"
-			method="post" class="write-form" enctype="multipart/form-data">
+		<form action="${pageContext.request.contextPath}/noticeWriteDo" method="post" class="write-form" enctype="multipart/form-data">
 			<!-- 제목 -->
 			<div style="width: 80%;">
-				<input type="text" id="noticeTitle" name="noticeTitle"
-					placeholder="제목을 입력하세요" required>
+				<input type="text" id="noticeTitle" name="noticeTitle" placeholder="제목을 입력하세요" required>
 			</div>
 
 			<!-- 내용 -->
@@ -131,7 +126,7 @@ html, body {
 				.createInIFrame({
 					oAppRef : oEditors,
 					elPlaceHolder : "noticeContent",
-					sSkinURI : "${pageContext.request.contextPath}/nse/SmartEditor2Skin.html"
+					sSkinURI : "${pageContext.request.contextPath}/nse/SmartEditor2Skin.html",
 				});
 	</script>
 
