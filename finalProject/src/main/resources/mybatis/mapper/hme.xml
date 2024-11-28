@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.codingbamboo.finalproject.hme.dao.IHmeDAO">
-	<select id="getHme" resultType="com.codingbamboo.finalproject.hme.dto.HmeDTO">
+	<select id="getHme" parameterType="com.codingbamboo.finalproject.hme.dto.HmeDTO" resultType="com.codingbamboo.finalproject.hme.dto.HmeDTO">
 		select
 			hme_energy_source
 		    , hme_household_members
 		    , hme_consumption
 		FROM
 			household_member_energy
+		WHERE 1=1
+			AND hme_household_members = #{hmeHouseholdMembers}
 	</select>
 </mapper>

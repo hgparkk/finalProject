@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.codingbamboo.finalproject.htac.dao.IHtacDAO">
-	<select id="getHtac" resultType="com.codingbamboo.finalproject.htac.dto.HtacDTO">
+	<select id="getHtac" parameterType="com.codingbamboo.finalproject.htac.dto.HtacDTO" resultType="com.codingbamboo.finalproject.htac.dto.HtacDTO">
 		select
-			htac_house_type
+			htac_no
+			, htac_house_type
 		    , htac_area
-		    , htac_household_size1
-		    , htac_household_size2
-		    , htac_household_size3
-		    , htac_household_size4
-		    , htac_household_size5
-		    , htac_household_size6
+		    , htac_household
+		    , htac_value
 		FROM
 			household_type_area_count
+		WHERE 1=1
+			AND htac_house_type = #{htacHouseType}
+			AND htac_area = #{htacArea}
+			AND htac_household = #{htacHousehold}
 	</select>
 </mapper>

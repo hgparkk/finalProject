@@ -1,7 +1,5 @@
 package com.codingbamboo.finalproject.htac.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +13,8 @@ public class HtacService {
 	IHtacDAO dao;
 	
 	// 주택면적, 가구원수별 가구수 가져오기
-	public List<HtacDTO> getHtac(){
-		return dao.getHtac();
+	public HtacDTO getHtac(HtacDTO htac){
+		return dao.getHtac(htac);
 	}
 
 }

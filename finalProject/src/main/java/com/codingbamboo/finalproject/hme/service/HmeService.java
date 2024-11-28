@@ -1,5 +1,6 @@
 package com.codingbamboo.finalproject.hme.service;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,8 @@ public class HmeService {
 	IHmeDAO dao;
 	
 	// 가족 구성원별 탄소 배출량
-	public List<HmeDTO> getHme(){
-		return dao.getHme();
+	public List<HmeDTO> getHme(HmeDTO hme){
+		return dao.getHme(hme);
 	}
 
 }

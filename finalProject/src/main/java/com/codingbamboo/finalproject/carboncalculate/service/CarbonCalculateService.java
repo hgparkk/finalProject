@@ -1,5 +1,6 @@
 package com.codingbamboo.finalproject.carboncalculate.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,21 @@ public class CarbonCalculateService {
 		int result = dao.insertCal(carbonCalculate);
 		return result;
 	}
+	
+	// 탄소발자국 결과 업데이트
+	public int updateCal(CarbonCalculateDTO carbonCalculate) {
+		return dao.updateCal(carbonCalculate);
+	}
 
 	// 탄소 발자국 결과 불러오기
 	public List<CarbonCalculateDTO> selectCalList(String userId) {
 		return dao.selectCalList(userId);
 	}
+	
+	
+	public CarbonCalculateDTO getCalByDate(Date resultDate) {
+	    return dao.getCalByDate(resultDate);
+	}
+
 	
 }

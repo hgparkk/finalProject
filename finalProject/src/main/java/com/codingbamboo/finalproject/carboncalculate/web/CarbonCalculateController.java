@@ -1,5 +1,6 @@
 package com.codingbamboo.finalproject.carboncalculate.web;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.codingbamboo.finalproject.carboncalculate.dto.CarbonCalculateDTO;
 import com.codingbamboo.finalproject.carboncalculate.service.CarbonCalculateService;
@@ -58,9 +60,6 @@ public class CarbonCalculateController {
 
 	@RequestMapping("/testView")
 	public String testView(Model model) {
-		// 거주형태, 면적, 가구원수 별 가구수 가져오기
-        List<HtacDTO> getHtac = htacService.getHtac();
-        model.addAttribute("keyGetHtac", getHtac);
 		
 		return "carbonCal/testView";
 	}
@@ -86,10 +85,6 @@ public class CarbonCalculateController {
         List<HteDTO> getHte = hteService.getHte();
         model.addAttribute("keyGetHte", getHte);
         
-        // 가족 구성원별 탄소 배출량
-        List<HmeDTO> getHme = hmeService.getHme();
-        model.addAttribute("keyGetHme", getHme);
-        
         // 건물 면적별 탄소 배출량
         List<RaeDTO> getRae = raeService.getRae();
         model.addAttribute("keyGetRae", getRae);
@@ -101,10 +96,6 @@ public class CarbonCalculateController {
         // 거주
         List<HtrDTO> getHtr = htrService.getHtr();
         model.addAttribute("keyGetHtr", getHtr);
-        
-        // 거주형태, 면적, 가구원수 별 가구수 가져오기
-        List<HtacDTO> getHtac = htacService.getHtac();
-        model.addAttribute("keyGetHtac", getHtac);
         
 		return "carbonCal/carbonCalResultView";
 	}
@@ -119,20 +110,42 @@ public class CarbonCalculateController {
 		if (login == null) {
 			return "redirect:/loginView";
 		}
+		
+		// 현재 날짜와 결과 날짜 비교
+	    Date resultDate = carbonCalculate.getResultDate();
+	    
+	    System.out.println(resultDate);
+	    
+	    // resultDate가 이미 DB에 존재하는지 확인
+	    CarbonCalculateDTO existingResult = carbonCalculateService.getCalByDate(resultDate);
+	    
+	    if (existingResult != null) {
+	        // 결과 날짜가 이미 존재하는 경우, 기존 데이터를 업데이트
+	        carbonCalculate.setUserId(existingResult.getUserId());
+	        carbonCalculateService.updateCal(carbonCalculate);
 
-		// 탄소 계산 결과 날짜 확인
-		carbonCalculate.getResultDate();
+	        // 사용자에게 메시지 전달
+	        request.setAttribute("msg", "탄소 계산 결과가 업데이트되었습니다.");
+	    } else {
+	        // 새로운 계산 결과를 저장
+	        carbonCalculateService.insertCal(carbonCalculate);
 
-		// 탄소 계산 결과 저장
-		carbonCalculateService.insertCal(carbonCalculate);
-
-		// 사용자에게 메시지 전달
-		request.setAttribute("msg", "탄소 계산 결과가 정상적으로 등록되었습니다.");
-		request.setAttribute("url", "/carbonCalView");
+	        // 사용자에게 메시지 전달
+	        request.setAttribute("msg", "탄소 계산 결과가 정상적으로 등록되었습니다.");
+	    }
 
 		return "alert";
 	}
 	
-	/* @PostMapping("/carbonGraphDo") */
-
+	@PostMapping("/carbonGraphDo")
+	@ResponseBody
+	public HtacDTO carbonGraphDo(HtacDTO htac) {
+		return htacService.getHtac(htac);
+	}
+	
+	@PostMapping("/carbonEnergyDo")
+	@ResponseBody
+	public List<HmeDTO> carbonEnergyDo(HmeDTO hme) {
+		return hmeService.getHme(hme);
+	}
 }

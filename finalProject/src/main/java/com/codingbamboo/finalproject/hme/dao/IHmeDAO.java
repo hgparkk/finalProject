@@ -9,5 +9,5 @@ import com.codingbamboo.finalproject.hme.dto.HmeDTO;
 @Mapper
 public interface IHmeDAO {
 	// 가족 구성원별 탄소 배출량
-	List<HmeDTO> getHme();
+	List<HmeDTO> getHme(HmeDTO hme);
 }
