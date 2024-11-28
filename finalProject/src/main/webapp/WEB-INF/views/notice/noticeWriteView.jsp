@@ -141,8 +141,25 @@ html, body {
 					sSkinURI : "${pageContext.request.contextPath}/nse/SmartEditor2Skin.html",
 				});
 		
+		const v_title = document.getElementById("noticeTitle")
+		const v_content = document.getElementById("noticeContent")
+		
 		document.getElementById('noticeWriteBtn').addEventListener('click', ()=>{
 			oEditors.getById["noticeContent"].exec("UPDATE_CONTENTS_FIELD", []);
+			
+			v_titleValue = v_title.value
+			v_contentValue = v_content.value
+			
+			v_contentValue = v_contentValue.replaceAll("&nbsp;"," ")
+			
+			v_title.value = v_titleValue.trim()
+			v_content.value = v_contentValue.trim()
+			
+			if(!v_title.value || !v_content.value){
+				alert("입력된 내용이 없습니다")
+				return
+			}
+			
 			document.getElementById('noticeWriteForm').submit();
 		});
 	</script>

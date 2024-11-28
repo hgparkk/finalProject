@@ -112,12 +112,11 @@ public class NoticeController {
 
 		return "notice/noticeWriteView";
 	}
-
 	/**
 	 * 공지사항 등록 처리
 	 */
 	@RequestMapping(value = "/noticeWriteDo", method = RequestMethod.POST)
-	public String noticeWriteDo(NoticeDTO notice, String noticeContent, HttpSession session,
+	public String noticeWriteDo(NoticeDTO notice, HttpSession session,
 			RedirectAttributes redirectAttributes, MultipartFile[] boFile) {
 
 		UserDTO loginUser = (UserDTO) session.getAttribute("login");
@@ -134,11 +133,11 @@ public class NoticeController {
 			return "redirect:/noticeWrite";
 		}
 
+		int noticeNo = noticeService.getNoticeNo();
 		// 파일첨부
 		if (boFile != null && boFile.length > 0 && !boFile[0].isEmpty()) {
 			try {
 				List<AttachDTO> attachList = fileUploadUtils.getAttachListByMultiparts(boFile);
-				int noticeNo = noticeService.getNoticeNo();
 				for (int i = 0; i < attachList.size(); i++) {
 					attachService.insertAttach(attachList.get(i));
 					int attachNo = attachService.getAttachNo(attachList.get(i).getAttachName());
@@ -152,45 +151,37 @@ public class NoticeController {
 		}
 
 		redirectAttributes.addFlashAttribute("successMsg", "공지사항이 등록되었습니다.");
-		return "redirect:/noticeView";
+		return "redirect:/noticeDetailView?noticeNo=" + noticeNo;
 	}
 
 	@RequestMapping(value = "/noticeDeleteDo", method = { RequestMethod.GET, RequestMethod.POST })
-	public String noticeDeleteDo(@RequestParam("noticeNo") int noticeNo, RedirectAttributes redirectAttributes) {
+	public String noticeDeleteDo(@RequestParam("noticeNo") int noticeNo, RedirectAttributes redirectAttributes, HttpSession session, Model model) {
+		UserDTO loginUser = (UserDTO) session.getAttribute("login");
+		if (loginUser == null || loginUser.getUserIsmaster() != 1) {
+			model.addAttribute("errorMsg", "권한이 없습니다.");
+			return "redirect:/noticeView";
+		}
 		try {
-			System.out.println("삭제할 공지사항 번호: " + noticeNo);
+			
 
 			// 1. 첨부파일 목록 가져오기
 			List<AttachDTO> attachList = attachService.getAttachList(noticeNo);
-			System.out.println("첨부파일 목록 개수: " + attachList.size());
+			
 
 			// 2. 자식 테이블 데이터 삭제 (예: notice_attach)
 			for (AttachDTO attach : attachList) {
-				int noticeAttachResult = attachService.deleteNoticeAttach(attach.getAttachNo());
-				if (noticeAttachResult > 0) {
-					System.out.println("notice_attach에서 첨부파일 참조 삭제 성공: " + attach.getAttachNo());
-				} else {
-					System.out.println("notice_attach에서 첨부파일 참조 삭제 실패: " + attach.getAttachNo());
-				}
+				attachService.deleteNoticeAttach(attach.getAttachNo());
 			}
 
 			// 3. 첨부파일 데이터베이스에서 삭제
 			for (AttachDTO attach : attachList) {
-				int attachResult = attachService.deleteAttach(attach.getAttachNo());
-				if (attachResult > 0) {
-					System.out.println("DB에서 첨부파일 삭제 성공: " + attach.getAttachNo());
-				} else {
-					System.out.println("DB에서 첨부파일 삭제 실패: " + attach.getAttachNo());
-				}
+				attachService.deleteAttach(attach.getAttachNo());
+
 			}
 
 			// 4. 공지사항 삭제
-			int noticeResult = noticeService.deleteNotice(noticeNo);
-			if (noticeResult > 0) {
-				System.out.println("공지사항 삭제 성공: " + noticeNo);
-			} else {
-				System.out.println("공지사항 삭제 실패: " + noticeNo);
-			}
+			noticeService.deleteNotice(noticeNo);
+
 
 			redirectAttributes.addFlashAttribute("successMsg", "공지사항이 삭제되었습니다.");
 		} catch (Exception e) {
@@ -203,9 +194,6 @@ public class NoticeController {
 	// 파일 다운로드 처리
 	@RequestMapping("/filedownload")
 	public void fileDownload(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-		// uploadPath 값 디버깅
-		System.out.println("Upload Path: " + uploadPath);
 
 		// 클라이언트에서 요청받은 파라미터 가져오기
 		String fileName = request.getParameter("attachName"); // 서버에 저장된 파일명
@@ -236,7 +224,12 @@ public class NoticeController {
 
 	// 공지수정뷰
 	@RequestMapping("/noticeEditView")
-	public String noticeEditView(@RequestParam("noticeNo") int noticeNo, Model model) {
+	public String noticeEditView(@RequestParam("noticeNo") int noticeNo, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+		UserDTO loginUser = (UserDTO) session.getAttribute("login");
+		if (loginUser == null || loginUser.getUserIsmaster() != 1) {
+			redirectAttributes.addFlashAttribute("errorMsg", "권한이 없습니다.");
+			return "redirect:/noticeView";
+		}
 		// 공지사항 정보 가져오기
 		NoticeDTO notice = noticeService.getNoticeDetail(noticeNo);
 
@@ -279,7 +272,7 @@ public class NoticeController {
 			redirectAttributes.addFlashAttribute("errorMsg", "공지사항 수정 중 오류가 발생했습니다.");
 		}
 
-		return "redirect:/noticeView";
+		 return "redirect:/noticeDetailView?noticeNo=" + notice.getNoticeNo();
 	}
 
 }

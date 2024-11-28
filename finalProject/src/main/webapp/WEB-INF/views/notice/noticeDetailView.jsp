@@ -126,7 +126,7 @@ html, body {
 
 		<!-- 내용 -->
 		<div class="notice-content">
-			<c:out value="${notice.noticeContent}" escapeXml="false" />
+			${notice.noticeContent}
 		</div>
 
 		<!-- 작성일 -->
