@@ -36,9 +36,11 @@
 		,
 		gas_usage = #{gasUsage}
 		, traffic_kind = #{trafficKind}
-		, traffic_value
-		= #{trafficValye}
-		, traffic_weight = #{trafficWeight}
+		, traffic_value = #{trafficValue}
+		, waste_weight = #{wasteWeight}
+		WHERE 1=1
+			AND user_id = #{userId}
+			AND result_date = #{resultDate}
 	</update>
 
 	<!-- 탄소발자국 불러오기 -->
@@ -61,7 +63,7 @@
 	</select>
 
 	<!-- 탄소발자국 저장된 날짜 불러오기 -->
-	<select id="getCalByDate" parameterType="java.sql.Date" resultType="CarbonCalculateDTO">
+	<select id="getCalByDate" parameterType="CarbonCalculateDTO" resultType="CarbonCalculateDTO">
 		SELECT result_no
 		, user_id
 		, result_date

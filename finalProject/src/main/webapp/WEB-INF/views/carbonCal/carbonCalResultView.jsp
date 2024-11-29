@@ -7,6 +7,14 @@
 <meta charset="UTF-8">
 <title>Coding Bamboo</title>
 
+<%
+java.time.YearMonth currentYearMonth = java.time.YearMonth.now();
+int currentYear = currentYearMonth.getYear();
+int currentMonth = currentYearMonth.getMonthValue(); // 1에서 12 사이의 값
+request.setAttribute("currentYear", currentYear);
+request.setAttribute("currentMonth", currentMonth);
+%>
+
 <style type="text/css">
 .graph-container {
 	width: 100%;
@@ -137,107 +145,6 @@
 			</c:if>
 		</c:forEach>
 	</div>
-	
-	<b>주거형태별 에너지소비량</b>
-	<div>${keyGetHte }</div>
-	<br>
-	<b>주거형태별 인구비율</b>
-	<div>${keyGetHtr }</div>
-	<br>
-	<b>가구별 가구원수 및 비율</b>
-	<div>${keyGetHmc }</div>
-	<br>
-	<b>사용면적별 에너지소비량</b>
-	<div>${keyGetRae }</div>
-	<br>
-	<b>가구원별 에너지소비량</b>
-	<div>${keyGetHme }</div>
-	<b>주거형태, 면적, 가구원수</b>
-	<div>${keyGetHtac }</div>
-
-	<div class="house">
-		<span class="span">주거 형태</span>
-	</div>
-	<div class="house-type-select-box">
-		<div class="house-type-select d-flex">
-			<div class="house-type">
-				<input type="radio" name="housing_type" id="housing_type1"
-					value="0" checked> <label for="housing_type1">아파트</label>
-			</div>
-			<div class="house-type">
-				<input type="radio" name="housing_type" id="housing_type2"
-					value="1"> <label for="housing_type2">단독주택</label>
-			</div>
-			<div class="house-type">
-				<input type="radio" name="housing_type" id="housing_type3"
-					value="2"> <label for="housing_type3">연립 및 다세대</label>
-			</div>
-			<div class="house-type">
-				<input type="radio" name="housing_type" id="housing_type4"
-					value="3"> <label for="housing_type4">기타</label>
-			</div>
-		</div>
-	</div>
-
-	<div class="area">
-		<span class="span">거주면적</span>
-	</div>
-	<div class="resdential-area-select-box">
-		<div class="resdential-area-select d-flex">
-			<div class="resdential-area">
-				<input type="radio" name="resdentialArea" id="resdentialArea1"
-					value="0" checked> <label for="resdentialArea1">~33㎡ 이하</label>
-			</div>
-			<div class="resdential-area">
-				<input type="radio" name="resdentialArea" id="resdentialArea2"
-					value="1"> <label for="resdentialArea2">33㎡ 초과 ~ 66㎡ 이하</label>
-			</div>
-			<div class="resdential-area">
-				<input type="radio" name="resdentialArea" id="resdentialArea3"
-					value="2"> <label for="resdentialArea3">66㎡ 초과~99㎡ 이하</label>
-			</div>
-			<div class="resdential-area">
-				<input type="radio" name="resdentialArea" id="resdentialArea4"
-					value="3"> <label for="resdentialArea4">99㎡ 초과~132㎡ 이하</label>
-			</div>
-			<div class="resdential-area">
-				<input type="radio" name="resdentialArea" id="resdentialArea5"
-					value="4"> <label for="resdentialArea5">132㎡ 초과~</label>
-			</div>
-		</div>
-	</div>
-	
-	<div class="member">
-		<span class="span">거주인원</span>
-	</div>
-	<div class="house-member-select-box">
-		<div class="house-member-select d-flex">
-			<div class="house-member">
-				<input type="radio" name="livingMember" id="livingMember1"
-					value="0" checked> <label for="livingMember1">1명</label>
-			</div>
-			<div class="house-member">
-				<input type="radio" name="livingMember" id="livingMember2"
-					value="1"> <label for="livingMember2">2명</label>
-			</div>
-			<div class="house-member">
-				<input type="radio" name="livingMember" id="livingMember3"
-					value="2"> <label for="livingMember3">3명</label>
-			</div>
-			<div class="house-member">
-				<input type="radio" name="livingMember" id="livingMember4"
-					value="3"> <label for="livingMember4">4명</label>
-			</div>
-			<div class="house-member">
-				<input type="radio" name="livingMember" id="livingMember5"
-					value="4"> <label for="livingMember5">5명</label>
-			</div>
-			<div class="house-member">
-				<input type="radio" name="livingMember" id="livingMember6"
-					value="5"> <label for="livingMember6">6명 이상</label>
-			</div>
-		</div>
-	</div>
 
 	<div class="graph-container">
 		<div class="title-box">
@@ -254,28 +161,6 @@
 			</div>
 		</div>
 		<div class="usage-result-box">
-			<div class="select-date-box">
-				<div>
-					<select id="year">
-						<option value="2022">2022</option>
-						<option value="2023">2023</option>
-						<option value="2024">2024</option>
-					</select> <select id="month">
-						<option value="01">1</option>
-						<option value="02">2</option>
-						<option value="03">3</option>
-						<option value="04">4</option>
-						<option value="05">5</option>
-						<option value="06">6</option>
-						<option value="07">7</option>
-						<option value="08">8</option>
-						<option value="09">9</option>
-						<option value="10">10</option>
-						<option value="11">11</option>
-						<option value="12">12</option>
-					</select>
-				</div>
-			</div>
 			<div class="graph-box">
 				<div class="circle-graph-box">
 					<div class="circle-graph">
@@ -303,7 +188,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="bar-graph-box">
+				<%-- <div class="bar-graph-box">
 					<!-- 전기 -->
 					<div class="allType-graph-box">
 						<div class="bar-graph-title">
@@ -356,23 +241,85 @@
 						</div>
 					</div>
 				</div>
-			</div>
-			<div>
-				<form id="resRegistForm"
-					action="${pageContext.request.contextPath }/carbonCalRegistDo"
-					method="POST">
-					<div class="d-none">
-						<input type="hidden" value="${sessionScope.login.userId }"
-							name="userId"> <input type="date" id="regDate"
-							name="resultDate" value="${carbonCalculateDTO.resultDate}">
-						<input type="hidden" id="resElec" name="electricUsage"> <input
-							type="hidden" id="resGas" name="gasUsage"> <input
-							type="hidden" id="resGar" name="wasteWeight"> <input
-							type="hidden" id="resTrfType" name="trafficKind"> <input
-							type="hidden" id="resTrf" name="trafficValue">
+			</div> --%>
+				<div class="d-flex flex-column align-items-center">
+					<div class="bar-graph-box justify-content-center">
+						<div class="bar-graph">
+							<canvas id="co2Graph"></canvas>
+						</div>
 					</div>
-					<button id="resRegistBtn" type="button">저장하기</button>
-				</form>
+					<div class="d-flex" style="width: 70%;">
+						<div class="select-date-box">
+							<span>결과를 저장할 날짜를 선택해주세요</span> <select id="year">
+								<option value="${currentYear-2 }">${currentYear-2 }</option>
+								<option value="${currentYear-1 }">${currentYear-1 }</option>
+								<option value="${currentYear}" selected>${currentYear}</option>
+							</select> <select id="month">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
+								<option value="11">11</option>
+								<option value="12">12</option>
+							</select>
+						</div>
+						<div style="width: 15%;">
+							<form id="registCheckForm"
+								action="${pageContext.request.contextPath }/carbonCalRegistCheck"
+								method="POST">
+								<div class="d-none">
+									<input type="hidden" value="${sessionScope.login.userId }"
+										name="userId">
+									<input type="hidden" id="dateYear1" name="year">
+									<input type="hidden" id="dateMonth1" name="month">
+									<input type="hidden" id="resElec1" name="electricUsage">
+									<input type="hidden" id="resGas1" name="gasUsage">
+									<input type="hidden" id="resGar1" name="wasteWeight">
+									<input type="hidden" id="resTrfType1" name="trafficKind">
+									<input type="hidden" id="resTrf1" name="trafficValue">
+								</div>
+								<button id="resRegistBtn" class="btn btn-secondary"
+									type="button">저장하기</button>
+							</form>
+							<form id="registUpdateForm"
+								action="${pageContext.request.contextPath }/carbonCalUpdateDo"
+								method="POST">
+								<div class="d-none">
+									<input type="hidden" value="${sessionScope.login.userId }"
+										name="userId">
+									<input type="hidden" id="dateYear2" name="year">
+									<input type="hidden" id="dateMonth2" name="month">
+									<input type="hidden" id="resElec2" name="electricUsage">
+									<input type="hidden" id="resGas2" name="gasUsage">
+									<input type="hidden" id="resGar2" name="wasteWeight">
+									<input type="hidden" id="resTrfType2" name="trafficKind">
+									<input type="hidden" id="resTrf2" name="trafficValue">
+								</div>
+							</form>
+							<form id="registRegistForm"
+								action="${pageContext.request.contextPath }/carbonCalRegistDo"
+								method="POST">
+								<div class="d-none">
+									<input type="hidden" value="${sessionScope.login.userId }"
+										name="userId">
+									<input type="hidden" id="dateYear3" name="year">
+									<input type="hidden" id="dateMonth3" name="month">
+									<input type="hidden" id="resElec3" name="electricUsage">
+									<input type="hidden" id="resGas3" name="gasUsage">
+									<input type="hidden" id="resGar3" name="wasteWeight">
+									<input type="hidden" id="resTrfType3" name="trafficKind">
+									<input type="hidden" id="resTrf3" name="trafficValue">
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -381,20 +328,46 @@
 	<%@ include file="/WEB-INF/inc/footer.jsp"%>
 
 	<script type="text/javascript">
-	let v_regDate = document.getElementById("regDate");
-    const currentDate = new Date();
-    const currentYear = currentDate.getFullYear();
-    const currentMonth = currentDate.getMonth() + 1;
-    const currentDay = currentDate.getDate();
-
-	// Date 객체를 "yyyy-MM-dd" 형식으로 설정
-	v_regDate.value = currentYear + '-' + (currentMonth < 10 ? '0' + currentMonth : currentMonth) + '-' + (currentDay < 10 ? '0' + currentDay : currentDay);
-
-    const yearSelect = document.getElementById('year');
-    const monthSelect = document.getElementById('month');
-
-    // 연도 선택 박스에서 현재 연도를 설정
-    yearSelect.value = currentYear;
+		v_year = document.getElementById("year")
+		v_month = document.getElementById("month")
+		
+		monthOptions = v_month.querySelectorAll("option");
+		
+		function monthSet(){
+			if(v_year.value == ${currentYear}){
+				monthOptions.forEach(option =>{
+					if(option.innerHTML >= ${currentMonth}){
+						option.disabled = true;
+					}else{
+						option.disabled = false;
+					}
+				})
+			}else{
+				monthOptions.forEach(option =>{
+					option.disabled = false;
+				})
+			}
+			document.getElementById("dateYear1").value = v_year.value
+			document.getElementById("dateYear2").value = v_year.value
+			document.getElementById("dateYear3").value = v_year.value
+			document.getElementById("dateMonth1").value = v_month.value
+			document.getElementById("dateMonth2").value = v_month.value
+			document.getElementById("dateMonth3").value = v_month.value
+		}
+		monthSet()
+		
+		v_year.addEventListener("change", monthSet)
+		
+		v_month.addEventListener("change", ()=>{
+			document.getElementById("dateYear1").value = v_year.value
+			document.getElementById("dateYear2").value = v_year.value
+			document.getElementById("dateYear3").value = v_year.value
+			document.getElementById("dateMonth1").value = v_month.value
+			document.getElementById("dateMonth2").value = v_month.value
+			document.getElementById("dateMonth3").value = v_month.value
+		})
+		
+	/* 
 
     // 연도나 월이 변경될 때마다 달력을 업데이트
     function updateMonthOptions() {
@@ -433,7 +406,7 @@
     if (resTrfTypeValue) {
         document.getElementById('resTrfType').value = resTrfTypeValue;
     }
-};
+}; */
 
 // 결과 트래픽 타입을 sessionStorage에서 가져와서 추가적으로 처리할 부분
 let v_resultTrfType = sessionStorage.getItem('resultTrfType');
@@ -445,47 +418,79 @@ let v_resultGas = sessionStorage.getItem('resultGas');
 let v_resultGar = sessionStorage.getItem('resultGar');
 
 if(!v_resultElec){
-	document.getElementById("resElec").value = 0
+	document.getElementById("resElec1").value = 0
+	document.getElementById("resElec2").value = 0
+	document.getElementById("resElec3").value = 0
 }else{
-	document.getElementById("resElec").value = v_resultElec;
+	document.getElementById("resElec1").value = v_resultElec;
+	document.getElementById("resElec2").value = v_resultElec;
+	document.getElementById("resElec3").value = v_resultElec;
 }
 
 if(!v_resultGas){
-	document.getElementById("resGas").value = 0
+	document.getElementById("resGas1").value = 0
+	document.getElementById("resGas2").value = 0
+	document.getElementById("resGas3").value = 0
 }else{
-	document.getElementById("resGas").value = v_resultGas;
+	document.getElementById("resGas1").value = v_resultGas;
+	document.getElementById("resGas2").value = v_resultGas;
+	document.getElementById("resGas3").value = v_resultGas;
 }
 
 if(!v_resultGar){
-	document.getElementById("resGar").value = 0
+	document.getElementById("resGar1").value = 0
+	document.getElementById("resGar2").value = 0
+	document.getElementById("resGar3").value = 0
 }else{
-	document.getElementById("resGar").value = v_resultGar;
+	document.getElementById("resGar1").value = v_resultGar;
+	document.getElementById("resGar2").value = v_resultGar;
+	document.getElementById("resGar3").value = v_resultGar;
 }
 
 if(!v_resultTrfType){
-	document.getElementById("resTrfType").value = 0
+	document.getElementById("resTrfType1").value = 0
+	document.getElementById("resTrfType2").value = 0
+	document.getElementById("resTrfType3").value = 0
 }else{
-	document.getElementById("resTrfType").value = v_resultTrfType;
+	document.getElementById("resTrfType1").value = v_resultTrfType;
+	document.getElementById("resTrfType2").value = v_resultTrfType;
+	document.getElementById("resTrfType3").value = v_resultTrfType;
 }
 
 if(!v_resultTrf){
-	document.getElementById("resTrf").value = 0
+	document.getElementById("resTrf1").value = 0
+	document.getElementById("resTrf2").value = 0
+	document.getElementById("resTrf3").value = 0
 }else{
-	document.getElementById("resTrf").value = v_resultTrf;
+	document.getElementById("resTrf1").value = v_resultTrf;
+	document.getElementById("resTrf2").value = v_resultTrf;
+	document.getElementById("resTrf3").value = v_resultTrf;
 }
 
-console.log(document.getElementById("resTrf").value);
+let registCheckForm = document.getElementById("registCheckForm")
 
 document.getElementById("resRegistBtn").addEventListener('click', () => {
-    // regDate가 빈값일 경우, 알림
-    if (v_regDate.value.length <= 4) {
-        alert("년도와 월을 선택해주세요");
-        return;
-    }
-
-    // 등록 폼 제출
-    document.getElementById("resRegistForm").submit();
-});
+	let registCheckForm = $('#registCheckForm')
+	let v_url = registCheckForm.attr("action")
+	let formdata = registCheckForm.serialize()
+	
+    $.ajax({
+		type : 'POST',
+		url : v_url,
+		data : formdata,
+		success : function(result1){
+			if(result1 == "login"){
+				location.href = "${pageContext.request.contextPath}" + "/loginView"
+			}else if(result1 == "exist"){
+				if(confirm("저장할려는 날짜와 같은 날짜가 이미 존재합니다 덮어쓰시겠습니까?")){
+					document.getElementById("registUpdateForm").submit();
+				}
+			}else{
+				document.getElementById("registRegistForm").submit();
+			}
+		}
+	})
+})
 
 v_resultElec = Math.round(v_resultElec * document.getElementById("electricCoefficient").innerHTML * 100000) / 100000;
 v_resultGas = Math.round(v_resultGas * document.getElementById("gasCoefficient").innerHTML * 100000) / 100000;
@@ -501,6 +506,7 @@ if (v_resultTrfType == '휘발유') {
 
 sessionStorage.removeItem("resultCo2");
 let v_allCo2 = v_fuelCo2 + v_resultElec + v_resultGas + v_resultGar
+v_allCo2 = Math.round(v_allCo2 * 100000) / 100000
 console.log(v_allCo2)
 sessionStorage.setItem("resultCo2", v_allCo2);
 document.getElementById("resultCO2").innerHTML += v_allCo2;
@@ -542,7 +548,7 @@ document.getElementById("resultCO2").innerHTML += v_allCo2;
         let electricCtx = document.getElementById('elecGraph');
 
         /* 전기 */
-        new Chart(electricCtx, {
+        /* new Chart(electricCtx, {
             type: 'bar', // bar = 막대그래프는 항목별 수량, 수치를 비교할 때 적합하다.
             data: {
                 labels: ['내 건물', '다른 건물'],
@@ -565,10 +571,10 @@ document.getElementById("resultCO2").innerHTML += v_allCo2;
                     }
                 }
             }
-        });
+        }); */
         
         /* 가스 */
-        let gasCtx = document.getElementById('gasGraph');
+        /* let gasCtx = document.getElementById('gasGraph');
 
         new Chart(gasCtx, {
             type: 'bar', // bar = 막대그래프는 항목별 수량, 수치를 비교할 때 적합하다.
@@ -593,10 +599,10 @@ document.getElementById("resultCO2").innerHTML += v_allCo2;
                     }
                 }
             }
-        });
+        }); */
         
         /* 폐기물 */
-        let garbageCtx = document.getElementById('garbageGraph');
+        /* let garbageCtx = document.getElementById('garbageGraph');
 
         new Chart(garbageCtx, {
             type: 'bar', // bar = 막대그래프는 항목별 수량, 수치를 비교할 때 적합하다.
@@ -621,10 +627,10 @@ document.getElementById("resultCO2").innerHTML += v_allCo2;
                     }
                 }
             }
-        });
+        }); */
         
         /* 교통 */
-        let trafficCtx = document.getElementById('trafficGraph');
+        /* let trafficCtx = document.getElementById('trafficGraph');
 
         new Chart(trafficCtx, {
             type: 'bar', // bar = 막대그래프는 항목별 수량, 수치를 비교할 때 적합하다.
@@ -632,6 +638,33 @@ document.getElementById("resultCO2").innerHTML += v_allCo2;
                 labels: ['내 건물', '다른 건물'],
                 datasets: [{
                     data: [v_resultTrf, 10],
+					backgroundColor: "purple"
+                }]
+            },
+            options: {
+            	responsive: true, // 화면 크기에 따라 반응형 조정
+                maintainAspectRatio: false, // 비율을 유지하지 않음
+                plugins: {
+                    legend: {
+                        display: false // 범례 숨기기 (label 위쪽 부분)
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        }); */
+        
+        let co2Ctx = document.getElementById('co2Graph');
+
+        new Chart(co2Ctx, {
+            type: 'bar', // bar = 막대그래프는 항목별 수량, 수치를 비교할 때 적합하다.
+            data: {
+                labels: ['내 건물', '다른 건물'],
+                datasets: [{
+                    data: [v_allCo2, ${avgCo2Emisison}],
 					backgroundColor: "purple"
                 }]
             },
@@ -704,7 +737,5 @@ document.getElementById("resultCO2").innerHTML += v_allCo2;
         
         
     </script>
-
-
 </body>
 </html>

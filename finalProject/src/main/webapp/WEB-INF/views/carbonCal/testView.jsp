@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page import="java.time.Year"%>
-<%@ page import="java.time.Month"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -180,10 +178,6 @@ request.setAttribute("currentMonth", currentMonth);
 		}
 	})
 	
-	/* v_month.addEventListener("change", ()=>{
-		
-	}) */
-	
 	const htRadioButtons = document.querySelectorAll('input[name="housing_type"]');
     const RaRadioButtons = document.querySelectorAll('input[name="resdentialArea"]');
     const HhRadioButtons = document.querySelectorAll('input[name="livingMember"]');
@@ -232,7 +226,7 @@ request.setAttribute("currentMonth", currentMonth);
     }
     
     document.getElementById("resultBtn").addEventListener('click', ()=>{
-    	$.ajax({
+    	/* $.ajax({
     		type : 'POST',
     		url : '${pageContext.request.contextPath}/carbonGraphDo',
     		data : {"htacHouseType":houseType, "htacArea":area, "htacHousehold":household},
@@ -244,12 +238,13 @@ request.setAttribute("currentMonth", currentMonth);
     				data : {"hmeHouseholdMembers":householdString},
     				success : function(result2){
 						console.log(result2)
-						
+						console.log(result1)
 						
 					}
     			})
 			}
-    	})
+    	}) */
+    	
     });
     
     </script>

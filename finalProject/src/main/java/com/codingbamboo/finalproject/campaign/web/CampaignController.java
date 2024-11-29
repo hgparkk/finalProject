@@ -7,7 +7,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.codingbamboo.finalproject.campaign.dto.CampaignDTO;
 import com.codingbamboo.finalproject.campaign.service.CampaignService;
@@ -55,5 +57,12 @@ public class CampaignController {
 		}
 		
 		return "campaign/campaignWriteView";
+	}
+	
+	@PostMapping("/campaignWriteDo")
+	public String campaignWriteDo(CampaignDTO campaign, MultipartFile file) {
+		campaignService.registCampaign(campaign);
+		
+		return "campaign/campaignView";
 	}
 }

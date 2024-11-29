@@ -14,12 +14,12 @@ public interface ICarbonCalculateDAO {
 	int insertCal(CarbonCalculateDTO carbonCalculateDTO);
 	
 	// 탄소 발자국 결과 업데이트
-	int updateCal(CarbonCalculateDTO carbonCalculate);
+	int updateCal(CarbonCalculateDTO carbonCalculateDTO);
 	
 	// 탄소 발자국 결과 불러오기
 	List<CarbonCalculateDTO> selectCalList(String userId);
 	
 	// 탄소 발자국 등록된 날짜 불러오기
-	CarbonCalculateDTO getCalByDate(Date resultDate);
+	CarbonCalculateDTO getCalByDate(CarbonCalculateDTO carbonCalculateDTO);
 	
 }

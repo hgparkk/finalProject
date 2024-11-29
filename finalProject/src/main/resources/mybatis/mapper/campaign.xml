@@ -1,44 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.codingbamboo.finalproject.campaign.dao.ICampaignDAO">
+<mapper
+	namespace="com.codingbamboo.finalproject.campaign.dao.ICampaignDAO">
 	<sql id="campaignSearch">
-	  <if test="searchWord != null">
-	  	<choose>
-	  		<when test="searchOption == 'title'">AND campaign_title LIKE '%' || #{searchWord} || '%'</when>
-	  	</choose>
-	  </if>
+		<if test="searchWord != null">
+			AND campaign_title LIKE '%' || #{searchWord} || '%'
+		</if>
 	</sql>
-	
-	<select id="getCampaignList" resultType="com.codingbamboo.finalproject.campaign.dto.CampaignDTO" parameterType="com.codingbamboo.finalproject.common.vo.SearchVO">
+
+	<select id="getCampaignList"
+		resultType="com.codingbamboo.finalproject.campaign.dto.CampaignDTO"
+		parameterType="com.codingbamboo.finalproject.common.vo.SearchVO">
 		SELECT *
 		FROM(
-			SELECT
-				A.*
-				, ROWNUM as rnum
-			FROM(
-				SELECT *
-				FROM campaign
-				WHERE 1=1
-				<include refid="campaignSearch"/>
-				ORDER BY campaign_date DESC
-			)A
+		SELECT
+		A.*
+		, ROWNUM as rnum
+		FROM(
+		SELECT *
+		FROM campaign
+		WHERE
+		1=1
+		<include refid="campaignSearch" />
+		ORDER BY campaign_date DESC
+		)A
 		)
 		WHERE rnum BETWEEN #{start} AND #{end}
 	</select>
-	
+
 	<select id="getCampaignCount" resultType="int">
-		SELECT 
-			COUNT(*)
+		SELECT
+		COUNT(*)
 		FROM
-			campaign
+		campaign
 	</select>
-	
+
 	<select id="getCampaignPageCount" resultType="int">
-		SELECT 
-			COUNT(*)
+		SELECT
+		COUNT(*)
 		FROM
-			campaign
+		campaign
 		WHERE 1=1
-		  <include refid="campaignSearch"/>
+		<include refid="campaignSearch" />
 	</select>
+
+	<insert id="registCampaign"
+		parameterType="com.codingbamboo.finalproject.campaign.dto.CampaignDTO">
+		INSERT INTO campaign(
+			campaign_no
+			, campaign_img
+			, campaign_title
+			, campaign_date
+		) VALUES (
+			campaign_seq.NEXTVAL
+			, #{campaignImg}
+			, #{campaignTitle}
+			, SYSDATE
+		);
+	</insert>
 </mapper>

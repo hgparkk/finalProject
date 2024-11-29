@@ -31,8 +31,8 @@ public class CarbonCalculateService {
 	}
 	
 	
-	public CarbonCalculateDTO getCalByDate(Date resultDate) {
-	    return dao.getCalByDate(resultDate);
+	public CarbonCalculateDTO getCalByDate(CarbonCalculateDTO carbonCalculateDTO) {
+	    return dao.getCalByDate(carbonCalculateDTO);
 	}
 
 	
