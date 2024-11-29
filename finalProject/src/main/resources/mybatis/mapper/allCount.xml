@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.codingbamboo.finalproject.allcount.dao.IAllCountDAO">
+	<select id="selectAvgCo2Emission" resultType="com.codingbamboo.finalproject.allcount.dto.AvgDTO">
+        SELECT AVG(ac_co2Emission) AS avgAcCo2Emission
+        FROM allCount
+    </select>
+    
+    <insert id="insertCo2Emission" parameterType="com.codingbamboo.finalproject.allcount.dto.AllCountDTO">
+    	INSERT INTO allCount(
+    		ac_no
+    		, ac_co2Emission
+    	) VALUES(
+    		ac_seq.NEXTVAL
+    		, #{acCo2Emission}
+    	)
+    </insert>
+</mapper>

@@ -384,7 +384,7 @@
 								</div>
 							</div>
 							<div class="inputUsage">
-								<span class="span">이동 거리</span> <span id="selectedFuel"></span>
+								<span class="span">이동 거리</span>
 								<input class="input" type="number" id="inputFuel"
 									placeholder="숫자 입력..." onchange="co2Emission()"
 									style="text-align: right;"> <span>km/월</span>
@@ -447,6 +447,7 @@
 			<div>
 				<form id="submitForm"
 					action="${pageContext.request.contextPath }/carbonCalResultView">
+					<input type="hidden" id="co2Emission" name="acCo2Emission">
 					<button id="submitBtn" type="button">제출하기</button>
 				</form>
 			</div>
@@ -559,7 +560,8 @@
 		                 (parseFloat(document.getElementById("outputGarbage").value) || 0);
 		    
 		    // 전체 CO₂ 발생량 출력
-		    document.getElementById("allUsage").value = totalCo2
+		    document.getElementById("allUsage").value = Math.round(totalCo2 * 100000) / 100000
+		    document.getElementById("co2Emission").value = Math.round(totalCo2 * 100000) / 100000
 		}
 	
 		document.getElementById('submitBtn').addEventListener('click', ()=>{
@@ -598,7 +600,18 @@
 				sessionStorage.setItem("resultGar", document.getElementById("inputGarbage").value);
 				sessionStorage.setItem("resultTrf", v_inputFuel);
 				sessionStorage.setItem("resultTrfType", document.querySelector('input[name="fuelType"]:checked').nextElementSibling.textContent.trim());
-				document.getElementById("submitForm").submit();
+				
+				let submitForm = $('#submitForm')
+				let formdata = submitForm.serialize()
+				
+				$.ajax({
+					type : 'POST',
+					url : "${pageContext.request.contextPath }/insertCarbonResult",
+					data : formdata,
+					success : function(result1){
+						document.getElementById("submitForm").submit();
+					}
+				})
 			}
 		});
 	</script>

@@ -341,7 +341,11 @@
 								sum += result1[i].beuElectric
 							}
 							document.getElementById("buildingElectricUsage").value = Math.round(((sum / result1.length) * 12) * 10000) / 10000
-							document.getElementById("areaElectricUsage").value = Math.round((((sum / result1.length) * 12)/data[seq].buildingArea)*10000)/10000
+							if(data[seq].buildingArea!=0){
+								document.getElementById("areaElectricUsage").value = Math.round((((sum / result1.length) * 12)/data[seq].buildingArea)*10000)/10000
+							}else{
+								document.getElementById("areaElectricUsage").value = 0
+							}
 							$.ajax({
 								type:'POST',
 								url: "<c:url value='/getEmission' />",
@@ -470,10 +474,10 @@
 		const autocomplete = document.getElementById("autocomplete")
 
 		// 입력 이벤트 리스너
-		v_searchInput.addEventListener("input", ()=> {
-  			const value = v_searchInput.value
-  			const matchedItems = dataList.filter(item =>
-    			item.toLowerCase().includes(value)
+		v_searchInput.addEventListener("change", ()=> {
+  			const value = v_searchInput.value.trim()
+  			const valueArray = value.split(/\s+/)
+  			const matchedItems = dataList.filter(item => valueArray.every(valueIndex => item.toLowerCase().includes(valueIndex))
   			)
   
   			displayResults(matchedItems)

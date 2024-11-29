@@ -119,6 +119,26 @@ a>span {
 	color: black;
 	font-size: 0.9vw;
 }
+
+.title-box {
+	display: flex;
+}
+
+.carbonCal-title {
+	width: 100%;
+	height: 10vh;
+}
+
+.home-go {
+	border: 1px solid #CCCCCC;
+	border-radius: 0.4vw;
+	padding: 0.3vw;
+	padding-left: 0.5vw;
+	padding-right: 0.5vw;
+	text-decoration: none;
+	color: black;
+	font-size: 1vw
+}
 </style>
 <!-- header -->
 <%@ include file="/WEB-INF/inc/header.jsp"%>
@@ -129,20 +149,18 @@ a>span {
 
 	<section class="campaign-section">
 		<div class="campaign-container">
-			<div class="campaign-nav-box">
-				<nav>
-					<ul class="campaign-ul">
-						<li class="d-flex"><a class="home-go"
-							href="${pageContext.request.contextPath }"> <img
-								src="image/home.png">
-						</a></li>
-						<li class="li-text"><a
-							href="${pageContext.request.contextPath }/campaignView">탄소중립
-								참여해요</a></li>
-						<li class="li-text"><a
-							href="${pageContext.request.contextPath }/campaignView">캠페인</a></li>
-					</ul>
-				</nav>
+			<div class="title-box">
+				<div class="carbonCal-title w-50">
+					<h1 style="color: green; font-weight: bold;">캠페인</h1>
+					<span style="font-size: 0.7vw;">지구를 구하기 위한 다양한 활동들</span>
+				</div>
+				<div class="w-50 d-flex align-items-center justify-content-end">
+					<a class="home-go" href="${pageContext.request.contextPath }">
+						<img
+						src="${pageContext.request.contextPath}/resources/image/home.png">
+						<span>홈으로 이동</span>
+					</a>
+				</div>
 			</div>
 			<div class="campaign-box">
 				<div class="campaign-info">
@@ -168,9 +186,8 @@ a>span {
 					<form class="d-flex justify-content-around"
 						action="${pageContext.request.contextPath }/campaignView"
 						method="get">
-						<select class="form-select w-25" name="searchOption">
-							<option value="title">제목</option>
-						</select> <input type="text" class="form-control w-50" name="searchWord">
+						<input type="text" class="form-control me-2" name="searchWord"
+							placeholder="제목을 입력해주세요...">
 						<button class="btn btn-primary" type="submit">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 								fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
