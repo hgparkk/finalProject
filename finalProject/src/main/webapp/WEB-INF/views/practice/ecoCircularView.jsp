@@ -443,13 +443,27 @@ html, body {
     line-height: 1.6;
     margin-top: 15px;
 }
+.home-go {
+	border: 1px solid #CCCCCC;
+	border-radius: 0.4vw;
+	padding: 0.3vw;
+	padding-left: 0.5vw;
+	padding-right: 0.5vw;
+	text-decoration: none;
+	color: black;
+	font-size: 1vw
+}
 </style>
 
 </head>
 <body>
    <!-- 탑 인클루드 파일 -->
    <%@ include file="/WEB-INF/inc/top.jsp"%>
-
+		<div class="w-50 d-flex align-items-center justify-content-end mb-5" style="margin-left:600px;">
+			<a class="home-go" href="${pageContext.request.contextPath }/lowCarbonPracticeView">
+				<span>이전으로</span>
+			</a>
+		</div>
    <div class="title">
       <img
          src="${pageContext.request.contextPath}/resources/image/ecoCircularMain.jpg">

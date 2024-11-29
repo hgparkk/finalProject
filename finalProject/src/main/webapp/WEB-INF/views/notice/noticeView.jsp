@@ -20,10 +20,20 @@ html, body {
 	font-family: 'Noto Sans KR', sans-serif;
 }
 
+.carbonCal-container {
+	width: 100%;
+	max-width: 1300px;
+	min-width: 500px;
+	justify-content: center;
+	margin: auto;
+	padding-left: 2vw;
+	padding-right: 2vw;
+}
+
 .notice-container {
 	padding: 50px 20px;
-	min-width: 1200px;
-	max-width: 800px;
+	width: 80%;
+	min-width: 800px;
 	margin: 0 auto;
 	background-color: #ffffff;
 	border-radius: 15px;
@@ -31,13 +41,11 @@ html, body {
 	flex-grow: 1;
 	margin-bottom: 20px;
 	min-height: 1000px;
+	margin: 0 auto;
 }
 
 .title-box {
 	display: flex;
-	padding-left: 2vw;
-	padding-right: 2vw;
-	margin-left: 130px;
 }
 
 .carbonCal-title {
@@ -81,8 +89,9 @@ html, body {
 
 .write-button-container {
 	display: flex;
-	justify-content: center;
+	justify-content: flex-end;
 	margin: 20px 0;
+	margin-right: 350px;
 }
 
 .write-button {
@@ -177,40 +186,90 @@ html, body {
 	background-color: #007bff;
 	color: white;
 }
+
+.home-go {
+	border: 1px solid #CCCCCC;
+	border-radius: 0.4vw;
+	padding: 0.3vw;
+	padding-left: 0.5vw;
+	padding-right: 0.5vw;
+	text-decoration: none;
+	color: black;
+	font-size: 1vw
+}
+
+.home-go>img {
+	width: 1vw;
+	height: 1vw;
+}
+
+
+
+.campaign-info {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 0.7vw;
+	width: 100%;
+	min-width: 800px;
+	margin: auto;
+}
 </style>
 </head>
 <body>
 	<!-- Header -->
 	<%@ include file="/WEB-INF/inc/top.jsp"%>
 
-	<div class="title-box">
-		<div class="carbonCal-title w-50">
-			<h1 style="color: green; font-weight: bold;">공지사항</h1>
+	<div class="carbonCal-container">
+		<div class="title-box">
+			<div class="carbonCal-title w-50">
+				<h1 style="color: green; font-weight: bold;">공지사항</h1>
+			</div>
+			<div class="w-50 d-flex align-items-center justify-content-end">
+				<a class="home-go" href="${pageContext.request.contextPath }"> <img
+					src="${pageContext.request.contextPath}/resources/image/home.png">
+					<span>홈으로 이동</span>
+				</a>
+			</div>
 		</div>
 	</div>
 
-	<!-- 공지사항 검색박스 -->
-	<div class="notice-search-box">
-		<form action="noticeView" method="get">
-			<input type="text" name="searchKeyword" placeholder="검색어를 입력하세요"
-				value="${param.searchKeyword}">
-			<button type="submit">검색</button>
-		</form>
-	</div>
-
-	<!-- 글쓰기 버튼 -->
-	<c:if test="${sessionScope.login.userIsmaster == 1}">
-		<div class="write-button-container">
-			<a href="noticeWriteView" class="write-button">글쓰기</a>
+	<div style="width: 80%; margin: auto">
+		<div class="campaign-info">
+			<p>
+				<c:if test="${noticeList.size() != 0}">
+					<span>전체</span>
+					<b>${totalNotices}건</b>
+					<span>페이지</span>
+					<b>${currentPage}</b>
+					<span>/</span>
+					<b>${totalPages}</b>
+				</c:if>
+			</p>
+			<!-- 검색바 -->
+			<form class="d-flex justify-content-around align-items-center"
+				action="${pageContext.request.contextPath }/noticeView" method="get">
+				<input type="text" style="width:140;" class="form-control"
+					name="searchKeyword" placeholder="제목키워드를 입력하세요"
+					value="${param.searchKeyword}">
+				<button class="btn btn-primary" type="submit">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+						fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+								  <path
+							d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+								</svg>
+				</button>
+			</form>
 		</div>
-	</c:if>
-
+	</div>
 	<!-- 공지사항 리스트 컨테이너 -->
 	<div class="notice-container">
+		<!-- 공지사항 검색박스 -->
+
 		<div class="noticeDetail">
 			<ul>
 				<c:forEach var="notice" items="${noticeList}">
-					<li><a href="${pageContext.request.contextPath}/noticeDetailView?noticeNo=${notice.noticeNo}">
+					<li><a
+						href="${pageContext.request.contextPath}/noticeDetailView?noticeNo=${notice.noticeNo}">
 							<span>${notice.noticeTitle}</span> <span class="text-muted">
 								<fmt:formatDate value="${notice.noticeDate}"
 									pattern="yyyy-MM-dd" />
@@ -223,6 +282,15 @@ html, body {
 			</ul>
 		</div>
 	</div>
+
+	<!-- 글쓰기 버튼 -->
+
+	<c:if test="${sessionScope.login.userIsmaster == 1}">
+		<div class="write-button-container">
+			<a href="noticeWriteView" class="write-button">글쓰기</a>
+		</div>
+	</c:if>
+
 
 	<!-- 페이징 -->
 	<div class="pagination mb-5">
@@ -251,6 +319,9 @@ html, body {
 			</ul>
 		</c:if>
 	</div>
+
+
+
 	<!-- Footer -->
 	<%@ include file="/WEB-INF/inc/footer.jsp"%>
 </body>

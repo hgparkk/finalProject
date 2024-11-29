@@ -79,6 +79,7 @@ public class NoticeController {
 		model.addAttribute("totalPages", totalPages);
 		model.addAttribute("size", size);
 		model.addAttribute("isMaster", isMaster);
+		model.addAttribute("totalNotices", totalNotices);
 
 		return "notice/noticeView";
 	}

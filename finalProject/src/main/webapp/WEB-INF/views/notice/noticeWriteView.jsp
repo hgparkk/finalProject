@@ -123,7 +123,7 @@ html, body {
 
 			<!-- 첨부파일 -->
 			<div>
-				<label for="formFileMultiple" class="form-label" style="text-align:left;">파일첨부</label>
+				<label for="formFileMultiple" class="form-label" style="margin-right : 600px;">파일첨부</label>
 				<input class="form-control" name="boFile" type="file" id="formFileMultiple" multiple>
 			</div>
 			<!-- 등록 버튼 -->

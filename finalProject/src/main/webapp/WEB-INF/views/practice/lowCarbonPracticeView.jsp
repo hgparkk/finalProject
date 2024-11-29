@@ -124,11 +124,34 @@
     .carousel-control-next {
         right: calc(50% - 280px); /* 카드 오른쪽에서 100px 간격 */
     }
+    .home-go {
+	border: 1px solid #CCCCCC;
+	border-radius: 0.4vw;
+	padding: 0.3vw;
+	padding-left: 0.5vw;
+	padding-right: 0.5vw;
+	text-decoration: none;
+	color: black;
+	font-size: 1vw;
+	margin-top: 50px
+}
+
+.home-go>img {
+	width: 1vw;
+	height: 1vw;
+}
 </style>
 </head>
 <body data-scroll-container>
     <!-- 탑 인클루드 파일 -->
     <%@ include file="/WEB-INF/inc/top.jsp"%>
+
+			<div class="w-50 d-flex align-items-center justify-content-end mb-5" style="margin-left:600px;">
+				<a class="home-go" href="${pageContext.request.contextPath }"> <img
+					src="${pageContext.request.contextPath}/resources/image/home.png">
+					<span>홈으로 이동</span>
+				</a>
+			</div>
 
     <div class="container text-center" data-scroll>
         <!-- 제목 -->
