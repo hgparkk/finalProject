@@ -921,6 +921,9 @@ request.setAttribute("currentYear", Year.now().getValue());
 					if(result[j].coefficientName == "LPG CO2 발생량" && trafficKind.value == "LPG"){
 						trafficCO2 = trafficValue.value * result[j].coefficientValue
 					}
+					if(trafficKind.value == "승용차 없음"){
+						trafficCO2 = 0
+					}
 					if(result[j].coefficientName == "폐기물 CO2 발생량"){
 						wasteCO2 = wasteWeight.value * result[j].coefficientValue
 					}
