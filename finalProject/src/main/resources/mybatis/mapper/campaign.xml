@@ -8,6 +8,7 @@
 		</if>
 	</sql>
 
+	<!-- 캠페인 목록 가져오기 -->
 	<select id="getCampaignList"
 		resultType="com.codingbamboo.finalproject.campaign.dto.CampaignDTO"
 		parameterType="com.codingbamboo.finalproject.common.vo.SearchVO">
@@ -28,6 +29,7 @@
 		WHERE rnum BETWEEN #{start} AND #{end}
 	</select>
 
+	<!-- 캠페인 전체 갯수 가져오기 -->
 	<select id="getCampaignCount" resultType="int">
 		SELECT
 		COUNT(*)
@@ -35,6 +37,7 @@
 		campaign
 	</select>
 
+	<!-- 캠페인 한 페이지 갯수 가져오기 -->
 	<select id="getCampaignPageCount" resultType="int">
 		SELECT
 		COUNT(*)
@@ -44,6 +47,7 @@
 		<include refid="campaignSearch" />
 	</select>
 
+	<!-- 캠페인 등록하기 -->
 	<insert id="registCampaign"
 		parameterType="com.codingbamboo.finalproject.campaign.dto.CampaignDTO">
 		INSERT INTO campaign(
@@ -51,11 +55,19 @@
 			, campaign_img
 			, campaign_title
 			, campaign_date
+			, campaign_url
 		) VALUES (
 			campaign_seq.NEXTVAL
 			, #{campaignImg}
 			, #{campaignTitle}
 			, SYSDATE
-		);
+			, #{campaignUrl}
+		)
 	</insert>
+	
+	<!-- 캠페인 삭제하기 -->
+	<delete id="deleteCampaign" parameterType="int">
+		DELETE FROM campaign
+		WHERE campaign_no = #{campaignNo}
+	</delete>
 </mapper>

@@ -21,6 +21,12 @@ public class CampaignService {
 		return result;
 	}
 	
+	// 캠페인 삭제
+	public int deleteCampaign(int campaignNo) {
+		int result = dao.deleteCampaign(campaignNo);
+		return result;
+	}
+	
 	// 캠페인 목록 조회
 	public List<CampaignDTO> getCampaignList(SearchVO search){
 		List<CampaignDTO> result = dao.getCampaignList(search);

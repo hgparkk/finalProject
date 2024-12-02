@@ -23,7 +23,7 @@ public class CampaignController {
 	CampaignService campaignService;
 
 	// 캠페인 페이지 이동
-	@RequestMapping("campaignView")
+	@RequestMapping("/campaignView")
 	public String campaignView(Model model, SearchVO search) {
 		// 캠페인 전체 갯수 조회
 		int campaignCount = campaignService.getCampaignCount();
@@ -60,9 +60,14 @@ public class CampaignController {
 	}
 	
 	@PostMapping("/campaignWriteDo")
-	public String campaignWriteDo(CampaignDTO campaign, MultipartFile file) {
+	public String campaignWriteDo(CampaignDTO campaign) {
 		campaignService.registCampaign(campaign);
-		
-		return "campaign/campaignView";
+		return "redirect:/campaignView";
+	}
+	
+	@PostMapping("/campaignDelDo")
+	public String campaignDelDo(int campaignNo) {
+		campaignService.deleteCampaign(campaignNo);
+		return "redirect:/campaignView";
 	}
 }

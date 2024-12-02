@@ -71,7 +71,7 @@ ul {
 }
 
 .campaign-list-ul {
-	margin: 0; /* 기본 margin 리셋 */
+	margin: 0;
 	padding: 0;
 	margin-top: 0.7vw;
 	list-style-type: none;
@@ -87,17 +87,22 @@ ul {
 	width: 32%;
 	display: block;
 	margin-bottom: 0.7vw;
+	position: relative;
+	margin-bottom: 0.3vw;
 }
 
 @media ( max-width : 1100px) {
 	.campaign {
-		width: 48%; /* 화면 크기가 줄어들면 2개만 한 줄에 보이도록 설정 */
+		width: 45%;
 	}
 }
 
 @media ( max-width : 600px) {
+	.campaign-list-ul {
+		justify-content: center;
+	}
 	.campaign {
-		width: 98%; /* 화면 크기가 더 줄어들면 1개만 보이도록 설정 */
+		width: 95%;
 	}
 }
 
@@ -109,7 +114,6 @@ i>img {
 	width: 100%;
 }
 
-/* 추가로 모든 링크에 대해 확실히 밑줄 제거 */
 a {
 	text-decoration: none !important;
 }
@@ -138,6 +142,18 @@ a>span {
 	text-decoration: none;
 	color: black;
 	font-size: 1vw
+}
+
+.xBtn {
+	position: absolute;
+	right:0%;
+	transform: translate(0%, 0%);
+	width: 2vw;
+	height: 2vw;
+	background-color: red;
+	border: 0px;
+	color: white;
+	z-index: 999;
 }
 </style>
 <!-- header -->
@@ -202,7 +218,21 @@ a>span {
 					<c:if test="${keyGetCampaignList.size() != 0}">
 						<ul class="campaign-list-ul">
 							<c:forEach items="${keyGetCampaignList }" var="campaignDTO">
-								<li class="campaign"><a class="d-flex flex-column"
+								<li class="campaign"><c:if
+										test="${sessionScope.login.userIsmaster == 1 }">
+										<form
+											action="${pageContext.request.contextPath }/campaignDelDo"
+											method="POST">
+											<input type="hidden" name="campaignNo"
+												value="${campaignDTO.campaignNo}" />
+											<button type="button"
+												class="xBtn d-flex justify-content-center align-items-center"
+												onclick="delCamBtn(this)">x</button>
+										</form>
+									</c:if> <c:if
+										test="${sessionScope.login.userIsmaster != 1 || sessionScope.login == null }">
+										<span class="xBtn d-none" onclick="delCamBtn(this)"></span>
+									</c:if> <a class="d-flex flex-column"
 									href="${campaignDTO.campaignUrl }" target="_blank"> <i>
 											<img src="${campaignDTO.campaignImg }" class="campaign-img">
 									</i> <span class="campaign-explain"> <strong>${campaignDTO.campaignTitle }</strong>
@@ -221,16 +251,22 @@ a>span {
 					</c:if>
 				</div>
 			</div>
+			<!-- 캠페인 등록 -->
+			<div class="d-flex justify-content-end">
+				<c:if test="${sessionScope.login.userIsmaster == 1 }">
+					<form
+						action="${pageContext.request.contextPath }/campaignWriteView">
+						<button type="button" class="btn btn-secondary" id="camBtn">캠페인
+							등록하기</button>
+					</form>
+				</c:if>
+				<c:if
+					test="${sessionScope.login == null || sessionScope.login.userIsmaster != 1 }">
+					<span class="d-none" id="camBtn">캠페인 등록하기</span>
+				</c:if>
+			</div>
 		</div>
 	</section>
-	<!-- 캠페인 등록 -->
-	<div>
-		<c:if test="${sessionScope.login.userIsmaster == 1 }">
-			<form action="${pageContext.request.contextPath }/campaignWriteView">
-				<button type="button" id="camBtn">캠페인 등록하기</button>
-			</form>
-		</c:if>
-	</div>
 	<!-- 페이지 부분 -->
 	<!-- 페이징 -->
 	<c:if test="${keyCampaignList.size() != 0 }">
@@ -294,6 +330,15 @@ a>span {
 		document.getElementById("camBtn").addEventListener('click', ()=>{
 			document.getElementById("camBtn").parentElement.submit();
 		})
+		
+		function delCamBtn(button) {
+			if(confirm("정말로 삭제하시겠습니까?")){
+				let form = button.closest('form');
+				console.log(form)
+	            form.submit();
+			}
+		}
+		
 	</script>
 
 </body>

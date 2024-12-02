@@ -203,7 +203,7 @@
 				</div>
 
 				<a class="nav-link co2" href="${pageContext.request.contextPath }/carbonCalView">탄소발자국 계산</a>
-				<a class="nav-link co2" href="${pageContext.request.contextPath}/solarRadiationView">태양광 발전 예측 지도</a>
+				<a class="nav-link co2" href="${pageContext.request.contextPath}/solarRadiationView">태양광 발전량 모의 예측</a>
 			</c:if>
 			<c:if test="${sessionScope.login != null && sessionScope.login.userIsmaster == 1}">
 				<!-- 탄소중립 알려드려요 드롭다운 -->

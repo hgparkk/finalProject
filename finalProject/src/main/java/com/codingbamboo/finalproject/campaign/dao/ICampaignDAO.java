@@ -12,6 +12,9 @@ public interface ICampaignDAO {
 	// 캠페인 등록
 	int registCampaign(CampaignDTO campaign);
 	
+	// 캠페인 삭제
+	int deleteCampaign(int campaignNo);
+	
 	// 캠페인 목록 조회
 	List<CampaignDTO> getCampaignList(SearchVO search);
 	
