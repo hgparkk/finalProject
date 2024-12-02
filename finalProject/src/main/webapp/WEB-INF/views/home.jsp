@@ -2,24 +2,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<html>
+<!DOCTYPE html>
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <title>Coding Bamboo</title>
-<!-- Bootstrap CSS -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-
 <!-- 헤더 인클루드 파일 -->
 <%@ include file="/WEB-INF/inc/header.jsp"%>
 
 <!-- Locomotive Scroll CSS -->
-<link rel="stylesheet"
-	href="https://unpkg.com/locomotive-scroll/dist/locomotive-scroll.min.css">
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<link rel="stylesheet" href="https://unpkg.com/locomotive-scroll/dist/locomotive-scroll.min.css">
 
 <style>
 html, body {
@@ -146,9 +138,7 @@ html, body {
 	<!-- 메인 비디오 파트 -->
 	<div class="video-container" data-scroll>
 		<video autoplay muted loop playsinline>
-			<source
-				src="${pageContext.request.contextPath}/resources/video/main.mp4"
-				type="video/mp4">
+			<source src="${pageContext.request.contextPath}/resources/video/main.mp4" type="video/mp4">
 		</video>
 		<div class="text-overlay">
 			<p>대전 지역 탄소 및 태양광 발전 예측</p>
@@ -165,30 +155,24 @@ html, body {
 				<div class="col-md-6 mb-4 d-flex">
 					<div class="feature-box flex-fill">
 						<div class="hover-image-container">
-							<img
-								src="${pageContext.request.contextPath}/resources/image/sub_2.jpg"
-								alt="탄소 발자국 계산기 이미지">
+							<img src="${pageContext.request.contextPath}/resources/image/sub_2.jpg" alt="탄소 발자국 계산기 이미지">
 						</div>
 						<div class="content-overlay">
 							<h4>탄소 발자국 계산기</h4>
 							<p>당신의 생활에서 발생하는 탄소 배출량을 계산하고 줄이는 방법을 알아보세요.</p>
-							<a href="${pageContext.request.contextPath}/carbonCalView"
-								class="btn btn-primary mt-3">계산하기</a>
+							<a href="${pageContext.request.contextPath}/carbonCalView" class="btn btn-primary mt-3">계산하기</a>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-6 mb-4 d-flex">
 					<div class="feature-box flex-fill">
 						<div class="hover-image-container">
-							<img
-								src="${pageContext.request.contextPath}/resources/image/sub_1.jpg"
-								alt="태양열 발전 예측 지도 이미지">
+							<img src="${pageContext.request.contextPath}/resources/image/sub_1.jpg" alt="태양열 발전 예측 지도 이미지">
 						</div>
 						<div class="content-overlay">
 							<h4>태양열 발전 예측 지도</h4>
 							<p>당신의 지역에서 태양열 발전량을 예측하고 환경에 미치는 영향을 확인해보세요.</p>
-							<a href="${pageContext.request.contextPath}/solarRadiationView"
-								class="btn btn-primary mt-3">예측 하기</a>
+							<a href="${pageContext.request.contextPath}/solarRadiationView" class="btn btn-primary mt-3">예측 하기</a>
 						</div>
 					</div>
 				</div>
@@ -200,23 +184,20 @@ html, body {
 	<div class="container py-5">
 		<div class="position-relative mb-4">
 			<h2 class="text-center fw-bold m-0">공지사항</h2>
-			<a href="${pageContext.request.contextPath}/noticeView"
-				class="position-absolute text-decoration-none text-success"
-				style="right: 20px; bottom: 0; margin-left: -20px;">더보기</a>
+			<a href="${pageContext.request.contextPath}/noticeView" class="position-absolute text-decoration-none text-success" style="right: 20px; bottom: 0; margin-left: -20px;">더보기</a>
 		</div>
 
 		<div class="not_slide">
 			<ul class="list-unstyled">
 				<!-- 공지사항 리스트 출력 -->
 				<c:forEach var="notice" items="${noticePreviewList}">
-					<li><a
-						href="${pageContext.request.contextPath}/noticeDetailView?noticeNo=${notice.noticeNo}"
-						class="d-flex justify-content-between text-decoration-none text-dark w-100">
-							<span>${notice.noticeTitle}</span> <!-- 포맷된 날짜 출력 --> <span
-							class="text-muted"> <fmt:formatDate
-									value="${notice.noticeDate}" pattern="yyyy-MM-dd" />
-						</span>
-					</a></li>
+					<li><a href="${pageContext.request.contextPath}/noticeDetailView?noticeNo=${notice.noticeNo}" class="d-flex justify-content-between text-decoration-none text-dark w-100">
+							<span>${notice.noticeTitle}</span>
+							<!-- 포맷된 날짜 출력 -->
+							<span class="text-muted">
+								<fmt:formatDate value="${notice.noticeDate}" pattern="yyyy-MM-dd" />
+							</span>
+						</a></li>
 				</c:forEach>
 
 				<!-- 공지사항이 없을 경우 -->
@@ -232,19 +213,16 @@ html, body {
 	<div class="container py-5">
 		<div class="position-relative mb-4">
 			<h2 class="text-center fw-bold m-0">탄소저감기술 연구 동향</h2>
-			<a href="#"
-				class="position-absolute text-decoration-none text-success"
-				style="right: 20px; bottom: 0; margin-left: -20px;">더보기</a>
+			<a href="#" class="position-absolute text-decoration-none text-success" style="right: 20px; bottom: 0; margin-left: -20px;">더보기</a>
 		</div>
 
 		<div class="not_slide">
 			<ul class="list-unstyled">
 				<c:forEach var="trend" items="${trendPreviewList}">
-					<li><a
-						href="${pageContext.request.contextPath}/trendDetailView?trendNo=${trend.trendNo}"
-						class="d-flex justify-content-between text-decoration-none text-dark w-100">
-							<span>${trend.trendTitle}</span> <span class="text-muted">${trend.trendDate}</span>
-					</a></li>
+					<li><a href="${pageContext.request.contextPath}/trendDetailView?trendNo=${trend.trendNo}" class="d-flex justify-content-between text-decoration-none text-dark w-100">
+							<span>${trend.trendTitle}</span>
+							<span class="text-muted">${trend.trendDate}</span>
+						</a></li>
 				</c:forEach>
 				<c:if test="${empty trendPreviewList}">
 					<li class="text-center text-muted py-4">등록된 연구 동향이 없습니다.</li>
@@ -257,10 +235,8 @@ html, body {
 	<%@ include file="/WEB-INF/inc/footer.jsp"%>
 
 	<!-- Bootstrap 및 Locomotive Scroll JS -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-	<script
-		src="https://unpkg.com/locomotive-scroll/dist/locomotive-scroll.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://unpkg.com/locomotive-scroll/dist/locomotive-scroll.min.js"></script>
 	<script>
 		const scroll = new LocomotiveScroll({
 			el : document.querySelector('[data-scroll-container]'),

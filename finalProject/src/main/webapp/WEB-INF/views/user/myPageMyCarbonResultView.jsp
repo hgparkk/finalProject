@@ -96,6 +96,58 @@ request.setAttribute("currentYear", Year.now().getValue());
 							<input type="hidden" value="${year}">
 						</div>
 					</div>
+					<div>
+						<div class="d-flex">
+							<div>
+								<div class="fw-bold fs-3 text-center">연 합계 탄소 배출량</div>
+								<canvas id="yearCalResultGraph"></canvas>
+							</div>
+							<div class="d-flex">
+								<div class="d-flex flex-column">
+									<div class="content-line">
+										<span class="content-text fw-bold">월 평균 전기 탄소 배출량</span>
+									</div>
+									<div class="content-line">
+										<span class="content-text fw-bold">월 평균 가스 탄소 배출량</span>
+									</div>
+									<div class="content-line">
+										<span class="content-text fw-bold">월 평균 교통 탄소 배출량</span>
+									</div>
+									<div class="content-line">
+										<span class="content-text fw-bold">월 평균 폐기물 탄소 배출량</span>
+									</div>
+								</div>
+								<div id="yearCalResultAvgValue" class="d-flex flex-column">
+									<div class="content-line d-flex justify-content-end">
+										<span class="content-text"></span>
+									</div>
+									<div class="content-line d-flex justify-content-end">
+										<span class="content-text"></span>
+									</div>
+									<div class="content-line d-flex justify-content-end">
+										<span class="content-text"></span>
+									</div>
+									<div class="content-line d-flex justify-content-end">
+										<span class="content-text"></span>
+									</div>
+								</div>
+								<div class="d-flex flex-column">
+									<div class="content-line">
+										<span class="content-text fw-bold">kg</span>
+									</div>
+									<div class="content-line">
+										<span class="content-text fw-bold">kg</span>
+									</div>
+									<div class="content-line">
+										<span class="content-text fw-bold">kg</span>
+									</div>
+									<div class="content-line">
+										<span class="content-text fw-bold">kg</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 					<div class="accordion accordion-flush" id="myCarbonCalAccordion">
 						<div class="accordion-item">
 							<h2 class="accordion-header">
@@ -111,6 +163,7 @@ request.setAttribute("currentYear", Year.now().getValue());
 													<c:set var="found" value="true" />
 													<div class="d-flex">
 														<div>
+															<div class="fw-bold fs-3 text-center">총 탄소 배출량</div>
 															<input value="${myCal.electricUsage}" type="hidden">
 															<input value="${myCal.gasUsage}" type="hidden">
 															<input value="${myCal.trafficKind}" type="hidden">
@@ -126,6 +179,9 @@ request.setAttribute("currentYear", Year.now().getValue());
 																<span class="content-text fw-bold">가스 사용량</span>
 															</div>
 															<div class="content-line">
+																<span class="content-text fw-bold">교통 종류</span>
+															</div>
+															<div class="content-line">
 																<span class="content-text fw-bold">교통 사용량</span>
 															</div>
 															<div class="content-line">
@@ -134,16 +190,36 @@ request.setAttribute("currentYear", Year.now().getValue());
 														</div>
 														<div class="d-flex flex-column">
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.electricUsage}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.gasUsage}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.trafficKind}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.trafficValue}</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text d-flex justify-content-end">${myCal.wasteWeight}</span>
+															</div>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text fw-bold">kWh</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">m³</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">&nbsp;</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">km</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">kg</span>
 															</div>
 														</div>
 													</div>
@@ -174,6 +250,7 @@ request.setAttribute("currentYear", Year.now().getValue());
 													<c:set var="found" value="true" />
 													<div class="d-flex">
 														<div>
+															<div class="fw-bold fs-3 text-center">총 탄소 배출량</div>
 															<input value="${myCal.electricUsage}" type="hidden">
 															<input value="${myCal.gasUsage}" type="hidden">
 															<input value="${myCal.trafficKind}" type="hidden">
@@ -189,6 +266,9 @@ request.setAttribute("currentYear", Year.now().getValue());
 																<span class="content-text fw-bold">가스 사용량</span>
 															</div>
 															<div class="content-line">
+																<span class="content-text fw-bold">교통 종류</span>
+															</div>
+															<div class="content-line">
 																<span class="content-text fw-bold">교통 사용량</span>
 															</div>
 															<div class="content-line">
@@ -197,16 +277,36 @@ request.setAttribute("currentYear", Year.now().getValue());
 														</div>
 														<div class="d-flex flex-column">
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.electricUsage}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.gasUsage}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.trafficKind}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.trafficValue}</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text d-flex justify-content-end">${myCal.wasteWeight}</span>
+															</div>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text fw-bold">kWh</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">m³</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">&nbsp;</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">km</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">kg</span>
 															</div>
 														</div>
 													</div>
@@ -237,6 +337,7 @@ request.setAttribute("currentYear", Year.now().getValue());
 													<c:set var="found" value="true" />
 													<div class="d-flex">
 														<div>
+															<div class="fw-bold fs-3 text-center">총 탄소 배출량</div>
 															<input value="${myCal.electricUsage}" type="hidden">
 															<input value="${myCal.gasUsage}" type="hidden">
 															<input value="${myCal.trafficKind}" type="hidden">
@@ -252,6 +353,9 @@ request.setAttribute("currentYear", Year.now().getValue());
 																<span class="content-text fw-bold">가스 사용량</span>
 															</div>
 															<div class="content-line">
+																<span class="content-text fw-bold">교통 종류</span>
+															</div>
+															<div class="content-line">
 																<span class="content-text fw-bold">교통 사용량</span>
 															</div>
 															<div class="content-line">
@@ -260,16 +364,36 @@ request.setAttribute("currentYear", Year.now().getValue());
 														</div>
 														<div class="d-flex flex-column">
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.electricUsage}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.gasUsage}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.trafficKind}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.trafficValue}</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text d-flex justify-content-end">${myCal.wasteWeight}</span>
+															</div>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text fw-bold">kWh</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">m³</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">&nbsp;</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">km</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">kg</span>
 															</div>
 														</div>
 													</div>
@@ -300,6 +424,7 @@ request.setAttribute("currentYear", Year.now().getValue());
 													<c:set var="found" value="true" />
 													<div class="d-flex">
 														<div>
+															<div class="fw-bold fs-3 text-center">총 탄소 배출량</div>
 															<input value="${myCal.electricUsage}" type="hidden">
 															<input value="${myCal.gasUsage}" type="hidden">
 															<input value="${myCal.trafficKind}" type="hidden">
@@ -315,6 +440,9 @@ request.setAttribute("currentYear", Year.now().getValue());
 																<span class="content-text fw-bold">가스 사용량</span>
 															</div>
 															<div class="content-line">
+																<span class="content-text fw-bold">교통 종류</span>
+															</div>
+															<div class="content-line">
 																<span class="content-text fw-bold">교통 사용량</span>
 															</div>
 															<div class="content-line">
@@ -323,16 +451,36 @@ request.setAttribute("currentYear", Year.now().getValue());
 														</div>
 														<div class="d-flex flex-column">
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.electricUsage}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.gasUsage}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.trafficKind}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.trafficValue}</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text d-flex justify-content-end">${myCal.wasteWeight}</span>
+															</div>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text fw-bold">kWh</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">m³</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">&nbsp;</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">km</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">kg</span>
 															</div>
 														</div>
 													</div>
@@ -363,6 +511,7 @@ request.setAttribute("currentYear", Year.now().getValue());
 													<c:set var="found" value="true" />
 													<div class="d-flex">
 														<div>
+															<div class="fw-bold fs-3 text-center">총 탄소 배출량</div>
 															<input value="${myCal.electricUsage}" type="hidden">
 															<input value="${myCal.gasUsage}" type="hidden">
 															<input value="${myCal.trafficKind}" type="hidden">
@@ -378,6 +527,9 @@ request.setAttribute("currentYear", Year.now().getValue());
 																<span class="content-text fw-bold">가스 사용량</span>
 															</div>
 															<div class="content-line">
+																<span class="content-text fw-bold">교통 종류</span>
+															</div>
+															<div class="content-line">
 																<span class="content-text fw-bold">교통 사용량</span>
 															</div>
 															<div class="content-line">
@@ -386,16 +538,36 @@ request.setAttribute("currentYear", Year.now().getValue());
 														</div>
 														<div class="d-flex flex-column">
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.electricUsage}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.gasUsage}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.trafficKind}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.trafficValue}</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text d-flex justify-content-end">${myCal.wasteWeight}</span>
+															</div>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text fw-bold">kWh</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">m³</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">&nbsp;</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">km</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">kg</span>
 															</div>
 														</div>
 													</div>
@@ -426,6 +598,7 @@ request.setAttribute("currentYear", Year.now().getValue());
 													<c:set var="found" value="true" />
 													<div class="d-flex">
 														<div>
+															<div class="fw-bold fs-3 text-center">총 탄소 배출량</div>
 															<input value="${myCal.electricUsage}" type="hidden">
 															<input value="${myCal.gasUsage}" type="hidden">
 															<input value="${myCal.trafficKind}" type="hidden">
@@ -441,6 +614,9 @@ request.setAttribute("currentYear", Year.now().getValue());
 																<span class="content-text fw-bold">가스 사용량</span>
 															</div>
 															<div class="content-line">
+																<span class="content-text fw-bold">교통 종류</span>
+															</div>
+															<div class="content-line">
 																<span class="content-text fw-bold">교통 사용량</span>
 															</div>
 															<div class="content-line">
@@ -449,16 +625,36 @@ request.setAttribute("currentYear", Year.now().getValue());
 														</div>
 														<div class="d-flex flex-column">
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.electricUsage}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.gasUsage}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.trafficKind}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.trafficValue}</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text d-flex justify-content-end">${myCal.wasteWeight}</span>
+															</div>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text fw-bold">kWh</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">m³</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">&nbsp;</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">km</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">kg</span>
 															</div>
 														</div>
 													</div>
@@ -489,6 +685,7 @@ request.setAttribute("currentYear", Year.now().getValue());
 													<c:set var="found" value="true" />
 													<div class="d-flex">
 														<div>
+															<div class="fw-bold fs-3 text-center">총 탄소 배출량</div>
 															<input value="${myCal.electricUsage}" type="hidden">
 															<input value="${myCal.gasUsage}" type="hidden">
 															<input value="${myCal.trafficKind}" type="hidden">
@@ -504,6 +701,9 @@ request.setAttribute("currentYear", Year.now().getValue());
 																<span class="content-text fw-bold">가스 사용량</span>
 															</div>
 															<div class="content-line">
+																<span class="content-text fw-bold">교통 종류</span>
+															</div>
+															<div class="content-line">
 																<span class="content-text fw-bold">교통 사용량</span>
 															</div>
 															<div class="content-line">
@@ -512,16 +712,36 @@ request.setAttribute("currentYear", Year.now().getValue());
 														</div>
 														<div class="d-flex flex-column">
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.electricUsage}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.gasUsage}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.trafficKind}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.trafficValue}</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text d-flex justify-content-end">${myCal.wasteWeight}</span>
+															</div>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text fw-bold">kWh</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">m³</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">&nbsp;</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">km</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">kg</span>
 															</div>
 														</div>
 													</div>
@@ -552,6 +772,7 @@ request.setAttribute("currentYear", Year.now().getValue());
 													<c:set var="found" value="true" />
 													<div class="d-flex">
 														<div>
+															<div class="fw-bold fs-3 text-center">총 탄소 배출량</div>
 															<input value="${myCal.electricUsage}" type="hidden">
 															<input value="${myCal.gasUsage}" type="hidden">
 															<input value="${myCal.trafficKind}" type="hidden">
@@ -567,6 +788,9 @@ request.setAttribute("currentYear", Year.now().getValue());
 																<span class="content-text fw-bold">가스 사용량</span>
 															</div>
 															<div class="content-line">
+																<span class="content-text fw-bold">교통 종류</span>
+															</div>
+															<div class="content-line">
 																<span class="content-text fw-bold">교통 사용량</span>
 															</div>
 															<div class="content-line">
@@ -575,16 +799,36 @@ request.setAttribute("currentYear", Year.now().getValue());
 														</div>
 														<div class="d-flex flex-column">
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.electricUsage}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.gasUsage}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.trafficKind}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.trafficValue}</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text d-flex justify-content-end">${myCal.wasteWeight}</span>
+															</div>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text fw-bold">kWh</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">m³</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">&nbsp;</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">km</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">kg</span>
 															</div>
 														</div>
 													</div>
@@ -615,6 +859,7 @@ request.setAttribute("currentYear", Year.now().getValue());
 													<c:set var="found" value="true" />
 													<div class="d-flex">
 														<div>
+															<div class="fw-bold fs-3 text-center">총 탄소 배출량</div>
 															<input value="${myCal.electricUsage}" type="hidden">
 															<input value="${myCal.gasUsage}" type="hidden">
 															<input value="${myCal.trafficKind}" type="hidden">
@@ -630,6 +875,9 @@ request.setAttribute("currentYear", Year.now().getValue());
 																<span class="content-text fw-bold">가스 사용량</span>
 															</div>
 															<div class="content-line">
+																<span class="content-text fw-bold">교통 종류</span>
+															</div>
+															<div class="content-line">
 																<span class="content-text fw-bold">교통 사용량</span>
 															</div>
 															<div class="content-line">
@@ -638,16 +886,36 @@ request.setAttribute("currentYear", Year.now().getValue());
 														</div>
 														<div class="d-flex flex-column">
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.electricUsage}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.gasUsage}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.trafficKind}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.trafficValue}</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text d-flex justify-content-end">${myCal.wasteWeight}</span>
+															</div>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text fw-bold">kWh</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">m³</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">&nbsp;</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">km</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">kg</span>
 															</div>
 														</div>
 													</div>
@@ -678,6 +946,7 @@ request.setAttribute("currentYear", Year.now().getValue());
 													<c:set var="found" value="true" />
 													<div class="d-flex">
 														<div>
+															<div class="fw-bold fs-3 text-center">총 탄소 배출량</div>
 															<input value="${myCal.electricUsage}" type="hidden">
 															<input value="${myCal.gasUsage}" type="hidden">
 															<input value="${myCal.trafficKind}" type="hidden">
@@ -693,6 +962,9 @@ request.setAttribute("currentYear", Year.now().getValue());
 																<span class="content-text fw-bold">가스 사용량</span>
 															</div>
 															<div class="content-line">
+																<span class="content-text fw-bold">교통 종류</span>
+															</div>
+															<div class="content-line">
 																<span class="content-text fw-bold">교통 사용량</span>
 															</div>
 															<div class="content-line">
@@ -701,16 +973,36 @@ request.setAttribute("currentYear", Year.now().getValue());
 														</div>
 														<div class="d-flex flex-column">
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.electricUsage}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.gasUsage}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.trafficKind}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.trafficValue}</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text d-flex justify-content-end">${myCal.wasteWeight}</span>
+															</div>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text fw-bold">kWh</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">m³</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">&nbsp;</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">km</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">kg</span>
 															</div>
 														</div>
 													</div>
@@ -741,6 +1033,7 @@ request.setAttribute("currentYear", Year.now().getValue());
 													<c:set var="found" value="true" />
 													<div class="d-flex">
 														<div>
+															<div class="fw-bold fs-3 text-center">총 탄소 배출량</div>
 															<input value="${myCal.electricUsage}" type="hidden">
 															<input value="${myCal.gasUsage}" type="hidden">
 															<input value="${myCal.trafficKind}" type="hidden">
@@ -756,6 +1049,9 @@ request.setAttribute("currentYear", Year.now().getValue());
 																<span class="content-text fw-bold">가스 사용량</span>
 															</div>
 															<div class="content-line">
+																<span class="content-text fw-bold">교통 종류</span>
+															</div>
+															<div class="content-line">
 																<span class="content-text fw-bold">교통 사용량</span>
 															</div>
 															<div class="content-line">
@@ -764,16 +1060,36 @@ request.setAttribute("currentYear", Year.now().getValue());
 														</div>
 														<div class="d-flex flex-column">
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.electricUsage}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.gasUsage}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.trafficKind}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.trafficValue}</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text d-flex justify-content-end">${myCal.wasteWeight}</span>
+															</div>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text fw-bold">kWh</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">m³</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">&nbsp;</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">km</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">kg</span>
 															</div>
 														</div>
 													</div>
@@ -804,6 +1120,7 @@ request.setAttribute("currentYear", Year.now().getValue());
 													<c:set var="found" value="true" />
 													<div class="d-flex">
 														<div>
+															<div class="fw-bold fs-3 text-center">총 탄소 배출량</div>
 															<input value="${myCal.electricUsage}" type="hidden">
 															<input value="${myCal.gasUsage}" type="hidden">
 															<input value="${myCal.trafficKind}" type="hidden">
@@ -819,6 +1136,9 @@ request.setAttribute("currentYear", Year.now().getValue());
 																<span class="content-text fw-bold">가스 사용량</span>
 															</div>
 															<div class="content-line">
+																<span class="content-text fw-bold">교통 종류</span>
+															</div>
+															<div class="content-line">
 																<span class="content-text fw-bold">교통 사용량</span>
 															</div>
 															<div class="content-line">
@@ -827,16 +1147,36 @@ request.setAttribute("currentYear", Year.now().getValue());
 														</div>
 														<div class="d-flex flex-column">
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.electricUsage}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.gasUsage}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.trafficKind}</span>
 															</div>
 															<div class="content-line">
-																<span class="content-text"></span>
+																<span class="content-text d-flex justify-content-end">${myCal.trafficValue}</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text d-flex justify-content-end">${myCal.wasteWeight}</span>
+															</div>
+														</div>
+														<div class="d-flex flex-column">
+															<div class="content-line">
+																<span class="content-text fw-bold">kWh</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">m³</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">&nbsp;</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">km</span>
+															</div>
+															<div class="content-line">
+																<span class="content-text fw-bold">kg</span>
 															</div>
 														</div>
 													</div>
@@ -888,14 +1228,29 @@ request.setAttribute("currentYear", Year.now().getValue());
     
     let charts = [];
     
+    let sumElec = 0
+    let sumGas = 0
+    let sumTraffic = 0
+    let sumWaste = 0
+    
+    let sumElecCO2 = 0
+    let sumGasCO2 = 0
+    let sumTrafficCO2 = 0
+    let sumWasteCO2 = 0
+    
     // 그래프 그리기
     let canvas = document.getElementsByClassName("myCalResult")
     for (let i = 0; i < canvas.length; i++){
-    	let electricUsage = canvas[i].parentElement.children[0]
-		let gasUsage = canvas[i].parentElement.children[1]
-		let trafficKind = canvas[i].parentElement.children[2]
-		let trafficValue = canvas[i].parentElement.children[3]
-		let wasteWeight = canvas[i].parentElement.children[4]
+    	let electricUsage = canvas[i].parentElement.children[1]
+		let gasUsage = canvas[i].parentElement.children[2]
+		let trafficKind = canvas[i].parentElement.children[3]
+		let trafficValue = canvas[i].parentElement.children[4]
+		let wasteWeight = canvas[i].parentElement.children[5]
+    	
+    	sumElec += parseInt(electricUsage.value)
+        sumGas += parseInt(gasUsage.value)
+        sumTraffic += parseInt(trafficValue.value)
+        sumWaste += parseInt(wasteWeight.value)
     	
     	$.ajax({
 			type:'POST',
@@ -907,31 +1262,31 @@ request.setAttribute("currentYear", Year.now().getValue());
 				let wasteCO2
 				for(let j = 0; j < result.length; j++){
 					if(result[j].coefficientName == "전기 CO2 발생량"){
-						electricCO2 = electricUsage.value * result[j].coefficientValue
+						electricCO2 = Math.round((electricUsage.value * result[j].coefficientValue) *10000)/10000
 					}
 					if(result[j].coefficientName == "가스 CO2 발생량"){
-						gasCO2 = gasUsage.value * result[j].coefficientValue
+						gasCO2 = Math.round((gasUsage.value * result[j].coefficientValue) *10000)/10000
 					}
 					if(result[j].coefficientName == "경유 CO2 발생량" && trafficKind.value == "경유"){
-						trafficCO2 = trafficValue.value * result[j].coefficientValue
+						trafficCO2 = Math.round((trafficValue.value * result[j].coefficientValue) *10000)/10000
 					}
 					if(result[j].coefficientName == "휘발유 CO2 발생량" && trafficKind.value == "휘발유"){
-						trafficCO2 = trafficValue.value * result[j].coefficientValue
+						trafficCO2 = Math.round((trafficValue.value * result[j].coefficientValue) *10000)/10000
 					}
 					if(result[j].coefficientName == "LPG CO2 발생량" && trafficKind.value == "LPG"){
-						trafficCO2 = trafficValue.value * result[j].coefficientValue
+						trafficCO2 = Math.round((trafficValue.value * result[j].coefficientValue) *10000)/10000
 					}
 					if(trafficKind.value == "승용차 없음"){
 						trafficCO2 = 0
 					}
 					if(result[j].coefficientName == "폐기물 CO2 발생량"){
-						wasteCO2 = wasteWeight.value * result[j].coefficientValue
+						wasteCO2 = Math.round((wasteWeight.value * result[j].coefficientValue) *10000)/10000
 					}
 				}
-				canvas[i].parentElement.parentElement.children[2].children[0].children[0].innerHTML = " : " +electricCO2
-				canvas[i].parentElement.parentElement.children[2].children[1].children[0].innerHTML = " : " +gasCO2
-				canvas[i].parentElement.parentElement.children[2].children[2].children[0].innerHTML = " : " +trafficCO2
-				canvas[i].parentElement.parentElement.children[2].children[3].children[0].innerHTML = " : " +wasteCO2
+				sumElecCO2 += electricCO2
+			    sumGasCO2 += gasCO2
+			    sumTrafficCO2 += trafficCO2
+			    sumWasteCO2 += wasteCO2
 				charts[i] = new Chart(canvas[i], {
 		            type: 'pie',
 		            data: {
@@ -963,6 +1318,49 @@ request.setAttribute("currentYear", Year.now().getValue());
 			}
 		})
     }
+    
+    sumGraph = document.getElementById("yearCalResultGraph")
+    setTimeout(()=>{
+    	new Chart(sumGraph, {
+            type: 'pie',
+            data: {
+                labels: ['전기', '가스', '폐기물', '교통'],
+                datasets: [{
+                    data: [sumElecCO2, sumGasCO2, sumWasteCO2, sumTrafficCO2]
+                }]
+            },
+            options: {
+                responsive: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    datalabels: {
+                        color: '#fff', // 데이터 글자 색상
+                        font: {
+                            size: 15, // 글자 크기
+                        },
+                        formatter: (value, context) => {
+                        	if(value == 0) return ''
+                            return value + "kg";
+                        }
+                    }
+                }
+            },
+            plugins: [ChartDataLabels] // 플러그인 활성화
+        })
+    	
+    	let resultCount = 0
+    	<c:forEach items="${myCalList}" var="myCal">
+    		resultCount+=1
+    	</c:forEach>
+    	
+    	document.getElementById("yearCalResultAvgValue").children[0].children[0].innerHTML = Math.round(sumElecCO2/resultCount *10000)/10000
+    	document.getElementById("yearCalResultAvgValue").children[1].children[0].innerHTML = Math.round(sumGasCO2/resultCount *10000)/10000
+    	document.getElementById("yearCalResultAvgValue").children[2].children[0].innerHTML = Math.round(sumTrafficCO2/resultCount *10000)/10000
+    	document.getElementById("yearCalResultAvgValue").children[3].children[0].innerHTML = Math.round(sumWasteCO2/resultCount *10000)/10000
+    }, 100);
+    
 	</script>
 </body>
 
