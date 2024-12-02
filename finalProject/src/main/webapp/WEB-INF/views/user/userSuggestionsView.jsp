@@ -102,14 +102,13 @@ html, body {
 }
 </style>
 </head>
-<script src="https://cdn.ckeditor.com/4.20.2/standard/ckeditor.js"></script>
 <body>
 	<!-- Header -->
 	<%@ include file="/WEB-INF/inc/top.jsp"%>
 
 	<div class="title-box">
-		<h1>공지사항 작성</h1>
-		<span style="font-size: 0.7vw;">Coding Bamboo Notice</span>
+		<h1>건의사항 작성</h1>
+		<span style="font-size: 0.7vw;">Coding Bamboo Suggestion</span>
 	</div>
 
 	<!-- 글쓰기 폼 -->
@@ -127,7 +126,7 @@ html, body {
 
 			<!-- 첨부파일 -->
 			<div>
-				<label for="formFileMultiple" class="form-label" style="text-align:left;">파일첨부</label>
+				<label for="formFileMultiple" class="form-label" style="margin-right : 600px;">파일첨부</label>
 				<input class="form-control" name="boFile" type="file" id="formFileMultiple" multiple>
 			</div>
 			<!-- 등록 버튼 -->
@@ -168,6 +167,6 @@ html, body {
 		});
 	</script>
 
-	<%@ include file="/WEB-INF/inc/footer.jsp"%>
+
 </body>
 </html>
