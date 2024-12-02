@@ -82,11 +82,11 @@
 	<%@ include file="/WEB-INF/inc/top.jsp"%>
 	<div class="radiation-container">
 		<div class="d-flex">
-			<div class="radiation-title w-50">
-				<h1 style="color: green; font-weight: bold;">태양광 발전량 모의 예측</h1>
-				<span style="font-size: 0.7vw;">건물의 건축 면적에 해당하는 태양광 패널을 설치한다면 얼마나 전기가 생산될까요?</span>
+			<div class="radiation-title w-75">
+				<h1 style="color: green; font-weight: bold;">대전 광역시 태양광 발전량 모의 예측</h1>
+				<span style="font-size: 0.7vw;">대전 광역시의 건물의 건축 면적에 해당하는 태양광 패널을 설치한다면 얼마나 전기가 생산될까요?</span>
 			</div>
-			<div class="w-50 d-flex align-items-center justify-content-end">
+			<div class="w-25 d-flex align-items-center justify-content-end">
 				<a class="home-go" href="${pageContext.request.contextPath }">
 					<img class="home-go-img" src="${pageContext.request.contextPath}/resources/image/home.png">
 					<span>홈으로 이동</span>
