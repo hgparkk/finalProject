@@ -2,8 +2,7 @@ package com.codingbamboo.finalproject.usersg.dto;
 
 public class UserSgDTO {
 	private int sgNo;
-	private int attachNo;
-	private String user_id;
+	private String userId;
 	private String sgTitle;
 	private String sgContent;
 	private String sgDate;
@@ -12,11 +11,10 @@ public class UserSgDTO {
 		super();
 	}
 
-	public UserSgDTO(int sgNo, int attachNo, String user_id, String sgTitle, String sgContent, String sgDate) {
+	public UserSgDTO(int sgNo, String userId, String sgTitle, String sgContent, String sgDate) {
 		super();
 		this.sgNo = sgNo;
-		this.attachNo = attachNo;
-		this.user_id = user_id;
+		this.userId = userId;
 		this.sgTitle = sgTitle;
 		this.sgContent = sgContent;
 		this.sgDate = sgDate;
@@ -24,8 +22,8 @@ public class UserSgDTO {
 
 	@Override
 	public String toString() {
-		return "UserSgDTO [sgNo=" + sgNo + ", attachNo=" + attachNo + ", user_id=" + user_id + ", sgTitle=" + sgTitle
-				+ ", sgContent=" + sgContent + ", sgDate=" + sgDate + "]";
+		return "UserSgDTO [sgNo=" + sgNo + ", userId=" + userId + ", sgTitle=" + sgTitle + ", sgContent=" + sgContent
+				+ ", sgDate=" + sgDate + "]";
 	}
 
 	public int getSgNo() {
@@ -36,20 +34,12 @@ public class UserSgDTO {
 		this.sgNo = sgNo;
 	}
 
-	public int getAttachNo() {
-		return attachNo;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setAttachNo(int attachNo) {
-		this.attachNo = attachNo;
-	}
-
-	public String getUser_id() {
-		return user_id;
-	}
-
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	public String getSgTitle() {

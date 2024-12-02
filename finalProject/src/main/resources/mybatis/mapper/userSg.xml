@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.codingbamboo.finalproject.notice.dao.IUserSgDAO">
+<mapper namespace="com.codingbamboo.finalproject.userSg.dao.IUserSgDAO">
 
-	<insert id="registSg">
+	<insert id="registSg" parameterType="com.codingbamboo.finalproject.usersg.dto.UserSgDTO">
 		INSERT INTO
 			suggestion(
 			  sg_no
-			, attach_no
 			, user_id
 			, sg_title
 			, sg_content
 			, sg_date
 			) VALUES (
-			SUGGESTION_SEQ.NEXTVAL
-			
+			SUGGESTION_SEQ.NEXTVAL,
+			#{sgTitle}, #sgContent}, SYSDATE
 			)
-
 	</insert>
 
 </mapper>
