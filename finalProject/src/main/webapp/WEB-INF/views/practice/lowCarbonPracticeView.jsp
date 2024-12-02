@@ -218,7 +218,7 @@
                 <!-- 자원순환 -->
                 <div class="carousel-item">
                     <div class="photo-item">
-                        <a href="${pageContext.request.contextPath}/ecoConsumptionView">
+                        <a href="${pageContext.request.contextPath}/ecoCircularView">
                             <img src="${pageContext.request.contextPath}/resources/image/box4.jpg" class="img-fluid rounded" alt="자원순환">
                             <p class="photo-title">자원순환</p>
                         </a>

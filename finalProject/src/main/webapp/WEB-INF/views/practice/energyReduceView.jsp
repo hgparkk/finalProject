@@ -39,6 +39,7 @@ html, body {
 .title img {
     width: 100%;
     height: 80vh;
+    min-height: 750px;
     object-fit: cover;
 }
 

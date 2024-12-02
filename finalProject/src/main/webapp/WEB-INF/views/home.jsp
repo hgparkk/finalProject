@@ -141,8 +141,8 @@ html, body {
 			<source src="${pageContext.request.contextPath}/resources/video/main.mp4" type="video/mp4">
 		</video>
 		<div class="text-overlay">
-			<p>대전 지역 탄소 및 태양광 발전 예측</p>
-			<p>미래를 위한 스마트 에너지 솔루션</p>
+			<p>대전광역시 태양광 발전 예측 시스템</p>
+			<p>미래를 위한 에너지 솔루션</p>
 			<p>Coding Bamboo</p>
 		</div>
 	</div>
