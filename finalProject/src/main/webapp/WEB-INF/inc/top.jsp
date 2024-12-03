@@ -161,7 +161,7 @@
 	<div class="d-flex top-container">
 		<c:if test="${sessionScope.login.userIsmaster != 1}">
 			<div class="img-box d-flex align-items-center justify-content-center">
-				<a class="nav-link main d-flex align-items-center justify-content-center" href="${pageContext.request.contextPath }">
+				<a class="nav-link main d-flex align-items-center justify-content-center" href="${pageContext.request.contextPath }/">
 					<img src="image/favicon.ico"> Coding Bamboo
 				</a>
 			</div>
