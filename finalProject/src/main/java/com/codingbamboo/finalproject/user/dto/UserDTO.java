@@ -10,7 +10,7 @@ public class UserDTO {
     @Pattern(regexp = "^(?=.*[a-z])[a-zA-Z0-9!@#$%^&*]{8,}$", message = "비밀번호는 영문 소문자가 포함된 숫자,영문,특수문자로만 이루어진 8글자 이상여야 합니다.")
 	private String userPw;
     
-    @Pattern(regexp = "^[��-�Ra-zA-Z]*$", message = "이름은 숫자, 특수문자를 포함하지 않습니다.")
+    @Pattern(regexp = "^[가-힣a-zA-Z]*$", message = "이름은 숫자, 특수문자를 포함하지 않습니다.")
 	private String userName;
     
     @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "올바르지 않은 이메일 형식입니다.")
