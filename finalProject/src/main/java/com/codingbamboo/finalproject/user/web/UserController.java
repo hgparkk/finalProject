@@ -300,7 +300,7 @@ public class UserController {
 			if (login.getUserIstemp() == 1) {
 				return "redirect:/myPagePwChangeView";
 			}
-			if (fromUrl == null || fromUrl.isEmpty() || fromUrl.contains("/login") || fromUrl.contains("/callback")) {
+			if (fromUrl == null || fromUrl.isEmpty() || fromUrl.contains("/login") || fromUrl.contains("/callback") || fromUrl.contains("Do")) {
 				return "redirect:/";
 			} else {
 				return "redirect:" + fromUrl;
@@ -317,7 +317,7 @@ public class UserController {
 	public String logoutDo(HttpServletRequest request, HttpSession session) {
 		String fromUrl = request.getHeader("Referer");
 		session.invalidate();
-		if (fromUrl == null || fromUrl.isEmpty() || fromUrl.contains("/login")) {
+		if (fromUrl == null || fromUrl.isEmpty() || fromUrl.contains("/login") || fromUrl.contains("Do")) {
 			return "redirect:/";
 		} else {
 			return "redirect:" + fromUrl;

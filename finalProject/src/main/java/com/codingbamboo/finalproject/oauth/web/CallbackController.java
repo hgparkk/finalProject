@@ -62,7 +62,7 @@ public class CallbackController {
 		if (login != null) {
 			String fromUrl = (String) session.getAttribute("fromUrl");
 			session.setAttribute("login", login);
-			if (fromUrl == null || fromUrl.isEmpty() || fromUrl.contains("/login") || fromUrl.contains("/callback")) {
+			if (fromUrl == null || fromUrl.isEmpty() || fromUrl.contains("/login") || fromUrl.contains("/callback") || fromUrl.contains("Do")) {
 				return "redirect:/";
 			} else {
 				return "redirect:" + fromUrl;
@@ -108,7 +108,7 @@ public class CallbackController {
 		if (login != null) {
 			String fromUrl = (String) session.getAttribute("fromUrl");
 			session.setAttribute("login", login);
-			if (fromUrl == null || fromUrl.isEmpty() || fromUrl.contains("/login") || fromUrl.contains("/callback")) {
+			if (fromUrl == null || fromUrl.isEmpty() || fromUrl.contains("/login") || fromUrl.contains("/callback") || fromUrl.contains("Do")) {
 				return "redirect:/";
 			} else {
 				return "redirect:" + fromUrl;
@@ -153,7 +153,7 @@ public class CallbackController {
 		if (login != null) {
 			String fromUrl = (String) session.getAttribute("fromUrl");
 			session.setAttribute("login", login);
-			if (fromUrl == null || fromUrl.isEmpty() || fromUrl.contains("/login") || fromUrl.contains("/callback")) {
+			if (fromUrl == null || fromUrl.isEmpty() || fromUrl.contains("/login") || fromUrl.contains("/callback") || fromUrl.contains("Do")) {
 				return "redirect:/";
 			} else {
 				return "redirect:" + fromUrl;
