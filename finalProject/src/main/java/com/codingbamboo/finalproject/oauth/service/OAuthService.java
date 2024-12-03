@@ -91,7 +91,7 @@ public class OAuthService {
 			storedState = (String) session.getAttribute("googleState");
 		}
 		if (!storedState.equals(state)) {
-			throw new IllegalStateException("CSRF ���°� ��ġ���� �ʽ��ϴ�.");
+			throw new IllegalStateException("CSRF 상태가 일치하지 않습니다.");
 		}
 		String accessToken = getAccessToken(code, state, link, provider);
 		return getUserInfo(accessToken, provider);
@@ -110,7 +110,6 @@ public class OAuthService {
 			params.add("client_secret", naverConfig.getClientSecret());
 			params.add("code", code);
 			params.add("state", state);
-			// īī�� ��ū ��û url �����
 		} else if (provider.equalsIgnoreCase("Kakao")) {
 			tokenUrl = "https://kauth.kakao.com/oauth/token";
 			params.add("grant_type", "authorization_code");
