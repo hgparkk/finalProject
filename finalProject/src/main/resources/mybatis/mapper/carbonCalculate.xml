@@ -44,15 +44,14 @@
 	</update>
 
 	<!-- 탄소발자국 불러오기 -->
-	<select id="selectCalList" parameterType="String"
+	<select id="selectCalList" parameterType="Map"
 		resultType="CarbonCalculateDTO">
 		SELECT
 		result_no
 		, user_id
 		, result_date
 		, electric_usage
-		,
-		gas_usage
+		, gas_usage
 		, traffic_kind
 		, traffic_value
 		, waste_weight
@@ -60,6 +59,7 @@
 		carbon_result
 		WHERE 1=1
 		AND user_id = #{userId}
+		AND TO_CHAR(result_date,'YYYY') = #{year}
 	</select>
 
 	<!-- 탄소발자국 저장된 날짜 불러오기 -->
