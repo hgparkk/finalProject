@@ -96,58 +96,60 @@ request.setAttribute("currentYear", Year.now().getValue());
 							<input type="hidden" value="${year}">
 						</div>
 					</div>
-					<div>
-						<div class="d-flex">
-							<div>
-								<div class="fw-bold fs-3 text-center">연 합계 탄소 배출량</div>
-								<canvas id="yearCalResultGraph"></canvas>
-							</div>
+					<c:if test="${not empty myCalList}">
+						<div>
 							<div class="d-flex">
-								<div class="d-flex flex-column">
-									<div class="content-line">
-										<span class="content-text fw-bold">월 평균 전기 탄소 배출량</span>
-									</div>
-									<div class="content-line">
-										<span class="content-text fw-bold">월 평균 가스 탄소 배출량</span>
-									</div>
-									<div class="content-line">
-										<span class="content-text fw-bold">월 평균 교통 탄소 배출량</span>
-									</div>
-									<div class="content-line">
-										<span class="content-text fw-bold">월 평균 폐기물 탄소 배출량</span>
-									</div>
+								<div>
+									<div class="fw-bold fs-3 text-center">연 합계 탄소 배출량</div>
+									<canvas id="yearCalResultGraph"></canvas>
 								</div>
-								<div id="yearCalResultAvgValue" class="d-flex flex-column">
-									<div class="content-line d-flex justify-content-end">
-										<span class="content-text"></span>
+								<div class="d-flex">
+									<div class="d-flex flex-column">
+										<div class="content-line">
+											<span class="content-text fw-bold">월 평균 전기 탄소 배출량</span>
+										</div>
+										<div class="content-line">
+											<span class="content-text fw-bold">월 평균 가스 탄소 배출량</span>
+										</div>
+										<div class="content-line">
+											<span class="content-text fw-bold">월 평균 교통 탄소 배출량</span>
+										</div>
+										<div class="content-line">
+											<span class="content-text fw-bold">월 평균 폐기물 탄소 배출량</span>
+										</div>
 									</div>
-									<div class="content-line d-flex justify-content-end">
-										<span class="content-text"></span>
+									<div id="yearCalResultAvgValue" class="d-flex flex-column">
+										<div class="content-line d-flex justify-content-end">
+											<span class="content-text"></span>
+										</div>
+										<div class="content-line d-flex justify-content-end">
+											<span class="content-text"></span>
+										</div>
+										<div class="content-line d-flex justify-content-end">
+											<span class="content-text"></span>
+										</div>
+										<div class="content-line d-flex justify-content-end">
+											<span class="content-text"></span>
+										</div>
 									</div>
-									<div class="content-line d-flex justify-content-end">
-										<span class="content-text"></span>
-									</div>
-									<div class="content-line d-flex justify-content-end">
-										<span class="content-text"></span>
-									</div>
-								</div>
-								<div class="d-flex flex-column">
-									<div class="content-line">
-										<span class="content-text fw-bold">kg</span>
-									</div>
-									<div class="content-line">
-										<span class="content-text fw-bold">kg</span>
-									</div>
-									<div class="content-line">
-										<span class="content-text fw-bold">kg</span>
-									</div>
-									<div class="content-line">
-										<span class="content-text fw-bold">kg</span>
+									<div class="d-flex flex-column">
+										<div class="content-line">
+											<span class="content-text fw-bold">kg</span>
+										</div>
+										<div class="content-line">
+											<span class="content-text fw-bold">kg</span>
+										</div>
+										<div class="content-line">
+											<span class="content-text fw-bold">kg</span>
+										</div>
+										<div class="content-line">
+											<span class="content-text fw-bold">kg</span>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+					</c:if>
 					<div class="accordion accordion-flush" id="myCarbonCalAccordion">
 						<div class="accordion-item">
 							<h2 class="accordion-header">
@@ -1360,7 +1362,6 @@ request.setAttribute("currentYear", Year.now().getValue());
     	document.getElementById("yearCalResultAvgValue").children[2].children[0].innerHTML = Math.round(sumTrafficCO2/resultCount *10000)/10000
     	document.getElementById("yearCalResultAvgValue").children[3].children[0].innerHTML = Math.round(sumWasteCO2/resultCount *10000)/10000
     }, 100);
-    
 	</script>
 </body>
 

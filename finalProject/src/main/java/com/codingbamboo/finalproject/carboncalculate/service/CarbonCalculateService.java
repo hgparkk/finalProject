@@ -1,6 +1,5 @@
 package com.codingbamboo.finalproject.carboncalculate.service;
 
-import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,14 +25,12 @@ public class CarbonCalculateService {
 	}
 
 	// 탄소 발자국 결과 불러오기
-	public List<CarbonCalculateDTO> selectCalList(String userId) {
-		return dao.selectCalList(userId);
+	public List<CarbonCalculateDTO> selectCalList(String userId, String year) {
+		return dao.selectCalList(userId,year);
 	}
 	
 	
 	public CarbonCalculateDTO getCalByDate(CarbonCalculateDTO carbonCalculateDTO) {
 	    return dao.getCalByDate(carbonCalculateDTO);
 	}
-
-	
 }

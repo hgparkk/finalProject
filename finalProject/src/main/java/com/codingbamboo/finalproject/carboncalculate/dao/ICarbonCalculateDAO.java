@@ -1,12 +1,11 @@
 package com.codingbamboo.finalproject.carboncalculate.dao;
 
-import java.sql.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.codingbamboo.finalproject.carboncalculate.dto.CarbonCalculateDTO;
-import com.codingbamboo.finalproject.coefficient.dto.CoefficientDTO;
 
 @Mapper
 public interface ICarbonCalculateDAO {
@@ -17,9 +16,8 @@ public interface ICarbonCalculateDAO {
 	int updateCal(CarbonCalculateDTO carbonCalculateDTO);
 	
 	// 탄소 발자국 결과 불러오기
-	List<CarbonCalculateDTO> selectCalList(String userId);
+	List<CarbonCalculateDTO> selectCalList(@Param("userId") String userId, @Param("year") String year);
 	
 	// 탄소 발자국 등록된 날짜 불러오기
 	CarbonCalculateDTO getCalByDate(CarbonCalculateDTO carbonCalculateDTO);
-	
 }
