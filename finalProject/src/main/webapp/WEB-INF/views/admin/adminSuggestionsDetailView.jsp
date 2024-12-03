@@ -134,19 +134,20 @@ html, body {
 		<!-- 버튼 컨테이너 -->
 		<div class="button-container">
 			<div class="back-button">
-				<a href="noticeView?page=${param.page}&searchKeyword=${param.searchKeyword}"> 목록으로 돌아가기 </a>
+				<a href="adminSuggestionsView?page=${param.page}"> 목록으로 돌아가기 </a>
 			</div>
 			<c:if test="${sessionScope.login.userIsmaster == 1}">
 				<div style="display: flex;">
 					<div class="delete-button" style="margin-right: 10px;">
-						<a href="noticeDeleteDo?noticeNo=${notice.noticeNo}" onclick="return confirm('이 공지사항을 삭제하시겠습니까?');"> 삭제 </a>
+						<a href="suggestionDeleteDo?sgNo=${suggestion.sgNo}" onclick="return confirm('이 건의사항을 삭제하시겠습니까?');"> 삭제 </a>
 					</div>
 					<div class="edit-button">
-						<a href="noticeEditView?noticeNo=${notice.noticeNo}"> 수정 </a>
+						<a href="suggestionEditView?sgNo=${suggestion.sgNo}"> 수정 </a>
 					</div>
 				</div>
 			</c:if>
 		</div>
+		
 		<!-- 첨부파일 -->
 		<c:if test="${not empty attachList}">
 			<div class="attach-files">

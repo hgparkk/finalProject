@@ -257,7 +257,7 @@ html, body {
 			<ul>
 				<c:forEach var="suggestion" items="${sgList}">
 					<li><a
-						href="${pageContext.request.contextPath}/noticeDetailView?noticeNo=${suggestion.sgNo}">
+						href="${pageContext.request.contextPath}/adminSuggestionsDetailView?noticeNo=${suggestion.sgNo}">
 							<span>${suggestion.sgTitle}</span> <span class="text-muted">
 								<fmt:formatDate value="${suggestion.sgDate}"
 									pattern="yyyy-MM-dd" />
@@ -270,6 +270,7 @@ html, body {
 			</ul>
 		</div>
 	</div>
+	
 	<!-- 페이징 -->
 	<div class="pagination mb-5">
 		<c:if test="${totalPages > 0}">
