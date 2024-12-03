@@ -156,7 +156,7 @@ html, body {
 					<!-- 첨부파일 목록 반복 -->
 					<c:forEach var="attach" items="${attachList}">
 						<li>
-							<!-- 파일 다운로드 링크 생성 --> <a href="${pageContext.request.contextPath}/filedownload?attachName=${attach.attachName}&attachOriginalName=${attach.attachOriginalName}" target="_blank"> ${attach.attachOriginalName} (${attach.attachFancySize}) </a>
+							<!-- 파일 다운로드 링크 생성 --> <a href="${pageContext.request.contextPath}/filedownloadDo?attachName=${attach.attachName}&attachOriginalName=${attach.attachOriginalName}" target="_blank"> ${attach.attachOriginalName} (${attach.attachFancySize}) </a>
 						</li>
 					</c:forEach>
 				</ul>

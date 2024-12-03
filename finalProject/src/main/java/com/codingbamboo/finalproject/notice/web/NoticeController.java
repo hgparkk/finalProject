@@ -113,25 +113,26 @@ public class NoticeController {
 
 		return "notice/noticeWriteView";
 	}
+
 	/**
 	 * 공지사항 등록 처리
 	 */
 	@RequestMapping(value = "/noticeWriteDo", method = RequestMethod.POST)
-	public String noticeWriteDo(NoticeDTO notice, HttpSession session,
-			RedirectAttributes redirectAttributes, MultipartFile[] boFile) {
+	public String noticeWriteDo(NoticeDTO notice, HttpSession session, HttpServletRequest request,
+			MultipartFile[] boFile) {
 
 		UserDTO loginUser = (UserDTO) session.getAttribute("login");
 
 		if (loginUser == null || loginUser.getUserIsmaster() != 1) {
-			redirectAttributes.addFlashAttribute("errorMsg", "권한이 없습니다.");
 			return "redirect:/noticeView";
 		}
 
 		// 공지사항 DB 저장
 		int isInserted = noticeService.registNotice(notice);
 		if (isInserted == 0) {
-			redirectAttributes.addFlashAttribute("errorMsg", "공지사항 등록에 실패했습니다.");
-			return "redirect:/noticeWrite";
+			request.setAttribute("msg", "공지사항 등록에 실패하였습니다.");
+			request.setAttribute("url", "/noticeWriteView");
+			return "alert";
 		}
 
 		int noticeNo = noticeService.getNoticeNo();
@@ -140,6 +141,7 @@ public class NoticeController {
 			try {
 				List<AttachDTO> attachList = fileUploadUtils.getAttachListByMultiparts(boFile);
 				for (int i = 0; i < attachList.size(); i++) {
+					System.out.println(attachList.get(i));
 					attachService.insertAttach(attachList.get(i));
 					int attachNo = attachService.getAttachNo(attachList.get(i).getAttachName());
 					NoticeAttachDTO noticeAttach = new NoticeAttachDTO(noticeNo, attachNo);
@@ -150,24 +152,23 @@ public class NoticeController {
 			}
 
 		}
-
-		redirectAttributes.addFlashAttribute("successMsg", "공지사항이 등록되었습니다.");
-		return "redirect:/noticeDetailView?noticeNo=" + noticeNo;
+		String url = "/noticeDetailView?noticeNo=" + noticeNo;
+		request.setAttribute("msg", "공지사항이 등록되었습니다.");
+		request.setAttribute("url", url);
+		return "alert";
 	}
 
 	@RequestMapping(value = "/noticeDeleteDo", method = { RequestMethod.GET, RequestMethod.POST })
-	public String noticeDeleteDo(@RequestParam("noticeNo") int noticeNo, RedirectAttributes redirectAttributes, HttpSession session, Model model) {
+	public String noticeDeleteDo(@RequestParam("noticeNo") int noticeNo, HttpServletRequest request,
+			HttpSession session, Model model) {
 		UserDTO loginUser = (UserDTO) session.getAttribute("login");
 		if (loginUser == null || loginUser.getUserIsmaster() != 1) {
-			model.addAttribute("errorMsg", "권한이 없습니다.");
 			return "redirect:/noticeView";
 		}
 		try {
-			
 
 			// 1. 첨부파일 목록 가져오기
 			List<AttachDTO> attachList = attachService.getAttachList(noticeNo);
-			
 
 			// 2. 자식 테이블 데이터 삭제 (예: notice_attach)
 			for (AttachDTO attach : attachList) {
@@ -183,18 +184,19 @@ public class NoticeController {
 			// 4. 공지사항 삭제
 			noticeService.deleteNotice(noticeNo);
 
-
-			redirectAttributes.addFlashAttribute("successMsg", "공지사항이 삭제되었습니다.");
+			request.setAttribute("msg", "공지사항이 삭제되었습니다.");
+			request.setAttribute("url", "/noticeView");
 		} catch (Exception e) {
 			e.printStackTrace();
-			redirectAttributes.addFlashAttribute("errorMsg", "공지사항 삭제 중 오류가 발생했습니다.");
+			request.setAttribute("msg", "공지사항 삭제 중 오류가 발생했습니다.");
+			request.setAttribute("url", "/noticeView");
 		}
-		return "redirect:/noticeView";
+		return "alert";
 	}
 
 	// 파일 다운로드 처리
-	@RequestMapping("/filedownload")
-	public void fileDownload(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	@RequestMapping("/filedownloadDo")
+	public void fileDownloadDo(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
 		// 클라이언트에서 요청받은 파라미터 가져오기
 		String fileName = request.getParameter("attachName"); // 서버에 저장된 파일명
@@ -225,7 +227,8 @@ public class NoticeController {
 
 	// 공지수정뷰
 	@RequestMapping("/noticeEditView")
-	public String noticeEditView(@RequestParam("noticeNo") int noticeNo, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+	public String noticeEditView(@RequestParam("noticeNo") int noticeNo, Model model, HttpSession session,
+			RedirectAttributes redirectAttributes) {
 		UserDTO loginUser = (UserDTO) session.getAttribute("login");
 		if (loginUser == null || loginUser.getUserIsmaster() != 1) {
 			redirectAttributes.addFlashAttribute("errorMsg", "권한이 없습니다.");
@@ -246,7 +249,8 @@ public class NoticeController {
 	// 공지수정실행
 	@RequestMapping(value = "/noticeEditDo", method = RequestMethod.POST)
 	public String noticeEditDo(NoticeDTO notice, @RequestParam("uploadFiles") MultipartFile[] uploadFiles,
-			RedirectAttributes redirectAttributes) {
+			HttpServletRequest request) {
+		String url = "";
 		try {
 			// 1. 공지사항 업데이트
 			noticeService.updateNotice(notice);
@@ -266,14 +270,18 @@ public class NoticeController {
 					}
 				}
 			}
+			url = "/noticeDetailView?noticeNo=" + notice.getNoticeNo();
 
-			redirectAttributes.addFlashAttribute("successMsg", "공지사항이 수정되었습니다.");
+			request.setAttribute("msg", "공지사항이 수정되었습니다.");
+			request.setAttribute("url", url);
 		} catch (Exception e) {
 			e.printStackTrace();
-			redirectAttributes.addFlashAttribute("errorMsg", "공지사항 수정 중 오류가 발생했습니다.");
+			url = "/noticeDetailView?noticeNo=" + notice.getNoticeNo();
+			request.setAttribute("msg", "공지사항 수정이 실패하였습니다.");
+			request.setAttribute("url", url);
 		}
 
-		 return "redirect:/noticeDetailView?noticeNo=" + notice.getNoticeNo();
+		return "alert";
 	}
 
 }
