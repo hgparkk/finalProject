@@ -225,7 +225,7 @@ html, body {
 				<h1 style="color: green; font-weight: bold;">공지사항</h1>
 			</div>
 			<div class="w-50 d-flex align-items-center justify-content-end">
-				<a class="home-go" href="${pageContext.request.contextPath }"> <img
+				<a class="home-go" href="${pageContext.request.contextPath }/"> <img
 					src="${pageContext.request.contextPath}/resources/image/home.png">
 					<span>홈으로 이동</span>
 				</a>
