@@ -338,7 +338,7 @@ public class UserController {
 
 		List<CoefficientDTO> coefficientList = coefficientService.getCoefficientValue();
 		List<CarbonCalculateDTO> myCalList = carboncalcuateService
-				.selectCalList(((UserDTO) session.getAttribute("login")).getUserId());
+				.selectCalList(((UserDTO) session.getAttribute("login")).getUserId(),year.toString());
 
 		model.addAttribute("coefficientList", coefficientList);
 		model.addAttribute("myCalList", myCalList);
