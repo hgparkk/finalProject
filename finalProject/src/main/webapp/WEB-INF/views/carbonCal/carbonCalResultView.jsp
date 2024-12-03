@@ -180,9 +180,9 @@ request.setAttribute("currentMonth", currentMonth);
 							<c:if test="${sessionScope.login.userId == null }">
 								<p>나의 이산화탄소(CO₂) 발생량 통계</p>
 								<div>
-									<span>고객님 가정의 이산화탄소 배출량은 총</span> <span id="resultCO2"></span>
+									<span>익명님 가정의 이산화탄소 배출량은 총</span> <span id="resultCO2"></span>
 									<span>kg 입니다. 왼쪽의 그래프를 보면 어느 부분에서 이산화탄소가 가장 많이 발생하고 있는지
-										확인할 수 있습니다.</span>
+										확인하실 수 있습니다.</span>
 								</div>
 							</c:if>
 						</div>
@@ -454,7 +454,7 @@ document.getElementById("resultCO2").innerHTML += v_allCo2;
         new Chart(co2Ctx, {
             type: 'bar', // bar = 막대그래프는 항목별 수량, 수치를 비교할 때 적합하다.
             data: {
-                labels: ['내 건물', '다른 건물'],
+                labels: ['우리 집', '다른 집'],
                 datasets: [{
                     data: [v_allCo2, ${avgCo2Emisison}],
 					backgroundColor: "purple"

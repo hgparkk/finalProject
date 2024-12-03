@@ -103,7 +103,7 @@
 					보러가기</button>
 				<ul class="dropdown-menu">
 					<li><a class="detail2"
-						href="http://localhost:6060/miniproject/">탄소배출 계산기</a></li>
+						href="https://www.kcen.kr/tanso/intro.green">탄소발자국 계산기</a></li>
 					<li><a class="detail2"
 						href="https://energyinfo.seoul.go.kr/solarmap?menu-id=Z080600">서울특별시
 							에너지정보</a></li>
