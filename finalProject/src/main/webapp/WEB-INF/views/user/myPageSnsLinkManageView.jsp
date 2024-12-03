@@ -113,12 +113,8 @@
 								<img src="assets/kakao_login_assets/kakaotalk_sharing_btn_small.png" class="ms-3" style="width: 35px;">
 								<span class="ms-3 fs-5" style="color: #3C1E1E">KAKAO</span>
 							</c:if>
-							<c:if test="${sessionScope.login.userProvider == 'Google'}">
-								<img src="assets/google_login_assets/Web (mobile + desktop)/png@2x/neutral/web_neutral_rd_na_border@2x.png" class="ms-3" style="width: 35px;">
-								<span class="ms-3 fs-5" style="color: #000000">Google</span>
-							</c:if>
 						</div>
-						<div class="mt-5 mb-5">
+						<div class="mt-5 mb-5 d-flex justify-content-center">
 							<button id="deleteSnsLink" class="btn btn-success btn-lg" style="width: 100%;">SNS 연동 정보 삭제</button>
 							<form id="deleteSnsLinkDo" action="<c:url value="/deleteSnsLinkDo" />" method="POST"></form>
 						</div>
@@ -136,7 +132,6 @@
 						<div class="d-flex justify-content-evenly min-width-set">
 							<a href="${naverLinkUri}" class="social-login-btn btn-naver"></a>
 							<a href="${kakaoLinkUri}"  class="social-login-btn btn-kakao"></a>
-							<a href="${googleLinkUri}"  class="social-login-btn btn-google"></a>
 						</div>
 					</c:if>
 					<form id="deleteSnsLinkForm" action="<c:url value="/deleteSnsLinkDo" />" method="POST"></form>

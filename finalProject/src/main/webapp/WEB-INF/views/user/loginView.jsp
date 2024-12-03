@@ -134,7 +134,6 @@
 				<div class="d-flex justify-content-evenly min-width-set">
 					<a href="${naverLoginUri}" class="social-login-btn btn-naver"></a>
 					<a href="${kakaoLoginUri}"  class="social-login-btn btn-kakao"></a>
-					<a href="${googleLoginUri}"  class="social-login-btn btn-google"></a>
 				</div>
 				<div class="d-flex justify-content-center mention min-width-set" style="margin-top: 100px;">아직 회원이 아니시라면?</div>
 
