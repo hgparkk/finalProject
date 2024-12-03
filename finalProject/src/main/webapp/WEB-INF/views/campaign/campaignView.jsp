@@ -171,7 +171,7 @@ a>span {
 					<span style="font-size: 0.7vw;">지구를 구하기 위한 다양한 활동들</span>
 				</div>
 				<div class="w-50 d-flex align-items-center justify-content-end">
-					<a class="home-go" href="${pageContext.request.contextPath }">
+					<a class="home-go" href="${pageContext.request.contextPath }/">
 						<img
 						src="${pageContext.request.contextPath}/resources/image/home.png">
 						<span>홈으로 이동</span>
