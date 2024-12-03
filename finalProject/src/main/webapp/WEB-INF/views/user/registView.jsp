@@ -53,7 +53,7 @@
 						<div class="form-floating mb-3 input-div">
 							<input class="form-control" id="inputName" type="text" name="userName" placeholder="이름" required>
 							<label for="inputName">이름</label>
-							<div class="invalid-feedback">이름은 숫자, 특수문자를 포함하지 않습니다</div>
+							<div class="invalid-feedback">이름은 숫자, 특수문자를 포함하지 않습니다.</div>
 						</div>
 
 						<!-- 이메일 입력창 -->
@@ -61,7 +61,7 @@
 							<div class="form-floating mb-3 input-div">
 								<input class="form-control" id="inputEmail" type="text" name="userEmail" placeholder="이메일" required>
 								<label for="inputEmail">이메일</label>
-								<div id="emailFeedback" class="invalid-feedback">올바르지 않은 이메일 형식입니다</div>
+								<div id="emailFeedback" class="invalid-feedback">올바르지 않은 이메일 형식입니다.</div>
 							</div>
 							<div class="d-flex align-items-center btn-div-doc-div mb-3">
 								<button type="button" id="sendAuthEmail" class="btn btn-secondary" disabled>인증메일 발송</button>
