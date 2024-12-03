@@ -1,7 +1,6 @@
 package com.codingbamboo.finalproject.usersg.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -27,7 +26,11 @@ public interface IUserSgDAO {
     List<UserSgDTO> getSgList(@Param("userId") String userId, 
                                   @Param("offset") int offset, 
                                   @Param("size") int size);
+    
+    List<UserSgDTO> getAdminSgList( @Param("offset") int offset, 
+            @Param("size") int size);
 
+    
     // 총 개수 조회 (검색 키워드 기반)
     int getSgCount(String userId);
     
@@ -36,4 +39,7 @@ public interface IUserSgDAO {
     int getCurrentSgNo();
 
 	int getSgNo();
+	
+	int getAdminSgCount();
+	
 }

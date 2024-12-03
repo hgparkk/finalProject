@@ -44,8 +44,7 @@ public class UserSgController {
 	public String noticeWriteView(HttpSession session, Model model) {
 		UserDTO loginUser = (UserDTO) session.getAttribute("login");
 
-		if (loginUser == null || loginUser.getUserIsmaster() == 1) {
-			model.addAttribute("errorMsg", "회원 전용 메뉴입니다. 로그인 후 이용해주세요");
+		if (loginUser == null) {
 			return "redirect:/loginView";
 		}
 

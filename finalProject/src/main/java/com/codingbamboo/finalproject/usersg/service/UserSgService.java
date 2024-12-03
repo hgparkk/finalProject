@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.codingbamboo.finalproject.notice.dto.NoticeDTO;
 import com.codingbamboo.finalproject.usersg.dao.IUserSgDAO;
 import com.codingbamboo.finalproject.usersg.dto.UserSgDTO;
 
@@ -27,13 +28,23 @@ public class UserSgService {
 			return dao.getSgList(userId, offset, size);
 		}
 
+		/** 관리자 건의사항 목록 조회 **/
+		public List<UserSgDTO> getAdminSgList(int offset, int size) {
+			return dao.getAdminSgList(offset, size);
+		}
+		
+		
 		/**
 		 * 총 개수 조회
 		 */
 		public int getSgCount(String userId) {
 			return dao.getSgCount(userId);
 		}
-
+		
+		public int getAdminSgCount() {
+			return dao.getAdminSgCount();
+		}
+		
 		/**
 		 * 상세 조회
 		 */
@@ -53,5 +64,7 @@ public class UserSgService {
 	    public int deleteSg(int sgNo) {
 	        return dao.deleteSg(sgNo);
 	    }
+	    
+	    
 	    
 }
