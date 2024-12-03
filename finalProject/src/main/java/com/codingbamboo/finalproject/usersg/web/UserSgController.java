@@ -37,11 +37,6 @@ public class UserSgController {
 	@Autowired
 	private FileUploadUtils fileUploadUtils;
 	
-	@RequestMapping("/userSuggestionsView")
-	public String userSgView() {
-		return "user/userSuggestionsView";
-	}
-	
 	/**
 	 * 건의사항 등록 페이지
 	 */

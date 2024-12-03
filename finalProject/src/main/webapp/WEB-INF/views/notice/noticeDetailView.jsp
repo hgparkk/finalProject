@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
@@ -9,8 +8,7 @@
 <meta charset="UTF-8">
 <title>Coding Bamboo - 공지사항 상세</title>
 <%@ include file="/WEB-INF/inc/header.jsp"%>
-<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css"
-	rel="stylesheet">
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 <style>
 html, body {
 	margin: 0;
@@ -125,9 +123,7 @@ html, body {
 		</div>
 
 		<!-- 내용 -->
-		<div class="notice-content">
-			${notice.noticeContent}
-		</div>
+		<div class="notice-content">${notice.noticeContent}</div>
 
 		<!-- 작성일 -->
 		<div class="notice-meta">
@@ -139,15 +135,12 @@ html, body {
 		<!-- 버튼 컨테이너 -->
 		<div class="button-container">
 			<div class="back-button">
-				<a
-					href="noticeView?page=${param.page}&searchKeyword=${param.searchKeyword}">
-					목록으로 돌아가기 </a>
+				<a href="noticeView?page=${param.page}&searchKeyword=${param.searchKeyword}"> 목록으로 돌아가기 </a>
 			</div>
 			<c:if test="${sessionScope.login.userIsmaster == 1}">
 				<div style="display: flex;">
 					<div class="delete-button" style="margin-right: 10px;">
-						<a href="noticeDeleteDo?noticeNo=${notice.noticeNo}"
-							onclick="return confirm('이 공지사항을 삭제하시겠습니까?');"> 삭제 </a>
+						<a href="noticeDeleteDo?noticeNo=${notice.noticeNo}" onclick="return confirm('이 공지사항을 삭제하시겠습니까?');"> 삭제 </a>
 					</div>
 					<div class="edit-button">
 						<a href="noticeEditView?noticeNo=${notice.noticeNo}"> 수정 </a>
@@ -156,25 +149,19 @@ html, body {
 			</c:if>
 		</div>
 		<!-- 첨부파일 -->
-		<div class="attach-files">
-			<h4>첨부파일</h4>
-			<c:if test="${not empty attachList}">
+		<c:if test="${not empty attachList}">
+			<div class="attach-files">
+				<h4>첨부파일</h4>
 				<ul>
 					<!-- 첨부파일 목록 반복 -->
 					<c:forEach var="attach" items="${attachList}">
 						<li>
-							<!-- 파일 다운로드 링크 생성 --> <a
-							href="${pageContext.request.contextPath}/filedownload?attachName=${attach.attachName}&attachOriginalName=${attach.attachOriginalName}"
-							target="_blank"> ${attach.attachOriginalName}
-								(${attach.attachFancySize}) </a>
+							<!-- 파일 다운로드 링크 생성 --> <a href="${pageContext.request.contextPath}/filedownload?attachName=${attach.attachName}&attachOriginalName=${attach.attachOriginalName}" target="_blank"> ${attach.attachOriginalName} (${attach.attachFancySize}) </a>
 						</li>
 					</c:forEach>
 				</ul>
-			</c:if>
-			<c:if test="${empty attachList}">
-				<p>첨부파일이 없습니다.</p>
-			</c:if>
-		</div>
+			</div>
+		</c:if>
 
 
 

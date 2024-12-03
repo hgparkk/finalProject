@@ -56,7 +56,4 @@ public class NoticeService {
     public int deleteNotice(int noticeNo) {
         return noticeDAO.deleteNotice(noticeNo);
     }
-    
-
-	
 }

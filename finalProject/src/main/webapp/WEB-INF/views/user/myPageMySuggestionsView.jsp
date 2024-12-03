@@ -109,15 +109,15 @@
 					<div class="suggestion-container">
 						<div class="suggestion-detail">
 							<ul>
-								<c:forEach var="notice" items="${noticeList}">
-									<li><a href="${pageContext.request.contextPath}/noticeDetailView?noticeNo=${notice.noticeNo}">
-											<span>${notice.noticeTitle}</span>
+								<c:forEach var="suggestion" items="${suggestionList}">
+									<li><a href="${pageContext.request.contextPath}/">
+											<span>${suggestion.sgTitle}</span>
 											<span class="text-muted">
-												<fmt:formatDate value="${notice.noticeDate}" pattern="yyyy-MM-dd" />
+												<fmt:formatDate value="${suggestion.sgDate}" pattern="yyyy-MM-dd" />
 											</span>
 										</a></li>
 								</c:forEach>
-								<c:if test="${empty noticeList}">
+								<c:if test="${empty suggestionList}">
 									<li class="text-center text-muted py-4">등록한 건의사항이 없습니다..</li>
 								</c:if>
 							</ul>
@@ -130,17 +130,17 @@
 							<ul>
 								<!-- 이전 버튼 -->
 								<c:if test="${currentPage > 1}">
-									<li><a href="?page=${currentPage - 1}&size=${size}&searchKeyword=${searchKeyword}">이전</a></li>
+									<li><a href="?page=${currentPage - 1}&size=${size}">이전</a></li>
 								</c:if>
 
 								<!-- 페이지 번호 -->
 								<c:forEach var="i" begin="1" end="${totalPages}">
-									<li><a href="?page=${i}&size=${size}&searchKeyword=${searchKeyword}" class="${i == currentPage ? 'active' : ''}">${i}</a></li>
+									<li><a href="?page=${i}&size=${size}" class="${i == currentPage ? 'active' : ''}">${i}</a></li>
 								</c:forEach>
 
 								<!-- 다음 버튼 -->
 								<c:if test="${currentPage < totalPages}">
-									<li><a href="?page=${currentPage + 1}&size=${size}&searchKeyword=${searchKeyword}">다음</a></li>
+									<li><a href="?page=${currentPage + 1}&size=${size}">다음</a></li>
 								</c:if>
 							</ul>
 						</c:if>

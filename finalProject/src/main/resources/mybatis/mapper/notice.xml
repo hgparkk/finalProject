@@ -7,28 +7,36 @@
 	<select id="getNoticeDetail" parameterType="int"
 		resultType="com.codingbamboo.finalproject.notice.dto.NoticeDTO">
 		SELECT
-		notice_no AS noticeNo,
-		notice_title AS noticeTitle,
-		notice_content AS noticeContent,
-		notice_date AS noticeDate
+			notice_no,
+			notice_title,
+			notice_content,
+			notice_date
 		FROM notice
-		WHERE notice_no = #{noticeNo}
+			WHERE notice_no = #{noticeNo}
 	</select>
 
 	<!-- 공지사항 등록 -->
 	<insert id="registNotice"
 		parameterType="com.codingbamboo.finalproject.notice.dto.NoticeDTO">
-		INSERT INTO NOTICE (NOTICE_NO,
-		NOTICE_TITLE, NOTICE_CONTENT, NOTICE_DATE)
-		VALUES (NOTICE_SEQ.NEXTVAL,
-		#{noticeTitle}, #{noticeContent}, SYSDATE)
+		INSERT INTO notice (
+			NOTICE_NO,
+			NOTICE_TITLE,
+			NOTICE_CONTENT,
+			NOTICE_DATE)
+		VALUES (
+			NOTICE_SEQ.NEXTVAL,
+			#{noticeTitle},
+			#{noticeContent},
+			SYSDATE
+		)
 	</insert>
 
 	<!-- 공지사항 삭제 -->
 	<delete id="deleteNotice" parameterType="int">
-		DELETE FROM notice
-		WHERE
-		notice_no = #{noticeNo}
+		DELETE 
+			FROM notice
+		WHERE 1=1
+			AND notice_no = #{noticeNo}
 	</delete>
 
 	<!-- 공지사항 미리보기 -->
@@ -36,9 +44,9 @@
 		resultType="com.codingbamboo.finalproject.notice.dto.NoticeDTO">
         <![CDATA[
             SELECT
-                notice_no AS noticeNo,
-                notice_title AS noticeTitle,
-                notice_date AS noticeDate
+                notice_no,
+                notice_title,
+                notice_date
             FROM (
                 SELECT
                     notice_no,
@@ -49,17 +57,6 @@
             )
             WHERE ROWNUM <= 3
         ]]>
-	</select>
-
-	<!-- 공지사항 총 개수 조회 -->
-	<select id="selectNoticeCount" parameterType="map"
-		resultType="int">
-		SELECT COUNT(*)
-		FROM notice
-		WHERE 1=1
-		<if test="searchKeyword != null and searchKeyword != ''">
-			AND notice_title LIKE '%' || #{searchKeyword} || '%'
-		</if>
 	</select>
 
 	<!-- 공지사항 수정 -->
@@ -79,21 +76,20 @@
 		resultType="com.codingbamboo.finalproject.notice.dto.NoticeDTO">
 		SELECT *
 		FROM (
-		SELECT
-		notice_no AS noticeNo,
-		notice_title AS noticeTitle,
-		notice_content AS noticeContent,
-		notice_date AS noticeDate,
-		ROWNUM AS rn
-		FROM notice
-		WHERE 1=1
-		<if test="searchKeyword != null and searchKeyword != ''">
-			AND notice_title LIKE '%' || #{searchKeyword} || '%'
-		</if>
-		ORDER BY notice_date DESC
+			SELECT
+				notice_no,
+				notice_title,
+				notice_content,
+				notice_date,
+				ROWNUM AS rn
+			FROM notice
+			WHERE 1=1
+			<if test="searchKeyword != null and searchKeyword != ''">
+				AND notice_title LIKE '%' || #{searchKeyword} || '%'
+			</if>
+			ORDER BY notice_date DESC
 		)
-		WHERE rn BETWEEN #{offset} + 1 AND #{offset}
-		+ #{size}
+		WHERE rn BETWEEN #{offset} + 1 AND #{offset} + #{size}
 	</select>
 
 	<!-- 검색 키워드에 따른 공지사항 총 개수 조회 -->

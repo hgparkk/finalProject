@@ -23,15 +23,15 @@ public class UserSgService {
 		/**
 		 * 목록 조회
 		 */
-		public List<UserSgDTO> getSgList(String searchKeyword, int offset, int size) {
-			return dao.getSgList(searchKeyword, offset, size);
+		public List<UserSgDTO> getSgList(String userId, int offset, int size) {
+			return dao.getSgList(userId, offset, size);
 		}
 
 		/**
 		 * 총 개수 조회
 		 */
-		public int getSgCount(String searchKeyword) {
-			return dao.getSgCount(searchKeyword);
+		public int getSgCount(String userId) {
+			return dao.getSgCount(userId);
 		}
 
 		/**

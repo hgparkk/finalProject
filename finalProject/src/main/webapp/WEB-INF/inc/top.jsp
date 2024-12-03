@@ -197,7 +197,7 @@
 				<div class="dropdown-body">
 					<span class="aTag dropdown-text">소통공간</span>
 					<div class="dropdown-select">
-						<a class="detail" href="#">건의하기</a>
+						<a class="detail" href="${pageContext.request.contextPath }/userSuggestionsView">건의하기</a>
 						<a class="detail" href="${pageContext.request.contextPath }/noticeView">공지사항</a>
 					</div>
 				</div>

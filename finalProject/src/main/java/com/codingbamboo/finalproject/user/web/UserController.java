@@ -28,9 +28,12 @@ import com.codingbamboo.finalproject.carboncalculate.dto.CarbonCalculateDTO;
 import com.codingbamboo.finalproject.carboncalculate.service.CarbonCalculateService;
 import com.codingbamboo.finalproject.coefficient.dto.CoefficientDTO;
 import com.codingbamboo.finalproject.coefficient.service.CoefficientService;
+import com.codingbamboo.finalproject.notice.dto.NoticeDTO;
 import com.codingbamboo.finalproject.oauth.service.OAuthService;
 import com.codingbamboo.finalproject.user.dto.UserDTO;
 import com.codingbamboo.finalproject.user.service.UserService;
+import com.codingbamboo.finalproject.usersg.dto.UserSgDTO;
+import com.codingbamboo.finalproject.usersg.service.UserSgService;
 
 @Controller
 public class UserController {
@@ -47,12 +50,15 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
-	
+
 	@Autowired
 	CarbonCalculateService carboncalcuateService;
-	
+
 	@Autowired
 	CoefficientService coefficientService;
+	
+	@Autowired
+	UserSgService userSgService;
 
 	// 로그인 창 이동
 	@RequestMapping(value = "/loginView", method = RequestMethod.GET)
@@ -288,7 +294,7 @@ public class UserController {
 
 		if (login != null && passwordEncoder.matches(userInfo.getUserPw(), login.getUserPw())) {
 			session.setAttribute("login", login);
-			if(login.getUserIsmaster() == 1) {
+			if (login.getUserIsmaster() == 1) {
 				return "redirect:/adminHomeView";
 			}
 			if (login.getUserIstemp() == 1) {
@@ -331,10 +337,11 @@ public class UserController {
 		}
 
 		List<CoefficientDTO> coefficientList = coefficientService.getCoefficientValue();
-		List<CarbonCalculateDTO> myCalList = carboncalcuateService.selectCalList(((UserDTO) session.getAttribute("login")).getUserId());
-		
-		model.addAttribute("coefficientList",coefficientList);
-		model.addAttribute("myCalList",myCalList);
+		List<CarbonCalculateDTO> myCalList = carboncalcuateService
+				.selectCalList(((UserDTO) session.getAttribute("login")).getUserId());
+
+		model.addAttribute("coefficientList", coefficientList);
+		model.addAttribute("myCalList", myCalList);
 		model.addAttribute("year", year);
 
 		return "user/myPageMyCarbonResultView";
@@ -342,11 +349,26 @@ public class UserController {
 
 	// 마이페이지 나의 건의사항 뷰
 	@RequestMapping(value = "/myPageMySuggestionsView", method = RequestMethod.GET)
-	public String myPageMySuggestionsView(HttpSession session) {
+	public String myPageMySuggestionsView(HttpSession session,
+			@RequestParam(value = "page", defaultValue = "1") int page,
+			@RequestParam(value = "size", defaultValue = "10") int size, Model model) {
 		if ((UserDTO) session.getAttribute("login") == null) {
 			return "redirect:/";
 		}
 
+		// 페이징 계산
+		int offset = (page - 1) * size;
+		
+		List<UserSgDTO> suggestionList = userSgService.getSgList(((UserDTO) session.getAttribute("login")).getUserId(), offset, size);
+		int totalSuggestions = userSgService.getSgCount(((UserDTO) session.getAttribute("login")).getUserId());
+		int totalPages = (int) Math.ceil((double) totalSuggestions / size);
+		
+		model.addAttribute("suggestionList",suggestionList);
+		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("size", size);
+		model.addAttribute("totalNotices", totalSuggestions);
+		
 		return "user/myPageMySuggestionsView";
 	}
 
