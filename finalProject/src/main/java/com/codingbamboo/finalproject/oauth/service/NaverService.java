@@ -38,7 +38,6 @@ public class NaverService {
 		this.gson = new Gson();
 	}
 	
-	// ³×ÀÌ¹ö ¾ÆÀÌµð¿¡ Á¢±ÙÇÏ±â À§ÇÑ uri °¡Á®¿À±â
 	public String getNaverUri(HttpServletRequest request, boolean link) {
 		String redirectUri;
 		if(link) {
@@ -54,16 +53,14 @@ public class NaverService {
 		return apiUrl;
 	}
 	
-	// ÄÝ¹é Ã³¸® ÇÔ¼ö
 	public Map<String, Object> handleCallback(String code, String state, HttpSession session) {
         String storedState = (String) session.getAttribute("state");
         if (!storedState.equals(state)) {
         	System.out.println(state);
         	System.out.println(storedState);
-            throw new IllegalStateException("CSRF »óÅÂ°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+            throw new IllegalStateException("CSRF ï¿½ï¿½ï¿½Â°ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½Ê½ï¿½ï¿½Ï´ï¿½.");
         }
 
-        // ¾×¼¼½º ÅäÅ« ¿äÃ»
         String tokenUrl = "https://nid.naver.com/oauth2.0/token";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -85,7 +82,6 @@ public class NaverService {
         JsonObject tokenJson = JsonParser.parseString(tokenResponse.getBody()).getAsJsonObject();
         String accessToken = tokenJson.get("access_token").getAsString();
 
-        // »ç¿ëÀÚ Á¤º¸ ¿äÃ»
         String profileUrl = "https://openapi.naver.com/v1/nid/me";
         HttpHeaders profileHeaders = new HttpHeaders();
         profileHeaders.set("Authorization", "Bearer " + accessToken);

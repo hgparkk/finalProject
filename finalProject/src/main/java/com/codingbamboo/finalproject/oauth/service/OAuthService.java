@@ -40,7 +40,6 @@ public class OAuthService {
 		this.restTemplate = new RestTemplate();
 	}
 
-	// Á¢±ÙÇÏ±â À§ÇÑ uri °¡Á®¿À±â
 	public String getUri(HttpServletRequest request, boolean link, String provider) {
 		String redirectUri = "";
 		String apiUrl = "";
@@ -81,7 +80,6 @@ public class OAuthService {
 		return apiUrl;
 	}
 
-	// ÄÝ¹é Ã³¸® ÇÔ¼ö
 	public Map<String, Object> handleCallback(String code, String state, boolean link, HttpSession session,
 			String provider) {
 		String storedState = "";
@@ -93,7 +91,7 @@ public class OAuthService {
 			storedState = (String) session.getAttribute("googleState");
 		}
 		if (!storedState.equals(state)) {
-			throw new IllegalStateException("CSRF »óÅÂ°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+			throw new IllegalStateException("CSRF ï¿½ï¿½ï¿½Â°ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½Ê½ï¿½ï¿½Ï´ï¿½.");
 		}
 		String accessToken = getAccessToken(code, state, link, provider);
 		return getUserInfo(accessToken, provider);
@@ -105,7 +103,6 @@ public class OAuthService {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-		// ³×ÀÌ¹ö ÅäÅ« ¿äÃ» url ¸¸µé±â
 		if (provider.equalsIgnoreCase("Naver")) {
 			tokenUrl = "https://nid.naver.com/oauth2.0/token";
 			params.add("grant_type", "authorization_code");
@@ -113,7 +110,7 @@ public class OAuthService {
 			params.add("client_secret", naverConfig.getClientSecret());
 			params.add("code", code);
 			params.add("state", state);
-			// Ä«Ä«¿À ÅäÅ« ¿äÃ» url ¸¸µé±â
+			// Ä«Ä«ï¿½ï¿½ ï¿½ï¿½Å« ï¿½ï¿½Ã» url ï¿½ï¿½ï¿½ï¿½ï¿½
 		} else if (provider.equalsIgnoreCase("Kakao")) {
 			tokenUrl = "https://kauth.kakao.com/oauth/token";
 			params.add("grant_type", "authorization_code");
@@ -151,7 +148,6 @@ public class OAuthService {
 		return tokenJson.get("access_token").getAsString();
 	}
 
-	// »ç¿ëÀÚ Á¤º¸ ¿äÃ»
 	private Map<String, Object> getUserInfo(String accessToken, String provider) {
 
 		String profileUrl = "";
