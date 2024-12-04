@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.codingbamboo.finalproject.attach.dao.IAttachDAO;
 import com.codingbamboo.finalproject.attach.dto.AttachDTO;
 import com.codingbamboo.finalproject.usersg.dao.IUserSgDAO;
 import com.codingbamboo.finalproject.usersg.dto.UserSgDTO;
@@ -14,6 +15,8 @@ public class UserSgService {
 	
 	@Autowired
 	private IUserSgDAO dao;
+	@Autowired
+	private IAttachDAO attachdao;
 	
 	// 1. 등록
 
@@ -67,7 +70,7 @@ public class UserSgService {
 	    }
 	    
 		public List<AttachDTO> getAttachList(int sgNo) {
-			List<AttachDTO> result = dao.getSgAttachList(sgNo);
+			List<AttachDTO> result = attachdao.getSgAttachList(sgNo);
 			return result;
 		}
 	    

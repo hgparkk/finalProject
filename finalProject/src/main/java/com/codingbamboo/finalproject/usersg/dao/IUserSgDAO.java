@@ -43,7 +43,6 @@ public interface IUserSgDAO {
 	
 	int getAdminSgCount();
 	
-	List<AttachDTO> getSgAttachList(int sgNo);
 	
 	int insertAttach(AttachDTO attach);
 	

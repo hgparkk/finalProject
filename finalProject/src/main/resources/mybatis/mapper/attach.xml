@@ -39,6 +39,23 @@
       AND na.notice_no = #{noticeNo}
 </select>
 
+<select id="getSgAttachList" parameterType="int" resultType="com.codingbamboo.finalproject.attach.dto.AttachDTO">
+    SELECT
+        a.attach_no,
+        a.attach_name,
+        a.attach_original_name,
+        a.attach_size,
+        a.attach_fancy_size,
+        a.attach_type,
+        a.attach_path
+    FROM
+        attach a
+    JOIN
+        suggestion_attach na ON a.attach_no = na.attach_no
+    WHERE 1=1
+      AND na.sg_no = #{sgNo}
+</select>
+
 <select id="getAttachNo" parameterType="String" resultType="int">
 	SELECT
 		attach_no

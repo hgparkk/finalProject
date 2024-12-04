@@ -113,15 +113,17 @@ html, body {
 
 	<!-- 글쓰기 폼 -->
 	<div class="write-container">
-		<form id="noticeWriteForm" action="${pageContext.request.contextPath}/noticeWriteDo" method="post" class="write-form" enctype="multipart/form-data">
+		<form id="WriteForm" action="${pageContext.request.contextPath}/sgWriteDo" method="post" class="write-form" enctype="multipart/form-data">
 			<!-- 제목 -->
 			<div style="width: 750px;">
-				<input type="text" id="noticeTitle" name="noticeTitle" placeholder="제목을 입력하세요" required>
+				<input type="text" id="sgTitle" name="sgTitle" placeholder="제목을 입력하세요" required>
 			</div>
+			
+			<input type="hidden" id="userId" name="userId" value="${userId}">
 
 			<!-- 내용 -->
 			<div style="width: 80%;">
-				<textarea id="noticeContent" name="noticeContent" style="width:95%"></textarea>
+				<textarea id="sgContent" name="sgContent" style="width:95%"></textarea>
 			</div>
 
 			<!-- 첨부파일 -->
@@ -130,7 +132,7 @@ html, body {
 				<input class="form-control" name="boFile" type="file" id="formFileMultiple" multiple>
 			</div>
 			<!-- 등록 버튼 -->
-			<button id="noticeWriteBtn" type="button">등록</button>
+			<button id="sgWriteBtn" type="button">등록</button>
 		</form>
 	</div>
 	<!-- Footer -->
@@ -140,19 +142,18 @@ html, body {
 
 		nhn.husky.EZCreator.createInIFrame({
 					oAppRef : oEditors,
-					elPlaceHolder : "noticeContent",
+					elPlaceHolder : "sgContent",
 					sSkinURI : "${pageContext.request.contextPath}/nse/SmartEditor2Skin.html",
 				});
 		
-		const v_title = document.getElementById("noticeTitle")
-		const v_content = document.getElementById("noticeContent")
+		const v_title = document.getElementById("sgTitle")
+		const v_content = document.getElementById("sgContent")
 		
-		document.getElementById('noticeWriteBtn').addEventListener('click', ()=>{
-			oEditors.getById["noticeContent"].exec("UPDATE_CONTENTS_FIELD", []);
+		document.getElementById('sgWriteBtn').addEventListener('click', ()=>{
+			oEditors.getById["sgContent"].exec("UPDATE_CONTENTS_FIELD", []);
 			
 			v_titleValue = v_title.value
 			v_contentValue = v_content.value
-			
 			v_contentValue = v_contentValue.replaceAll("&nbsp;"," ")
 			
 			v_title.value = v_titleValue.trim()
@@ -163,8 +164,9 @@ html, body {
 				return
 			}
 			
-			document.getElementById('noticeWriteForm').submit();
+			document.getElementById('WriteForm').submit();
 		});
+		
 	</script>
 
 

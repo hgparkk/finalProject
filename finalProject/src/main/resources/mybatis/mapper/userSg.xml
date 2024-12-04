@@ -12,7 +12,7 @@
 			, sg_date
 			) VALUES (
 			SUGGESTION_SEQ.NEXTVAL,
-			#{sgTitle}, #sgContent}, SYSDATE
+			#{userId}, #{sgTitle}, #{sgContent}, SYSDATE
 			)
 	</insert>
 	
@@ -58,6 +58,18 @@
 			sg_date
 		FROM suggestion
 			WHERE sg_no = #{sgNo}
+	</select>
+	
+	<select id="getSgNo" resultType="int">
+		SELECT
+			sg_no
+		FROM(
+			SELECT *
+			FROM suggestion
+			ORDER BY sg_date DESC
+		)
+		WHERE
+			ROWNUM = 1
 	</select>
 
 </mapper>

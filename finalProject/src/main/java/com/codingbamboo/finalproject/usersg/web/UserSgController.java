@@ -47,6 +47,7 @@ public class UserSgController {
 		if (loginUser == null) {
 			return "redirect:/loginView";
 		}
+	    model.addAttribute("userId", loginUser.getUserId());
 
 		return "user/userSuggestionsView";
 	}
@@ -59,11 +60,6 @@ public class UserSgController {
 			RedirectAttributes redirectAttributes, MultipartFile[] boFile) {
 
 		UserDTO loginUser = (UserDTO) session.getAttribute("login");
-
-		if (loginUser == null || loginUser.getUserIsmaster() != 1) {
-			redirectAttributes.addFlashAttribute("errorMsg", "권한이 없습니다.");
-			return "redirect:/";
-		}
 
 		// 건의사항 DB 저장
 		int isInserted = userSgService.registSg(sg);

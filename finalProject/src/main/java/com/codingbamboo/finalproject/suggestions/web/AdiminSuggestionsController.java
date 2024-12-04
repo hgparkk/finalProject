@@ -74,7 +74,7 @@ public class AdiminSuggestionsController {
 		// 건의사항 상세 정보 가져오기
 		UserSgDTO suggestion = userSgService.getSgDetail(sgNo);
 
-		List<AttachDTO> attachList = attachService.getAttachList(sgNo);
+		List<AttachDTO> attachList = attachService.getSgAttachList(sgNo);
 
 		model.addAttribute("suggestion", suggestion);
 		model.addAttribute("attachList", attachList);

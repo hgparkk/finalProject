@@ -8,6 +8,7 @@
 <title>건의사항</title>
 <%@ include file="/WEB-INF/inc/header.jsp"%>
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
 <style>
 html, body {
 	margin: 0;
@@ -127,7 +128,7 @@ html, body {
 		<!-- 작성일 -->
 		<div class="sg-meta">
 			작성일:
-			<fmt:formatDate value="${suggestion.sgDate}" pattern="yyyy-MM-dd" />
+			${suggestion.sgDate}
 		</div>
 
 

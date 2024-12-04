@@ -31,7 +31,7 @@ public interface IAttachDAO {
 	
 	int deleteSgAttach(int sgNo);
 
-	
+	List<AttachDTO> getSgAttachList(int sgNo);
 
 
 	

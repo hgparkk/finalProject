@@ -47,7 +47,7 @@ public class AttachService {
     }
     
 	public List<AttachDTO> getSgAttachList(int sgNo) {
-		List<AttachDTO> result = usersgdao.getSgAttachList(sgNo);
+		List<AttachDTO> result = dao.getSgAttachList(sgNo);
 		return result;
 	}
     
