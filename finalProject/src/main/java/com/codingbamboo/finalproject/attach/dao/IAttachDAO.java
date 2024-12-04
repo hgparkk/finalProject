@@ -26,6 +26,10 @@ public interface IAttachDAO {
 	int deleteByAttachNo(int attachNo);
 
 	int deleteNoticeAttach(int attachNo);
+	
+	int deleteBySgNo(int sgNo);
+	
+	int deleteSgAttach(int sgNo);
 
 	
 

@@ -62,14 +62,14 @@ public class UserSgController {
 
 		if (loginUser == null || loginUser.getUserIsmaster() != 1) {
 			redirectAttributes.addFlashAttribute("errorMsg", "권한이 없습니다.");
-			return "redirect:/noticeView";
+			return "redirect:/";
 		}
 
 		// 건의사항 DB 저장
 		int isInserted = userSgService.registSg(sg);
 		if (isInserted == 0) {
 			redirectAttributes.addFlashAttribute("errorMsg", "건의사항 등록에 실패했습니다.");
-			return "redirect:/sgWrite";
+			return "redirect:/myPageMySuggestionsView";
 		}
 
 		int sgNo = userSgService.getSgNo();
@@ -94,4 +94,6 @@ public class UserSgController {
 		redirectAttributes.addFlashAttribute("successMsg", "건의사항이 등록되었습니다.");
 		return "redirect:/myPageMySuggestionsView";
 	}
+	
+	
 }

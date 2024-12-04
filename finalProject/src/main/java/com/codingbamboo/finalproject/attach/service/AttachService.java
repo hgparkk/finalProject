@@ -7,12 +7,16 @@ import org.springframework.stereotype.Service;
 
 import com.codingbamboo.finalproject.attach.dao.IAttachDAO;
 import com.codingbamboo.finalproject.attach.dto.AttachDTO;
+import com.codingbamboo.finalproject.usersg.dao.IUserSgDAO;
 
 @Service
 public class AttachService {
 
 	@Autowired
 	IAttachDAO dao;
+	
+	@Autowired
+	IUserSgDAO usersgdao;
 
 
 
@@ -37,7 +41,16 @@ public class AttachService {
 	    return dao.insertAttach(attach);
 	}
 	
-	
+    public int deleteSg(int sgNo) {
+        int result = usersgdao.deleteSg(sgNo);
+    	return result;
+    }
+    
+	public List<AttachDTO> getSgAttachList(int sgNo) {
+		List<AttachDTO> result = usersgdao.getSgAttachList(sgNo);
+		return result;
+	}
+    
 
 
 }

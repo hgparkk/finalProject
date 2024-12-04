@@ -257,7 +257,7 @@ html, body {
 			<ul>
 				<c:forEach var="suggestion" items="${sgList}">
 					<li><a
-						href="${pageContext.request.contextPath}/adminSuggestionsDetailView?noticeNo=${suggestion.sgNo}">
+						href="${pageContext.request.contextPath}/adminSuggestionsDetailView?sgNo=${suggestion.sgNo}">
 							<span>${suggestion.sgTitle}</span> <span class="text-muted">
 								<fmt:formatDate value="${suggestion.sgDate}"
 									pattern="yyyy-MM-dd" />

@@ -39,6 +39,26 @@
 		FROM suggestion  
 		ORDER BY sg_date DESC
 	</select>
+	
+	<!-- 건의사항 삭제 -->
+	<delete id="deleteSg" parameterType="int">
+		DELETE 
+			FROM suggestion
+		WHERE 1=1
+			AND sg_no = #{sgNo}
+	</delete>
+	
+	<!-- 건의사항 상세 조회 -->
+	<select id="getSgDetail" parameterType="int"
+		resultType="com.codingbamboo.finalproject.usersg.dto.UserSgDTO">
+		SELECT
+			sg_no,
+			sg_title,
+			sg_content,
+			sg_date
+		FROM suggestion
+			WHERE sg_no = #{sgNo}
+	</select>
 
 </mapper>
 

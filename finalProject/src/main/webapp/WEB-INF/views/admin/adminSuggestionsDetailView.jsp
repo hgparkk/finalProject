@@ -114,7 +114,7 @@ html, body {
 	<!-- Header -->
 	<%@ include file="/WEB-INF/inc/top.jsp"%>
 
-	<!-- 공지사항 상세 내용 -->
+	<!-- 건의사항 상세 내용 -->
 	<div class="sg-container">
 		<!-- 제목 -->
 		<div class="sg-title">

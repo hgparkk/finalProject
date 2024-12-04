@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.codingbamboo.finalproject.notice.dto.NoticeDTO;
+import com.codingbamboo.finalproject.attach.dto.AttachDTO;
 import com.codingbamboo.finalproject.usersg.dao.IUserSgDAO;
 import com.codingbamboo.finalproject.usersg.dto.UserSgDTO;
 
@@ -62,8 +62,14 @@ public class UserSgService {
 	    }
 
 	    public int deleteSg(int sgNo) {
-	        return dao.deleteSg(sgNo);
+	        int result = dao.deleteSg(sgNo);
+	    	return result;
 	    }
+	    
+		public List<AttachDTO> getAttachList(int sgNo) {
+			List<AttachDTO> result = dao.getSgAttachList(sgNo);
+			return result;
+		}
 	    
 	    
 	    
