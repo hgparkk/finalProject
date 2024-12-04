@@ -81,7 +81,6 @@ html, body {
 }
 
 .photo-section-wrapper {
-	background-color: #17a065;
 	padding: 40px 5vw;
 }
 
@@ -159,120 +158,146 @@ html, body {
 	width: 1vw;
 	height: 1vw;
 }
+
 .slider {
-  position: relative;
-  width: 100%;
-  max-width: 100%;
+	position: relative;
+	width: 100%;
+	max-width: 100%;
 }
+
 .slider .slider__inner {
-  display: flex;
-  position: relative;
-  align-items: center;
-  max-width: 750px;
-  height: 400px;
-  margin: 0 auto;
+	display: flex;
+	position: relative;
+	align-items: center;
+	max-width: 750px;
+	height: 400px;
+	margin: 0 auto;
 }
+
 .slider .slider__inner .slider__item {
-  position: absolute;
-  height: 150px;
-  width: 150px;
-  opacity: 0;
-  transition: all 0.3s ease-in-out;
-  z-index: -1;
-  pointer-events: none;
-  user-select: none;
+	position: absolute;
+	height: 150px;
+	width: 150px;
+	opacity: 0;
+	transition: all 0.3s ease-in-out;
+	z-index: -1;
+	user-select: none;
 }
+
 .slider .slider__inner .slider__item-trigger-next {
-  left: 15%;
-  transform: translateX(-50%);
+	left: 15%;
+	transform: translateX(-50%);
 }
+
 .slider .slider__inner .slider__item-trigger-previous {
-  left: 85%;
-  transform: translateX(-50%);
+	left: 85%;
+	transform: translateX(-50%);
 }
+
 .slider .slider__inner .slider__item-selected {
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.6), 0 0 60px rgba(255, 255, 255, 0.45), 0 0 110px rgba(255, 255, 255, 0.25), 0 0 100px rgba(255, 255, 255, 0.1);
-  height: 300px;
-  opacity: 1;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 300px;
-  z-index: 2;
+	box-shadow: 0 0 30px rgba(255, 255, 255, 0.6), 0 0 60px
+		rgba(255, 255, 255, 0.45), 0 0 110px rgba(255, 255, 255, 0.25), 0 0
+		100px rgba(255, 255, 255, 0.1);
+	height: 300px;
+	opacity: 1;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 300px;
+	z-index: 2;
 }
-.slider .slider__inner .slider__item-previous, .slider .slider__inner .slider__item-next {
-  height: 200px;
-  opacity: 1;
-  width: 200px;
-  z-index: 1;
+
+.slider .slider__inner .slider__item-previous, .slider .slider__inner .slider__item-next
+	{
+	height: 200px;
+	opacity: 1;
+	width: 200px;
+	z-index: 1;
 }
-.slider .slider__inner .slider__item-last, .slider .slider__inner .slider__item-first {
-  opacity: .4;
-  z-index: 0;
+
+.slider .slider__inner .slider__item-last, .slider .slider__inner .slider__item-first
+	{
+	opacity: .4;
+	z-index: 0;
 }
+
 .slider .slider__inner .slider__item-previous {
-  left: 30%;
-  transform: translateX(-50%);
+	left: 30%;
+	transform: translateX(-50%);
 }
+
 .slider .slider__inner .slider__item-next {
-  left: 70%;
-  transform: translateX(-50%);
+	left: 70%;
+	transform: translateX(-50%);
 }
+
 .slider .slider__inner .slider__item-first {
-  left: 15%;
-  transform: translateX(-50%);
+	left: 15%;
+	transform: translateX(-50%);
 }
+
 .slider .slider__inner .slider__item-last {
-  left: 85%;
-  transform: translateX(-50%);
+	left: 85%;
+	transform: translateX(-50%);
 }
+
 .slider .slider__inner .slider__item-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
+	position: relative;
+	width: 100%;
+	height: 100%;
 }
+
 .slider .slider__inner .slider__item-img {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
 }
+
 .slider .slider__inner .slider__item-datas {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  padding: .5rem 0;
-  background-color: rgba(255, 255, 255, 0.75);
-  text-align: center;
-  font-family: 'Arial';
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	padding: .5rem 0;
+	background-color: rgba(255, 255, 255, 0.75);
+	text-align: center;
+	font-family: 'Arial';
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
+
 .slider .slider__controls {
-  display: flex;
-  position: absolute;
-  left: 0;
-  right: 0;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
+	display: flex;
+	position: absolute;
+	left: 0;
+	right: 0;
+	width: 100%;
+	justify-content: space-between;
+	align-items: center;
 }
+
 .slider .slider__controls-previous, .slider .slider__controls-next {
-  border: 0;
-  cursor: pointer;
-  font-size: 50px;
-  background-color: transparent;
-  color: rgba(0, 0, 0, 0.75);
-  padding: 0;
+	border: 0;
+	cursor: pointer;
+	font-size: 50px;
+	background-color: transparent;
+	color: rgba(0, 0, 0, 0.75);
+	padding: 0;
 }
-.slider .slider__controls-previous:focus, .slider .slider__controls-next:focus {
-  outline: none;
+
+.slider .slider__controls-previous:focus, .slider .slider__controls-next:focus
+	{
+	outline: none;
 }
-@media (max-width: 750px) {
-  .slider .slider__controls {
-    display: none;
-  }
+.slider__item-selected{
+	cursor: pointer;
+}
+
+@media ( max-width : 750px) {
+	.slider .slider__controls {
+		display: none;
+	}
 }
 </style>
 </head>
@@ -321,144 +346,64 @@ html, body {
 		</div>
 	</div>
 
-	<!-- Carousel for 5 Cards with Green Background -->
-	<div class="photo-section-wrapper">
-		<div id="photoCarousel" class="carousel slide" data-bs-ride="carousel"
-			data-bs-interval="3000">
-			<div class="carousel-inner">
-				<!-- 에너지 절약 -->
-				<div class="carousel-item active">
-					<div class="photo-item">
-						<a href="${pageContext.request.contextPath}/energyReduceView">
-							<img
-							src="${pageContext.request.contextPath}/resources/image/box1.jpg"
-							class="img-fluid rounded" alt="에너지 절약">
-							<p class="photo-title">에너지 절약</p>
-						</a>
-					</div>
-				</div>
-				<!-- 친환경 소비 -->
-				<div class="carousel-item">
-					<div class="photo-item">
-						<a href="${pageContext.request.contextPath}/ecoConsumptionView">
-							<img
-							src="${pageContext.request.contextPath}/resources/image/box2.jpg"
-							class="img-fluid rounded" alt="친환경 소비">
-							<p class="photo-title">친환경 소비</p>
-						</a>
-					</div>
-				</div>
-				<!-- 친환경 이동 -->
-				<div class="carousel-item">
-					<div class="photo-item">
-						<a href="${pageContext.request.contextPath}/ecoMovementView">
-							<img
-							src="${pageContext.request.contextPath}/resources/image/box3.jpg"
-							class="img-fluid rounded" alt="친환경 이동">
-							<p class="photo-title">친환경 이동</p>
-						</a>
-					</div>
-				</div>
-				<!-- 자원순환 -->
-				<div class="carousel-item">
-					<div class="photo-item">
-						<a href="${pageContext.request.contextPath}/ecoCircularView">
-							<img
-							src="${pageContext.request.contextPath}/resources/image/box4.jpg"
-							class="img-fluid rounded" alt="자원순환">
-							<p class="photo-title">자원순환</p>
-						</a>
-					</div>
-				</div>
-				<!-- 흡수원 보호 -->
-				<div class="carousel-item">
-					<div class="photo-item">
-						<a href="${pageContext.request.contextPath}/ecoSinksView"> <img
-							src="${pageContext.request.contextPath}/resources/image/box5.jpg"
-							class="img-fluid rounded" alt="흡수원 보호">
-							<p class="photo-title">흡수원 보호</p>
-						</a>
-					</div>
-				</div>
-			</div>
-			<!-- Carousel Controls -->
-			<button class="carousel-control-prev" type="button"
-				data-bs-target="#photoCarousel" data-bs-slide="prev">
-				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">이전</span>
-			</button>
-			<button class="carousel-control-next" type="button"
-				data-bs-target="#photoCarousel" data-bs-slide="next">
-				<span class="carousel-control-next-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">다음</span>
-			</button>
-		</div>
-	</div>
-
-
 
 
 	<!-- 케로셀 -->
-	<div class="slider">
+	<div class="slider photo-section-wrapper">
 		<div class="slider__inner">
 			<!-- Slides -->
+
 			<div class="slider__item">
-				<div class="slider__item-container">
-					<a href="${pageContext.request.contextPath}/ecoSinksView"> <img
-						src="${pageContext.request.contextPath}/resources/image/box5.jpg"
+				<div id="energyReduce" class="slider__item-container">
+					<img
+						src="${pageContext.request.contextPath}/resources/image/box1.jpg"
 						class="slider__item-img" />
-						<div class="slider__item-datas">
-							<span>흡수원 보호</span>
-						</div>
-					</a>
+					<div class="slider__item-datas">
+						<span>에너지 절약</span>
+					</div>
 				</div>
 			</div>
 			<div class="slider__item">
-				<div class="slider__item-container">
-					<a href="${pageContext.request.contextPath}/ecoSinksView"> <img
-						src="${pageContext.request.contextPath}/resources/image/box5.jpg"
+				<div id="ecoConsumption" class="slider__item-container">
+					<img
+						src="${pageContext.request.contextPath}/resources/image/box2.jpg"
 						class="slider__item-img" />
-						<div class="slider__item-datas">
-							<span>흡수원 보호</span>
-						</div>
-					</a>
+					<div class="slider__item-datas">
+						<span>친환경 소비</span>
+					</div>
 				</div>
 			</div>
 			<div class="slider__item">
-				<div class="slider__item-container">
-					<a href="${pageContext.request.contextPath}/ecoSinksView"> <img
-						src="${pageContext.request.contextPath}/resources/image/box5.jpg"
+				<div id="ecoMovement" class="slider__item-container">
+					<img
+						src="${pageContext.request.contextPath}/resources/image/box3.jpg"
 						class="slider__item-img" />
-						<div class="slider__item-datas">
-							<span>흡수원 보호</span>
-						</div>
-					</a>
+					<div class="slider__item-datas">
+						<span>친환경 이동</span>
+					</div>
 				</div>
 			</div>
 			<div class="slider__item">
-				<div class="slider__item-container">
-					<a href="${pageContext.request.contextPath}/ecoSinksView"> <img
-						src="${pageContext.request.contextPath}/resources/image/box5.jpg"
+				<div id="ecoCircular" class="slider__item-container">
+					<img
+						src="${pageContext.request.contextPath}/resources/image/box4.jpg"
 						class="slider__item-img" />
-						<div class="slider__item-datas">
-							<span>흡수원 보호</span>
-						</div>
-					</a>
+					<div class="slider__item-datas">
+						<span>자원순환</span>
+					</div>
 				</div>
 			</div>
 			<div class="slider__item">
-				<div class="slider__item-container">
-					<a href="${pageContext.request.contextPath}/ecoSinksView"> <img
+				<div id="ecoSinks" class="slider__item-container">
+					<img
 						src="${pageContext.request.contextPath}/resources/image/box5.jpg"
 						class="slider__item-img" />
-						<div class="slider__item-datas">
-							<span>흡수원 보호</span>
-						</div>
-					</a>
+					<div class="slider__item-datas">
+						<span>흡수원 보호</span>
+					</div>
 				</div>
 			</div>
 
-			
 			<!-- Slider Controls -->
 			<div class="slider__controls"></div>
 		</div>
@@ -491,6 +436,43 @@ html, body {
 	      controlsContainer: document.querySelector('.slider__controls'),
 	      textControls: ["<i class='fas fa-chevron-left'></i>", "<i class='fas fa-chevron-right'></i>"]
 	});
+	
+	document.getElementById('energyReduce').addEventListener('click',()=>{
+		if(document.getElementById('energyReduce').parentElement.classList.contains('slider__item-selected')){
+			window.location.href = '${pageContext.request.contextPath}/energyReduceView'
+		}
+	});
+	
+	document.getElementById('ecoConsumption').addEventListener('click',()=>{
+		if(document.getElementById('ecoConsumption').parentElement.classList.contains('slider__item-selected')){
+			window.location.href = '${pageContext.request.contextPath}/ecoConsumptionView'
+		}
+	});
+	
+	document.getElementById('ecoMovement').addEventListener('click',()=>{
+		if(document.getElementById('ecoMovement').parentElement.classList.contains('slider__item-selected')){
+			window.location.href = '${pageContext.request.contextPath}/ecoMovementView'
+		}
+	});
+	
+	document.getElementById('ecoCircular').addEventListener('click',()=>{
+		if(document.getElementById('ecoCircular').parentElement.classList.contains('slider__item-selected')){
+			window.location.href = '${pageContext.request.contextPath}/ecoCircularView'
+		}
+	});
+	
+	document.getElementById('ecoSinks').addEventListener('click',()=>{
+		if(document.getElementById('ecoSinks').parentElement.classList.contains('slider__item-selected')){
+			window.location.href = '${pageContext.request.contextPath}/ecoSinksView'
+		}
+	});
+	
+
+
+
+
+
+	
 	</script>
 </body>
 </html>
