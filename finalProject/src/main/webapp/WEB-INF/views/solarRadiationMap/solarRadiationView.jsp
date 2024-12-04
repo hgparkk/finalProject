@@ -362,7 +362,7 @@
 									})
 									$.ajax({
 										type:'POST',
-										url: "http://localhost:5000/getSolarRadiationPred",
+										url: "http://192.168.0.49:5000/getSolarRadiationPred",
 										data: JSON.stringify({ "year": "2024"}),
 										contentType: "application/json",
 										success: function(result3){
