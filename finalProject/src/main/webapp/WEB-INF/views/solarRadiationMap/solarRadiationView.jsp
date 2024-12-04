@@ -362,8 +362,9 @@
 									})
 									$.ajax({
 										type:'POST',
-										url: "<c:url value='/getSolarRadiation' />",
-										data: { "year": "2023"},
+										url: "http://localhost:5000/getSolarRadiationPred",
+										data: JSON.stringify({ "year": "2024"}),
+										contentType: "application/json",
 										success: function(result3){
 											srRadiation = []
 											let sum = 0
