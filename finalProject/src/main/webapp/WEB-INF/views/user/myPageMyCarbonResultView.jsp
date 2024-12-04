@@ -225,6 +225,9 @@ request.setAttribute("currentYear", Year.now().getValue());
 															</div>
 														</div>
 													</div>
+													<div class="d-flex justify-content-end">
+														<button class="btn btn-secondary" onclick="deleteCalResult(1)">삭제</button>
+													</div>
 												</c:if>
 											</c:forEach>
 											<c:if test="${not found}">
@@ -311,6 +314,9 @@ request.setAttribute("currentYear", Year.now().getValue());
 																<span class="content-text fw-bold">kg</span>
 															</div>
 														</div>
+													</div>
+													<div class="d-flex justify-content-end">
+														<button class="btn btn-secondary" onclick="deleteCalResult(2)">삭제</button>
 													</div>
 												</c:if>
 											</c:forEach>
@@ -399,6 +405,9 @@ request.setAttribute("currentYear", Year.now().getValue());
 															</div>
 														</div>
 													</div>
+													<div class="d-flex justify-content-end">
+														<button class="btn btn-secondary" onclick="deleteCalResult(3)">삭제</button>
+													</div>
 												</c:if>
 											</c:forEach>
 											<c:if test="${not found}">
@@ -485,6 +494,9 @@ request.setAttribute("currentYear", Year.now().getValue());
 																<span class="content-text fw-bold">kg</span>
 															</div>
 														</div>
+													</div>
+													<div class="d-flex justify-content-end">
+														<button class="btn btn-secondary" onclick="deleteCalResult(4)">삭제</button>
 													</div>
 												</c:if>
 											</c:forEach>
@@ -573,6 +585,9 @@ request.setAttribute("currentYear", Year.now().getValue());
 															</div>
 														</div>
 													</div>
+													<div class="d-flex justify-content-end">
+														<button class="btn btn-secondary" onclick="deleteCalResult(5)">삭제</button>
+													</div>
 												</c:if>
 											</c:forEach>
 											<c:if test="${not found}">
@@ -659,6 +674,9 @@ request.setAttribute("currentYear", Year.now().getValue());
 																<span class="content-text fw-bold">kg</span>
 															</div>
 														</div>
+													</div>
+													<div class="d-flex justify-content-end">
+														<button class="btn btn-secondary" onclick="deleteCalResult(6)">삭제</button>
 													</div>
 												</c:if>
 											</c:forEach>
@@ -747,6 +765,9 @@ request.setAttribute("currentYear", Year.now().getValue());
 															</div>
 														</div>
 													</div>
+													<div class="d-flex justify-content-end">
+														<button class="btn btn-secondary" onclick="deleteCalResult(7)">삭제</button>
+													</div>
 												</c:if>
 											</c:forEach>
 											<c:if test="${not found}">
@@ -833,6 +854,9 @@ request.setAttribute("currentYear", Year.now().getValue());
 																<span class="content-text fw-bold">kg</span>
 															</div>
 														</div>
+													</div>
+													<div class="d-flex justify-content-end">
+														<button class="btn btn-secondary" onclick="deleteCalResult(8)">삭제</button>
 													</div>
 												</c:if>
 											</c:forEach>
@@ -921,6 +945,9 @@ request.setAttribute("currentYear", Year.now().getValue());
 															</div>
 														</div>
 													</div>
+													<div class="d-flex justify-content-end">
+														<button class="btn btn-secondary" onclick="deleteCalResult(9)">삭제</button>
+													</div>
 												</c:if>
 											</c:forEach>
 											<c:if test="${not found}">
@@ -1007,6 +1034,9 @@ request.setAttribute("currentYear", Year.now().getValue());
 																<span class="content-text fw-bold">kg</span>
 															</div>
 														</div>
+													</div>
+													<div class="d-flex justify-content-end">
+														<button class="btn btn-secondary" onclick="deleteCalResult(10)">삭제</button>
 													</div>
 												</c:if>
 											</c:forEach>
@@ -1095,6 +1125,9 @@ request.setAttribute("currentYear", Year.now().getValue());
 															</div>
 														</div>
 													</div>
+													<div class="d-flex justify-content-end">
+														<button class="btn btn-secondary" onclick="deleteCalResult(11)">삭제</button>
+													</div>
 												</c:if>
 											</c:forEach>
 											<c:if test="${not found}">
@@ -1182,6 +1215,9 @@ request.setAttribute("currentYear", Year.now().getValue());
 															</div>
 														</div>
 													</div>
+													<div class="d-flex justify-content-end">
+														<button class="btn btn-secondary" onclick="deleteCalResult(12)">삭제</button>
+													</div>
 												</c:if>
 											</c:forEach>
 											<c:if test="${not found}">
@@ -1201,6 +1237,11 @@ request.setAttribute("currentYear", Year.now().getValue());
 			</div>
 		</div>
 	</div>
+	<form id="carbonCalDeleteForm" action="<c:url value="/carbonCalDeleteDo" />" method="POST">
+		<input type="hidden" name="userId" value="${sessionScope.login.userId}">
+		<input type="hidden" name="resultYear" value="${year}">
+		<input id="resultMonth" type="hidden" name="resultMonth">
+	</form>
 	<%@ include file="/WEB-INF/inc/footer.jsp"%>
 	<script>
 	document.querySelector('.custom-select-trigger').addEventListener('click', function() {
@@ -1240,6 +1281,12 @@ request.setAttribute("currentYear", Year.now().getValue());
     let sumTrafficCO2 = 0
     let sumWasteCO2 = 0
     
+    function deleteCalResult(month){
+    	document.getElementById("resultMonth").value = month
+    	if(confirm("탄소 발자국 결과를 삭제하시겠습니까?")){
+    		document.getElementById("carbonCalDeleteForm").submit();
+    	}
+    	}
     // 그래프 그리기
     let canvas = document.getElementsByClassName("myCalResult")
     for (let i = 0; i < canvas.length; i++){

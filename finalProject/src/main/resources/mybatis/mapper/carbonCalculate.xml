@@ -27,7 +27,7 @@
 		)
 	</insert>
 
-	<!-- 탄소발자국 계산 결과 덮어쓰기 -->
+	<!-- 탄소발자국 계산 결과 수정 -->
 	<update id="updateCal" parameterType="CarbonCalculateDTO">
 		UPDATE carbon_result
 		SET
@@ -76,4 +76,12 @@
 		AND user_id = #{userId}
 		AND result_date = #{resultDate}
 	</select>
+	
+	<!-- 탄소발자국 계산 결과 삭제 -->
+	<delete id="deleteCal" parameterType="CarbonCalculateDTO">
+		DELETE FROM carbon_result
+		WHERE 1=1
+			AND user_id = #{userId}
+			AND result_date = #{resultDate}
+	</delete>
 </mapper>

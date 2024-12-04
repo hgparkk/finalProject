@@ -33,4 +33,9 @@ public class CarbonCalculateService {
 	public CarbonCalculateDTO getCalByDate(CarbonCalculateDTO carbonCalculateDTO) {
 	    return dao.getCalByDate(carbonCalculateDTO);
 	}
+	
+	// 탄소 발자국 저장 결과 삭제
+	public int deleteCal(CarbonCalculateDTO carbonCaluateDTO) {
+		return dao.deleteCal(carbonCaluateDTO);
+	}
 }

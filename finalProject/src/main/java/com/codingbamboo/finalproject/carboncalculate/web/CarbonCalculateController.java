@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.codingbamboo.finalproject.allcount.dto.AllCountDTO;
@@ -126,10 +127,26 @@ public class CarbonCalculateController {
 		carbonCalculateService.updateCal(carbonCalculate);
 
 		// 사용자에게 메시지 전달
-		request.setAttribute("msg", "탄소 계산 결과가 업데이트되었습니다.");
+		request.setAttribute("msg", "탄소 계산 결과가 변경되었습니다.");
 		request.setAttribute("url", "/myPageMyCarbonResultView");
 
 		return "alert";
 	}
 
+	@RequestMapping(value="/carbonCalDeleteDo", method=RequestMethod.POST)
+	public String carbonCalDeleteDo(String userId, int resultYear, int resultMonth, HttpServletRequest request) {
+		CarbonCalculateDTO carbonCalculate = new CarbonCalculateDTO();
+		carbonCalculate.setUserId(userId);
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(resultYear, resultMonth - 1, 1, 0, 0, 0);
+		Date selectedDate = new Date(calendar.getTimeInMillis());
+		carbonCalculate.setResultDate(selectedDate);
+		
+		carbonCalculateService.deleteCal(carbonCalculate);
+		
+		request.setAttribute("msg", "탄소 계산 결과가 삭제되었습니다.");
+		request.setAttribute("url", "/myPageMyCarbonResultView");
+		
+		return "alert";
+	}
 }

@@ -20,4 +20,7 @@ public interface ICarbonCalculateDAO {
 	
 	// 탄소 발자국 등록된 날짜 불러오기
 	CarbonCalculateDTO getCalByDate(CarbonCalculateDTO carbonCalculateDTO);
+	
+	// 탄소 발자국 저장 결과 삭제
+	int deleteCal(CarbonCalculateDTO carbonCaluateDTO);
 }
