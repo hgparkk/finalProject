@@ -29,7 +29,7 @@ public interface IAttachDAO {
 	
 	int deleteBySgNo(int sgNo);
 	
-	int deleteSgAttach(int sgNo);
+	int deleteSgAttach(int attachNo);
 
 	List<AttachDTO> getSgAttachList(int sgNo);
 

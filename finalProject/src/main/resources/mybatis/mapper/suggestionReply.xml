@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.codingbamboo.finalproject.suggestionreply.dao.ISuggestionReplyDAO">
+	
+	<select id="getReplyList" parameterType="map" resultType="com.codingbamboo.finalproject.suggestionreply.dto.SuggestionReplyDTO">
+		SELECT *
+		FROM (
+			SELECT
+				reply_no,
+				sg_no,
+				reply_content,
+				reply_isread,
+				reply_date,
+				ROWNUM AS rn
+			FROM reply
+			WHERE sg_no = #{sgNo}
+			ORDER BY reply_date DESC
+		)
+	</select>
+	
+	<select id="getReply" parameterType="int" resultType="com.codingbamboo.finalproject.suggestionreply.dto.SuggestionReplyDTO">
+		SELCT
+			reply_no,
+			sg_no,
+			reply_content,
+			reply_isread,
+			reply_date
+		FROM reply
+		WHERE 1=1
+		ORDER BY sg_date DESC
+	</select>
+	
+	<insert id="registReply" parameterType="com.codingbamboo.finalproject.suggestionreply.dto.SuggestionReplyDTO">
+		INSERT INTO
+			reply(
+			  reply_no
+			, sg_no
+			, reply_content
+			, reply_isread
+			, reply_date
+			) VALUES (
+			REPLY_SEQ.NEXTVAL,
+			#{sgNo}, #{replyContent}, 0, SYSDATE
+			)
+	</insert>
+	
+	<delete id="delReply" parameterType="int">
+		DELETE 
+			FROM reply
+		WHERE 1=1
+			AND reply_no = #{replyNo}
+	</delete>
+	
+	<delete id="delSgAllReply" parameterType="int">
+		DELETE
+			FROM reply
+		WHERE sg_no = #{sg_no}
+	</delete>
+
+</mapper>

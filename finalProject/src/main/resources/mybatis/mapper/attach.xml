@@ -75,5 +75,10 @@
     WHERE attach_no = #{attachNo}
 </delete>
 
+<delete id="deleteSgAttach" parameterType="int">
+    DELETE FROM suggestion_attach
+    WHERE attach_no = #{attachNo}
+</delete>
+
 
 </mapper>

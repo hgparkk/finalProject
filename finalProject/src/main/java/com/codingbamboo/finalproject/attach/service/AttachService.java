@@ -37,6 +37,10 @@ public class AttachService {
 	    return dao.deleteNoticeAttach(attachNo);
 	}
 	
+	public int deleteSgAttach(int attachNo) {
+		return dao.deleteSgAttach(attachNo);
+	}
+	
 	public int insertAttach(AttachDTO attach) {
 	    return dao.insertAttach(attach);
 	}
@@ -50,6 +54,8 @@ public class AttachService {
 		List<AttachDTO> result = dao.getSgAttachList(sgNo);
 		return result;
 	}
+	
+	
     
 
 
