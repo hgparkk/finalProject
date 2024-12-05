@@ -461,6 +461,26 @@
 						data: result,
 						fill: false
 					}]
+				},
+				options: {
+					plugins: {
+						tooltip: {
+							callbacks: {
+								label: function(context) {
+									return Math.round(context.raw*10000)/10000 + " kWh";
+								}
+							}
+						}
+					},
+					scales: {
+						y: {
+							ticks: {
+								callback: function(value) {
+									return value + " kWh";
+								}
+							}
+						}
+					}
 				}
 			})
 		}
