@@ -8,5 +8,7 @@ import com.codingbamboo.finalproject.carbonresearch.dto.CarbonResearchDTO;
 
 @Mapper
 public interface ICarbonResearchDAO {
-	List<CarbonResearchDTO> getCarbonResearchList();
+	List<CarbonResearchDTO> getTechList();
+	
+	
 }

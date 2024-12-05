@@ -14,8 +14,8 @@ public class CarbonResearchService {
 	@Autowired
 	ICarbonResearchDAO dao;
 	
-	public List<CarbonResearchDTO> getCarbonResearchList(){
-		List<CarbonResearchDTO> result = dao.getCarbonResearchList();
+	public List<CarbonResearchDTO> getTechList(){
+		List<CarbonResearchDTO> result = dao.getTechList();
 		return result;
 	}
 	

@@ -20,6 +20,7 @@ import com.codingbamboo.finalproject.suggestionattach.service.SuggestionAttachSe
 import com.codingbamboo.finalproject.suggestionreply.dto.SuggestionReplyDTO;
 import com.codingbamboo.finalproject.suggestionreply.service.SuggestionReplyService;
 import com.codingbamboo.finalproject.user.dto.UserDTO;
+import com.codingbamboo.finalproject.user.service.UserService;
 import com.codingbamboo.finalproject.usersg.dto.UserSgDTO;
 import com.codingbamboo.finalproject.usersg.service.UserSgService;
 
@@ -38,6 +39,9 @@ public class AdiminSuggestionsController {
 	
 	@Autowired
 	FileUploadUtils fileUploadUtils;
+	
+	@Autowired
+	private UserService userService;
 	
 	@Autowired
 	private SuggestionReplyService replyService;
@@ -79,7 +83,14 @@ public class AdiminSuggestionsController {
 	}
 	
 	@RequestMapping("/adminSuggestionsDetailView")
-	public String adminSuggestionsDetailView(int sgNo, Model model) {
+	public String adminSuggestionsDetailView(int sgNo, Model model, HttpSession session) {
+		// 사용자 정보 확인 (관리자 여부)
+		UserDTO loginUser = (UserDTO) session.getAttribute("login");
+		int isMaster = (loginUser != null) ? loginUser.getUserIsmaster() : 0;
+		if (loginUser == null || loginUser.getUserIsmaster() != 1) {
+			return "redirect:/loginView";
+		}
+		
 		// 건의사항 상세 정보 가져오기
 		UserSgDTO suggestion = userSgService.getSgDetail(sgNo);
 
@@ -112,7 +123,6 @@ public class AdiminSuggestionsController {
 	@RequestMapping(value = "/suggestionDeleteDo", method = { RequestMethod.GET, RequestMethod.POST })
 	public String suggestionDeleteDo(int sgNo, HttpServletRequest request,
 			HttpSession session, Model model) {
-		System.out.println("건의사항 삭제");
 		UserDTO loginUser = (UserDTO) session.getAttribute("login");
 		
 		if (loginUser == null || loginUser.getUserIsmaster() != 1) {
@@ -120,7 +130,6 @@ public class AdiminSuggestionsController {
 		}
 		try {
 			
-			System.out.println(sgNo);
 			 replyService.delSgAllReply(sgNo);
 			
 			// 1. 첨부파일 목록 가져오기
