@@ -92,6 +92,25 @@
 	background-color: #007bff;
 	color: white;
 }
+
+.nameTag {
+	padding-right: 10px;
+}
+
+.tagAlert {
+	position: relative;
+}
+
+.tagAlert::after {
+	content: "";
+	width: 10px;
+	height: 10px;
+	background-color: red;
+	border-radius: 50%;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+}
 </style>
 </head>
 
@@ -110,8 +129,9 @@
 						<div class="suggestion-detail">
 							<ul>
 								<c:forEach var="suggestion" items="${suggestionList}">
-									<li><a href="${pageContext.request.contextPath}/">
-											<span>${suggestion.sgTitle}</span>
+									<li><a href="${pageContext.request.contextPath}/adminSuggestionsDetailView?sgNo=${suggestion.sgNo}">
+											<span class="d-none">${suggestion.sgNo}</span>
+											<span class="nameTag">${suggestion.sgTitle}</span>
 											<span class="text-muted">
 												<fmt:formatDate value="${suggestion.sgDate}" pattern="yyyy-MM-dd" />
 											</span>
@@ -125,31 +145,56 @@
 					</div>
 
 					<!-- 페이징 -->
-					<div class="pagination mb-5">
-						<c:if test="${totalPages > 0}">
-							<ul>
-								<!-- 이전 버튼 -->
-								<c:if test="${currentPage > 1}">
-									<li><a href="?page=${currentPage - 1}&size=${size}">이전</a></li>
-								</c:if>
+					<div class="d-flex justify-content-center">
+						<div class="pagination mb-5">
+							<c:if test="${totalPages > 0}">
+								<ul>
+									<!-- 이전 버튼 -->
+									<c:if test="${currentPage > 1}">
+										<li><a href="?page=${currentPage - 1}&size=${size}">이전</a></li>
+									</c:if>
 
-								<!-- 페이지 번호 -->
-								<c:forEach var="i" begin="1" end="${totalPages}">
-									<li><a href="?page=${i}&size=${size}" class="${i == currentPage ? 'active' : ''}">${i}</a></li>
-								</c:forEach>
+									<!-- 페이지 번호 -->
+									<c:forEach var="i" begin="1" end="${totalPages}">
+										<li><a href="?page=${i}&size=${size}" class="${i == currentPage ? 'active' : ''}">${i}</a></li>
+									</c:forEach>
 
-								<!-- 다음 버튼 -->
-								<c:if test="${currentPage < totalPages}">
-									<li><a href="?page=${currentPage + 1}&size=${size}">다음</a></li>
-								</c:if>
-							</ul>
-						</c:if>
+									<!-- 다음 버튼 -->
+									<c:if test="${currentPage < totalPages}">
+										<li><a href="?page=${currentPage + 1}&size=${size}">다음</a></li>
+									</c:if>
+								</ul>
+							</c:if>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<%@ include file="/WEB-INF/inc/footer.jsp"%>
+	<script>
+		$
+				.ajax({
+					type : 'POST',
+					url : "${pageContext.request.contextPath }/getUnreadReply",
+					data : {
+						"userId" : "${sessionScope.login.userId}"
+					},
+					success : function(result) {
+						if (result.length > 0) {
+							let tags = document
+									.getElementsByClassName("nameTag")
+							for (let i = 0; i < tags.length; i++) {
+								for (let j = 0; j < result.length; j++) {
+									if (tags[i].parentElement.children[0].innerHTML == result[j]) {
+										tags[i].classList.add("tagAlert")
+									}
+								}
+							}
+						}
+					}
+				})
+	</script>
 </body>
 
 </html>

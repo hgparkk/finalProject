@@ -1,17 +1,19 @@
 package com.codingbamboo.finalproject.usersg.dto;
 
+import java.sql.Date;
+
 public class UserSgDTO {
 	private int sgNo;
 	private String userId;
 	private String sgTitle;
 	private String sgContent;
-	private String sgDate;
+	private Date sgDate;
 	
 	public UserSgDTO() {
 		super();
 	}
 
-	public UserSgDTO(int sgNo, String userId, String sgTitle, String sgContent, String sgDate) {
+	public UserSgDTO(int sgNo, String userId, String sgTitle, String sgContent, Date sgDate) {
 		super();
 		this.sgNo = sgNo;
 		this.userId = userId;
@@ -58,11 +60,11 @@ public class UserSgDTO {
 		this.sgContent = sgContent;
 	}
 
-	public String getSgDate() {
+	public Date getSgDate() {
 		return sgDate;
 	}
 
-	public void setSgDate(String sgDate) {
+	public void setSgDate(Date sgDate) {
 		this.sgDate = sgDate;
 	}
 	

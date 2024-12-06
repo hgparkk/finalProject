@@ -30,6 +30,84 @@
 			AND user_id = #{userId}
 	</select>
 	
+	<insert id="registSg" parameterType="com.codingbamboo.finalproject.usersg.dto.UserSgDTO">
+		INSERT INTO
+			suggestion(
+			  sg_no
+			, user_id
+			, sg_title
+			, sg_content
+			, sg_date
+			) VALUES (
+			SUGGESTION_SEQ.NEXTVAL,
+			#{userId}, #{sgTitle}, #{sgContent}, SYSDATE
+			)
+	</insert>
 	
-
+	<!-- 페이징 처리된 건의사항 목록 조회 -->
+	<select id="getAdminSgList" parameterType="map"
+		resultType="com.codingbamboo.finalproject.usersg.dto.UserSgDTO">
+		SELECT *
+		FROM (
+			SELECT
+				sg_no,
+				sg_title,
+				sg_content,
+				sg_date,
+				ROWNUM AS rn
+			FROM suggestion
+			WHERE 1=1
+			ORDER BY sg_date DESC
+		)
+		WHERE rn BETWEEN #{offset} + 1 AND #{offset} + #{size}
+	</select>
+	
+	<select id="getAdminSgCount" resultType="int">
+		SELECT COUNT(*)
+		FROM suggestion  
+		ORDER BY sg_date DESC
+	</select>
+	
+	<!-- 건의사항 삭제 -->
+	<delete id="deleteSg" parameterType="int">
+		DELETE 
+			FROM suggestion
+		WHERE 1=1
+			AND sg_no = #{sgNo}
+	</delete>
+	
+	<!-- 건의사항 상세 조회 -->
+	<select id="getSgDetail" parameterType="int"
+		resultType="com.codingbamboo.finalproject.usersg.dto.UserSgDTO">
+		SELECT
+			sg_no,
+			user_id,
+			sg_title,
+			sg_content,
+			sg_date
+		FROM suggestion
+			WHERE sg_no = #{sgNo}
+	</select>
+	
+	<select id="getSgNo" resultType="int">
+		SELECT
+			sg_no
+		FROM(
+			SELECT *
+			FROM suggestion
+			ORDER BY sg_date DESC
+		)
+		WHERE
+			ROWNUM = 1
+	</select>
+	
+	<select id="selectUnreadReply" parameterType="String" resultType="int">
+		SELECT
+			suggestion.sg_no
+		FROM
+			suggestion JOIN reply ON suggestion.sg_no = reply.sg_no
+		WHERE 1=1
+			AND user_id = #{userId}
+			AND reply_isread = 0
+	</select>
 </mapper>

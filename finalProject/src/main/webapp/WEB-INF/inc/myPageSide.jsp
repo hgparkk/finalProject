@@ -33,6 +33,21 @@ request.setAttribute("selectedItem", selectedItem);
 	background-color: #d1e7dd;
 	color: rgb(25, 135, 84);
 }
+
+.spanAlert {
+	position: relative;
+}
+
+.spanAlert::after {
+	content: "";
+	width: 10px;
+	height: 10px;
+	background-color: red;
+	border-radius: 50%;
+	position: absolute;
+	top: 20px;
+	right: 20px;
+}
 </style>
 
 <div class="d-flex flex-column bg-success ps-5">
@@ -44,10 +59,10 @@ request.setAttribute("selectedItem", selectedItem);
 		<a href="<c:url value="/myPageMyCarbonResultView" />" class="not-selected-span link-underline link-underline-opacity-0 menu-box">나의 탄소 발자국</a>
 	</c:if>
 	<c:if test="${selectedSpan == 'mySuggestions'}">
-		<span class="text-success bg-success-subtle link-underline link-underline-opacity-0 menu-box border-end border-success">나의 건의사항</span>
+		<span id="Suggestion" class="text-success bg-success-subtle link-underline link-underline-opacity-0 menu-box border-end border-success">나의 건의사항</span>
 	</c:if>
 	<c:if test="${selectedSpan != 'mySuggestions'}">
-		<a href="<c:url value="/myPageMySuggestionsView" />" class="not-selected-span link-underline link-underline-opacity-0 menu-box">나의 건의사항</a>
+		<a id="Suggestion" href="<c:url value="/myPageMySuggestionsView" />" class="not-selected-span link-underline link-underline-opacity-0 menu-box">나의 건의사항</a>
 	</c:if>
 	<c:if test="${selectedSpan == 'aboutUser'}">
 		<span class="text-success bg-success-subtle link-underline link-underline-opacity-0 menu-box border-bottom border-end border-success border-end border-success">회원 관리</span>
@@ -81,6 +96,17 @@ request.setAttribute("selectedItem", selectedItem);
 </div>
 
 <script>
+$.ajax({
+	type:'POST',
+	url: "${pageContext.request.contextPath }/getUnreadReply",
+	data: { "userId": "${sessionScope.login.userId}"},
+	success: function(result){
+		if(result.length > 0){
+			document.getElementById("Suggestion").classList.add("spanAlert")
+		}
+	}
+})
+
 	const notSelectedItem = document.getElementsByClassName("not-selected-item")
 
 	Array.from(notSelectedItem).forEach((element) => {

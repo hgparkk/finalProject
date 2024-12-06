@@ -17,6 +17,8 @@ public interface ISuggestionReplyDAO {
 	
 	int delReply(int replyNo);
 	
+	int readReply(int replyNo);
+	
 	int delSgAllReply(int sgNo);
 	
 }

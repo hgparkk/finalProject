@@ -51,6 +51,15 @@
 			AND reply_no = #{replyNo}
 	</delete>
 	
+	<update id="readReply" parameterType="int">
+		UPDATE
+			reply
+		SET
+			reply_isread = 1
+		WHERE
+			reply_no = #{replyNo}
+	</update>
+	
 	<delete id="delSgAllReply" parameterType="int">
 		DELETE
 			FROM reply

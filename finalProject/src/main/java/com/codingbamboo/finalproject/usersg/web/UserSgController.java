@@ -3,6 +3,7 @@ package com.codingbamboo.finalproject.usersg.web;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.codingbamboo.finalproject.attach.dto.AttachDTO;
 import com.codingbamboo.finalproject.attach.service.AttachService;
@@ -40,7 +40,7 @@ public class UserSgController {
 	/**
 	 * 건의사항 등록 페이지
 	 */
-	@RequestMapping("/userSuggestionsView")
+	@RequestMapping("/userSuggestionWriteView")
 	public String noticeWriteView(HttpSession session, Model model) {
 		UserDTO loginUser = (UserDTO) session.getAttribute("login");
 
@@ -49,7 +49,7 @@ public class UserSgController {
 		}
 	    model.addAttribute("userId", loginUser.getUserId());
 
-		return "user/userSuggestionsView";
+		return "user/userSuggestionWriteView";
 	}
 	
 	/**
@@ -57,15 +57,14 @@ public class UserSgController {
 	 */
 	@RequestMapping(value = "/sgWriteDo", method = RequestMethod.POST)
 	public String sgWriteDo(UserSgDTO sg, HttpSession session,
-			RedirectAttributes redirectAttributes, MultipartFile[] boFile) {
-
-		UserDTO loginUser = (UserDTO) session.getAttribute("login");
+			HttpServletRequest request, MultipartFile[] boFile) {
 
 		// 건의사항 DB 저장
 		int isInserted = userSgService.registSg(sg);
 		if (isInserted == 0) {
-			redirectAttributes.addFlashAttribute("errorMsg", "건의사항 등록에 실패했습니다.");
-			return "redirect:/myPageMySuggestionsView";
+			request.setAttribute("msg", "건의사항 등록에 실패했습니다.");
+			request.setAttribute("url", "/userSuggestionWriteView");
+			return "alert";
 		}
 
 		int sgNo = userSgService.getSgNo();
@@ -87,8 +86,9 @@ public class UserSgController {
 
 		}
 
-		redirectAttributes.addFlashAttribute("successMsg", "건의사항이 등록되었습니다.");
-		return "redirect:/myPageMySuggestionsView";
+		request.setAttribute("msg", "건의사항이 등록되었습니다.");
+		request.setAttribute("url", "/myPageMySuggestionsView");
+		return "alert";
 	}
 	
 	

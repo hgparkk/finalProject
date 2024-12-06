@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -126,26 +125,32 @@ html, body {
 		<div class="sg-content">${suggestion.sgContent}</div>
 
 		<!-- 작성일 -->
-		<div class="sg-meta">
-			작성일:
-			${suggestion.sgDate}
-		</div>
+		<div class="sg-meta">작성일: ${suggestion.sgDate}</div>
 
 
 		<!-- 버튼 컨테이너 -->
 		<div class="button-container">
-			<div class="back-button">
-				<a href="adminSuggestionsView?page=${param.page}"> 목록으로 돌아가기 </a>
-			</div>
 			<c:if test="${sessionScope.login.userIsmaster == 1}">
+				<div class="back-button">
+					<a href="adminSuggestionsView?page=${param.page}"> 목록으로 돌아가기 </a>
+				</div>
+			</c:if>
+			<c:if test="${sessionScope.login.userIsmaster == 1 || sessionScope.login.userId == suggestion.userId}">
 				<div style="display: flex;">
-					<div class="delete-button" style="margin-right: 10px;">
-						<a href="suggestionDeleteDo?sgNo=${suggestion.sgNo}" onclick="return confirm('이 건의사항을 삭제하시겠습니까?');"> 삭제 </a>
-					</div>
+					<form id="sgDelForm" action="${pageContext.request.contextPath}/suggestionDeleteDo" method="post">
+						<input type="hidden" value="${suggestion.sgNo}" name="sgNo">
+						<input type="hidden" value="${suggestion.userId}" name="userId">
+					</form>
+					<c:if test="${empty replyList}">
+						<button type="button" id="sgDelBtn" class="btn btn-secondary" style="margin-right: 10px;">삭제</button>
+					</c:if>
+					<c:if test="${not empty replyList}">
+						<button id="sgDelBtn"></button>
+					</c:if>
 				</div>
 			</c:if>
 		</div>
-		
+
 		<!-- 첨부파일 -->
 		<c:if test="${not empty attachList}">
 			<div class="attach-files">
@@ -160,61 +165,74 @@ html, body {
 				</ul>
 			</div>
 		</c:if>
-		
-<div class="comments-container" style="margin-top: 30px;">
-    <h4>답변 목록</h4>
-    <c:if test="${not empty replyList}">
-        <ul class="comments-list" style="list-style: none; padding: 0;">
-            <c:forEach var="reply" items="${replyList}">
-                <li class="comment-item" style="margin-bottom: 15px; padding: 10px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 5px; display: flex; justify-content: space-between; align-items: center;">
-                    <p style="margin: 0; font-size: 1rem; color: #333; flex-grow: 1;">
-                        <c:out value="${reply.replyContent}" />
-                    </p>
-                    <div class="comment-meta" style="font-size: 0.85rem; color: #666;">
-                        작성일: <c:out value="${reply.replyDate}" />
-                    </div>
-                    <c:if test="${sessionScope.login.userIsmaster == 1}">
-                        <form action="delReplyDo" method="post" onsubmit="return confirm('이 답변을 삭제하시겠습니까?');" style="margin-left: 10px;">
-                            <input type="hidden" name="sgNo" value="${suggestion.sgNo}" />
-                            <input type="hidden" name="replyNo" value="${reply.replyNo}" />
-                            <button type="submit" style="border: none; background: none; color: red; cursor: pointer;">삭제</button>
-                        </form>
-                    </c:if>
-                </li>
-            </c:forEach>
-        </ul>
-    </c:if>
-</div>
 
-		
+		<div class="comments-container" style="margin-top: 30px;">
+			<c:if test="${not empty replyList}">
+				<h4>답변 목록</h4>
+				<ul class="comments-list" style="list-style: none; padding: 0;">
+					<c:forEach var="reply" items="${replyList}">
+						<li class="comment-item" style="margin-bottom: 15px; padding: 10px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 5px; display: flex; justify-content: space-between; align-items: center;">
+							<p style="margin: 0; font-size: 1rem; color: #333; flex-grow: 1;">
+								<c:out value="${reply.replyContent}" />
+							</p>
+							<div class="comment-meta" style="font-size: 0.85rem; color: #666;">
+								작성일:
+								<c:out value="${reply.replyDate}" />
+							</div> <c:if test="${sessionScope.login.userIsmaster == 1}">
+								<form id="replyDeleteForm" action="delReplyDo" method="post" style="margin-left: 10px;">
+									<input type="hidden" name="sgNo" value="${suggestion.sgNo}" />
+									<input type="hidden" name="replyNo" value="${reply.replyNo}" />
+									<button id="replyDeleteBtn" type="button" style="border: none; background: none; color: red; cursor: pointer;">삭제</button>
+								</form>
+							</c:if> <c:if test="${sessionScope.login.userIsmaster != 1 }">
+								<button id="replyDeleteBtn" class="d-none"></button>
+							</c:if>
+						</li>
+					</c:forEach>
+				</ul>
+			</c:if>
+			<c:if test="${sessionScope.login.userIsmaster != 1 }">
+				<form class="d-none" id="replyDeleteForm" action="delReplyDo" method="post" style="margin-left: 10px;">
+					<input type="hidden" name="sgNo" value="${suggestion.sgNo}" />
+					<input type="hidden" name="replyNo" value="${reply.replyNo}" />
+					<button id="replyDeleteBtn" class="d-none" type="button" style="border: none; background: none; color: red; cursor: pointer;">삭제</button>
+				</form>
+			</c:if>
+		</div>
+
+
 		<!-- 답변 작성 폼 -->
 		<c:if test="${sessionScope.login.userIsmaster == 1}">
-		    <div class="reply-container" style="margin-top: 30px;">
-		        <h4>답변</h4>
-		        <form action="${pageContext.request.contextPath}/registReplyDo" method="post">
-		            <!-- 건의사항 번호 (숨겨진 필드) -->
-		            <input type="hidden" name="sgNo" value="${suggestion.sgNo}" />
-		
-		            <!-- 답변 내용 -->
-		            <textarea name="replyContent" rows="5" placeholder="여기에 답변을 작성하세요." style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"></textarea>
-		
-		            <!-- 버튼 -->
-		            <div class="button-container" style="margin-top: 15px;">
-		                <button id="registReply" type="submit" style="padding: 10px 20px; background-color: green; color: white; border: none; border-radius: 5px; cursor: pointer;">
-		                    답변 저장
-		                </button>
-		            </div>
-		        </form>
-		    </div>
+			<div class="reply-container" style="margin-top: 30px;">
+				<h4>답변</h4>
+				<form action="${pageContext.request.contextPath}/registReplyDo" method="post">
+					<!-- 건의사항 번호 (숨겨진 필드) -->
+					<input type="hidden" name="sgNo" value="${suggestion.sgNo}" />
+
+					<!-- 답변 내용 -->
+					<textarea name="replyContent" rows="5" placeholder="여기에 답변을 작성하세요." style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"></textarea>
+
+					<!-- 버튼 -->
+					<div class="button-container" style="margin-top: 15px;">
+						<button id="registReply" type="submit" style="padding: 10px 20px; background-color: green; color: white; border: none; border-radius: 5px; cursor: pointer;">답변 저장</button>
+					</div>
+				</form>
+			</div>
 		</c:if>
-		
-
-
-
-
-
-
 	</div>
-		<%@ include file="/WEB-INF/inc/footer.jsp"%>
+	<%@ include file="/WEB-INF/inc/footer.jsp"%>
+	<script>
+		document.getElementById("replyDeleteBtn").addEventListener("click",()=>{
+			if (confirm("답변을 삭제하시겠습니까?")) {
+				document.getElementById("replyDeleteForm").submit()
+			}
+		})
+
+		document.getElementById("sgDelBtn").addEventListener("click",()=>{
+			if (confirm('이 건의사항을 삭제하시겠습니까?')) {
+				document.getElementById("sgDelForm").submit()
+			}
+		})
+	</script>
 </body>
 </html>

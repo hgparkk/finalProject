@@ -11,9 +11,6 @@ import com.codingbamboo.finalproject.usersg.dao.IUserSgDAO;
 
 @Service
 public class SuggestionReplyService {
-
-	@Autowired
-	private IUserSgDAO usersgdao;
 	
 	@Autowired
 	private ISuggestionReplyDAO replydao;
@@ -26,14 +23,13 @@ public class SuggestionReplyService {
 		return replydao.getReplyList(sgNo);
 	}
 	
-//	public int getReply(int reNo) {
-//		int result = replydao.getReply(reNo);
-//		return result;
-//	}
-	
 	public int delReply(int reNo) {
 		int result = replydao.delReply(reNo);
 		return result;
+	}
+	
+	public int readReply(int reNo) {
+		return replydao.readReply(reNo);
 	}
 	
 	public int delSgAllReply(int sgNo) {

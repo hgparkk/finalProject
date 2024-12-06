@@ -28,8 +28,8 @@ import com.codingbamboo.finalproject.carboncalculate.dto.CarbonCalculateDTO;
 import com.codingbamboo.finalproject.carboncalculate.service.CarbonCalculateService;
 import com.codingbamboo.finalproject.coefficient.dto.CoefficientDTO;
 import com.codingbamboo.finalproject.coefficient.service.CoefficientService;
-import com.codingbamboo.finalproject.notice.dto.NoticeDTO;
 import com.codingbamboo.finalproject.oauth.service.OAuthService;
+import com.codingbamboo.finalproject.suggestionattach.service.SuggestionAttachService;
 import com.codingbamboo.finalproject.user.dto.UserDTO;
 import com.codingbamboo.finalproject.user.service.UserService;
 import com.codingbamboo.finalproject.usersg.dto.UserSgDTO;
@@ -456,5 +456,15 @@ public class UserController {
 		request.setAttribute("msg", "회원탈퇴가 완료되었습니다");
 		request.setAttribute("url", "/");
 		return "alert";
+	}
+	
+	// 안 읽은 답변 가져오기
+	@RequestMapping(value="/getUnreadReply", method=RequestMethod.POST)
+	@ResponseBody
+	public List<Integer> getUnreadReply(String userId){
+		if(userId == null || userId.isEmpty()) {
+			return null;
+		}
+		return userSgService.selectUnreadReply(userId);
 	}
 }

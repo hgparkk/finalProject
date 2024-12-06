@@ -12,9 +12,11 @@ public class adminController {
 
 	@RequestMapping("/adminHomeView")
 	public String adminHomeView(HttpSession session) {
-		if ((UserDTO) session.getAttribute("login") == null || ((UserDTO) session.getAttribute("login")).getUserIsmaster() != 1) {
-			return "redirect:/";}
+		if ((UserDTO) session.getAttribute("login") == null
+				|| ((UserDTO) session.getAttribute("login")).getUserIsmaster() != 1) {
+			return "redirect:/";
+		}
 		return "admin/adminHomeView";
-		
+
 	}
 }

@@ -74,6 +74,7 @@ public class UserSgService {
 			return result;
 		}
 	    
-	    
-	    
+		public List<Integer> selectUnreadReply(String userId){
+			return dao.selectUnreadReply(userId);
+		};    
 }

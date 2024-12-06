@@ -52,4 +52,6 @@ public interface IUserSgDAO {
 	
 	int getAttachNo(String attachName);
 	
+	List<Integer> selectUnreadReply(String userId);
+	
 }

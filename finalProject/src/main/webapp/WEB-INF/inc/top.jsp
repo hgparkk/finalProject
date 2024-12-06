@@ -91,6 +91,21 @@
 	padding: 0 1vw; /* 좌우 간격을 균등하게 추가 */
 }
 
+.aTagAlert {
+	position: relative;
+}
+
+.aTagAlert::after {
+	content: "";
+	width: 10px;
+	height: 10px;
+	background-color: red;
+	border-radius: 50%;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+}
+
 .aTag:hover {
 	color: green;
 }
@@ -197,7 +212,7 @@
 				<div class="dropdown-body">
 					<span class="aTag dropdown-text">소통공간</span>
 					<div class="dropdown-select">
-						<a class="detail" href="${pageContext.request.contextPath }/userSuggestionsView">건의하기</a>
+						<a class="detail" href="${pageContext.request.contextPath }/userSuggestionWriteView">건의하기</a>
 						<a class="detail" href="${pageContext.request.contextPath }/noticeView">공지사항</a>
 					</div>
 				</div>
@@ -246,9 +261,21 @@
 			</c:if>
 			<c:if test="${sessionScope.login != null && sessionScope.login.userIsmaster != 1}">
 				<span class="aTag-not">${sessionScope.login.userName}</span>
-				<a class="aTag" href="${pageContext.request.contextPath }/myPageMyCarbonResultView">마이페이지</a>
+				<a id="myPage" class="aTag" href="${pageContext.request.contextPath }/myPageMyCarbonResultView">마이페이지</a>
 				<a class="aTag" href="${pageContext.request.contextPath }/logoutDo">로그아웃</a>
 			</c:if>
 		</div>
 	</div>
+	<script>
+	$.ajax({
+		type:'POST',
+		url: "${pageContext.request.contextPath }/getUnreadReply",
+		data: { "userId": "${sessionScope.login.userId}"},
+		success: function(result){
+			if(result.length > 0){
+				document.getElementById("myPage").classList.add("aTagAlert")
+			}
+		}
+	})
+	</script>
 </nav>
