@@ -235,9 +235,9 @@ html, body {
 	<div style="width: 80%; margin: auto">
 		<div class="campaign-info">
 			<p>
-				<c:if test="${noticeList.size() != 0}">
+				<c:if test="${TechList.size() != 0}">
 					<span>전체</span>
-					<b>${totalresearch}건</b>
+					<b>${totalTech}건</b>
 					<span>페이지</span>
 					<b>${currentPage}</b>
 					<span>/</span>
@@ -262,11 +262,11 @@ html, body {
 	</div>
 	<!-- 연구동향 리스트 컨테이너 -->
 	<div class="research-container">
-		<!-- 공지사항 검색박스 -->
+		<!-- 연구동향 검색박스 -->
 
 		<div class="researchDetail">
 			<ul>
-				<c:forEach var="technology" items="${researchList}">
+				<c:forEach var="technology" items="${techList}">
 					<li><a
 						href="${pageContext.request.contextPath}/researchDetailView?noticeNo=${technology.techNo}">
 							<span>${technology.techTitle}</span> <span class="text-muted">
@@ -286,7 +286,7 @@ html, body {
 
 	<c:if test="${sessionScope.login.userIsmaster == 1}">
 		<div class="write-button-container">
-			<a href="researchWriteView" class="write-button">글쓰기</a>
+			<a href="carbonResearchWriteView" class="write-button">글쓰기</a>
 		</div>
 	</c:if>
 

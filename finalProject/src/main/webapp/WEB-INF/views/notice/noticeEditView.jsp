@@ -4,7 +4,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>Coding Bamboo - 공지사항 수정</title>
+<title>Coding Bamboo - 연구동향 수정</title>
 <%@ include file="/WEB-INF/inc/header.jsp"%>
 <!-- 네이버스마트에디터 js -->
 <script src="${pageContext.request.contextPath}/nse/js/HuskyEZCreator.js"></script>
@@ -91,8 +91,8 @@ html, body {
 	<%@ include file="/WEB-INF/inc/top.jsp"%>
 
 	<div class="title-box">
-		<h1>공지사항 수정</h1>
-		<span style="font-size: 0.7vw;">Coding Bamboo Notice</span>
+		<h1>연구동향 수정</h1>
+		<span style="font-size: 0.7vw;">Coding Bamboo Research</span>
 	</div>
 
 	<!-- 수정 폼 -->

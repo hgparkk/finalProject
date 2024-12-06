@@ -12,7 +12,7 @@
 			TECHNOLOGY_SEQ.NEXTVAL,
 			#{techTitle},
 			SYSDATE,
-			#{techUrl},
+			#{techUrl}
 		)
 	</insert>
 	
