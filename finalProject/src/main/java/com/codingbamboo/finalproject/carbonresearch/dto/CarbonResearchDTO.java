@@ -1,16 +1,18 @@
 package com.codingbamboo.finalproject.carbonresearch.dto;
 
+import java.sql.Date;
+
 public class CarbonResearchDTO {
 	private int techNo;
 	private String techTitle;
-	private String techDate;
+	private Date techDate;
 	private String techUrl;
 	
 	public CarbonResearchDTO() {
-		
+		super();
 	}
 
-	public CarbonResearchDTO(int techNo, String techTitle, String techDate, String techUrl) {
+	public CarbonResearchDTO(int techNo, String techTitle, Date techDate, String techUrl) {
 		super();
 		this.techNo = techNo;
 		this.techTitle = techTitle;
@@ -40,11 +42,11 @@ public class CarbonResearchDTO {
 		this.techTitle = techTitle;
 	}
 
-	public String getTechDate() {
+	public Date getTechDate() {
 		return techDate;
 	}
 
-	public void setTechDate(String techDate) {
+	public void setTechDate(Date techDate) {
 		this.techDate = techDate;
 	}
 

@@ -2,7 +2,94 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.codingbamboo.finalproject.carbonresearch.dao.ICarbonResearchDAO">
 
-	<insert id="registTech" >
-		
+	<insert id="registTech" parameterType="com.codingbamboo.finalproject.carbonresearch.dto.CarbonResearchDTO" >
+		INSERT INTO technology (
+			TECH_NO,
+			TECH_TITLE,
+			TECH_DATE,
+			TECH_URL)
+		VALUES (
+			TECHNOLOGY_SEQ.NEXTVAL,
+			#{techTitle},
+			SYSDATE,
+			#{techUrl},
+		)
 	</insert>
+	
+		<!-- 연구동향 상세 조회 -->
+	<select id="getTechDetail" parameterType="int"
+		resultType="com.codingbamboo.finalproject.carbonresearch.dto.CarbonResearchDTO">
+		SELECT
+			tech_no,
+			tech_title,
+			tech_date,
+			tech_url
+		FROM technology
+			WHERE tech_no = #{techNo}
+	</select>
+	
+		<!-- 연구동향 삭제 -->
+	<delete id="deleteTech" parameterType="int">
+		DELETE 
+			FROM technology
+		WHERE 1=1
+			AND tech_no = #{techNo}
+	</delete>
+	
+	<!-- 검색 키워드와 페이징 처리된 연구동향 목록 조회 -->
+	<select id="getTechList" parameterType="map"
+		resultType="com.codingbamboo.finalproject.carbonresearch.dto.CarbonResearchDTO">
+		SELECT
+			tech_no,
+			tech_title,
+			tech_date,
+			tech_url
+		FROM (
+        SELECT
+            tech_no,
+				tech_title,
+				tech_date,
+				tech_url,
+                ROWNUM as rn
+            FROM(
+			SELECT
+				tech_no,
+				tech_title,
+				tech_date,
+				tech_url
+			FROM technology
+			WHERE 1=1
+			<if test="searchKeyword != null and searchKeyword != ''">
+				AND tech_title LIKE '%' || #{searchKeyword} || '%'
+			</if>
+			ORDER BY tech_date DESC)
+		)
+		WHERE rn BETWEEN #{offset} + 1 AND #{offset} + #{size}
+	</select>
+
+	<!-- 검색 키워드에 따른 연구동향 총 개수 조회 -->
+	<select id="getTechCount" parameterType="string"
+		resultType="int">
+		SELECT COUNT(*)
+		FROM technology
+		WHERE 1=1
+		<if test="searchKeyword != null and searchKeyword != ''">
+			AND tech_title LIKE '%' || #{searchKeyword} || '%'
+		</if>
+	</select>
+	
+	<select id="getTecheNo" resultType="int">
+		SELECT
+			tech_no
+		FROM(
+			SELECT *
+			FROM technology
+			ORDER BY tech_date DESC
+		)
+		WHERE
+			ROWNUM = 1
+	</select>
+	
+	
+	
 </mapper>
