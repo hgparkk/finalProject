@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -203,8 +203,6 @@ html, body {
 	height: 1vw;
 }
 
-
-
 .campaign-info {
 	display: flex;
 	justify-content: space-between;
@@ -227,8 +225,8 @@ html, body {
 				<h1 style="color: green; font-weight: bold;">건의사항</h1>
 			</div>
 			<div class="w-50 d-flex align-items-center justify-content-end">
-				<a class="home-go" href="${pageContext.request.contextPath }"> <img
-					src="${pageContext.request.contextPath}/resources/image/home.png">
+				<a class="home-go" href="${pageContext.request.contextPath }">
+					<img src="${pageContext.request.contextPath}/resources/image/home.png">
 					<span>홈으로 이동</span>
 				</a>
 			</div>
@@ -256,13 +254,12 @@ html, body {
 		<div class="sgDetail">
 			<ul>
 				<c:forEach var="suggestion" items="${sgList}">
-					<li><a
-						href="${pageContext.request.contextPath}/adminSuggestionsDetailView?sgNo=${suggestion.sgNo}">
-							<span>${suggestion.sgTitle}</span> <span class="text-muted">
-								<fmt:formatDate value="${suggestion.sgDate}"
-									pattern="yyyy-MM-dd" />
-						</span>
-					</a></li>
+					<li><a href="${pageContext.request.contextPath}/adminSuggestionsDetailView?sgNo=${suggestion.sgNo}">
+							<span>${suggestion.sgTitle}</span>
+							<span class="text-muted">
+								<fmt:formatDate value="${suggestion.sgDate}" pattern="yyyy-MM-dd" />
+							</span>
+						</a></li>
 				</c:forEach>
 				<c:if test="${empty sgList}">
 					<li class="text-center text-muted py-4">등록된 건의사항이 없습니다.</li>
@@ -270,30 +267,24 @@ html, body {
 			</ul>
 		</div>
 	</div>
-	
+
 	<!-- 페이징 -->
 	<div class="pagination mb-5">
 		<c:if test="${totalPages > 0}">
 			<ul>
 				<!-- 이전 버튼 -->
 				<c:if test="${currentPage > 1}">
-					<li><a
-						href="?page=${currentPage - 1}&size=${size}=${searchKeyword}">이전</a>
-					</li>
+					<li><a href="?page=${currentPage - 1}&size=${size}=${searchKeyword}">이전</a></li>
 				</c:if>
 
 				<!-- 페이지 번호 -->
 				<c:forEach var="i" begin="1" end="${totalPages}">
-					<li><a
-						href="?page=${i}&size=${size}=${searchKeyword}"
-						class="${i == currentPage ? 'active' : ''}">${i}</a></li>
+					<li><a href="?page=${i}&size=${size}=${searchKeyword}" class="${i == currentPage ? 'active' : ''}">${i}</a></li>
 				</c:forEach>
 
 				<!-- 다음 버튼 -->
 				<c:if test="${currentPage < totalPages}">
-					<li><a
-						href="?page=${currentPage + 1}&size=${size}=${searchKeyword}">다음</a>
-					</li>
+					<li><a href="?page=${currentPage + 1}&size=${size}=${searchKeyword}">다음</a></li>
 				</c:if>
 			</ul>
 		</c:if>

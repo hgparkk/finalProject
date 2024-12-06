@@ -141,11 +141,11 @@ html, body {
 						<input type="hidden" value="${suggestion.sgNo}" name="sgNo">
 						<input type="hidden" value="${suggestion.userId}" name="userId">
 					</form>
-					<c:if test="${empty replyList}">
+					<c:if test="${sessionScope.login.userIsmaster == 1 || empty replyList}">
 						<button type="button" id="sgDelBtn" class="btn btn-secondary" style="margin-right: 10px;">삭제</button>
 					</c:if>
-					<c:if test="${not empty replyList}">
-						<button id="sgDelBtn"></button>
+					<c:if test="${sessionScope.login.userIsmaster != 1 || not empty replyList}">
+						<button class="d-none" id="sgDelBtn"></button>
 					</c:if>
 				</div>
 			</c:if>

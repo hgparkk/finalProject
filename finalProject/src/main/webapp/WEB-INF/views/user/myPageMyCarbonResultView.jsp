@@ -1408,7 +1408,7 @@ request.setAttribute("currentYear", Year.now().getValue());
     	document.getElementById("yearCalResultAvgValue").children[1].children[0].innerHTML = Math.round(sumGasCO2/resultCount *10000)/10000
     	document.getElementById("yearCalResultAvgValue").children[2].children[0].innerHTML = Math.round(sumTrafficCO2/resultCount *10000)/10000
     	document.getElementById("yearCalResultAvgValue").children[3].children[0].innerHTML = Math.round(sumWasteCO2/resultCount *10000)/10000
-    }, 100);
+    }, 200);
 	</script>
 </body>
 
