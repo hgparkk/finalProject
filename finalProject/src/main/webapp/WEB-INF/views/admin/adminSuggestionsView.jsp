@@ -238,7 +238,7 @@ html, body {
 			<p>
 				<c:if test="${sgList.size() != 0}">
 					<span>전체</span>
-					<b>${totalsg}건</b>
+					<b>${totalSg}건</b>
 					<span>페이지</span>
 					<b>${currentPage}</b>
 					<span>/</span>
