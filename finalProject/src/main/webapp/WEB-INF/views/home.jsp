@@ -213,18 +213,19 @@ html, body {
 	<div class="container py-5">
 		<div class="position-relative mb-4">
 			<h2 class="text-center fw-bold m-0">탄소저감기술 연구 동향</h2>
-			<a href="#" class="position-absolute text-decoration-none text-success" style="right: 20px; bottom: 0; margin-left: -20px;">더보기</a>
+			<a href="${pageContext.request.contextPath}/carbonResearchView" class="position-absolute text-decoration-none text-success" style="right: 20px; bottom: 0; margin-left: -20px;">더보기</a>
 		</div>
 
 		<div class="not_slide">
 			<ul class="list-unstyled">
-				<c:forEach var="trend" items="${trendPreviewList}">
-					<li><a href="${pageContext.request.contextPath}/trendDetailView?trendNo=${trend.trendNo}" class="d-flex justify-content-between text-decoration-none text-dark w-100">
-							<span>${trend.trendTitle}</span>
-							<span class="text-muted">${trend.trendDate}</span>
+				<c:forEach var="trend" items="${CarbonResearchList}">
+					<li><a target="_blank" href="${trend.techUrl}" class="d-flex justify-content-between text-decoration-none text-dark w-100">
+							<span>${trend.techTitle}</span>
+							
+							<span class="text-muted"><fmt:formatDate value="${trend.techDate}" pattern="yyyy-MM-dd" /></span>
 						</a></li>
 				</c:forEach>
-				<c:if test="${empty trendPreviewList}">
+				<c:if test="${empty CarbonResearchList}">
 					<li class="text-center text-muted py-4">등록된 연구 동향이 없습니다.</li>
 				</c:if>
 			</ul>

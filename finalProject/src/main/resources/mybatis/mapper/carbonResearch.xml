@@ -78,7 +78,7 @@
 		</if>
 	</select>
 	
-	<select id="getTecheNo" resultType="int">
+	<select id="getTechNo" resultType="int">
 		SELECT
 			tech_no
 		FROM(
@@ -88,6 +88,27 @@
 		)
 		WHERE
 			ROWNUM = 1
+	</select>
+	
+		<select id="getTechPreviewList"
+		resultType="com.codingbamboo.finalproject.carbonresearch.dto.CarbonResearchDTO">
+        <![CDATA[
+            SELECT
+				tech_no,
+				tech_title,
+				tech_date,
+				tech_url
+            FROM (
+                SELECT
+					tech_no,
+					tech_title,
+					tech_date,
+					tech_url
+                FROM technology
+                ORDER BY tech_date DESC
+            )
+            WHERE ROWNUM <= 3
+        ]]>
 	</select>
 	
 	

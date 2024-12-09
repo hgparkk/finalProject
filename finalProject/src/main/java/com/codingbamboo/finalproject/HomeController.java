@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.codingbamboo.finalproject.carbonresearch.dto.CarbonResearchDTO;
+import com.codingbamboo.finalproject.carbonresearch.service.CarbonResearchService;
 import com.codingbamboo.finalproject.notice.dto.NoticeDTO;
 import com.codingbamboo.finalproject.notice.service.NoticeService;
 
@@ -18,11 +20,14 @@ public class HomeController {
     @Autowired
     private NoticeService noticeService;
 
+    @Autowired
+    private CarbonResearchService carbonResearchService;
+    
     @RequestMapping("/")
     public String home(Model model) {
         // 공지사항 미리보기 리스트 가져오기
         List<NoticeDTO> noticePreviewList = noticeService.getNoticePreviewList();
-
+        List<CarbonResearchDTO> CarbonResearchList = carbonResearchService.getTechPreviewList();
         // 날짜 포맷 설정
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -37,7 +42,7 @@ public class HomeController {
 
         // 모델에 데이터 추가
         model.addAttribute("noticePreviewList", noticePreviewList);
-
+        model.addAttribute("CarbonResearchList", CarbonResearchList);
         return "home";
     }
 }
