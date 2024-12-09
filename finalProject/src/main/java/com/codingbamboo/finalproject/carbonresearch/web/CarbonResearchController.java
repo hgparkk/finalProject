@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.codingbamboo.finalproject.carbonresearch.dto.CarbonResearchDTO;
@@ -31,137 +34,54 @@ public class CarbonResearchController {
 	 * 연구동향  목록 페이지
 	 */
 	@RequestMapping("/carbonResearchView")
-	public String carbonResearchView(@RequestParam(value = "searchKeyword", required = false) String searchKeyword,
-			@RequestParam(value = "page", defaultValue = "1") int page,
-			@RequestParam(value = "size", defaultValue = "10") int size, Model model, HttpSession session) {
+	public String carbonResearchView(
+	        @RequestParam(value = "page", defaultValue = "1") int page,
+	        @RequestParam(value = "size", defaultValue = "10") int size,
+	        Model model, HttpSession session) {
 
-		// 검색 키워드 초기화
-		if (searchKeyword == null || searchKeyword.trim().isEmpty()) {
-			searchKeyword = null;
-		}
+	    String url = "http://192.168.0.49:5000/getNews";
+	    RestTemplate restTemplate = new RestTemplate();
+	    
+	    // 뉴스 데이터를 가져오기
+	    List<Map<String, Object>> newsList = restTemplate.getForObject(url, List.class);
 
-		// 페이징 계산
-		int offset = (page - 1) * size;
+	    
+	    System.out.println("Total records in newsList: " + newsList.size());
+	    for (Map<String, Object> news : newsList) {
+	        System.out.println(news.get("title"));
+	    }
+	    System.out.println(newsList.size());
 
-		// 공지사항 데이터 가져오기
-		List<CarbonResearchDTO> techList = techService.getTechList(searchKeyword, offset, size);
-		int totalTechs = techService.getTechCount(searchKeyword);
-		int totalPages = (int) Math.ceil((double) totalTechs / size);
+	    // 전체 데이터의 개수
+	    int totalRecords = 33;
+	    
+	    // 전체 페이지 수 계산
+	    int totalPages = 4;
+	    
+	    // 페이지 범위 검증하여 범위를 벗어나지 않도록 처리
+	    if (page < 1) {
+	        page = 1;
+	    } else if (page > totalPages && totalPages != 0) {
+	        page = totalPages;
+	    }
 
-		// 사용자 정보 확인 (관리자 여부)
-		UserDTO loginUser = (UserDTO) session.getAttribute("login");
-		int isMaster = (loginUser != null) ? loginUser.getUserIsmaster() : 0;
+	    // 페이지 시작 인덱스와 끝 인덱스 계산
+	    int startIndex = (page - 1) * size;
+	    int endIndex = Math.min(startIndex + size, totalRecords);
+	    
+	    // 페이징된 데이터 리스트
+	    List<Map<String, Object>> paginatedList = newsList.subList(startIndex, endIndex);
 
-		// 모델 데이터 추가
-		model.addAttribute("techList", techList);
-		model.addAttribute("searchKeyword", searchKeyword);
-		model.addAttribute("currentPage", page);
-		model.addAttribute("totalPages", totalPages);
-		model.addAttribute("size", size);
-		model.addAttribute("isMaster", isMaster);
-		model.addAttribute("totalTechs", totalTechs);
+	    // 모델에 데이터 추가
+	    model.addAttribute("newsData", paginatedList);
+	    model.addAttribute("currentPage", page);
+	    model.addAttribute("totalPages", totalPages);
+	    model.addAttribute("totalRecords", totalRecords);
 
-		return "carbonresearch/carbonResearchView";
+	    
+	    return "carbonresearch/carbonResearchView";
 	}
 
-	/**
-	 * 연구동향 등록 페이지
-	 */
-	@RequestMapping("/carbonResearchWriteView")
-	public String carbonResearchWriteView(HttpSession session, Model model) {
-		UserDTO loginUser = (UserDTO) session.getAttribute("login");
 
-		if (loginUser == null || loginUser.getUserIsmaster() != 1) {
-			model.addAttribute("errorMsg", "권한이 없습니다.");
-			return "redirect:/carbonResearchView";
-		}
 
-		return "carbonresearch/carbonResearchWriteView";
-	}
-
-	/**
-	 * 연구동향 등록 처리
-	 */
-	@RequestMapping(value = "/techWriteDo", method = RequestMethod.POST)
-	public String techWriteDo(CarbonResearchDTO technology, HttpSession session, HttpServletRequest request) {
-
-		UserDTO loginUser = (UserDTO) session.getAttribute("login");
-
-		if (loginUser == null || loginUser.getUserIsmaster() != 1) {
-			return "redirect:/carbonResearchView";
-		}
-
-		// 연구동향 DB 저장
-		int isInserted = techService.registTech(technology);
-		if (isInserted == 0) {
-			request.setAttribute("msg", "연구동향 등록에 실패하였습니다.");
-			request.setAttribute("url", "/carbonResearchWriteView");
-			return "alert";
-		}
-
-		request.setAttribute("msg", "연구동향이 등록되었습니다.");
-		request.setAttribute("url", "/carbonResearchView");
-		return "alert";
-	}
-
-	@RequestMapping(value = "/techDeleteDo", method = { RequestMethod.GET, RequestMethod.POST })
-	public String techDeleteDo(@RequestParam("techNo") int techNo, HttpServletRequest request,
-			HttpSession session, Model model) {
-		UserDTO loginUser = (UserDTO) session.getAttribute("login");
-		if (loginUser == null || loginUser.getUserIsmaster() != 1) {
-			return "redirect:/carbonResearchView";
-		}
-		try {
-
-			// 4. 연구동향 삭제
-			techService.deleteTech(techNo);
-
-			request.setAttribute("msg", "연구동향이 삭제되었습니다.");
-			request.setAttribute("url", "/carbonResearchView");
-		} catch (Exception e) {
-			e.printStackTrace();
-			request.setAttribute("msg", "연구동향 삭제 중 오류가 발생했습니다.");
-			request.setAttribute("url", "/carbonResearchView");
-		}
-		return "alert";
-	}
-
-	// 연구동향 수정뷰
-	@RequestMapping("/carbonResearchEditView")
-	public String carbonResearchEditView(@RequestParam("techNo") int techNo, Model model, HttpSession session,
-			RedirectAttributes redirectAttributes) {
-		UserDTO loginUser = (UserDTO) session.getAttribute("login");
-		if (loginUser == null || loginUser.getUserIsmaster() != 1) {
-			redirectAttributes.addFlashAttribute("errorMsg", "권한이 없습니다.");
-			return "redirect:/carbonResearchView";
-		}
-		// 공지사항 정보 가져오기
-		CarbonResearchDTO tech = techService.getTechDetail(techNo);
-
-		model.addAttribute("tech", tech);
-
-		return "carbonresearch/carbonResearchEditView"; // 수정 화면 JSP 경로
-	}
-
-	// 연구동향 수정실행
-	@RequestMapping(value = "/techEditDo", method = RequestMethod.POST)
-	public String techEditDo(CarbonResearchDTO technology, HttpServletRequest request) {
-		String url = "";
-		try {
-			// 1. 연구동향 업데이트
-			techService.updateTech(technology);
-
-			url = "/carbonResearchView";
-
-			request.setAttribute("msg", "연구동향이 수정되었습니다.");
-			request.setAttribute("url", url);
-		} catch (Exception e) {
-			e.printStackTrace();
-			url = "/carbonResearchView";
-			request.setAttribute("msg", "연구동향 수정이 실패하였습니다.");
-			request.setAttribute("url", url);
-		}
-
-		return "alert";
-	}
 }

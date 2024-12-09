@@ -238,7 +238,7 @@ html, body {
 			<p>
 				<c:if test="${TechList.size() != 0}">
 					<span>전체</span>
-					<b>${totalTech}건</b>
+					<b>33건</b>
 					<span>페이지</span>
 					<b>${currentPage}</b>
 					<span>/</span>
@@ -246,7 +246,7 @@ html, body {
 				</c:if>
 			</p>
 			<!-- 검색바 -->
-			<form class="d-flex justify-content-around align-items-center"
+<%-- 			<form class="d-flex justify-content-around align-items-center"
 				action="${pageContext.request.contextPath }/carbonResearchView" method="get">
 				<input type="text" style="width:140;" class="form-control"
 					name="searchKeyword" placeholder="제목키워드를 입력하세요"
@@ -258,67 +258,52 @@ html, body {
 							d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
 								</svg>
 				</button>
-			</form>
+			</form> --%>
 		</div>
 	</div>
 	<!-- 연구동향 리스트 컨테이너 -->
 	<div class="research-container">
 		<!-- 연구동향 검색박스 -->
 
-		<div class="researchDetail">
-			<ul>
-				<c:forEach var="technology" items="${techList}">
-					<li><a
-						href="${technology.techUrl }" target="_blank">
-							<span>${technology.techTitle}</span> <span class="text-muted">
-								<fmt:formatDate value="${technology.techDate}"
-									pattern="yyyy-MM-dd" />
-						</span>
-					</a></li>
-				</c:forEach>
-				<c:if test="${empty techList}">
-					<li class="text-center text-muted py-4">등록된 연구동향이 없습니다.</li>
-				</c:if>
-			</ul>
-		</div>
-	</div>
-
-	<!-- 글쓰기 버튼 -->
-
-	<c:if test="${sessionScope.login.userIsmaster == 1}">
-		<div class="write-button-container">
-			<a href="carbonResearchWriteView" class="write-button">글쓰기</a>
-		</div>
-	</c:if>
+    <div class="researchDetail">
+        <ul>
+            <c:forEach var="news" items="${newsData}">
+                <li><a href="${news.url}" target="_blank">
+                    <span>${news.title}</span> <span class="text-muted">${news.date}</span>
+                </a></li>
+            </c:forEach>
+            <c:if test="${empty newsData}">
+                <li class="text-center text-muted py-4">등록된 연구동향이 없습니다.</li>
+            </c:if>
+        </ul>
+    </div>
+</div>
 
 
-	<!-- 페이징 -->
-	<div class="pagination mb-5">
-		<c:if test="${totalPages > 0}">
-			<ul>
-				<!-- 이전 버튼 -->
-				<c:if test="${currentPage > 1}">
-					<li><a
-						href="?page=${currentPage - 1}&size=${size}&searchKeyword=${searchKeyword}">이전</a>
-					</li>
-				</c:if>
+<div class="pagination mb-5">
+    <c:if test="${totalPages > 0}">
+        <ul>
+            <!-- 이전 버튼 -->
+            <c:if test="${currentPage > 1}">
+                <li><a href="?page=${currentPage - 1}&size=${size}&searchKeyword=${searchKeyword}">이전</a></li>
+            </c:if>
 
-				<!-- 페이지 번호 -->
-				<c:forEach var="i" begin="1" end="${totalPages}">
-					<li><a
-						href="?page=${i}&size=${size}&searchKeyword=${searchKeyword}"
-						class="${i == currentPage ? 'active' : ''}">${i}</a></li>
-				</c:forEach>
+            <!-- 페이지 번호 -->
+            <c:forEach var="i" begin="1" end="${totalPages}">
+                <li><a href="?page=${i}&size=${size}&searchKeyword=${searchKeyword}" 
+                       class="${i == currentPage ? 'active' : ''}">${i}</a></li>
+            </c:forEach>
 
-				<!-- 다음 버튼 -->
-				<c:if test="${currentPage < totalPages}">
-					<li><a
-						href="?page=${currentPage + 1}&size=${size}&searchKeyword=${searchKeyword}">다음</a>
-					</li>
-				</c:if>
-			</ul>
-		</c:if>
-	</div>
+            <!-- 다음 버튼 -->
+            <c:if test="${currentPage < totalPages}">
+                <li><a href="?page=${currentPage + 1}&size=${size}&searchKeyword=${searchKeyword}">다음</a></li>
+            </c:if>
+        </ul>
+    </c:if>
+</div>
+
+
+<script type="text/javascript">console.log()</script>
 
 
 
