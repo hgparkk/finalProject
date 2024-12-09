@@ -268,7 +268,7 @@ html, body {
 			<ul>
 				<c:forEach var="technology" items="${techList}">
 					<li><a
-						href="${pageContext.request.contextPath}/researchDetailView?noticeNo=${technology.techNo}">
+						href="${technology.techUrl }">
 							<span>${technology.techTitle}</span> <span class="text-muted">
 								<fmt:formatDate value="${technology.techDate}"
 									pattern="yyyy-MM-dd" />
