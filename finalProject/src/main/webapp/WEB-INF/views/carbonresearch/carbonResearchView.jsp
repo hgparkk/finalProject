@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -268,7 +269,7 @@ html, body {
 			<ul>
 				<c:forEach var="technology" items="${techList}">
 					<li><a
-						href="${technology.techUrl }">
+						href="${technology.techUrl }" target="_blank">
 							<span>${technology.techTitle}</span> <span class="text-muted">
 								<fmt:formatDate value="${technology.techDate}"
 									pattern="yyyy-MM-dd" />

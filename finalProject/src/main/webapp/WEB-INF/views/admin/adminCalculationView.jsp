@@ -73,43 +73,17 @@
             <h1>탄소발자국 계산식 수정</h1>
         </div>
         <div class="form-container">
-            <form action="${pageContext.request.contextPath}/updateCoefficient" method="post">
-                <!-- 전기 CO2 발생량 수정 -->
-                <div class="form-item">
-                    <label for="electricCoefficient" class="label">전기 CO₂ 계수</label>
-                    <input type="number" step="0.00001" class="input" id="electricCoefficient" 
-                           name="electricCoefficient" value="${keyGetCoefficientValue[2]['coefficientValue']}" required>
-                </div>
-                <!-- 가스 CO2 발생량 수정 -->
-                <div class="form-item">
-                    <label for="gasCoefficient" class="label">가스 CO₂ 계수</label>
-                    <input type="number" step="0.00001" class="input" id="gasCoefficient" 
-                           name="gasCoefficient" value="${keyGetCoefficientValue[3]['coefficientValue']}" required>
-                </div>
-                <!-- 휘발유 CO2 발생량 수정 -->
-                <div class="form-item">
-                    <label for="gasolineCoefficient" class="label">휘발유 CO₂ 계수</label>
-                    <input type="number" step="0.00001" class="input" id="gasolineCoefficient" 
-                           name="gasolineCoefficient" value="${keyGetCoefficientValue[4]['coefficientValue']}" required>
-                </div>
-                <!-- 경유 CO2 발생량 수정 -->
-                <div class="form-item">
-                    <label for="dieselCoefficient" class="label">경유 CO₂ 계수</label>
-                    <input type="number" step="0.00001" class="input" id="dieselCoefficient" 
-                           name="dieselCoefficient" value="${keyGetCoefficientValue[5]['coefficientValue']}" required>
-                </div>
-                <!-- LPG CO2 발생량 수정 -->
-                <div class="form-item">
-                    <label for="lpgCoefficient" class="label">LPG CO₂ 계수</label>
-                    <input type="number" step="0.00001" class="input" id="lpgCoefficient" 
-                           name="lpgCoefficient" value="${keyGetCoefficientValue[6]['coefficientValue']}" required>
-                </div>
-                <!-- 폐기물 CO2 발생량 수정 -->
-                <div class="form-item">
-                    <label for="wasteCoefficient" class="label">폐기물 CO₂ 계수</label>
-                    <input type="number" step="0.00001" class="input" id="wasteCoefficient" 
-                           name="wasteCoefficient" value="${keyGetCoefficientValue[7]['coefficientValue']}" required>
-                </div>
+            <form action="${pageContext.request.contextPath}/updateCalculationDo" method="post">
+                <c:forEach var="coefficient" items="${calculation}">
+                    <div class="form-item">
+                        <label for="coefficient${coefficient.coefficientNo}" class="label">
+                            ${coefficient.coefficientName} CO₂ 계수
+                        </label>
+                        <input type="hidden" name="coefficientNo" value="${coefficient.coefficientNo}">
+                        <input type="number" step="0.00001" class="input" 
+                               name="coefficientValue" value="${coefficient.coefficientValue}">
+                    </div>
+                </c:forEach>
                 <button id="submitBtn" type="submit">저장하기</button>
             </form>
         </div>

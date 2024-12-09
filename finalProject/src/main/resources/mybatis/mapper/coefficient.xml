@@ -8,4 +8,10 @@
 		FROM
 			coefficient
 	</select>
+
+	<update id="updateCf" parameterType="com.codingbamboo.finalproject.admincoefficient.dto.AdminCoefficientDTO">
+			UPDATE coefficient
+			SET coefficient_value = #{coefficientValue}
+			WHERE coefficient_no = #{coefficientNo}
+	</update>
 </mapper>

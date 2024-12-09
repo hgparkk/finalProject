@@ -57,7 +57,7 @@
 			<a class="contentL" href="${pageContext.request.contextPath }/adminSuggestionsView">건의사항 목록/답변하기</a>
 		</div>
 		<div class="content-box">
-			<a class="contentL" href="${pageContext.request.contextPath }/adminCalView">탄소 발자국 계산식 수정하기</a>
+			<a class="contentL" href="${pageContext.request.contextPath }/adminCalculationView">탄소 발자국 계산식 수정하기</a>
 		</div>
 	</div>
 </div>

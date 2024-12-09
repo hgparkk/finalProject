@@ -20,4 +20,9 @@ public class CoefficientService {
  		return dao.getCoefficientValue();
  	}
 
+ 	public void updateCoefficients(List<CoefficientDTO> coefficient) {
+		for (CoefficientDTO updateCf : coefficient) {
+			dao.updateCf(updateCf);
+		}
+	}
 }

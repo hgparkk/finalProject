@@ -11,14 +11,12 @@ import com.codingbamboo.finalproject.coefficient.dto.CoefficientDTO;
 
 @Mapper
 public interface IAdminCoefficientDAO {
-	// 저장
-	int insertCf(AdminCoefficientDTO adminCoefficientDTO);
-	
 	// 업데이트
-	int updateCf(AdminCoefficientDTO coefficient);
+	int updateCf(CoefficientDTO coefficient);
 	
 	// 불러오기
 	List<CoefficientDTO> getCoefficientValue();
+	
 	
 
 }

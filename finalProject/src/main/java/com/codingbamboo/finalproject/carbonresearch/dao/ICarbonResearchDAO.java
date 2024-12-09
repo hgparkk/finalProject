@@ -37,4 +37,5 @@ public interface ICarbonResearchDAO {
 	int getTechNo();
 	
 	
+	
 }
