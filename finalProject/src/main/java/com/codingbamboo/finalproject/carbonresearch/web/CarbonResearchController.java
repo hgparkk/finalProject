@@ -45,18 +45,15 @@ public class CarbonResearchController {
 	    // 뉴스 데이터를 가져오기
 	    List<Map<String, Object>> newsList = restTemplate.getForObject(url, List.class);
 
-	    
-	    System.out.println("Total records in newsList: " + newsList.size());
-	    for (Map<String, Object> news : newsList) {
-	        System.out.println(news.get("title"));
-	    }
-	    System.out.println(newsList.size());
 
+	    
+	    System.out.println(newsList.size());
 	    // 전체 데이터의 개수
-	    int totalRecords = 33;
+	    int totalRecords = newsList.size();		// newsList.size();
 	    
 	    // 전체 페이지 수 계산
-	    int totalPages = 4;
+	    int totalPages = (int) Math.ceil((double) totalRecords / size);
+	    
 	    
 	    // 페이지 범위 검증하여 범위를 벗어나지 않도록 처리
 	    if (page < 1) {
