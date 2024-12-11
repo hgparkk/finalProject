@@ -1,12 +1,9 @@
 package com.codingbamboo.finalproject.admincoefficient.dao;
 
-
-
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.codingbamboo.finalproject.admincoefficient.dto.AdminCoefficientDTO;
 import com.codingbamboo.finalproject.coefficient.dto.CoefficientDTO;
 
 @Mapper
@@ -16,7 +13,4 @@ public interface IAdminCoefficientDAO {
 	
 	// 불러오기
 	List<CoefficientDTO> getCoefficientValue();
-	
-	
-
 }

@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.codingbamboo.finalproject.admincoefficient.dao.IAdminCoefficientDAO;
-import com.codingbamboo.finalproject.admincoefficient.dto.AdminCoefficientDTO;
-import com.codingbamboo.finalproject.admincoefficient.service.AdminCoefficientService;
 import com.codingbamboo.finalproject.coefficient.dto.CoefficientDTO;
 import com.codingbamboo.finalproject.coefficient.service.CoefficientService;
 
@@ -49,6 +47,5 @@ public class AdminCoefficientController {
 		request.setAttribute("msg", "계산식 수정이 완료되었습니다.");
 		request.setAttribute("url", "/adminCalculationView");
 		return "alert";
-	}
-	
+	}	
 }

@@ -20,7 +20,6 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import com.codingbamboo.finalproject.oauth.config.NaverConfig;
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -29,13 +28,11 @@ public class NaverService {
 	
 	private final NaverConfig naverConfig;
 	private final RestTemplate restTemplate;
-	private final Gson gson;
 	
 	@Autowired
 	public NaverService(NaverConfig naverConfig) {
 		this.naverConfig = naverConfig;
 		this.restTemplate = new RestTemplate();
-		this.gson = new Gson();
 	}
 	
 	public String getNaverUri(HttpServletRequest request, boolean link) {
