@@ -7,17 +7,17 @@ public class CarbonCalculateDTO {
 	public int resultNo;
 	public String userId;
 	public Date resultDate;
-	public int electricUsage;
-	public int gasUsage;
+	public double electricUsage;
+	public double gasUsage;
 	public String trafficKind;
-	public int trafficValue;
-	public int wasteWeight;
+	public double trafficValue;
+	public double wasteWeight;
 	
 	public CarbonCalculateDTO() {
 	}
-
-	public CarbonCalculateDTO(int resultNo, String userId, Date resultDate, int electricUsage, int gasUsage,
-			String trafficKind, int trafficValue, int wasteWeight) {
+	
+	public CarbonCalculateDTO(int resultNo, String userId, Date resultDate, double electricUsage, double gasUsage,
+			String trafficKind, double trafficValue, double wasteWeight) {
 		super();
 		this.resultNo = resultNo;
 		this.userId = userId;
@@ -60,19 +60,19 @@ public class CarbonCalculateDTO {
 		this.resultDate = resultDate;
 	}
 
-	public int getElectricUsage() {
+	public double getElectricUsage() {
 		return electricUsage;
 	}
 
-	public void setElectricUsage(int electricUsage) {
+	public void setElectricUsage(double electricUsage) {
 		this.electricUsage = electricUsage;
 	}
 
-	public int getGasUsage() {
+	public double getGasUsage() {
 		return gasUsage;
 	}
 
-	public void setGasUsage(int gasUsage) {
+	public void setGasUsage(double gasUsage) {
 		this.gasUsage = gasUsage;
 	}
 
@@ -84,22 +84,22 @@ public class CarbonCalculateDTO {
 		this.trafficKind = trafficKind;
 	}
 
-	public int getTrafficValue() {
+	public double getTrafficValue() {
 		return trafficValue;
 	}
 
-	public void setTrafficValue(int trafficValue) {
+	public void setTrafficValue(double trafficValue) {
 		this.trafficValue = trafficValue;
 	}
 
-	public int getWasteWeight() {
+	public double getWasteWeight() {
 		return wasteWeight;
 	}
 
-	public void setWasteWeight(int wasteWeight) {
+	public void setWasteWeight(double wasteWeight) {
 		this.wasteWeight = wasteWeight;
 	}
-	
+
 	public int getYear() {
 	    Calendar cal = Calendar.getInstance();
 	    cal.setTime(resultDate);
