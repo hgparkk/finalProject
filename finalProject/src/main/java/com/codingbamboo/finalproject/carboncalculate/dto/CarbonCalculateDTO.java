@@ -7,32 +7,33 @@ public class CarbonCalculateDTO {
 	public int resultNo;
 	public String userId;
 	public Date resultDate;
-	public double electricUsage;
 	public double gasUsage;
+	public double electricUsage;
 	public String trafficKind;
 	public double trafficValue;
 	public double wasteWeight;
 	
 	public CarbonCalculateDTO() {
 	}
-	
-	public CarbonCalculateDTO(int resultNo, String userId, Date resultDate, double electricUsage, double gasUsage,
+
+	public CarbonCalculateDTO(int resultNo, String userId, Date resultDate, double gasUsage, double electricUsage,
 			String trafficKind, double trafficValue, double wasteWeight) {
 		super();
 		this.resultNo = resultNo;
 		this.userId = userId;
 		this.resultDate = resultDate;
-		this.electricUsage = electricUsage;
 		this.gasUsage = gasUsage;
+		this.electricUsage = electricUsage;
 		this.trafficKind = trafficKind;
 		this.trafficValue = trafficValue;
 		this.wasteWeight = wasteWeight;
 	}
 
+
 	@Override
 	public String toString() {
 		return "CarbonCalculateDTO [resultNo=" + resultNo + ", userId=" + userId + ", resultDate=" + resultDate
-				+ ", electricUsage=" + electricUsage + ", gasUsage=" + gasUsage + ", trafficKind=" + trafficKind
+				+ ", gasUsage=" + gasUsage + ", electricUsage=" + electricUsage + ", trafficKind=" + trafficKind
 				+ ", trafficValue=" + trafficValue + ", wasteWeight=" + wasteWeight + "]";
 	}
 
@@ -60,20 +61,20 @@ public class CarbonCalculateDTO {
 		this.resultDate = resultDate;
 	}
 
-	public double getElectricUsage() {
-		return electricUsage;
-	}
-
-	public void setElectricUsage(double electricUsage) {
-		this.electricUsage = electricUsage;
-	}
-
 	public double getGasUsage() {
 		return gasUsage;
 	}
 
 	public void setGasUsage(double gasUsage) {
 		this.gasUsage = gasUsage;
+	}
+
+	public double getElectricUsage() {
+		return electricUsage;
+	}
+
+	public void setElectricUsage(double electricUsage) {
+		this.electricUsage = electricUsage;
 	}
 
 	public String getTrafficKind() {

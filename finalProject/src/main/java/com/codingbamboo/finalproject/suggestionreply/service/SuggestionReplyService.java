@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.codingbamboo.finalproject.suggestionreply.dao.ISuggestionReplyDAO;
 import com.codingbamboo.finalproject.suggestionreply.dto.SuggestionReplyDTO;
-import com.codingbamboo.finalproject.usersg.dao.IUserSgDAO;
 
 @Service
 public class SuggestionReplyService {

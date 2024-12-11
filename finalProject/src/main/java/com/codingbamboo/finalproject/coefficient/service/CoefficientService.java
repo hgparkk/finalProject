@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.codingbamboo.finalproject.carboncalculate.dto.CarbonCalculateDTO;
 import com.codingbamboo.finalproject.coefficient.dao.ICoefficientDAO;
 import com.codingbamboo.finalproject.coefficient.dto.CoefficientDTO;
 

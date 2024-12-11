@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.codingbamboo.finalproject.admincoefficient.dto.AdminCoefficientDTO;
-import com.codingbamboo.finalproject.carboncalculate.dto.CarbonCalculateDTO;
 import com.codingbamboo.finalproject.coefficient.dto.CoefficientDTO;
 
 @Mapper
@@ -15,6 +13,5 @@ public interface ICoefficientDAO {
 	int updateCf(CoefficientDTO coefficient);
 	
 	// 불러오기
-	List<CoefficientDTO> getCoefficientValue();
-	
+	List<CoefficientDTO> getCoefficientValue();	
 }

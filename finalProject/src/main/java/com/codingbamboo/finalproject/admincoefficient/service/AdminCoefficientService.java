@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.codingbamboo.finalproject.admincoefficient.dao.IAdminCoefficientDAO;
-import com.codingbamboo.finalproject.admincoefficient.dto.AdminCoefficientDTO;
 import com.codingbamboo.finalproject.coefficient.dto.CoefficientDTO;
 
 @Service
@@ -24,5 +23,4 @@ public class AdminCoefficientService {
 			dao.updateCf(updateCf);
 		}
 	}
-	
 }
