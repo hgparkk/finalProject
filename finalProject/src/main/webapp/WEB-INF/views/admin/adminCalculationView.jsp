@@ -70,7 +70,7 @@
 	<%@ include file="/WEB-INF/inc/top.jsp"%>
     <div class="container">
         <div class="title">
-            <h1>탄소발자국 계산식 수정</h1>
+            <h1>탄소발자국 계산식 관리</h1>
         </div>
         <div class="form-container">
             <form action="${pageContext.request.contextPath}/updateCalculationDo" method="post">
