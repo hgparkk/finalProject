@@ -90,8 +90,10 @@ public class AdiminSuggestionsController {
 			List<AttachDTO> attachList = attachService.getSgAttachList(sgNo);
 
 			List<SuggestionReplyDTO> replyList = replyService.getReplyList(sgNo);
-			for (int i = 0; i < replyList.size(); i++) {
-				replyService.readReply(replyList.get(i).getReplyNo());
+			if (loginUser.getUserId().equals(suggestion.getUserId())) {
+				for (int i = 0; i < replyList.size(); i++) {
+					replyService.readReply(replyList.get(i).getReplyNo());
+				}
 			}
 
 			model.addAttribute("suggestion", suggestion);
