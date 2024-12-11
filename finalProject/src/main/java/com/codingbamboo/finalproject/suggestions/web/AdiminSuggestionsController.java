@@ -92,7 +92,6 @@ public class AdiminSuggestionsController {
 			List<SuggestionReplyDTO> replyList = replyService.getReplyList(sgNo);
 			for (int i = 0; i < replyList.size(); i++) {
 				replyService.readReply(replyList.get(i).getReplyNo());
-				replyList.get(i).setReplyNo(1);
 			}
 
 			model.addAttribute("suggestion", suggestion);
@@ -107,14 +106,14 @@ public class AdiminSuggestionsController {
 	@PostMapping("/registReplyDo")
 	public String registReplyDo(SuggestionReplyDTO reply) {
 		replyService.registReply(reply);
-		int sgNo = userSgService.getSgNo();
+		int sgNo = reply.getSgNo();
 		return "redirect:/adminSuggestionsDetailView?sgNo=" + sgNo;
 	}
 
 	@PostMapping("/delReplyDo")
 	public String delReply(SuggestionReplyDTO reply) {
 		int reNo = reply.getReplyNo();
-		int sgNo = userSgService.getSgNo();
+		int sgNo = reply.getSgNo();
 		replyService.delReply(reNo);
 		return "redirect:/adminSuggestionsDetailView?sgNo=" + sgNo;
 	}
